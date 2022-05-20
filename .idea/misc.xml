@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/work_station/blood_bank-main/app/src/main/res/drawable/blood_drop.xml" value="0.1945" />
+        <entry key="..\:/work_station/blood_bank-main/app/src/main/res/drawable/ic_compare_black_24dp.xml" value="0.1945" />
+        <entry key="..\:/work_station/blood_bank-main/app/src/main/res/drawable/round_button.xml" value="0.1945" />
+        <entry key="..\:/work_station/blood_bank-main/app/src/main/res/font/.xml" value="0.21666666666666667" />
+        <entry key="..\:/work_station/blood_bank-main/app/src/main/res/font/actor.xml" value="0.21666666666666667" />
+        <entry key="..\:/work_station/blood_bank-main/app/src/main/res/layout-v26/activity_dispaly_requests.xml" value="0.18645833333333334" />
+        <entry key="..\:/work_station/blood_bank-main/app/src/main/res/layout/activity_dispaly_requests.xml" value="0.25" />
+        <entry key="..\:/work_station/blood_bank-main/app/src/main/res/layout/activity_display_donors.xml" value="0.18" />
+        <entry key="..\:/work_station/blood_bank-main/app/src/main/res/layout/activity_login_screen.xml" value="0.25" />
+        <entry key="..\:/work_station/blood_bank-main/app/src/main/res/layout/activity_main.xml" value="0.18645833333333334" />
+        <entry key="..\:/work_station/blood_bank-main/app/src/main/res/layout/activity_register_i.xml" value="0.17074275362318841" />
+        <entry key="..\:/work_station/blood_bank-main/app/src/main/res/layout/activity_register_i_i.xml" value="0.25" />
+        <entry key="..\:/work_station/blood_bank-main/app/src/main/res/layout/details_donor_requester.xml" value="0.25" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

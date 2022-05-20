@@ -1,0 +1,965 @@
+<resources>
+    <string name="app_name">Ishwardi Blood Donor Club</string>
+
+    <string name="real_time_db_firebase">https://ibdc-blood-donors-default-rtdb.firebaseio.com/</string>
+    <string name="if_you_can_help_them_make_call_or_share">If you can help them make CALL or SHARE.</string>
+    <string name="more">More</string>
+    <string name="heading">Displayed Requests from ALL Unions of Ishwardi Upazila.</string>
+    <string name="heading_tab">To change Union edit below.</string>
+    <string name="union">Union</string>
+    <string name="view_donors">View Donors</string>
+    <string name="request_blood">Request Blood</string>
+    <string name="all">ALL</string>
+    <string name="make_call_or_share_if_needed">Make CALL or SHARE if Needed.</string>
+    <string name="divisions">Division</string>
+    <string name="upazila">Upazila</string>
+    <string name="district">District</string>
+    <string name="ibdc">Ishwardi Blood Donor Club</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="login">LOGIN</string>
+    <string name="enter_phone_no">Enter Phone No</string>
+    <string name="enter_password">Enter Password</string>
+    <string name="login1">LOGIN</string>
+    <string name="todo">TODO</string>
+    <string name="todo1">TODO</string>
+    <string name="already_have_an_account_log_in">Already have an account? Log in</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="sign_up">SIGN UP</string>
+    <string name="enter_full_name">Enter Full Name</string>
+    <string name="enter_city_name">Enter City Name</string>
+    <string name="title_activity_listand_map">ListandMapActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="search">Search</string>
+    <string name="Email">Enter Email Here…</string>
+    <string name="cover">cover</string>
+
+    <array name="blood_groups">
+        <item>A+</item>
+        <item>B+</item>
+        <item>O+</item>
+        <item>AB+</item>
+        <item>A-</item>
+        <item>B-</item>
+        <item>O-</item>
+        <item>AB-</item>
+    </array>
+
+<!--    Division Array-->
+    <array name="states">
+        <item>ঢাকা</item>
+        <item>চট্টগ্রাম</item>
+        <item>খুলনা</item>
+        <item>রাজশাহী</item>
+        <item>রংপুর</item>
+        <item>বরিশাল</item>
+        <item>সিলেট</item>
+        <item>ময়মনসিংহ</item>
+    </array>
+
+    <array name="dhaka_division">
+        <item>ঢাকা</item>
+        <item>ফরিদপুর</item>
+        <item>গাজীপুর</item>
+        <item>গোপালগঞ্জ</item>
+        <item>কিশোরগঞ্জ</item>
+        <item>মাদারীপুর</item>
+        <item>মানিকগঞ্জ</item>
+        <item>মুন্সীগঞ্জ</item>
+        <item>নরসিংদী</item>
+        <item>রাজবাড়ী</item>
+        <item>শরীয়তপুর</item>
+        <item>টাঙ্গাইল</item>
+    </array>
+
+    <array name="chittagong_division">
+        <item>চট্টগ্রাম</item>
+        <item>নোয়াখালী</item>
+        <item>কক্সবাজার</item>
+        <item>খাগড়াছড়ি</item>
+        <item>রাঙ্গামাটি</item>
+        <item>বান্দরবান</item>
+        <item>ব্রাহ্মণবাড়িয়া</item>
+        <item>চাঁদপুর</item>
+        <item>কুমিল্লা</item>
+        <item>ফেনী</item>
+        <item>লক্ষ্মীপুর</item>
+    </array>
+
+    <array name="khulna_division">
+        <item>খুলনা</item>
+        <item>যশোর</item>
+        <item>চুয়াডাঙ্গা</item>
+        <item>বাগেরহাট</item>
+        <item>ঝিনাইদহ</item>
+        <item>কুষ্টিয়া</item>
+        <item>মাগুরা</item>
+        <item>মেহেরপুর</item>
+        <item>নড়াইল</item>
+        <item>সাতক্ষীরা</item>
+    </array>
+
+    <array name="rajshahi_division">
+        <item>রাজশাহী</item>
+        <item>পাবনা</item>
+        <item>নাটোর</item>
+        <item>বগুড়া</item>
+        <item>নওগাঁ</item>
+        <item>জয়পুরহাট</item>
+        <item>চাঁপাইনবাবগঞ্জ</item>
+        <item>সিরাজগঞ্জ</item>
+    </array>
+
+    <array name="rangpur_division">
+        <item>রংপুর</item>
+        <item>দিনাজপুর</item>
+        <item>গাইবান্ধা</item>
+        <item>কুড়িগ্রাম</item>
+        <item>লালমনিরহাট</item>
+        <item>পঞ্চগড়</item>
+        <item>ঠাকুরগাঁও</item>
+        <item>নীলফামারী</item>
+    </array>
+
+    <array name="sylet_division">
+        <item>সিলেট</item>
+        <item>হবিগঞ্জ</item>
+        <item>মৌলভীবাজার</item>
+        <item>সুনামগঞ্জ</item>
+    </array>
+
+    <array name="barisal_division">
+        <item>বরিশাল</item>
+        <item>বরগুনা</item>
+        <item>ভোলা</item>
+        <item>ঝালকাঠি</item>
+        <item>পটুয়াখালী</item>
+        <item>পিরোজপুর</item>
+    </array>
+
+    <array name="mymanshingh_division">
+        <item>ময়মনসিংহ</item>
+        <item>জামালপুর</item>
+        <item>নেত্রকোণা</item>
+        <item>শেরপুর</item>
+    </array>
+
+    <!--  Finished Division Array-->
+
+
+
+<!--Districts Array-->
+
+<!--    Khulna Division's Districts-->
+    <array name="khulna">
+        <item>কয়রা</item>
+        <item>ডুমুরিয়া </item>
+        <item>তেরখাদা </item>
+        <item>দাকোপ </item>
+        <item>দিঘলিয়া </item>
+        <item>পাইকগাছা </item>
+        <item>ফুলতলা </item>
+        <item>বটিয়াঘাটা </item>
+        <item>রূপসা </item>
+    </array>
+
+    <array name="kushtia">
+        <item>কুষ্টিয়া সদর</item>
+        <item>কুমারখালী</item>
+        <item>খোকসা</item>
+        <item>দৌলতপুর</item>
+        <item>ভেড়ামারা</item>
+        <item>মিরপুর</item>
+    </array>
+
+    <array name="chuadanga">
+        <item>চুয়াডাঙ্গা সদর</item>
+        <item>আলমডাঙ্গা </item>
+        <item>জীবননগর </item>
+        <item>দামুড়হুদা </item>
+    </array>
+
+    <array name="jhinaidah">
+        <item>ঝিনাইদহ সদর</item>
+        <item>কালীগঞ্জ</item>
+        <item>কোটচাঁদপুর </item>
+        <item>মহেশপুর </item>
+        <item>শৈলকুপা </item>
+        <item>হরিণাকুন্ডু </item>
+    </array>
+
+    <array name="narail">
+        <item>নড়াইল সদর</item>
+        <item>কালিয়া </item>
+        <item>লোহাগড়া </item>
+    </array>
+
+    <array name="bagerhat">
+        <item>বাগেরহাট সদর</item>
+        <item>কচুয়া </item>
+        <item>চিতলমারী </item>
+        <item>ফকিরহাট </item>
+        <item>মোংলা </item>
+        <item>মোড়েলগঞ্জ </item>
+        <item>মোল্লাহাট </item>
+        <item>রামপাল </item>
+        <item>শরণখোলা </item>
+    </array>
+
+    <array name="magura">
+        <item>মাগুরা সদর</item>
+        <item>মোহাম্মদপুর </item>
+        <item>শালিখা </item>
+        <item>শ্রীপুর </item>
+    </array>
+
+    <array name="meherpur">
+        <item>মেহেরপুর সদর</item>
+        <item>গাংনী </item>
+        <item>মুজিবনগর </item>
+    </array>
+
+    <array name="jossore">
+        <item>যশোর সদর</item>
+        <item>অভয়নগর </item>
+        <item>কেশবপুর </item>
+        <item>চৌগাছা </item>
+        <item>ঝিকরগাছা </item>
+        <item>বাঘারপাড়া </item>
+        <item>মনিরামপুর </item>
+        <item>শার্শা </item>
+    </array>
+
+    <array name="satkhira">
+        <item>সাতক্ষীরা সদর</item>
+        <item>আশাশুনি </item>
+        <item>কলারোয়া </item>
+        <item>কালীগঞ্জ </item>
+        <item>তালা </item>
+        <item>দেবহাটা </item>
+        <item>শ্যামনগর </item>
+    </array>
+    <!-- End Khulna Division's Districts-->
+
+<!--    Chittagong Division's Districts-->
+    <array name="chittagong">
+        <item>কর্ণফুলি </item>
+        <item>আনোয়ারা </item>
+        <item>চন্দনাইশ </item>
+        <item>পটিয়া </item>
+        <item>ফটিকছড়ি </item>
+        <item>বাঁশখালী </item>
+        <item>বোয়ালখালী </item>
+        <item>মীরসরাই </item>
+        <item>রাউজান </item>
+        <item>রাঙ্গুনিয়া </item>
+        <item>লোহাগাড়া </item>
+        <item>সন্দ্বীপ </item>
+        <item>সাতকানিয়া </item>
+        <item>সীতাকুণ্ড </item>
+        <item>হাটহাজারী </item>
+    </array>
+
+    <array name="coxsbazar">
+        <item>কক্সবাজার সদর</item>
+        <item>উখিয়া</item>
+        <item>কুতুবদিয়া </item>
+        <item>টেকনাফ </item>
+        <item>টেকনাফ </item>
+        <item>মহেশখালী </item>
+        <item>রামু </item>
+        <item>আনোয়ারা</item>
+        <item>ঈদগাঁও </item>
+    </array>
+
+    <array name="bandarban">
+        <item>বান্দরবান সদর</item>
+        <item>থানচি </item>
+        <item>আলিকদম</item>
+        <item>নাইক্ষ্যংছড়ি </item>
+        <item>রুমা </item>
+        <item>রোয়াংছড়ি </item>
+        <item>লামা </item>
+    </array>
+
+    <array name="khagrachory">
+        <item>খাগড়াছড়ি সদর </item>
+        <item>দীঘিনালা </item>
+        <item>পানছড়ি </item>
+        <item>মহালছড়ি </item>
+        <item>মাটিরাঙ্গা </item>
+        <item>মানিকছড়ি </item>
+        <item>রামগড় </item>
+        <item>লক্ষীছড়ি </item>
+        <item>গুইমারা </item>
+    </array>
+
+    <array name="rangamati">
+        <item>কাউখালী</item>
+        <item>কাপ্তাই</item>
+        <item>জুরাছড়ি</item>
+        <item>নানিয়াচর</item>
+        <item>বরকল</item>
+        <item>বাঘাইছড়ি</item>
+        <item>বিলাইছড়ি</item>
+        <item>রাঙ্গামাটি সদর</item>
+        <item>রাজস্থলী</item>
+        <item>লংগদু</item>
+    </array>
+
+    <array name="noyakhali">
+        <item>নোয়াখালী সদর</item>
+        <item>বেগমগঞ্জ</item>
+        <item>চাটখিল</item>
+        <item>কোম্পানীগঞ্জ</item>
+        <item>হাতিয়া</item>
+        <item>সেনবাগ</item>
+        <item>সুবর্ণ চর</item>
+        <item>সোনাইমুড়ি</item>
+        <item>কবিরহাট</item>
+    </array>
+    
+    <array name="laxmipur">
+        <item>কমলনগর</item>
+        <item>রামগঞ্জ</item>
+        <item>রামগতি</item>
+        <item>রায়পুর</item>
+        <item>লক্ষ্মীপুর সদর</item>
+    </array>
+
+    <array name="feni">
+        <item>ফেনী সদর</item>
+        <item>দাগনভূঁইয়া</item>
+        <item>সোনাগাজী</item>
+        <item>ছাগলনাইয়া</item>
+        <item>পরশুরাম</item>
+        <item>ফুলগাজী</item>
+    </array>
+
+    <array name="cumilla">
+        <item>কুমিল্লা সদর </item>
+        <item>বরুরা </item>
+        <item>চান্দিনা </item>
+        <item>দাউদকান্দি </item>
+        <item>লাকসাম </item>
+        <item>ব্রাহ্মণপাড়া </item>
+        <item>বুড়িচং </item>
+        <item>চৌদ্দগ্রাম </item>
+        <item>দেবীদ্বার </item>
+        <item>হোমনা </item>
+        <item>মুরাদনগর </item>
+        <item>লাঙ্গলকোট</item>
+        <item>মেঘনা </item>
+        <item>তিতাস </item>
+        <item>মনোহরগঞ্জ</item>
+        <item>সদর দক্ষিণ </item>
+        <item>লালমাই </item>
+    </array>
+    
+    <array name="chadpur">
+        <item>চাঁদপুর সদর</item>
+        <item>হাজীগঞ্জ</item>
+        <item>কচুয়া</item>
+        <item>ফরিদগঞ্জ</item>
+        <item>মতলব উত্তর</item>
+        <item>মতলব দক্ষিণ</item>
+        <item>হাইমচর</item>
+        <item>শাহরাস্তি</item>
+        <item>ব্রাহ্মণবাড়িয়া জেলা</item>
+        <item>আশুগঞ্জ</item>
+        <item>আখাউড়া</item>
+        <item>কসবা</item>
+        <item>নবীনগর</item>
+        <item>নাসিরনগর</item>
+        <item>বাঞ্ছারামপুর</item>
+        <item>ব্রাহ্মণবাড়িয়া সদর</item>
+        <item>সরাইল</item>
+        <item>বিজয়নগর</item>
+    </array>
+
+    <array name="brammanbaria">
+        <item>ব্রাহ্মণবাড়িয়া সদর</item>
+        <item>আখাউড়া</item>
+        <item>আশুগঞ্জ</item>
+        <item>কসবা</item>
+        <item>নবীনগর</item>
+        <item>নাসিরনগর</item>
+        <item>বাঞ্ছারামপুর</item>
+        <item>বিজয়নগর</item>
+        <item>সরাইল</item>
+    </array>
+    <!--  End Chittagong Division's Districts-->
+
+
+<!--    Dhaka Division Districts-->
+    <array name="dhaka">
+        <item>ধামরাই</item>
+        <item>দোহার</item>
+        <item>কেরানীগঞ্জ</item>
+        <item>নবাবগঞ্জ</item>
+        <item>সাভার</item>
+    </array>
+
+    <array name="narshindhi">
+        <item>বেলাবো</item>
+        <item>মনোহরদী</item>
+        <item>শিবপুর</item>
+        <item>রায়পুরা</item>
+        <item>পলাশ</item>
+        <item>নরসিংদী সদর</item>
+
+    </array>
+
+    <array name="narayangonj">
+        <item>নারায়ণগঞ্জ সদর</item>
+        <item>বন্দর</item>
+        <item>আড়াইহাজার</item>
+        <item>রূপগঞ্জ</item>
+        <item>সোনারগাঁও</item>
+    </array>
+
+    <array name="gazipur">
+        <item>গাজীপুর সদর</item>
+        <item>কালিয়াকৈর</item>
+        <item>কালীগঞ্জ</item>
+        <item>কাপাসিয়া</item>
+        <item>শ্রীপুর</item>
+
+    </array>
+    
+    <array name="munsigonj">
+        <item>মুন্সীগঞ্জ সদর</item>
+        <item>শ্রীনগর</item>
+        <item>সিরাজদীখান</item>
+        <item>লৌহজং</item>
+        <item>টঙ্গীবাড়ী</item>
+        <item>গজারিয়া</item>
+    </array>
+    
+    <array name="manikgonj">
+        <item>মানিকগঞ্জ সদর</item>
+        <item>ঘিওর</item>
+        <item>দৌলতপুর</item>
+        <item>শিবালয়</item>
+        <item>সাটুরিয়া</item>
+        <item>সিঙ্গাইর</item>
+        <item>হরিরামপুর</item>
+    </array>
+
+    <array name="tangail">
+        <item>টাঙ্গাইল সদর</item>
+        <item>কালিহাতি</item>
+        <item>ঘাটাইল</item>
+        <item>বাসাইল</item>
+        <item>গোপালপুর</item>
+        <item>মির্জাপুর</item>
+        <item>ভূঞাপুর</item>
+        <item>নাগরপুর</item>
+        <item>মধুপুর</item>
+        <item>সখিপুর</item>
+        <item>দেলদুয়ার</item>
+        <item>ধনবাড়ী</item>
+    </array>
+    
+    <array name="rajbari">
+        <item>রাজবাড়ী সদর</item>
+        <item>গোয়ালন্দ</item>
+        <item>পাংশা</item>
+        <item>বালিয়াকান্দি</item>
+        <item>কালুখালী</item>
+    </array>
+    
+    <array name="gopalgonj">
+        <item>গোপালগঞ্জ সদর</item>
+        <item>মুকসুদপুর</item>
+        <item>কাশিয়ানী</item>
+        <item>কোটালীপাড়া</item>
+        <item>টুঙ্গিপাড়া</item>
+    </array>
+
+    <array name="shoriyotpur">
+        <item>শরীয়তপুর সদর</item>
+        <item>ডামুড্যা</item>
+        <item>নড়িয়া</item>
+        <item>ভেদরগঞ্জ</item>
+        <item>জাজিরা</item>
+        <item>গোসাইরহাট</item>
+    </array>
+
+    <array name="madaripur">
+        <item>মাদারীপুর সদর</item>
+        <item>শিবচর</item>
+        <item>কালকিনী</item>
+        <item>রাজৈর</item>
+        <item>ডাসার</item>
+    </array>
+
+    <array name="faridpur">
+        <item>ফরিদপুর সদর</item>
+        <item>বোয়ালমারী</item>
+        <item>আলফাডাঙা</item>
+        <item>মধুখালী</item>
+        <item>ভাঙ্গা</item>
+        <item>নগরকান্দা</item>
+        <item>চর ভদ্রাসন</item>
+        <item>সদরপুর</item>
+        <item>সালথা</item>
+    </array>
+
+    <array name="kishoregonj">
+        <item>কিশোরগঞ্জ সদর</item>
+        <item>অষ্টগ্রাম</item>
+        <item>ইটনা</item>
+        <item>করিমগঞ্জ</item>
+        <item>কটিয়াদি</item>
+        <item>কুলিয়ারচর</item>
+        <item>তাড়াইল</item>
+        <item>নিকলী</item>
+        <item>পাকুন্দিয়া</item>
+        <item>বাজিতপুর</item>
+        <item>ভৈরব</item>
+        <item>মিটামইন</item>
+        <item>হোসেনপুর</item>
+    </array>
+<!--   End Dhaka Division Districts-->
+
+
+<!--    Barishal Division District-->
+    <array name="barishal">
+    <item>বরিশাল সদর</item>
+    <item>আগৈলঝাড়া</item>
+    <item>বাকেরগঞ্জ</item>
+    <item>বাবুগঞ্জ</item>
+    <item>বানারীপাড়া</item>
+    <item>গৌরনদী</item>
+    <item>হিজলা</item>
+    <item>মেহেন্দিগঞ্জ</item>
+    <item>মুলাদী</item>
+    <item>উজিরপুর</item>
+    </array>
+
+    <array name="borguna">
+        <item>বরগুনা সদর</item>
+        <item>আমতলী</item>
+        <item>তালতলী</item>
+        <item>পাথরঘাটা</item>
+        <item>বেতাগি</item>
+        <item>বামনা</item>
+    </array>
+
+    <array name="bhola">
+        <item>ভোলা সদর</item>
+        <item>চরফ্যাশন</item>
+        <item>তজমুদ্দিন</item>
+        <item>দৌলতখান</item>
+        <item>বোরহানউদ্দিন</item>
+        <item>মনপুরা</item>
+        <item>লালমোহন</item>
+    </array>
+    
+    <array name="jhalkhathi">
+        <item>ঝালকাঠি সদর</item>
+        <item>কাঁঠালিয়া</item>
+        <item>নলছিটি</item>
+        <item>রাজাপুর</item>
+    </array>
+    
+    <array name="potuyakhali">
+        <item>পটুয়াখালী সদর</item>
+        <item>বাউফল</item>
+        <item>দশমিনা</item>
+        <item>গলাচিপা</item>
+        <item>কলাপাড়া</item>
+        <item>মির্জাগঞ্জ</item>
+        <item>দুমকি</item>
+        <item>রাঙ্গাবালী</item>
+    </array>
+    
+    <array name="pirojpur">
+        <item>পিরোজপুর সদর</item>
+        <item>কাউখালী</item>
+        <item>নাজিরপুর</item>
+        <item>নেছারাবাদ (স্বরূপকাঠি)</item>
+        <item>ভান্ডারিয়া</item>
+        <item>মঠবাড়িয়া</item>
+        <item>ইন্দুরকানী</item>
+    </array>
+<!--  End Barishal Division District-->
+
+
+<!--    Mymanshingh Division District-->
+    <array name="mymanshingh">
+        <item>ময়মনসিংহ সদর</item> 
+        <item>ত্রিশাল</item> 
+        <item>গৌরীপুর</item> 
+        <item>মুক্তাগাছা</item> 
+        <item>ফুলপুর</item> 
+        <item>তারাকান্দা</item> 
+        <item>হালুয়াঘাট</item> 
+        <item>ভালুকা</item> 
+        <item>ফুলবাড়িয়া</item> 
+        <item>গফরগাঁও</item> 
+        <item>ঈশ্বরগঞ্জ</item> 
+        <item>নান্দাইল</item> 
+        <item>ধোবাউড়া</item> 
+    </array>
+    
+    <array name="sherpur">
+        <item>শেরপুর সদর</item>
+        <item>ঝিনাইগাতী</item>
+        <item>নকলা</item>
+        <item>নালিতাবাড়ী</item>
+        <item>শ্রীবরদী</item>
+    </array>
+
+    <array name="jamalpur">
+        <item>জামালপুর সদর</item>
+        <item>বকশীগঞ্জ</item>
+        <item>দেওয়ানগঞ্জ</item>
+        <item>ইসলামপুর</item>
+        <item>মাদারগঞ্জ</item>
+        <item>মেলান্দহ</item>
+        <item>সরিষাবাড়ি</item>
+    </array>
+
+    <array name="netrokona">
+        <item>নেত্রকোণা সদর</item>
+        <item>আটপাড়া</item>
+        <item>বারহাট্টা</item>
+        <item>দুর্গাপুর</item>
+        <item>খালিয়াজুড়ি</item>
+        <item>কলমাকান্দা</item>
+        <item>কেন্দুয়া</item>
+        <item>মদন</item>
+        <item>মোহনগঞ্জ</item>
+        <item>পূর্বধলা</item>
+    </array>
+<!-- End Mymanshingh Division District-->
+
+<!--    Rangpur Division District-->
+    <array name="rangpur">
+        <item>রংপুর সদর</item>
+        <item>বদরগঞ্জ</item>
+        <item>গংগাচড়া</item>
+        <item>কাউনিয়া</item>
+        <item>মিঠাপুকুর</item>
+        <item>পীরগাছা</item>
+        <item>পীরগঞ্জ</item>
+        <item>তারাগঞ্জ</item>
+    </array>
+
+    <array name="dinajpur">
+        <item>দিনাজপুর সদর</item>
+        <item>বিরামপুর</item>
+        <item>বীরগঞ্জ</item>
+        <item>বোচাগঞ্জ</item>
+        <item>ফুলবাড়ী</item>
+        <item>চিরিরবন্দর</item>
+        <item>ঘোড়াঘাট</item>
+        <item>হাকিমপুর</item>
+        <item>কাহারোল</item>
+        <item>খানসামা</item>
+        <item>নবাবগঞ্জ</item>
+        <item>পার্বতীপুর</item>
+        <item>বিরল</item>
+    </array>
+
+    <array name="gaibandha">
+        <item>গাইবান্ধা সদর</item>
+        <item>ফুলছড়ি</item>
+        <item>গোবিন্দগঞ্জ</item>
+        <item>পলাশবাড়ী</item>
+        <item>সাদুল্লাপুর</item>
+        <item>সাঘাটা</item>
+        <item>সুন্দরগঞ্জ</item>
+    </array>
+
+    <array name="kurigram">
+        <item>কুড়িগ্রাম সদর</item>
+        <item>উলিপুর</item>
+        <item>চর রাজিবপুর</item>
+        <item>চিলমারী</item>
+        <item>নাগেশ্বরী</item>
+        <item>ফুলবাড়ী</item>
+        <item>ভুরুঙ্গামারী</item>
+        <item>রাজারহাট</item>
+        <item>রৌমারী</item>
+    </array>
+
+    <array name="niphamari">
+        <item>নীলফামারী সদর</item>
+        <item>ডোমার</item>
+        <item>ডিমলা</item>
+        <item>জলঢাকা</item>
+        <item>কিশোরগঞ্জ</item>
+        <item>সৈয়দপুর</item>
+    </array>
+
+    <array name="ponchogarh">
+        <item>পঞ্চগড় সদর</item>
+        <item>দেবীগঞ্জ</item>
+        <item>তেতুলিয়াৃ</item>
+        <item>আটোয়ারী</item>
+        <item>বোদা</item>
+    </array>
+
+    <array name="thakurgao">
+        <item>ঠাকুরগাঁও সদর</item>
+        <item>পীরগঞ্জ</item>
+        <item>বালিয়াডাঙ্গী</item>
+        <item>রানীশংকৈল</item>
+        <item>হরিপুর</item>
+    </array>
+
+    <array name="lalmonirhat">
+        <item>লালমনিরহাট সদর</item>
+        <item>আদিতমারী</item>
+        <item>কালীগঞ্জ</item>
+        <item>পাটগ্রাম</item>
+        <item>হাতীবান্ধা</item>
+    </array>
+    <!--   End Rangpur Division District-->
+
+
+<!--    Rajshahi Division District-->
+    <array name="rajshahi">
+        <item>বাঘা</item>
+        <item>পুঠিয়া</item>
+        <item>পবা</item>
+        <item>বাগমারা</item>
+        <item>তানোর</item>
+        <item>মোহনপুর</item>
+        <item>চারঘাট</item>
+        <item>গোদাগারী</item>
+        <item>দূর্গাপুর</item>
+    </array>
+
+    <array name="natore">
+        <item>নাটোর সদর</item>
+        <item>বাগাতিপাড়া</item>
+        <item>বরাইগ্রাম</item>
+        <item>গুরুদাসপুর</item>
+        <item>লালপুর</item>
+        <item>সিংড়া</item>
+        <item>নলডাঙ্গা</item>
+    </array>
+
+    <array name="Chapainababgonj">
+        <item>চাঁপাইনবাবগঞ্জ সদর</item>
+        <item>গোমস্তাপুর</item>
+        <item>শিবগঞ্জ</item>
+        <item>নাচোল</item>
+        <item>ভোলাহাট</item>
+    </array>
+
+    <array name="jaypurhat">
+        <item>জয়পুরহাট সদর</item>
+        <item>পাঁচবিবি</item>
+        <item>কালাই</item>
+        <item>ক্ষেতলাল</item>
+        <item>আক্কেলপুর</item>
+    </array>
+
+    <array name="nogone">
+        <item>নওগাঁ সদর</item>
+        <item>পত্নীতলা</item>
+        <item>ধামুরহাট</item>
+        <item>মহাদেবপুর</item>
+        <item>পোরশা</item>
+        <item>সাপাহার</item>
+        <item>বদলগাছী</item>
+        <item>মান্দা</item>
+        <item>নিয়ামতপুর</item>
+        <item>আত্রাই</item>
+        <item>রানীনগর</item>
+    </array>
+    
+    <array name="bogura">
+        <item>বগুড়া সদর</item>
+        <item>আদমদিঘী</item>
+        <item>ধুনট</item>
+        <item>ধুপচাঁচিয়া</item>
+        <item>গাবতলী</item>
+        <item>কাহালু</item>
+        <item>নন্দীগ্রাম</item>
+        <item>সারিয়াকান্দি</item>
+        <item>শেরপুর</item>
+        <item>শিবগঞ্জ</item>
+        <item>সোনাতলা</item>
+        <item>শাজাহানপুর</item>
+    </array>
+
+    <array name="pabna">
+        <item>পাবনা সদর</item>
+        <item>ঈশ্বরদী</item>
+        <item>আটঘরিয়া</item>
+        <item>চাটমোহর</item>
+        <item>ফরিদপুর</item>
+        <item>বেড়া</item>
+        <item>ভাঙ্গুরা</item>
+        <item>সাঁথিয়া</item>
+        <item>সুজানগর</item>
+    </array>
+
+    <array name="sirajgonj">
+        <item>সিরাজগঞ্জ সদর</item>
+        <item>উল্লাপাড়া</item>
+        <item>কাজীপুর</item>
+        <item>কামারখন্দ</item>
+        <item>চৌহালি</item>
+        <item>তাড়াশ</item>
+        <item>বেলকুচি</item>
+        <item>রায়গঞ্জ</item>
+        <item>শাহজাদপুর</item>
+    </array>
+<!--   End Rajshahi Division District-->
+
+<!--    Sylet Division District-->
+    <array name="sylet">
+        <item>সিলেট সদর</item>
+        <item>বালাগঞ্জ</item>
+        <item>বিয়ানীবাজার</item>
+        <item>বিশ্বনাথ</item>
+        <item>কোম্পানীগঞ্জ</item>
+        <item>ফেঞ্চুগঞ্জ</item>
+        <item>গোলাপগঞ্জ</item>
+        <item>গোয়াইনঘাট</item>
+        <item>জৈন্তাপুর</item>
+        <item>কানাইঘাট</item>
+        <item>জকিগঞ্জ</item>
+        <item>দক্ষিণ সুরমা</item>
+        <item>ওসমানীনগর</item>
+    </array>
+
+    <array name="molovibazar">
+        <item>মৌলভীবাজার সদর</item>
+        <item>বড়লেখা</item>
+        <item>কুলাউড়া</item>
+        <item>রাজনগর</item>
+        <item>কমলগঞ্জ</item>
+        <item>শ্রীমঙ্গল</item>
+        <item>জুড়ী</item>
+    </array>
+
+    <array name="sunamgonj">
+        <item>সুনামগঞ্জ সদর</item>
+        <item>ছাতক</item>
+        <item>জগন্নাথপুর</item>
+        <item>জামালগঞ্জ</item>
+        <item>তাহিরপুর</item>
+        <item>শান্তিগঞ্জ</item>
+        <item>দিরাই</item>
+        <item>দোয়ারাবাজার</item>
+        <item>ধর্মপাশা</item>
+        <item>বিশ্বম্ভরপুর</item>
+        <item>শাল্লা</item>
+        <item>মধ্যনগর</item>
+    </array>
+    
+    <array name="hobigonj">
+        <item>হবিগঞ্জ সদর</item>
+        <item>আজমিরীগঞ্জ</item>
+        <item>চুনারুঘাট</item>
+        <item>নবীগঞ্জ</item>
+        <item>বানিয়াচং</item>
+        <item>বাহুবল</item>
+        <item>মাধবপুর</item>
+        <item>লাখাই</item>
+        <item>শায়েস্তাগঞ্জ</item>
+    </array>
+<!--   End Sylet Division District-->
+
+    <!--Finished Districts Array-->
+
+
+
+
+
+    <array name="Districts">
+        <item>Anantapur</item>
+        <item>Chittoor</item>
+        <item>East Godavari</item>
+        <item>Guntur</item>
+        <item>Krishna</item>
+        <item>Kurnool</item>
+        <item>Prakasam</item>
+        <item>Srikakulam</item>
+        <item>Sri Potti Sriramulu Nellore</item>
+        <item>Visakhapatnam</item>
+        <item>Vizianagaram</item>
+        <item>West Godavari</item>
+        <item>YSR District</item>
+        <item></item>
+    </array>
+
+    <array name="Upazilas">
+        <item>Anjaw</item>
+        <item>Changlang</item>
+        <item>Dibang Valley</item>
+        <item>East Kameng</item>
+        <item>East Siang</item>
+        <item>Kamle</item>
+        <item>Kra Daadi</item>
+        <item>Kurung Kumey</item>
+        <item>Lepa Rada</item>
+        <item>Lohit</item>
+        <item>Longding</item>
+        <item>Lower Dibang Valley</item>
+        <item>Lower Siang</item>
+        <item>Lower Subansiri</item>
+        <item>Namsai</item>
+        <item>Pakke Kessang</item>
+        <item>Papum Pare</item>
+        <item>Shi Yomi</item>
+        <item>Siang</item>
+        <item>Tawang</item>
+        <item>Tirap</item>
+        <item>Upper Siang</item>
+        <item>Upper Subansiri</item>
+        <item>West Kameng</item>
+        <item>West Siang</item>
+    </array>
+
+    <array name="Districts_Maharashtra">
+        <item>Ahmednagar</item>
+        <item>Akola</item>
+        <item>Amravati</item>
+        <item>Aurangabad</item>
+        <item>Beed</item>
+        <item>Bhandara</item>
+        <item>Buldhana</item>
+        <item>Chandrapur</item>
+        <item>Dhule</item>
+        <item>Gadchiroli</item>
+        <item>Gondia</item>
+        <item>Hingoli</item>
+        <item>Jalgaon</item>
+        <item>Jalna</item>
+        <item>Kolhapur</item>
+        <item>Latur</item>
+        <item>Mumbai City</item>
+        <item>Mumbai Subarban</item>
+        <item>Nagpur</item>
+        <item>Nanded</item>
+        <item>Nandurbar</item>
+        <item>Nashik</item>
+        <item>Osmanabad</item>
+        <item>Palghar</item>
+        <item>Parbhani</item>
+        <item>Pune</item>
+        <item>Raigad</item>
+        <item>Ratnagiri</item>
+        <item>Sangli</item>
+        <item>Satara</item>
+        <item>Sindhudurg</item>
+        <item>Solapur</item>
+        <item>Thane</item>
+        <item>Wardha</item>
+        <item>Washim</item>
+        <item>Yavatmal</item>
+    </array>
+
+</resources>
+
+
