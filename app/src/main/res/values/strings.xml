@@ -34,6 +34,10 @@
     <string name="search">Search</string>
     <string name="Email">Enter Email Here…</string>
     <string name="cover">cover</string>
+    <string name="register">Register</string>
+    <string name="last_name">Last Name</string>
+    <string name="first_name">First Name</string>
+    <string name="motive">রক্তদিন জীবন বাঁচান!</string>
 
     <array name="blood_groups">
         <item>A+</item>

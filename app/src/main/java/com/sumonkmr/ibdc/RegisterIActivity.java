@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -14,9 +15,7 @@ import java.util.HashMap;
 
 public class RegisterIActivity extends AppCompatActivity {
 
-    com.google.android.material.textfield.TextInputEditText fName,lName,email,pass;
-    com.google.android.material.button.MaterialButton nextToI;
-    com.google.android.material.progressindicator.LinearProgressIndicator progressIndicator;
+    EditText fName,lName,email,pass;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,8 +29,6 @@ public class RegisterIActivity extends AppCompatActivity {
         lName = findViewById(R.id.lNameInput);
         email = findViewById(R.id.emailInput);
         pass = findViewById(R.id.passInput);
-        nextToI = findViewById(R.id.nextButtonI);
-        progressIndicator = findViewById(R.id.iProgressbar);
     }
 
     public void nextRegisterPage(View view) {
