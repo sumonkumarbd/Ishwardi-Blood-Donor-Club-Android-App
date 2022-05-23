@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -30,8 +32,8 @@ public class RegisterIIIActivity extends AppCompatActivity {
 
     AutoCompleteTextView bloodgrp;
 
-    com.google.android.material.textfield.TextInputEditText mobile,textVerification;
-    com.google.android.material.button.MaterialButton submit;
+    EditText mobile,textVerification;
+    TextView submit;
 
     boolean isVerified = false, isSubmit = false;
 
