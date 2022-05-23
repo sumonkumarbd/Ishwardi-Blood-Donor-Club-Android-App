@@ -3,12 +3,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -22,7 +20,7 @@ public class RegisterIIActivity extends AppCompatActivity {
     AutoCompleteTextView Division, District, Upazila;
 
     com.google.android.material.textfield.TextInputEditText Village;
-    com.google.android.material.button.MaterialButton nextToIII;
+    TextView nextToII;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -375,7 +373,7 @@ public class RegisterIIActivity extends AppCompatActivity {
         District = findViewById(R.id.districtDropDrown);
         Upazila = findViewById(R.id.upazilaDropDrown);
         Village = findViewById(R.id.VillageRegister);
-        nextToIII = findViewById(R.id.nextButtonII);
+        nextToII = findViewById(R.id.nextButtonII);
 
     }
 

@@ -6,6 +6,8 @@
         <entry key="..\:/work_station/blood_bank-main/app/src/main/res/drawable/blood_drop.xml" value="0.1945" />
         <entry key="..\:/work_station/blood_bank-main/app/src/main/res/drawable/ic_compare_black_24dp.xml" value="0.1945" />
         <entry key="..\:/work_station/blood_bank-main/app/src/main/res/drawable/round_button.xml" value="0.1945" />
+        <entry key="..\:/work_station/blood_bank-main/app/src/main/res/drawable/round_textbox.xml" value="0.1565" />
+        <entry key="..\:/work_station/blood_bank-main/app/src/main/res/drawable/text_box_border_coustom.xml" value="0.1565" />
         <entry key="..\:/work_station/blood_bank-main/app/src/main/res/font/.xml" value="0.21666666666666667" />
         <entry key="..\:/work_station/blood_bank-main/app/src/main/res/font/actor.xml" value="0.21666666666666667" />
         <entry key="..\:/work_station/blood_bank-main/app/src/main/res/layout-v26/activity_dispaly_requests.xml" value="0.18645833333333334" />
@@ -14,7 +16,7 @@
         <entry key="..\:/work_station/blood_bank-main/app/src/main/res/layout/activity_login_screen.xml" value="0.25" />
         <entry key="..\:/work_station/blood_bank-main/app/src/main/res/layout/activity_main.xml" value="0.18645833333333334" />
         <entry key="..\:/work_station/blood_bank-main/app/src/main/res/layout/activity_register_i.xml" value="0.2" />
-        <entry key="..\:/work_station/blood_bank-main/app/src/main/res/layout/activity_register_i_i.xml" value="0.25" />
+        <entry key="..\:/work_station/blood_bank-main/app/src/main/res/layout/activity_register_i_i.xml" value="0.33" />
         <entry key="..\:/work_station/blood_bank-main/app/src/main/res/layout/details_donor_requester.xml" value="0.25" />
       </map>
     </option>

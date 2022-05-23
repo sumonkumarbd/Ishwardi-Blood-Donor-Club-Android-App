@@ -37,7 +37,10 @@
     <string name="register">Register</string>
     <string name="last_name">Last Name</string>
     <string name="first_name">First Name</string>
-    <string name="motive">রক্তদিন জীবন বাঁচান!</string>
+    <string name="motive">আমি বাঁচাতে চাই একটি প্রাণ,\nতাইতো করবো রক্তদান!</string>
+    <string name="address">Address</string>
+    <string name="next">Next</string>
+    <string name="village">Village</string>
 
     <array name="blood_groups">
         <item>A+</item>
