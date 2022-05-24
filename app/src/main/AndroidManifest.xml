@@ -13,14 +13,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BloodBankByVinayak">
-        <activity android:name="com.sumonkmr.ibdc.DisplayDonorsActivity"></activity>
-        <activity android:name="com.sumonkmr.ibdc.DispalyRequestsActivity" />
-        <activity android:name="com.sumonkmr.ibdc.RegisterIIIActivity" />
-        <activity android:name="com.sumonkmr.ibdc.RegisterIIActivity" />
-        <activity android:name="com.sumonkmr.ibdc.RegisterIActivity" />
-        <activity android:name="com.sumonkmr.ibdc.LoginScreenActivity" />
         <activity
-            android:name="com.sumonkmr.ibdc.SplashScreen"
+            android:name=".DashBoard"
+            android:exported="false" />
+        <activity android:name=".DisplayDonorsActivity" />
+        <activity android:name=".DispalyRequestsActivity" />
+        <activity android:name=".RegisterIIIActivity" />
+        <activity android:name=".RegisterIIActivity" />
+        <activity android:name=".RegisterIActivity" />
+        <activity android:name=".LoginScreenActivity" />
+        <activity
+            android:name=".SplashScreen"
             android:theme="@style/Theme.BloodBankByVinayakNoStatusBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

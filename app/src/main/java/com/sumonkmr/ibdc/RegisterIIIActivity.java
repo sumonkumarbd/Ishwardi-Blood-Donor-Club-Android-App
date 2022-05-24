@@ -105,7 +105,7 @@ public class RegisterIIIActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if(task.isSuccessful()){
-                            startActivity(new Intent(RegisterIIIActivity.this,DispalyRequestsActivity.class));
+                            startActivity(new Intent(RegisterIIIActivity.this,DashBoard                        .class));
                             RegisterIIIActivity.this.finish();
                         }else {
                             Toast.makeText(RegisterIIIActivity.this, "Error!", Toast.LENGTH_SHORT).show();

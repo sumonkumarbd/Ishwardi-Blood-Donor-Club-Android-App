@@ -55,7 +55,7 @@ public class SplashScreen extends AppCompatActivity {
                                 break;
                             case "2": startActivity(new Intent(SplashScreen.this,RegisterIIIActivity.class));
                                 break;
-                            case "Done": startActivity(new Intent(SplashScreen.this,DispalyRequestsActivity.class));
+                            case "Done": startActivity(new Intent(SplashScreen.this,DashBoard.class));
                                 break;
                         }
                         SplashScreen.this.finish();
