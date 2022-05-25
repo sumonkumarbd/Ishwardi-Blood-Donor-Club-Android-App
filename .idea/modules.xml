@@ -2,11 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/BloodBankByVinayak.iml" filepath="$PROJECT_DIR$/.idea/modules/BloodBankByVinayak.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/BloodBankByVinayak.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/BloodBankByVinayak.app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/BloodBankByVinayak.app.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/BloodBankByVinayak.app.androidTest.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/BloodBankByVinayak.app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/app/BloodBankByVinayak.app.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/BloodBankByVinayak.app.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/BloodBankByVinayak.app.unitTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/IBDC.iml" filepath="$PROJECT_DIR$/.idea/modules/IBDC.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/IBDC.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/IBDC.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/IBDC.app.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/IBDC.app.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/IBDC.app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/app/IBDC.app.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/IBDC.app.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/IBDC.app.unitTest.iml" />
     </modules>
   </component>
 </project>

@@ -48,6 +48,8 @@
     <string name="verify_txt">Verify</string>
     <string name="header">Header</string>
     <string name="notice_board">Notice Board</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
 
     <array name="blood_groups">
         <item>A+</item>

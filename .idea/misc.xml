@@ -3,21 +3,27 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/work_station/IBDC App/app/src/main/res/layout/activity_dash_board.xml" value="0.1" />
+        <entry key="..\:/work_station/IBDC App/app/src/main/res/layout/nav_header.xml" value="0.1082427536231884" />
+        <entry key="..\:/work_station/IBDC App/app/src/main/res/menu/menu.xml" value="0.11623931623931624" />
         <entry key="..\:/work_station/blood_bank-main/app/src/main/res/drawable/blood_drop.xml" value="0.1945" />
+        <entry key="..\:/work_station/blood_bank-main/app/src/main/res/drawable/card.xml" value="0.1565" />
         <entry key="..\:/work_station/blood_bank-main/app/src/main/res/drawable/ic_baseline_call_24.xml" value="0.1565" />
         <entry key="..\:/work_station/blood_bank-main/app/src/main/res/drawable/ic_baseline_invert_colors_24.xml" value="0.1565" />
         <entry key="..\:/work_station/blood_bank-main/app/src/main/res/drawable/ic_compare_black_24dp.xml" value="0.1945" />
         <entry key="..\:/work_station/blood_bank-main/app/src/main/res/drawable/round_button.xml" value="0.1945" />
         <entry key="..\:/work_station/blood_bank-main/app/src/main/res/drawable/round_textbox.xml" value="0.1565" />
         <entry key="..\:/work_station/blood_bank-main/app/src/main/res/drawable/text_box_border_coustom.xml" value="0.1565" />
+        <entry key="..\:/work_station/blood_bank-main/app/src/main/res/drawable/white_box.xml" value="0.1565" />
         <entry key="..\:/work_station/blood_bank-main/app/src/main/res/font/.xml" value="0.21666666666666667" />
         <entry key="..\:/work_station/blood_bank-main/app/src/main/res/font/actor.xml" value="0.21666666666666667" />
         <entry key="..\:/work_station/blood_bank-main/app/src/main/res/layout-v26/activity_dispaly_requests.xml" value="0.18645833333333334" />
-        <entry key="..\:/work_station/blood_bank-main/app/src/main/res/layout/activity_dash_board.xml" value="0.16" />
+        <entry key="..\:/work_station/blood_bank-main/app/src/main/res/layout/activity_dash_board.xml" value="0.18" />
         <entry key="..\:/work_station/blood_bank-main/app/src/main/res/layout/activity_dispaly_requests.xml" value="0.25" />
         <entry key="..\:/work_station/blood_bank-main/app/src/main/res/layout/activity_display_donors.xml" value="0.18" />
         <entry key="..\:/work_station/blood_bank-main/app/src/main/res/layout/activity_login_screen.xml" value="0.25" />
         <entry key="..\:/work_station/blood_bank-main/app/src/main/res/layout/activity_main.xml" value="0.18645833333333334" />
+        <entry key="..\:/work_station/blood_bank-main/app/src/main/res/layout/activity_navigation_bar_manu.xml" value="0.14" />
         <entry key="..\:/work_station/blood_bank-main/app/src/main/res/layout/activity_register_i.xml" value="0.2" />
         <entry key="..\:/work_station/blood_bank-main/app/src/main/res/layout/activity_register_i_i.xml" value="0.22" />
         <entry key="..\:/work_station/blood_bank-main/app/src/main/res/layout/activity_register_i_i_i.xml" value="0.22" />
