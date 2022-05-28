@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:gravity="center"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <!--    main card-->
+    <LinearLayout
+        android:id="@+id/mainCard"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:elevation="@dimen/shadow"
+        android:background="@drawable/card"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:weightSum="2"
+            >
+
+            <!--        notice board-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight=".7"
+                android:layout_margin="10dp"
+                android:elevation="20dp"
+                android:background="@color/colorPrimary"
+                >
+                <TextView
+                    android:id="@+id/notice_board"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="@string/notice_board"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_margin="10dp"
+                    android:textColor="@color/white"
+                    android:textStyle="italic"
+                    android:textSize="@dimen/form_txt"
+                    />
+            </LinearLayout>
+
+            <!--    Category-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1.3"
+                android:weightSum="3"
+                android:orientation="vertical"
+                >
+
+                <LinearLayout
+                    android:id="@+id/first_row"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:layout_margin="10dp"
+                    android:elevation="@dimen/shadow"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:background="@drawable/white_box"
+                    android:weightSum="2.01"
+                    android:orientation="horizontal">
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        >
+
+                        <com.airbnb.lottie.LottieAnimationView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_marginBottom="10dp"
+                            app:lottie_autoPlay="true"
+                            app:lottie_loop="true"
+                            app:lottie_rawRes="@raw/ins" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"
+                            android:layout_alignParentBottom="true"
+                            android:text="@string/instructions"
+                            android:gravity="center"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/form_txt"
+                            android:layout_marginVertical="10dp"
+                            android:layout_marginHorizontal="5dp"
+                            android:background="@color/semi_tns_background" />
+                    </RelativeLayout>
+
+                    <View
+                        android:layout_width="2dp"
+                        android:layout_marginVertical="10dp"
+                        android:elevation="@dimen/minor_shadow"
+                        android:layout_height="match_parent"
+                        android:background="@color/colorPrimary"
+                        />
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        >
+
+                        <com.airbnb.lottie.LottieAnimationView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_marginBottom="10dp"
+                            app:lottie_autoPlay="true"
+                            app:lottie_loop="true"
+                            app:lottie_rawRes="@raw/blood_tnasfer" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"
+                            android:layout_alignParentBottom="true"
+                            android:text="@string/why_donate"
+                            android:gravity="center"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/form_txt"
+                            android:layout_marginVertical="10dp"
+                            android:layout_marginHorizontal="5dp"
+                            android:background="@color/semi_tns_background" />
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/sec_row"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:layout_margin="10dp"
+                    android:elevation="@dimen/shadow"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:background="@drawable/white_box"
+                    android:weightSum="2.01"
+                    android:orientation="horizontal">
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        >
+
+                        <com.airbnb.lottie.LottieAnimationView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_marginBottom="10dp"
+                            app:lottie_autoPlay="true"
+                            app:lottie_loop="true"
+                            app:lottie_rawRes="@raw/save_life" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"
+                            android:layout_alignParentBottom="true"
+                            android:text="@string/be_donor"
+                            android:gravity="center"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/form_txt"
+                            android:layout_marginVertical="10dp"
+                            android:layout_marginHorizontal="5dp"
+                            android:background="@color/semi_tns_background" />
+                    </RelativeLayout>
+
+                    <View
+                        android:layout_width="2dp"
+                        android:layout_marginVertical="10dp"
+                        android:elevation="@dimen/minor_shadow"
+                        android:layout_height="match_parent"
+                        android:background="@color/colorPrimary"
+                        />
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        >
+
+                        <com.airbnb.lottie.LottieAnimationView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_marginBottom="10dp"
+                            app:lottie_autoPlay="true"
+                            app:lottie_loop="true"
+                            app:lottie_rawRes="@raw/search_blood" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"
+                            android:layout_alignParentBottom="true"
+                            android:text="@string/search_donor"
+                            android:gravity="center"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/form_txt"
+                            android:layout_marginVertical="10dp"
+                            android:layout_marginHorizontal="5dp"
+                            android:background="@color/semi_tns_background" />
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/third_row"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:layout_margin="10dp"
+                    android:elevation="@dimen/shadow"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:background="@drawable/white_box"
+                    android:weightSum="2.01"
+                    android:orientation="horizontal">
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        >
+
+                        <com.airbnb.lottie.LottieAnimationView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_marginBottom="10dp"
+                            app:lottie_autoPlay="true"
+                            app:lottie_loop="true"
+                            app:lottie_rawRes="@raw/about_us" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"
+                            android:layout_alignParentBottom="true"
+                            android:text="@string/about_us"
+                            android:gravity="center"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/form_txt"
+                            android:layout_marginVertical="10dp"
+                            android:layout_marginHorizontal="5dp"
+                            android:background="@color/semi_tns_background" />
+                    </RelativeLayout>
+
+                    <View
+                        android:layout_width="2dp"
+                        android:layout_marginVertical="10dp"
+                        android:elevation="@dimen/minor_shadow"
+                        android:layout_height="match_parent"
+                        android:background="@color/colorPrimary"
+                        />
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        >
+
+                        <com.airbnb.lottie.LottieAnimationView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_marginBottom="10dp"
+                            app:lottie_autoPlay="true"
+                            app:lottie_loop="true"
+                            app:lottie_rawRes="@raw/rate_us" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"
+                            android:layout_alignParentBottom="true"
+                            android:text="@string/rate_us"
+                            android:gravity="center"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/form_txt"
+                            android:layout_marginVertical="10dp"
+                            android:layout_marginHorizontal="5dp"
+                            android:background="@color/semi_tns_background" />
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+
+
+            </LinearLayout> <!--    Category-->
+
+        </LinearLayout>
+
+
+    </LinearLayout><!--    main card-->
+
+
+    </LinearLayout><!--parent-->

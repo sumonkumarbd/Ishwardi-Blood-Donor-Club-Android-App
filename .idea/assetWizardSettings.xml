@@ -301,7 +301,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="file:/$PROJECT_DIR$/../../Program_Files/Android/Sdk/icons/material/materialicons/keyboard_hide/baseline_keyboard_hide_24.xml" />
+                                      <entry key="url" value="file:/$PROJECT_DIR$/../../Program_Files/Android/Sdk/icons/material/materialicons/home/baseline_home_24.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -311,8 +311,8 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="color" value="bf1f2d" />
-                            <entry key="outputName" value="ic_baseline_keyboard_hide_24" />
+                            <entry key="color" value="ffffff" />
+                            <entry key="outputName" value="ic_baseline_home_24" />
                             <entry key="sourceFile" value="D:\work_station\blood_bank-main" />
                           </map>
                         </option>
