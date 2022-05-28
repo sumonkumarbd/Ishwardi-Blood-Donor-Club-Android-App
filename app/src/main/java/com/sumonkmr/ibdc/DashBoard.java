@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,12 +24,17 @@ public class DashBoard extends AppCompatActivity implements View.OnClickListener
     FirebaseAuth auth;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dash_board);
 
         auth = FirebaseAuth.getInstance();
+
+
+
+
 
         init();
     }
@@ -56,11 +62,13 @@ public class DashBoard extends AppCompatActivity implements View.OnClickListener
         LinearLayout ll_Logout = menuView.findViewById(R.id.ll_Logout);
 
 
+
         ll_Home.setOnClickListener(this);
         ll_Profile.setOnClickListener(this);
         ll_Setting.setOnClickListener(this);
         ll_Share.setOnClickListener(this);
         ll_Logout.setOnClickListener(this);
+
 
 
         replace(new HomeFragment());
@@ -69,6 +77,7 @@ public class DashBoard extends AppCompatActivity implements View.OnClickListener
     }
 
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     public void onClick(View view) {
         switch (view.getId()){
@@ -92,6 +101,16 @@ public class DashBoard extends AppCompatActivity implements View.OnClickListener
                 auth.signOut();
                 startActivity(new Intent(this,SplashScreen.class));
                 break;
+
+//            case R.id.about_us:
+////                startActivity(new Intent(this, AboutUs.class));
+//                Toast.makeText(this, "This is About Us", Toast.LENGTH_SHORT).show();
+//                break;
+//
+//            case R.id.find_donors:
+////                startActivity(new Intent(this, DisplayDonorsActivity.class));
+//                Toast.makeText(this, "This is Donors", Toast.LENGTH_SHORT).show();
+//                break;
 
         }
         drawerLayout.closeDrawer();

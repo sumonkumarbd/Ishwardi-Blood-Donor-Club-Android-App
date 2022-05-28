@@ -198,6 +198,7 @@
                         />
 
                     <RelativeLayout
+                        android:id="@+id/find_donors"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -243,6 +244,7 @@
                     android:orientation="horizontal">
 
                     <RelativeLayout
+                        android:id="@+id/about_us"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
