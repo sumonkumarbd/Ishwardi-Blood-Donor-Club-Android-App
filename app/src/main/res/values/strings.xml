@@ -50,6 +50,10 @@
     <string name="notice_board">Notice Board</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
+    <string name="profile_name">Profile name</string>
+    <string name="home">Home</string>
+    <string name="logout">Logout</string>
+    <string name="about">About Us</string>
 
     <array name="blood_groups">
         <item>A+</item>

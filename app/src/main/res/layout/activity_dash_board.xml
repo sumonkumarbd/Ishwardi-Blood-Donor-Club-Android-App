@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<nl.psdcompany.duonavigationdrawer.views.DuoDrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/drawer"
@@ -9,343 +9,279 @@
     tools:context=".DashBoard"
     tools:openDrawer="start">
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-        <androidx.appcompat.widget.Toolbar
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/toolbar"
-            app:title="Navigation Drawer"
-            app:titleTextColor="@color/white"
-            android:background="@color/colorPrimary"/>
-
-
-    </RelativeLayout>
-
-    <com.google.android.material.navigation.NavigationView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/nav_menu"
-        app:menu="@menu/menu"
-        app:headerLayout="@layout/nav_header"
-        android:layout_gravity="start"
-        />
-
-
-    <androidx.constraintlayout.widget.ConstraintLayout
+<!--    manu-->
+    <nl.psdcompany.duonavigationdrawer.views.DuoMenuView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        >
-        <!--    Header-->
-        <ImageView
-            android:id="@+id/headerVictor"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:contentDescription="@string/header"
-            android:scaleType="centerCrop"
-            android:src="@drawable/header_victor"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        android:tag="@string/tag_menu"
+        app:footer="@layout/duo_view_footer">
 
-        <!--    main card-->
         <LinearLayout
-            android:id="@+id/mainCard"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginHorizontal="30dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginBottom="60dp"
-            android:elevation="@dimen/shadow"
-            android:background="@drawable/card"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.491"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0">
+            android:orientation="vertical">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profile_image"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="10dp"
+                android:src="@drawable/ibdc_logo_tns"
+                app:civ_border_width="2dp"
+                app:civ_border_color="@color/white"
+                android:elevation="@dimen/minor_shadow"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
+                android:text="@string/profile_name"
+                android:textSize="@dimen/manu_txt"
+                android:textColor="@color/white"
+                android:fontFamily="@font/varela_round"
+                />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/white"
+                />
+
 
             <LinearLayout
+                android:id="@+id/ll_Home"
+                android:gravity="center_vertical"
+                android:layout_marginTop="50dp"
+                android:layout_marginHorizontal="24dp"
+                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:weightSum="2"
-                >
+                android:layout_height="wrap_content">
 
-                <!--        notice board-->
-                <LinearLayout
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/blood_drop"
+                    app:tint="@color/white" />
+
+                <TextView
+                    android:fontFamily="@font/actor"
+                    android:textSize="@dimen/manu_txt"
+                    android:layout_marginHorizontal="16dp"
                     android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight=".7"
-                    android:layout_margin="10dp"
-                    android:elevation="20dp"
-                    android:background="@color/colorPrimary"
-                    >
-                    <TextView
-                        android:id="@+id/notice_board"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="@string/notice_board"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:layout_margin="10dp"
-                        android:textColor="@color/white"
-                        android:textStyle="italic"
-                        android:textSize="@dimen/form_txt"
-                        />
-                </LinearLayout>
-
-                <!--    Category-->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1.3"
-                    android:weightSum="3"
-                    android:orientation="vertical"
-                    >
-
-                    <LinearLayout
-                        android:id="@+id/first_row"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:layout_margin="10dp"
-                        android:elevation="@dimen/shadow"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:background="@drawable/white_box"
-                        android:weightSum="2.01"
-                        android:orientation="horizontal">
-
-                        <RelativeLayout
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            >
-                            <com.airbnb.lottie.LottieAnimationView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                app:lottie_rawRes="@raw/loading"
-                                app:lottie_autoPlay="true"
-                                app:lottie_loop="true"
-                                android:layout_margin="10dp"
-                                />
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="30dp"
-                                android:layout_alignParentBottom="true"
-                                android:text="@string/cover"
-                                android:gravity="center"
-                                android:textColor="@color/white"
-                                android:textSize="@dimen/form_txt"
-                                android:layout_marginVertical="10dp"
-                                android:layout_marginHorizontal="5dp"
-                                android:background="#3B000000" />
-                        </RelativeLayout>
-
-                        <View
-                            android:layout_width="2dp"
-                            android:layout_marginVertical="10dp"
-                            android:elevation="@dimen/minor_shadow"
-                            android:layout_height="match_parent"
-                            android:background="@color/colorPrimary"
-                            />
-
-                        <RelativeLayout
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            >
-                            <com.airbnb.lottie.LottieAnimationView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                app:lottie_rawRes="@raw/loading"
-                                app:lottie_autoPlay="true"
-                                app:lottie_loop="true"
-                                android:layout_margin="10dp"
-                                />
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="30dp"
-                                android:layout_alignParentBottom="true"
-                                android:text="@string/cover"
-                                android:gravity="center"
-                                android:textColor="@color/white"
-                                android:textSize="@dimen/form_txt"
-                                android:layout_marginVertical="10dp"
-                                android:layout_marginHorizontal="5dp"
-                                android:background="#3B000000" />
-                        </RelativeLayout>
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/sec_row"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:layout_margin="10dp"
-                        android:elevation="@dimen/shadow"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:background="@drawable/white_box"
-                        android:weightSum="2.01"
-                        android:orientation="horizontal">
-
-                        <RelativeLayout
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            >
-                            <com.airbnb.lottie.LottieAnimationView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                app:lottie_rawRes="@raw/loading"
-                                app:lottie_autoPlay="true"
-                                app:lottie_loop="true"
-                                android:layout_margin="10dp"
-                                />
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="30dp"
-                                android:layout_alignParentBottom="true"
-                                android:text="@string/cover"
-                                android:gravity="center"
-                                android:textColor="@color/white"
-                                android:textSize="@dimen/form_txt"
-                                android:layout_marginVertical="10dp"
-                                android:layout_marginHorizontal="5dp"
-                                android:background="#3B000000" />
-                        </RelativeLayout>
-
-                        <View
-                            android:layout_width="2dp"
-                            android:layout_marginVertical="10dp"
-                            android:elevation="@dimen/minor_shadow"
-                            android:layout_height="match_parent"
-                            android:background="@color/colorPrimary"
-                            />
-
-                        <RelativeLayout
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            >
-                            <com.airbnb.lottie.LottieAnimationView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                app:lottie_rawRes="@raw/loading"
-                                app:lottie_autoPlay="true"
-                                app:lottie_loop="true"
-                                android:layout_margin="10dp"
-                                />
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="30dp"
-                                android:layout_alignParentBottom="true"
-                                android:text="@string/cover"
-                                android:gravity="center"
-                                android:textColor="@color/white"
-                                android:textSize="@dimen/form_txt"
-                                android:layout_marginVertical="10dp"
-                                android:layout_marginHorizontal="5dp"
-                                android:background="#3B000000" />
-                        </RelativeLayout>
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/third_row"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:layout_margin="10dp"
-                        android:elevation="@dimen/shadow"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:background="@drawable/white_box"
-                        android:weightSum="2.01"
-                        android:orientation="horizontal">
-
-                        <RelativeLayout
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            >
-                            <com.airbnb.lottie.LottieAnimationView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                app:lottie_rawRes="@raw/loading"
-                                app:lottie_autoPlay="true"
-                                app:lottie_loop="true"
-                                android:layout_margin="10dp"
-                                />
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="30dp"
-                                android:layout_alignParentBottom="true"
-                                android:text="@string/cover"
-                                android:gravity="center"
-                                android:textColor="@color/white"
-                                android:textSize="@dimen/form_txt"
-                                android:layout_marginVertical="10dp"
-                                android:layout_marginHorizontal="5dp"
-                                android:background="#3B000000" />
-                        </RelativeLayout>
-
-                        <View
-                            android:layout_width="2dp"
-                            android:layout_marginVertical="10dp"
-                            android:elevation="@dimen/minor_shadow"
-                            android:layout_height="match_parent"
-                            android:background="@color/colorPrimary"
-                            />
-
-                        <RelativeLayout
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            >
-                            <com.airbnb.lottie.LottieAnimationView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                app:lottie_rawRes="@raw/loading"
-                                app:lottie_autoPlay="true"
-                                app:lottie_loop="true"
-                                android:layout_margin="10dp"
-                                />
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="30dp"
-                                android:layout_alignParentBottom="true"
-                                android:text="@string/cover"
-                                android:gravity="center"
-                                android:textColor="@color/white"
-                                android:textSize="@dimen/form_txt"
-                                android:layout_marginVertical="10dp"
-                                android:layout_marginHorizontal="5dp"
-                                android:background="#3B000000" />
-                        </RelativeLayout>
-
-                    </LinearLayout>
-
-
-                </LinearLayout>
+                    android:layout_height="wrap_content"
+                    android:text="@string/home"
+                    android:textColor="@color/white"/>
 
             </LinearLayout>
 
+            <LinearLayout
+                android:id="@+id/ll_Profile"
+                android:gravity="center_vertical"
+                android:layout_marginTop="24dp"
+                android:layout_marginHorizontal="24dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/blood_drop"
+                    app:tint="@color/white" />
+
+                <TextView
+                    android:fontFamily="@font/actor"
+                    android:textSize="@dimen/manu_txt"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Profile"
+                    android:textColor="@color/white"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_Setting"
+                android:gravity="center_vertical"
+                android:layout_marginTop="24dp"
+                android:layout_marginHorizontal="24dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/blood_drop"
+                    app:tint="@color/white" />
+
+                <TextView
+                    android:fontFamily="@font/actor"
+                    android:textSize="@dimen/manu_txt"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Setting"
+                    android:textColor="@color/white"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_Share"
+                android:gravity="center_vertical"
+                android:layout_marginTop="24dp"
+                android:layout_marginHorizontal="24dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/blood_drop"
+                    app:tint="@color/white" />
+
+                <TextView
+                    android:fontFamily="@font/actor"
+                    android:textSize="@dimen/manu_txt"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Share"
+                    android:textColor="@color/white"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_about_us"
+                android:gravity="center_vertical"
+                android:layout_marginTop="24dp"
+                android:layout_marginHorizontal="24dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/blood_drop"
+                    app:tint="@color/white" />
+
+                <TextView
+                    android:fontFamily="@font/actor"
+                    android:textSize="@dimen/manu_txt"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/about"
+                    android:textColor="@color/white"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_Logout"
+                android:gravity="center_vertical"
+                android:layout_marginTop="24dp"
+                android:layout_marginHorizontal="24dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/logout"
+                    app:tint="@color/white" />
+
+                <TextView
+                    android:fontFamily="@font/actor"
+                    android:textSize="@dimen/manu_txt"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/logout"
+                    android:textColor="@color/white"/>
+
+            </LinearLayout>
 
         </LinearLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
+    </nl.psdcompany.duonavigationdrawer.views.DuoMenuView>
+<!--finish manu-->
 
-</androidx.drawerlayout.widget.DrawerLayout>
+<!--    content-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:tag="@string/tag_content">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/colorPrimary"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+
+        <FrameLayout
+            android:id="@+id/container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorAccent"
+            >
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="visible"
+                >
+                <!--    Header-->
+                <ImageView
+                    android:id="@+id/headerVictor"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:contentDescription="@string/header"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/header_victor"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <!--    main card-->
+                <LinearLayout
+                    android:id="@+id/mainCard"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginHorizontal="15dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginBottom="60dp"
+                    android:elevation="@dimen/shadow"
+                    android:background="@drawable/card"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.491"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0">
+
+
+                            <FrameLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:id="@+id/frame"
+                                />
+
+                </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </FrameLayout>
+
+
+    </LinearLayout>
+<!--    finished content-->
+
+</nl.psdcompany.duonavigationdrawer.views.DuoDrawerLayout>

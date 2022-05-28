@@ -3,9 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/work_station/IBDC App/app/src/main/res/layout/activity_dash_board.xml" value="0.1" />
+        <entry key="..\:/work_station/IBDC App/app/src/main/res/layout/activity_dash_board.xml" value="0.16" />
+        <entry key="..\:/work_station/IBDC App/app/src/main/res/layout/fragment_profile.xml" value="0.1082427536231884" />
         <entry key="..\:/work_station/IBDC App/app/src/main/res/layout/nav_header.xml" value="0.1082427536231884" />
-        <entry key="..\:/work_station/IBDC App/app/src/main/res/menu/menu.xml" value="0.11623931623931624" />
+        <entry key="..\:/work_station/IBDC App/app/src/main/res/menu/menu.xml" value="0.22" />
         <entry key="..\:/work_station/blood_bank-main/app/src/main/res/drawable/blood_drop.xml" value="0.1945" />
         <entry key="..\:/work_station/blood_bank-main/app/src/main/res/drawable/card.xml" value="0.1565" />
         <entry key="..\:/work_station/blood_bank-main/app/src/main/res/drawable/ic_baseline_call_24.xml" value="0.1565" />
