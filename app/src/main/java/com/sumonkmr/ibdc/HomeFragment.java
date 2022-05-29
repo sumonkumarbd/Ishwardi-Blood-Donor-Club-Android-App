@@ -10,14 +10,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.google.android.gms.common.api.Releasable;
 
 
 public class HomeFragment extends Fragment {
 
-    RelativeLayout find_donors, about_us;
+    RelativeLayout ins,benefit,be_donor,find_donors, about_us,rate_us;
+    TextView notice_board;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -25,8 +23,25 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
+        notice_board = view.findViewById(R.id.notice_board);
+        ins = view.findViewById(R.id.ins);
+        benefit = view.findViewById(R.id.benefit);
+        be_donor = view.findViewById(R.id.be_donor);
         find_donors = view.findViewById(R.id.find_donors);
         about_us = view.findViewById(R.id.about_us);
+        rate_us = view.findViewById(R.id.rate_us);
+
+        ins.setOnClickListener(v -> {
+            startActivity(new Intent(getContext(), ProfitOfBloodDonation.class));
+        });
+
+        benefit.setOnClickListener(v -> {
+            startActivity(new Intent(getContext(), ProfitOfBloodDonation.class));
+        });
+
+        be_donor.setOnClickListener(v -> {
+//            startActivity(new Intent(getContext(),.class));
+        });
 
         find_donors.setOnClickListener(v -> {
             startActivity(new Intent(getContext(),DisplayDonorsActivity.class));
@@ -35,6 +50,11 @@ public class HomeFragment extends Fragment {
         about_us.setOnClickListener(v -> {
             startActivity(new Intent(getContext(),AboutUs.class));
         });
+
+        rate_us.setOnClickListener(v -> {
+//            startActivity(new Intent(getContext(),.class));
+        });
+
 
         return view;
 
