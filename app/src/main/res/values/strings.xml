@@ -11,9 +11,9 @@
     <string name="request_blood">Request Blood</string>
     <string name="all">ALL</string>
     <string name="make_call_or_share_if_needed">Make CALL or SHARE if Needed. </string>
-    <string name="divisions">Division</string>
-    <string name="upazila">Upazila</string>
-    <string name="district">District</string>
+    <string name="divisions">বিভাগ</string>
+    <string name="district">জেলা</string>
+    <string name="upazila">উপজেলা</string>
     <string name="ibdc">Ishwardi Blood Donor Club</string>
     <string name="forgot_password">Forgot Password?</string>
     <string name="login">LOGIN</string>
@@ -43,7 +43,7 @@
     <string name="village">Village</string>
     <string name="verification">Verification</string>
     <string name="mobile_number">Mobile Number</string>
-    <string name="blood_group">Blood Groupe</string>
+    <string name="blood_group">রক্তের গ্রূপ</string>
     <string name="verify">Verify OTP</string>
     <string name="verify_txt">Verify</string>
     <string name="header">Header</string>
@@ -68,6 +68,7 @@
     <string name="profit_of_blood_donation">রক্তদানের উপকারিতা</string>
     <string name="profit_of_blood_donation1">রক্তদান হল কোন প্রাপ্তবয়স্ক সুস্থ মানুষের স্বেচ্ছায় রক্ত দেবার প্রক্রিয়া। এই দান করা রক্ত পরিসঞ্চালন করা হয় অথবা অংশীকরণের মাধ্যমে ঔষধে পরিণত করা হয়।উন্নত দেশে বেশিরভাগ রক্তদাতাই হলেন স্বেচ্ছায় রক্তদাতা, যারা সামাজিক দায়বদ্ধতা থেকে রক্তদান করেন। দরিদ্র দেশগুলোতে এ ধরনের প্রতিষ্ঠিত স্বেচ্ছায় রক্তদাতার সংখ্যা বেশ কম, বেশিরভাগ রক্তদাতাই কেবল তাদের পরিচিতজনদের প্রয়োজনে রক্তদান করে থাকেন। বেশির ভাগ রক্তদাতাই সমাজসেবামূলক কাজ হিসেবে রক্তদান করেন, তবে কিছু মানুষ পেশাদার রক্তদাতা, অর্থাৎ তারা অর্থ বা কোন ভাতার বিনিময়ে রক্তদান করে থাকেন। আবার রক্তদাতা তার ভবিষ্যত প্রয়োজনে রক্ত পেতে পারেন। রক্তদান অপেক্ষাকৃত নিরাপদ, তবে কিছু রক্তদাতার যে জায়গায় সূঁচ প্রবেশ করানো হয় সেখানে কালশিরে পড়ে, আবার কেউ কেউ রক্তদানের পর দুর্বলতা অনুভব করেন।সম্ভাব্য রক্তদাতার রক্ত ব্যবহার যে সব কারণে ঝুঁকিপূর্ণ হতে পারে তার সবকিছুই পরীক্ষা করা হয়। এই পরীক্ষাগুলোর মধ্যে রক্তের মাধ্যমে ছড়ায় এমন রোগ (যেমন এইচআইভি ও ভাইরাল হেপাটাইটিস) এর পরীক্ষা অন্তর্ভুক্ত। রক্তদাতাকে তার চিকিৎসার ইতিহাস জিজ্ঞাসা করা হয় এবং তার একটি সংক্ষিপ্ত শারীরিক পরীক্ষা করা হয় তা নিশ্চিত করার জন্যে যে রক্তদান তার শরীরের জন্যে ক্ষতিকর হবে না। একজন রক্তদাতা কতদিন পরপর রক্তদান করতে পারবেন তা নির্ভর করে তিনি কী দান করছেন তার ওপর এবং যে দেশে রক্তদান সম্পন্ন হচ্ছে সে দেশের আইনের উপর । তবে প্রতি চারমাস অন্তর অর্থাৎ ১২০ দিন পর পর মানবদেহে নতুন রক্ত তৈরি হয়।গৃহীত রক্তের পরিমাণ ও পদ্ধতি ভিন্ন হতে পারে, তবে সাধারণতঃ ৫০০ মিলিলিটার (অথবা প্রায় ১ ইউএস পাইন্ট)[১]সম্পূর্ণ রক্ত নেওয়া হয়। পরিসঞ্চালনে ব্যবহৃত বেশির ভাগ রক্ত উপাদানই অল্প আয়ু বিশিষ্ট, এবং এ কারণে অপরিবর্তিত সরবরাহ নিশ্চিত করা একটি সবসময়কার সমস্যা।</string>
     <string name="profit_of_blood_donation2">১. রক্তদানের প্রথম এবং প্রধান কারণ,একজনের দানকৃত রক্ত আরেকজন মানুষের জীবন বাঁচাবে।\n২. রক্তদান স্বাস্থ্যের জন্য অত্যন্ত উপকারী। রক্তদান করার সঙ্গে সঙ্গে শরীরের মধ্যে অবস্থিত ‘বোন ম্যারো’ নতুন কণিকা তৈরির জন্য উদ্দীপ্ত হয় এবং রক্তদানের ২ সপ্তাহের মধ্যে নতুন রক্তকণিকার জন্ম হয়ে ঘাটতি পূরণ হয়ে যায়। বছরে ৩ বার রক্তদান আপনার শরীরে লোহিত কণিকাগুলোর প্রাণবন্ততা বাড়িয়ে তোলার সাথে সাথে নতুন কণিকা তৈরির হার বাড়িয়ে দেয়। উল্লেখ্য রক্তদান করার মাত্র ৪৮ ঘণ্টার মধ্যেই দেহে রক্তের পরিমাণ স্বাভাবিক হয়ে যায়।\n৩. নিয়মিত রক্তদান করলে হৃদরোগ ও হার্ট অ্যাটাকের ঝুঁকি অনেকটাই কমে যায়।\n৪. আরেক গবেষণায় দেখা যায়, যারা বছরে দুই বার রক্ত দেয়, অন্যদের তুলনায় তাদের ক্যান্সারে আক্রান্ত হওয়ার ঝুঁকি কম থাকে। বিশেষ করে ফুসফুস, লিভার, কোলন, পাকস্থলী ও গলার ক্যান্সারের ঝুঁকি নিয়মিত রক্তদাতাদের ক্ষেত্রে অনেক কম পরিলক্ষিত হয়েছে। চার বছর ধরে ১২০০ লোকের ওপর এ গবেষণা চালানো হয়েছিলো।\n৫. নিয়মিত স্বেচ্ছায় রক্তদানের মাধ্যমে নিজের শরীরে বড় কোনো রোগ আছে কিনা তা বিনা খরচে জানা যায়। যেমন : হেপাটাইটিস-বি, হেপাটাইটিস-সি, সিফিলিস, এইচআইভি (এইডস) ইত্যাদি।\n৬. প্রতি পাইন্ট (এক গ্যালনের আট ভাগের এক ভাগ) রক্ত দিলে ৬৫০ ক্যালরি করে শক্তি খরচ হয়। অর্থাৎ ওজন কমানোর ক্ষেত্রেও এটি গুরুত্বপূর্ণ ভূমিকা রাখতে পারে।\n৭. রক্তদান ধর্মীয় দিক থেকে অত্যন্ত পুণ্যের বা সওয়াবের কাজ। একজন মানুষের জীবন বাঁচানো সমগ্র মানব জাতির জীবন বাঁচানোর মতো মহান কাজ। পবিত্র কোরআনের সূরা মায়েদার ৩২ নং আয়াতে উল্লেখ আছে, ‘একজন মানুষের জীবন বাঁচানো সমগ্র মানব জাতির জীবন বাঁচানোর মতো মহান কাজ।</string>
+    <string name="hintforlocation">আপনার স্থান নির্বাচন করুন</string>
 
     <array name="blood_groups">
         <item>A+</item>
@@ -186,6 +187,7 @@
 
     <!--    Khulna Division's Districts-->
     <array name="khulna">
+        <item>খুলনা মেট্রোপলিটন</item>
         <item>কয়রা</item>
         <item>ডুমুরিয়া</item>
         <item>তেরখাদা</item>
@@ -277,6 +279,7 @@
 
     <!--    Chittagong Division's Districts-->
     <array name="chittagong">
+        <item>চট্টগ্রাম মেট্রোপলিটন</item>
         <item>কর্ণফুলি</item>
         <item>আনোয়ারা</item>
         <item>চন্দনাইশ</item>
@@ -427,6 +430,7 @@
 
     <!--    Dhaka Division Districts-->
     <array name="dhaka">
+        <item>ঢাকা মেট্রোপলিটন</item>
         <item>ধামরাই</item>
         <item>দোহার</item>
         <item>কেরানীগঞ্জ</item>
@@ -560,7 +564,7 @@
 
     <!--    Barishal Division District-->
     <array name="barishal">
-        <item>বরিশাল সদর</item>
+        <item>বরিশাল মেট্রোপলিটন</item>
         <item>আগৈলঝাড়া</item>
         <item>বাকেরগঞ্জ</item>
         <item>বাবুগঞ্জ</item>
@@ -623,7 +627,7 @@
 
     <!--    Mymanshingh Division District-->
     <array name="mymanshingh">
-        <item>ময়মনসিংহ সদর</item>
+        <item>ময়মনসিংহ মেট্রোপলিটন</item>
         <item>ত্রিশাল</item>
         <item>গৌরীপুর</item>
         <item>মুক্তাগাছা</item>
@@ -672,7 +676,7 @@
 
     <!--    Rangpur Division District-->
     <array name="rangpur">
-        <item>রংপুর সদর</item>
+        <item>রংপুর মেট্রোপলিটন</item>
         <item>বদরগঞ্জ</item>
         <item>গংগাচড়া</item>
         <item>কাউনিয়া</item>
@@ -757,6 +761,7 @@
 
     <!--    Rajshahi Division District-->
     <array name="rajshahi">
+        <item>রাজশাহী মেট্রোপলিটন</item>
         <item>বাঘা</item>
         <item>পুঠিয়া</item>
         <item>পবা</item>
@@ -850,7 +855,7 @@
 
     <!--    Sylet Division District-->
     <array name="sylet">
-        <item>সিলেট সদর</item>
+        <item>সিলেট মেট্রোপলিটন</item>
         <item>বালাগঞ্জ</item>
         <item>বিয়ানীবাজার</item>
         <item>বিশ্বনাথ</item>
@@ -905,90 +910,6 @@
 
     <!--Finished Districts Array-->
 
-
-    <array name="Districts">
-        <item>Anantapur</item>
-        <item>Chittoor</item>
-        <item>East Godavari</item>
-        <item>Guntur</item>
-        <item>Krishna</item>
-        <item>Kurnool</item>
-        <item>Prakasam</item>
-        <item>Srikakulam</item>
-        <item>Sri Potti Sriramulu Nellore</item>
-        <item>Visakhapatnam</item>
-        <item>Vizianagaram</item>
-        <item>West Godavari</item>
-        <item>YSR District</item>
-        <item></item>
-    </array>
-
-    <array name="Upazilas">
-        <item>Anjaw</item>
-        <item>Changlang</item>
-        <item>Dibang Valley</item>
-        <item>East Kameng</item>
-        <item>East Siang</item>
-        <item>Kamle</item>
-        <item>Kra Daadi</item>
-        <item>Kurung Kumey</item>
-        <item>Lepa Rada</item>
-        <item>Lohit</item>
-        <item>Longding</item>
-        <item>Lower Dibang Valley</item>
-        <item>Lower Siang</item>
-        <item>Lower Subansiri</item>
-        <item>Namsai</item>
-        <item>Pakke Kessang</item>
-        <item>Papum Pare</item>
-        <item>Shi Yomi</item>
-        <item>Siang</item>
-        <item>Tawang</item>
-        <item>Tirap</item>
-        <item>Upper Siang</item>
-        <item>Upper Subansiri</item>
-        <item>West Kameng</item>
-        <item>West Siang</item>
-    </array>
-
-    <array name="Districts_Maharashtra">
-        <item>Ahmednagar</item>
-        <item>Akola</item>
-        <item>Amravati</item>
-        <item>Aurangabad</item>
-        <item>Beed</item>
-        <item>Bhandara</item>
-        <item>Buldhana</item>
-        <item>Chandrapur</item>
-        <item>Dhule</item>
-        <item>Gadchiroli</item>
-        <item>Gondia</item>
-        <item>Hingoli</item>
-        <item>Jalgaon</item>
-        <item>Jalna</item>
-        <item>Kolhapur</item>
-        <item>Latur</item>
-        <item>Mumbai City</item>
-        <item>Mumbai Subarban</item>
-        <item>Nagpur</item>
-        <item>Nanded</item>
-        <item>Nandurbar</item>
-        <item>Nashik</item>
-        <item>Osmanabad</item>
-        <item>Palghar</item>
-        <item>Parbhani</item>
-        <item>Pune</item>
-        <item>Raigad</item>
-        <item>Ratnagiri</item>
-        <item>Sangli</item>
-        <item>Satara</item>
-        <item>Sindhudurg</item>
-        <item>Solapur</item>
-        <item>Thane</item>
-        <item>Wardha</item>
-        <item>Washim</item>
-        <item>Yavatmal</item>
-    </array>
 
 </resources>
 

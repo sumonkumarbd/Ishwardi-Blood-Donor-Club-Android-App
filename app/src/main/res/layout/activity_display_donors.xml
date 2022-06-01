@@ -7,7 +7,7 @@
     android:background="#8AAA5A5A"
     android:orientation="vertical"
     android:weightSum="6"
-    tools:context=".DisplayDonorsActivity">
+    tools:context=".DispalyRequestsActivity">
 
     <RelativeLayout
         android:id="@+id/relativeDonor"

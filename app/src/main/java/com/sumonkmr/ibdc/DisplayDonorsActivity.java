@@ -13,8 +13,11 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
@@ -34,7 +37,7 @@ public class DisplayDonorsActivity extends AppCompatActivity {
     RecyclerView list;
     UserAdapter adapter;
     ArrayList<User> users,temp;
-    EditText districtFilter;
+    AutoCompleteTextView DivisionFilter,districtFilter,UpazilaFilter, bloodGrpFilter;
     User self;
     String uid = FirebaseAuth.getInstance().getUid();
     PopupMenu popupMenu;
@@ -43,22 +46,353 @@ public class DisplayDonorsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_display_donors);
+        setContentView(R.layout.donor_list_activity);
 
         initializeComponents();
+        initializeAddressFilters();
         getDonors();
     }
 
+    private void initializeAddressFilters() {
+
+        DivisionFilter.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.states)));
+        bloodGrpFilter.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.blood_groups)));
+        DivisionFilter.setOnItemClickListener((parent, view, position, id) -> {
+
+            switch (DivisionFilter.getText().toString()){
+                case "ঢাকা":
+                    districtFilter.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.dhaka_division)));
+                    break;
+
+                case "রাজশাহী":
+                    districtFilter.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.rajshahi_division)));
+                    break;
+
+                case "চট্টগ্রাম":
+                    districtFilter.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.chittagong_division)));
+                    break;
+
+                case "খুলনা":
+                    districtFilter.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.khulna_division)));
+                    break;
+
+                case "বরিশাল":
+                    districtFilter.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.barisal_division)));
+                    break;
+
+                case "রংপুর":
+                    districtFilter.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.rangpur_division)));
+                    break;
+
+                case "সিলেট":
+                    districtFilter.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.sylet_division)));
+                    break;
+
+                case "ময়মনসিংহ":
+                    districtFilter.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.mymanshingh_division)));
+                    break;
+
+                default:
+                    Toast.makeText(this, "যেকোনো একটি বিভাগ সিলেক্ট করুন!", Toast.LENGTH_SHORT).show();
 
 
+            }
+        });
+
+
+        districtFilter.setOnItemClickListener((parent, view, position, id) -> {
+            switch (districtFilter.getText().toString()){
+
+//                Khulna Division
+                case "খুলনা":
+                    UpazilaFilter.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.khulna)));
+                    break;
+
+                case "কুষ্টিয়া":
+                    UpazilaFilter.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.kushtia)));
+                    break;
+
+                case "চুয়াডাঙ্গা":
+                    UpazilaFilter.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.chuadanga)));
+                    break;
+
+                case "ঝিনাইদহ":
+                    UpazilaFilter.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.jhinaidah)));
+                    break;
+
+                case "নড়াইল":
+                    UpazilaFilter.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.narail)));
+                    break;
+
+                case "বাগেরহাট":
+                    UpazilaFilter.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.bagerhat)));
+                    break;
+
+                case "মাগুরা":
+                    UpazilaFilter.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.magura)));
+                    break;
+
+                case "মেহেরপুর":
+                    UpazilaFilter.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.meherpur)));
+                    break;
+
+                case "যশোর":
+                    UpazilaFilter.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.jossore)));
+                    break;
+
+                case "সাতক্ষীরা":
+                    UpazilaFilter.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.satkhira)));
+                    break;
+//                    end khulna Division
+
+//                Barishal Division
+                case "বরিশাল":
+                    UpazilaFilter.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.barishal)));
+                    break;
+
+                case "বরগুনা":
+                    UpazilaFilter.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.borguna)));
+                    break;
+
+                case "ভোলা":
+                    UpazilaFilter.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.bhola)));
+                    break;
+
+                case "ঝালকাঠি":
+                    UpazilaFilter.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.jhalkhathi)));
+                    break;
+
+                case "পটুয়াখালী":
+                    UpazilaFilter.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.potuyakhali)));
+                    break;
+
+                case "পিরোজপুর":
+                    UpazilaFilter.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.pirojpur)));
+                    break;
+//                    end Barishal
+
+//                Chittagong Division
+                case "চট্টগ্রাম":
+                    UpazilaFilter.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.chittagong)));
+                    break;
+
+                case "বান্দরবান":
+                    UpazilaFilter.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.bandarban)));
+                    break;
+
+                case "ব্রাহ্মণবাড়িয়া":
+                    UpazilaFilter.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.brammanbaria)));
+                    break;
+
+                case "চাঁদপুর":
+                    UpazilaFilter.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.chadpur)));
+                    break;
+
+                case "কুমিল্লা":
+                    UpazilaFilter.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.cumilla)));
+                    break;
+
+                case "কক্সবাজার":
+                    UpazilaFilter.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.coxsbazar)));
+                    break;
+
+                case "ফেনী":
+                    UpazilaFilter.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.feni)));
+                    break;
+
+                case "খাগড়াছড়ি":
+                    UpazilaFilter.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.khagrachory)));
+                    break;
+
+                case "লক্ষ্মীপুর":
+                    UpazilaFilter.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.laxmipur)));
+                    break;
+
+                case "নোয়াখালী":
+                    UpazilaFilter.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.noyakhali)));
+                    break;
+
+                case "রাঙ্গামাটি":
+                    UpazilaFilter.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.rangamati)));
+                    break;
+//               end Chittagong Division
+                case "ঢাকা":
+                    UpazilaFilter.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.dhaka)));
+                    break;
+
+                case "ফরিদপুর":
+                    UpazilaFilter.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.faridpur)));
+                    break;
+
+                case "গাজীপুর":
+                    UpazilaFilter.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.gazipur)));
+                    break;
+
+                case "গোপালগঞ্জ":
+                    UpazilaFilter.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.gopalgonj)));
+                    break;
+
+                case "কিশোরগঞ্জ":
+                    UpazilaFilter.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.kishoregonj)));
+                    break;
+
+                case "মাদারীপুর":
+                    UpazilaFilter.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.madaripur)));
+                    break;
+
+                case "মানিকগঞ্জ":
+                    UpazilaFilter.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.manikgonj)));
+                    break;
+
+                case "মুন্সীগঞ্জ":
+                    UpazilaFilter.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.munsigonj)));
+                    break;
+
+                case "নারায়ণগঞ্জ":
+                    UpazilaFilter.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.narayangonj)));
+                    break;
+
+                case "নরসিংদী":
+                    UpazilaFilter.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.narshindhi)));
+                    break;
+
+                case "রাজবাড়ী":
+                    UpazilaFilter.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.rajbari)));
+                    break;
+
+                case "শরীয়তপুর":
+                    UpazilaFilter.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.shoriyotpur)));
+                    break;
+
+                case "টাঙ্গাইল":
+                    UpazilaFilter.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.tangail)));
+                    break;
+//                End  Dhaka Division
+
+
+//                 mymanshigh Division
+                case "ময়মনসিংহ":
+                    UpazilaFilter.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.mymanshingh)));
+                    break;
+
+                case "জামালপুর":
+                    UpazilaFilter.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.jamalpur)));
+                    break;
+
+                case "নেত্রকোণা":
+                    UpazilaFilter.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.netrokona)));
+                    break;
+
+                case "শেরপুর":
+                    UpazilaFilter.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.sherpur)));
+                    break;
+//              End mymanshigh Division
+
+//                Rajshahi Division
+                case "রাজশাহী":
+                    UpazilaFilter.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.rajshahi)));
+                    break;
+
+                case "পাবনা":
+                    UpazilaFilter.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.pabna)));
+                    break;
+
+                case "নাটোর":
+                    UpazilaFilter.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.natore)));
+                    break;
+
+                case "বগুড়া":
+                    UpazilaFilter.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.bogura)));
+                    break;
+
+                case "নওগাঁ":
+                    UpazilaFilter.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.nogone)));
+                    break;
+
+                case "জয়পুরহাট":
+                    UpazilaFilter.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.jaypurhat)));
+                    break;
+
+                case "চাঁপাইনবাবগঞ্জ":
+                    UpazilaFilter.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.Chapainababgonj)));
+                    break;
+
+                case "সিরাজগঞ্জ":
+                    UpazilaFilter.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.sirajgonj)));
+                    break;
+//               End Rajshahi Division
+
+//                Rangpur Division
+                case "রংপুর":
+                    UpazilaFilter.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.rangpur)));
+                    break;
+
+                case "দিনাজপুর":
+                    UpazilaFilter.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.dinajpur)));
+                    break;
+
+                case "গাইবান্ধা":
+                    UpazilaFilter.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.gaibandha)));
+                    break;
+
+                case "কুড়িগ্রাম":
+                    UpazilaFilter.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.kurigram)));
+                    break;
+
+                case "লালমনিরহাট":
+                    UpazilaFilter.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.lalmonirhat)));
+                    break;
+
+                case "নীলফামারী":
+                    UpazilaFilter.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.niphamari)));
+                    break;
+
+                case "পঞ্চগড়":
+                    UpazilaFilter.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.ponchogarh)));
+                    break;
+
+                case "ঠাকুরগাঁও":
+                    UpazilaFilter.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.thakurgao)));
+                    break;
+//             End Rangpur Division
+
+//                Sylet Division
+                case "সিলেট":
+                    UpazilaFilter.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.sylet)));
+                    break;
+
+                case "হবিগঞ্জ":
+                    UpazilaFilter.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.hobigonj)));
+                    break;
+
+                case "মৌলভীবাজার":
+                    UpazilaFilter.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.molovibazar)));
+                    break;
+
+                case "সুনামগঞ্জ":
+                    UpazilaFilter.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.sunamgonj)));
+                    break;
+//               End Sylet Division
+
+                default:
+                    Toast.makeText(this, "যেকোনো একটি জেলা সিলেক্ট করুন!", Toast.LENGTH_SHORT).show();
+
+
+            }
+        });
+
+    }
+    
     void initializeComponents() {
 
-
+        DivisionFilter = findViewById(R.id.stateFilter);
+        districtFilter = findViewById(R.id.districtFilter);
+        UpazilaFilter = findViewById(R.id.upazilaFilter);
+        bloodGrpFilter = findViewById(R.id.bloodGrpFilter);
 
         popupMenu = new PopupMenu(this, findViewById(R.id.more));
         popupMenu.getMenuInflater().inflate(R.menu.donors_menu,popupMenu.getMenu());
         popupMenu.setOnMenuItemClickListener(item -> {
-
 
             if(item.getItemId() == R.id.changePass){
                 FirebaseAuth.getInstance().sendPasswordResetEmail(self.getEmail());
@@ -91,7 +425,6 @@ public class DisplayDonorsActivity extends AppCompatActivity {
             return true;
         });
         self = new User();
-        districtFilter = findViewById(R.id.districtFilter);
         list = findViewById(R.id.donorsList);
         users = new ArrayList<>();
         temp = new ArrayList<>();
@@ -114,7 +447,7 @@ public class DisplayDonorsActivity extends AppCompatActivity {
         });
         list.setLayoutManager(new LinearLayoutManager(this));
         list.setAdapter(adapter);
-        districtFilter.addTextChangedListener(new TextWatcher() {
+        UpazilaFilter.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -128,6 +461,23 @@ public class DisplayDonorsActivity extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
                 updateList(s.toString());
+            }
+        });
+
+        bloodGrpFilter.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                updateBloodGroupList(s.toString());
             }
         });
     }
@@ -147,8 +497,20 @@ public class DisplayDonorsActivity extends AppCompatActivity {
         System.out.println(s);
         temp.clear();
         for( User v : users){
-            if(v.getDistrict().toUpperCase().contains(s)||s.equalsIgnoreCase("ALL")) {
-                System.out.println(v.getDistrict());
+            if(v.getUpazila().toUpperCase().contains(s)||s.equalsIgnoreCase("ALL")) {
+                System.out.println(v.getUpazila());
+                temp.add(v);
+            }
+        }
+        adapter.updateList(temp);
+    }
+
+    private void updateBloodGroupList(String s) {
+        System.out.println(s);
+        temp.clear();
+        for( User v : users){
+            if(v.getBloodGroup().toUpperCase().contains(s)||s.equalsIgnoreCase("ALL")) {
+                System.out.println(v.getBloodGroup());
                 temp.add(v);
             }
         }
@@ -175,7 +537,8 @@ public class DisplayDonorsActivity extends AppCompatActivity {
                         }
                     }
                 }
-                updateList(districtFilter.getText().toString());
+                updateList(UpazilaFilter.getText().toString());
+                updateList(bloodGrpFilter.getText().toString());
                 filterList();
             }
 
