@@ -17,7 +17,7 @@
         android:layout_height="match_parent"
         android:layout_alignParentStart="true"
         android:layout_marginTop="4dp"
-        android:src="@drawable/blood_drop"
+        android:src="@drawable/ibdc_logo_tns"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -26,119 +26,198 @@
     <LinearLayout
         android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
-        android:layout_height="120dp"
-        android:background="#20000000"
-        android:gravity="bottom"
-        android:orientation="horizontal"
+        android:layout_height="130dp"
+        android:background="#45000000"
+        android:gravity="top"
+        android:orientation="vertical"
         android:padding="10dp"
+        android:weightSum="2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
         <LinearLayout
-            android:id="@+id/linear1"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="bottom"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/bloodImg"
-            app:layout_constraintVertical_bias="1.0">
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight=".6"
+            android:layout_gravity="center"
+            android:orientation="horizontal"
+            >
 
             <TextView
                 android:id="@+id/detailFullName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="270dp"
+                android:layout_height="match_parent"
                 android:clickable="true"
                 android:contextClickable="true"
                 android:focusable="true"
                 android:focusableInTouchMode="true"
                 android:fontFamily="@font/varela_round"
-                android:freezesText="true"
                 android:singleLine="true"
-                android:text="Vinayak Patil"
+                android:text="@string/developer_name"
                 android:textColor="@color/white"
-                android:textSize="17sp" />
+                android:textSize="@dimen/card_header_txt"
+                android:elevation="@dimen/minor_shadow"
+                />
 
             <TextView
                 android:id="@+id/detailBloodGroup"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="40dp"
+                android:layout_height="match_parent"
                 android:fontFamily="@font/varela_round"
-                android:maxWidth="120dp"
                 android:singleLine="true"
+                android:layout_gravity="end"
+                android:gravity="end"
                 android:text="O+"
-                android:textColor="@color/white"
-                android:textSize="17sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/detailVillage"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/varela_round"
-                android:maxWidth="210dp"
-                android:singleLine="true"
-                android:text="Kodoli"
-                android:textColor="@color/white"
-                android:textSize="17sp"
-                android:tooltipText="Tooltip" />
-
-            <TextView
-                android:id="@+id/detailTehsil"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/varela_round"
-                android:maxWidth="120dp"
-                android:singleLine="true"
-                android:text="Panhala"
-                android:textColor="@color/white"
-                android:textSize="17sp" />
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/card_header_txt"
+                android:textStyle="bold"
+                android:elevation="@dimen/minor_shadow"
+                />
 
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/linear2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:layout_marginStart="15dp"
-            android:orientation="vertical">
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1.4"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            >
 
-            <TextView
-                android:id="@+id/detailDistrict"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/varela_round"
-                android:maxWidth="110dp"
-                android:singleLine="true"
-                android:text="Kolhapur"
-                android:textColor="@color/white"
-                android:textSize="17sp" />
+            <LinearLayout
+                android:id="@+id/linear1"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:gravity="bottom"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/bloodImg"
+                app:layout_constraintVertical_bias="1.0">
 
-            <TextView
-                android:id="@+id/detailState"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:clickable="true"
-                android:contextClickable="true"
-                android:ellipsize="marquee"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
-                android:fontFamily="@font/varela_round"
-                android:freezesText="true"
-                android:marqueeRepeatLimit="marquee_forever"
-                android:maxWidth="120dp"
-                android:scrollHorizontally="true"
-                android:singleLine="true"
-                android:text="Maharashtra"
-                android:textColor="@color/white"
-                android:textSize="17sp" />
+                <TextView
+                    android:id="@+id/detailVillage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/varela_round"
+                    android:maxWidth="210dp"
+                    android:singleLine="true"
+                    android:text="pakshey"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/card_txt"
+                    android:elevation="@dimen/minor_shadow"
+                    android:tooltipText="Tooltip" />
+
+                <TextView
+                    android:id="@+id/detailTehsil"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/varela_round"
+                    android:maxWidth="120dp"
+                    android:singleLine="true"
+                    android:text="Ishwardi"
+                    android:elevation="@dimen/minor_shadow"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/card_txt" />
+
+                <TextView
+                    android:id="@+id/detailDistrict"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/varela_round"
+                    android:maxWidth="110dp"
+                    android:singleLine="true"
+                    android:text="pabna"
+                    android:textColor="@color/white"
+                    android:elevation="@dimen/minor_shadow"
+                    android:textSize="@dimen/card_txt" />
+
+                <TextView
+                    android:id="@+id/detailState"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:contextClickable="true"
+                    android:ellipsize="marquee"
+                    android:focusable="true"
+                    android:elevation="@dimen/minor_shadow"
+                    android:focusableInTouchMode="true"
+                    android:fontFamily="@font/varela_round"
+                    android:freezesText="true"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:maxWidth="120dp"
+                    android:scrollHorizontally="true"
+                    android:singleLine="true"
+                    android:text="Rajshahi"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/card_txt" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical"
+                >
+
+                <TextView
+                    android:id="@+id/lastDonate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:contextClickable="true"
+                    android:ellipsize="marquee"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:fontFamily="@font/varela_round"
+                    android:freezesText="true"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:singleLine="true"
+                    android:elevation="@dimen/minor_shadow"
+                    android:text="@string/last_donate"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/card_txt" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginHorizontal="15dp"
+                    android:elevation="@dimen/minor_shadow"
+                    android:background="@color/colorPrimary"
+                    />
+
+                <TextView
+                    android:id="@+id/lastDonateDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:contextClickable="true"
+                    android:ellipsize="marquee"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:fontFamily="@font/varela_round"
+                    android:freezesText="true"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:maxWidth="120dp"
+                    android:singleLine="true"
+                    android:elevation="@dimen/minor_shadow"
+                    android:text="@string/last_donate_date"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/card_txt" />
+
+
+            </LinearLayout>
 
         </LinearLayout>
+
+
+
     </LinearLayout>
 
 

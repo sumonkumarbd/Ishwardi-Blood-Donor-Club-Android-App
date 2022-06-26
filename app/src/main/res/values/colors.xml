@@ -17,4 +17,14 @@
     <color name="colorAccentDark">#E7E7E7</color>
     <color name="extra">#EE6B61</color>
     <color name="semi_tns_background">#51000000</color>
+
+    <color name="grey">#E9EAEE</color>
+
+    <color name="yellow">#F8BA0F</color>
+
+    <color name="goodgrey">#535353</color>
+
+    <color name="blue">#293859</color>
+
+    <color name="lightgrey">#EEEEEE</color>
 </resources>

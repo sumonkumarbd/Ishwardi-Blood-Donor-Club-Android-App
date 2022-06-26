@@ -11,4 +11,6 @@
     <dimen name="manu_txt">25sp</dimen>
     <dimen name="shadow">15dp</dimen>
     <dimen name="minor_shadow">2dp</dimen>
+    <dimen name="card_txt">14sp</dimen>
+    <dimen name="card_header_txt">20sp</dimen>
 </resources>
