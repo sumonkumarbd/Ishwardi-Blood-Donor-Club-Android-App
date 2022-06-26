@@ -18,7 +18,7 @@
         android:src="@drawable/developer" />
 
     <View
-        android:id="@+id/view2"
+        android:id="@+id/cover_shed"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/semi_tns_background"
@@ -29,8 +29,8 @@
     <!--    for background images-->
 
 
-    <View
-        android:id="@+id/view"
+    <LinearLayout
+        android:id="@+id/info_box"
         android:layout_width="match_parent"
         android:layout_height="300dp"
         android:background="@color/semi_tns_background"
@@ -39,20 +39,94 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="1.0"
+        android:orientation="vertical">
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/profile_image"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/developer"
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/title_header_box"
+        android:layout_width="408dp"
+        android:layout_height="125dp"
+        android:background="@color/semi_tns_background"
+        android:weightSum="4"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.03"
+        app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.650" />
+        app:layout_constraintVertical_bias="0.636">
+
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profile_image"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_gravity="center"
+                android:scaleType="centerCrop"
+                android:src="@drawable/developer" />
+
+        <LinearLayout
+            android:id="@+id/title_box"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            >
+            <LinearLayout
+                android:id="@+id/name_box"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:fontFamily="@font/text_font"
+                    android:text="@string/first_name"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/manu_txt"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/text_font"
+                    android:text="@string/last_name"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/form_txt"
+                    android:textStyle="bold" />
+            </LinearLayout><!--            nameBox-->
+
+            <TextView
+                android:id="@+id/mobile_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/text_font"
+                android:text="@string/mobile_number"
+                android:textColor="@color/white"
+                android:textSize="@dimen/form_txt"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/blood_grp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/text_font"
+                android:text="@string/mobile_number"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/manu_txt"
+                android:textStyle="bold" />
+        </LinearLayout><!--        title_box-->
+
+
+        </LinearLayout>
+
 
     <!-- TODO: Update blank fragment layout -->
 
