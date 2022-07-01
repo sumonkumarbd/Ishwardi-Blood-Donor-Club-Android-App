@@ -32,7 +32,7 @@
     <LinearLayout
         android:id="@+id/info_box"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="200dp"
         android:background="@color/semi_tns_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -40,7 +40,388 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
-        android:orientation="vertical">
+        android:weightSum="2"
+        android:orientation="horizontal">
+
+
+        <LinearLayout
+            android:id="@+id/linear1"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:gravity="start"
+            android:layout_marginTop="65dp"
+            android:layout_marginStart="5dp"
+            android:weightSum="2"
+            android:orientation="horizontal"
+            >
+            <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight=".85"
+            android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/Village_key"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/varela_round"
+                    android:maxWidth="210dp"
+                    android:singleLine="true"
+                    android:text="@string/village"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/form_txt"
+                    android:elevation="@dimen/minor_shadow"
+                    android:layout_marginEnd="10dp"
+                    />
+
+                <TextView
+                    android:id="@+id/upazila_key"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/varela_round"
+                    android:maxWidth="210dp"
+                    android:singleLine="true"
+                    android:text="@string/upazila"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/form_txt"
+                    android:elevation="@dimen/minor_shadow"
+                    android:layout_marginEnd="10dp"
+                    />
+
+
+                <TextView
+                    android:id="@+id/district_key"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/varela_round"
+                    android:maxWidth="210dp"
+                    android:singleLine="true"
+                    android:text="@string/district"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/form_txt"
+                    android:elevation="@dimen/minor_shadow"
+                    android:layout_marginEnd="10dp"
+                    />
+
+
+                <TextView
+                    android:id="@+id/division_key"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/varela_round"
+                    android:maxWidth="210dp"
+                    android:singleLine="true"
+                    android:text="@string/divisions"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/form_txt"
+                    android:elevation="@dimen/minor_shadow"
+                    android:layout_marginEnd="10dp"/>
+
+        </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_weight=".05">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/colon"
+                    android:textSize="@dimen/form_txt"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/colon"
+                    android:textSize="@dimen/form_txt"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/colon"
+                    android:textSize="@dimen/form_txt"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/colon"
+                    android:textSize="@dimen/form_txt"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1.10"
+                android:layout_marginStart="10dp"
+                android:orientation="vertical">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    >
+                    <TextView
+                        android:id="@+id/detailVillage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/varela_round"
+                        android:maxWidth="210dp"
+                        android:singleLine="true"
+                        android:text="@string/vil_txt"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/form_txt"
+                        android:elevation="@dimen/minor_shadow"/>
+
+                    <ImageView
+                        android:id="@+id/vil_Edit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_baseline_edit_24"
+                        android:layout_marginStart="5dp"
+                        android:focusable="true"
+                        android:clickable="true"
+                        android:visibility="gone"
+                        android:contentDescription="@string/edit_button" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    >
+
+                    <TextView
+                        android:id="@+id/detailTehsil"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/varela_round"
+                        android:maxWidth="120dp"
+                        android:singleLine="true"
+                        android:text="@string/upa_txt"
+                        android:elevation="@dimen/minor_shadow"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/form_txt" />
+
+                    <ImageView
+                        android:id="@+id/upa_Edit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_baseline_edit_24"
+                        android:layout_marginStart="5dp"
+                        android:focusable="true"
+                        android:clickable="true"
+                        android:visibility="gone"
+                        android:contentDescription="@string/edit_button" />
+
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    >
+                    <TextView
+                        android:id="@+id/detailDistrict"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/varela_round"
+                        android:maxWidth="110dp"
+                        android:singleLine="true"
+                        android:text="@string/dis_txt"
+                        android:textColor="@color/white"
+                        android:elevation="@dimen/minor_shadow"
+                        android:textSize="@dimen/form_txt" />
+
+
+                    <ImageView
+                        android:id="@+id/dis_Edit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_baseline_edit_24"
+                        android:layout_marginStart="5dp"
+                        android:focusable="true"
+                        android:clickable="true"
+                        android:visibility="gone"
+                        android:contentDescription="@string/edit_button" />
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    >
+                    <TextView
+                        android:id="@+id/detailState"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:contextClickable="true"
+                        android:ellipsize="marquee"
+                        android:focusable="true"
+                        android:elevation="@dimen/minor_shadow"
+                        android:focusableInTouchMode="true"
+                        android:fontFamily="@font/varela_round"
+                        android:freezesText="true"
+                        android:marqueeRepeatLimit="marquee_forever"
+                        android:maxWidth="120dp"
+                        android:scrollHorizontally="true"
+                        android:singleLine="true"
+                        android:text="@string/div_txt"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/form_txt" />
+
+                    <ImageView
+                        android:id="@+id/div_Edit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_baseline_edit_24"
+                        android:layout_marginStart="5dp"
+                        android:focusable="true"
+                        android:clickable="true"
+                        android:visibility="gone"
+                        android:contentDescription="@string/edit_button" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:weightSum="2"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:orientation="vertical"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_weight="1.6"
+                >
+                <TextView
+                    android:id="@+id/lastDonate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:contextClickable="true"
+                    android:ellipsize="marquee"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:fontFamily="@font/varela_round"
+                    android:freezesText="true"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:singleLine="true"
+                    android:elevation="@dimen/minor_shadow"
+                    android:text="@string/last_donate"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/form_txt" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginHorizontal="15dp"
+                    android:elevation="@dimen/minor_shadow"
+                    android:background="@color/colorPrimary"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    >
+
+                    <TextView
+                        android:id="@+id/lastDonateDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:contextClickable="true"
+                        android:ellipsize="marquee"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:fontFamily="@font/varela_round"
+                        android:freezesText="true"
+                        android:marqueeRepeatLimit="marquee_forever"
+                        android:singleLine="true"
+                        android:elevation="@dimen/minor_shadow"
+                        android:text="@string/last_donate_date"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/form_txt" />
+
+                    <ImageView
+                        android:id="@+id/last_donate_Edit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_baseline_edit_24"
+                        android:layout_marginStart="5dp"
+                        android:focusable="true"
+                        android:clickable="true"
+                        android:visibility="gone"
+                        android:contentDescription="@string/edit_button" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:orientation="vertical"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_weight=".4"
+                >
+                <Button
+                    android:id="@+id/edit_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginEnd="5dp"
+                    android:gravity="center"
+                    android:visibility="visible"
+                    android:text="@string/edit_profile" />
+
+                <Button
+                    android:id="@+id/edit_save_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginEnd="5dp"
+                    android:gravity="center"
+                    android:visibility="gone"
+                    android:text="@string/save_profile" />
+
+            </LinearLayout>
+
+        </LinearLayout>
 
     </LinearLayout>
 
@@ -50,39 +431,55 @@
         android:layout_width="408dp"
         android:layout_height="125dp"
         android:background="@color/semi_tns_background"
-        android:weightSum="4"
         android:orientation="horizontal"
+        android:weightSum="4"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.636">
+        app:layout_constraintVertical_bias="0.780">
 
 
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/profile_image"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginStart="10dp"
                 android:layout_gravity="center"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/developer" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profile_edit_image"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:scaleType="centerCrop"
+                android:visibility="gone"
+                android:src="@drawable/edit_photo" />
+        </RelativeLayout>
+
 
         <LinearLayout
             android:id="@+id/title_box"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:orientation="vertical"
-            >
+            android:orientation="vertical">
+
             <LinearLayout
                 android:id="@+id/name_box"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                >
+                android:orientation="horizontal">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -91,7 +488,7 @@
                     android:text="@string/first_name"
                     android:textColor="@color/white"
                     android:textSize="@dimen/manu_txt"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -101,31 +498,74 @@
                     android:textColor="@color/white"
                     android:textSize="@dimen/form_txt"
                     android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/name_Edit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_baseline_edit_24"
+                    android:layout_marginStart="5dp"
+                    android:focusable="true"
+                    android:clickable="true"
+                    android:visibility="gone"
+                    android:contentDescription="@string/edit_button" />
             </LinearLayout><!--            nameBox-->
 
-            <TextView
-                android:id="@+id/mobile_number"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/text_font"
-                android:text="@string/mobile_number"
-                android:textColor="@color/white"
-                android:textSize="@dimen/form_txt"
-                android:textStyle="bold" />
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/mobile_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/text_font"
+                    android:text="@string/mobile_number"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/form_txt"
+                    android:textStyle="bold" />
+                <ImageView
+                    android:id="@+id/number_Edit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_baseline_edit_24"
+                    android:layout_marginStart="5dp"
+                    android:focusable="true"
+                    android:clickable="true"
+                    android:visibility="gone"
+                    android:contentDescription="@string/edit_button" />
+            </LinearLayout>
 
-            <TextView
-                android:id="@+id/blood_grp"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/text_font"
-                android:text="@string/mobile_number"
-                android:textColor="@color/colorPrimary"
-                android:textSize="@dimen/manu_txt"
-                android:textStyle="bold" />
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/blood_grp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/text_font"
+                    android:text="@string/blood_group"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/manu_txt"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/blood_Edit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/edit_red"
+                    android:layout_marginStart="5dp"
+                    android:focusable="true"
+                    android:clickable="true"
+                    android:visibility="gone"
+                    android:contentDescription="@string/edit_button" />
+            </LinearLayout>
+
         </LinearLayout><!--        title_box-->
 
 
-        </LinearLayout>
+    </LinearLayout>
 
 
     <!-- TODO: Update blank fragment layout -->

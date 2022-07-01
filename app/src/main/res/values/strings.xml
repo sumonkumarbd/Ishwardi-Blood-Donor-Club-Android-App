@@ -40,7 +40,7 @@
     <string name="motive">আমি বাঁচাতে চাই একটি প্রাণ,\nতাইতো করবো রক্তদান!</string>
     <string name="address">Address</string>
     <string name="next">Next</string>
-    <string name="village">Village</string>
+    <string name="village">গ্রাম</string>
     <string name="verification">Verification</string>
     <string name="mobile_number">Mobile Number</string>
     <string name="blood_group">রক্তের গ্রূপ</string>
@@ -89,8 +89,16 @@
     <string name="ratings">Star Ratings</string>
 
     <string name="samplereview">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec pretium bibendum sapien, ut euismod massa. Duis convallis sem sed turpis elementum auctor.</string>
+    <string name="colon">:</string>
+    <string name="vil_txt">পাকশী</string>
+    <string name="upa_txt">ঈশ্বরদী</string>
+    <string name="dis_txt">পাবনা</string>
+    <string name="div_txt">রাজশাহী</string>
+    <string name="edit_button">Edit Button</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="save_profile">Save Profile</string>
 
-<!--    end Profile-->
+    <!--    end Profile-->
 
     <array name="blood_groups">
         <item>A+</item>

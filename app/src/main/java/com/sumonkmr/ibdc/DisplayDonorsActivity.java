@@ -56,7 +56,7 @@ public class DisplayDonorsActivity extends AppCompatActivity {
     private void initializeAddressFilters() {
 
         DivisionFilter.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.states)));
-        bloodGrpFilter.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.blood_groups)));
+//        bloodGrpFilter.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.blood_groups)));
         DivisionFilter.setOnItemClickListener((parent, view, position, id) -> {
 
             switch (DivisionFilter.getText().toString()){
@@ -388,7 +388,7 @@ public class DisplayDonorsActivity extends AppCompatActivity {
         DivisionFilter = findViewById(R.id.stateFilter);
         districtFilter = findViewById(R.id.districtFilter);
         UpazilaFilter = findViewById(R.id.upazilaFilter);
-        bloodGrpFilter = findViewById(R.id.bloodGrpFilter);
+//        bloodGrpFilter = findViewById(R.id.bloodGrpFilter); // if get blood filter in search then comment out this line and also xml
 
         popupMenu = new PopupMenu(this, findViewById(R.id.more));
         popupMenu.getMenuInflater().inflate(R.menu.donors_menu,popupMenu.getMenu());
@@ -464,22 +464,24 @@ public class DisplayDonorsActivity extends AppCompatActivity {
             }
         });
 
-        bloodGrpFilter.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-            }
 
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                updateBloodGroupList(s.toString());
-            }
-        });
+//        bloodGrpFilter.addTextChangedListener(new TextWatcher() {
+//            @Override
+//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//
+//            }
+//
+//            @Override
+//            public void onTextChanged(CharSequence s, int start, int before, int count) {
+//
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable s) {
+//                updateBloodGroupList(s.toString());
+//            }
+//        });  // if get blood filter in search then comment out this line and also xml
     }
 
     private void updateVisible(boolean b) {
@@ -538,7 +540,7 @@ public class DisplayDonorsActivity extends AppCompatActivity {
                     }
                 }
                 updateList(UpazilaFilter.getText().toString());
-                updateList(bloodGrpFilter.getText().toString());
+//                updateList(bloodGrpFilter.getText().toString());
                 filterList();
             }
 
