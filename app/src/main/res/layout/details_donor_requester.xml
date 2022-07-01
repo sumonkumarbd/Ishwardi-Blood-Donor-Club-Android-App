@@ -96,7 +96,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/bloodImg"
+                app:layout_constraintTop_toTopOf="@+id/bloodImg_url"
                 app:layout_constraintVertical_bias="1.0">
 
                 <TextView
@@ -230,7 +230,7 @@
         app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
         app:layout_constraintEnd_toStartOf="@+id/call"
         app:layout_constraintHorizontal_bias="0.3"
-        app:layout_constraintStart_toStartOf="@+id/bloodImg"
+        app:layout_constraintStart_toStartOf="@+id/bloodImg_url"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.076" />
 
@@ -243,8 +243,8 @@
         android:src="@drawable/ic_baseline_call_24"
         android:tooltipText="Call"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
-        app:layout_constraintEnd_toEndOf="@+id/bloodImg"
-        app:layout_constraintTop_toTopOf="@+id/bloodImg"
+        app:layout_constraintEnd_toEndOf="@+id/bloodImg_url"
+        app:layout_constraintTop_toTopOf="@+id/bloodImg_url"
         app:layout_constraintVertical_bias="0.047" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

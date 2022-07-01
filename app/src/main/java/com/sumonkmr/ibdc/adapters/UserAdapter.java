@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.squareup.picasso.Picasso;
 import com.sumonkmr.ibdc.R;
 import com.sumonkmr.ibdc.StringCaseConverter;
 import com.sumonkmr.ibdc.listeners.MyOnClickListener;
@@ -48,12 +49,14 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder>{
 
     @Override
     public void onBindViewHolder(@NonNull UserHolder holder, int position) {
-        String state,district,tehsil,fname,village,bloodgroup;
+        String state,district,tehsil,fname,village,bloodgroup,bloodImg_url,lastDonateDate;
         state = users.get(position).getState();
         district = users.get(position).getDistrict();
         tehsil = users.get(position).getUpazila();
         village = users.get(position).getVillage();
         bloodgroup = users.get(position).getBloodGroup();
+        bloodImg_url = users.get(position).getBloodImg_url();
+        lastDonateDate = users.get(position).getLastDonateDate();
         fname = String.format("%s %s", users.get(position).getFName(), users.get(position).getLName());
         String s = StringCaseConverter.convertToTitleCaseIteratingChars(fname);
         holder.state.setText(state);
@@ -62,12 +65,23 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder>{
         holder.village.setText(village);
         holder.fullName.setText(s);
         holder.bloodGroup.setText(bloodgroup);
+        holder.lastDonateDate.setText(lastDonateDate);
+        holder.village_pro.setText(village);
+        holder.tehsil_pro.setText(tehsil);
+        holder.district_pro.setText(district);
+        holder.state_pro.setText(state);
+        holder.blood_grp_pro.setText(bloodgroup);
+        Picasso.get()
+                .load(bloodImg_url)
+                .placeholder(R.drawable.ibdc_logo)
+                .into(holder.bloodImg);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             holder.state.setText(state);
             holder.district.setTooltipText(district);
             holder.tehsil.setTooltipText(tehsil);
             holder.village.setTooltipText(village);
             holder.fullName.setTooltipText(fname);
+            holder.lastDonateDate.setText(lastDonateDate);
         }
 
 
@@ -87,9 +101,10 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder>{
 
     static class UserHolder extends RecyclerView.ViewHolder{
 
-        TextView fullName,bloodGroup,state,district,tehsil,village;
+        TextView fullName,bloodGroup,state,district,tehsil,village,lastDonateDate;
+        TextView f_name,l_name,mobile_number_pro,blood_grp_pro,village_pro,tehsil_pro,district_pro,state_pro,lastDonateDate_pro;
 
-        ImageView share,call;
+        ImageView share,call,bloodImg;
 
         public UserHolder(@NonNull View itemView) {
             super(itemView);
@@ -101,6 +116,21 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder>{
             village = itemView.findViewById(R.id.detailVillage);
             call = itemView.findViewById(R.id.call);
             share = itemView.findViewById(R.id.share);
+            lastDonateDate = itemView.findViewById(R.id.lastDonateDate);
+            bloodImg = itemView.findViewById(R.id.bloodImg);
+            f_name = itemView.findViewById(R.id.f_name);
+            l_name = itemView.findViewById(R.id.l_name);
+            mobile_number_pro = itemView.findViewById(R.id.mobile_number_pro);
+            blood_grp_pro = itemView.findViewById(R.id.blood_grp_pro);
+            village_pro = itemView.findViewById(R.id.village_pro);
+            tehsil_pro = itemView.findViewById(R.id.tehsil_pro);
+            district_pro = itemView.findViewById(R.id.district_pro);
+            state_pro = itemView.findViewById(R.id.state_pro);
+            state_pro = itemView.findViewById(R.id.state_pro);
+            state_pro = itemView.findViewById(R.id.state_pro);
+            lastDonateDate_pro = itemView.findViewById(R.id.lastDonateDate_pro);
+
+
 
         }
     }
