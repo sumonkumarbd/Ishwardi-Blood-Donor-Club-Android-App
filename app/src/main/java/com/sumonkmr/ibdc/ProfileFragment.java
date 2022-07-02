@@ -99,6 +99,7 @@ public class ProfileFragment extends Fragment {
         StorageReference storageReference = FirebaseStorage.getInstance().getReference();
 
         dbReference.child(userId).addValueEventListener(new ValueEventListener() {
+            @SuppressLint("SuspiciousIndentation")
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()){
@@ -127,6 +128,13 @@ public class ProfileFragment extends Fragment {
                                 .centerCrop()
                                 .placeholder(R.drawable.ibdc_logo)
                                 .into((ImageView) cover_image);
+
+                    Glide
+                            .with(view)
+                            .load(profile_url)
+                            .centerCrop()
+                            .placeholder(R.drawable.ibdc_logo)
+                            .into((ImageView) profile_image_edit);
 
                 }
             }
