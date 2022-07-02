@@ -50,7 +50,7 @@ public class ProfileFragment extends Fragment {
     androidx.constraintlayout.widget.ConstraintLayout profile_tab, profile_edit_tab;
     Button edit_btn, update_btn;
     TextView f_name, l_name, mobile_number_pro, blood_grp_pro, village_pro, tehsil_pro, district_pro, state_pro, lastDonateDate_pro,email_pro;
-    de.hdodenhof.circleimageview.CircleImageView profile_edit_image,profile_image;
+    de.hdodenhof.circleimageview.CircleImageView profile_image,profile_image_edit,p_image_shade_edit;
     ImageView cover_image;
     Uri filepath;
     Bitmap bitmap;
@@ -83,6 +83,8 @@ public class ProfileFragment extends Fragment {
         profile_edit_tab = view.findViewById(R.id.profile_edit_tab);
         profile_image = view.findViewById(R.id.profile_image);
         cover_image = view.findViewById(R.id.cover_image);
+        profile_image_edit = view.findViewById(R.id.profile_image_edit);
+        p_image_shade_edit = view.findViewById(R.id.p_image_shade_edit);
 
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         userId = currentUser.getUid();
@@ -147,7 +149,7 @@ public class ProfileFragment extends Fragment {
 
         });
 
-        update_btn.setOnClickListener(v -> {
+        p_image_shade_edit.setOnClickListener(v -> {
             Dexter.withContext(requireContext().getApplicationContext())
                     .withPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
                     .withListener(new PermissionListener() {
@@ -181,10 +183,7 @@ public class ProfileFragment extends Fragment {
             try {
                InputStream inputStream = requireActivity().getContentResolver().openInputStream(filepath);
                bitmap = BitmapFactory.decodeStream(inputStream);
-               profile_image.setImageBitmap(bitmap);
-                cover_image.setImageBitmap(bitmap);
-                f_name.setText(String.valueOf(bitmap));
-                Toast.makeText(getActivity().getApplicationContext(), String.valueOf(bitmap), Toast.LENGTH_SHORT).show();
+                profile_image_edit.setImageBitmap(bitmap);
             } catch (Exception ex) {
             }
             super.onActivityResult(requestCode, resultCode, data);
