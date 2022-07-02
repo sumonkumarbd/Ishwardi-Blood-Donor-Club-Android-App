@@ -48,7 +48,7 @@ import okhttp3.internal.cache.DiskLruCache;
 public class ProfileFragment extends Fragment {
 
     androidx.constraintlayout.widget.ConstraintLayout profile_tab, profile_edit_tab;
-    Button edit_btn, update_btn;
+    Button edit_btn,save_btn, update_btn;
     TextView f_name, l_name, mobile_number_pro, blood_grp_pro, village_pro, tehsil_pro, district_pro, state_pro, lastDonateDate_pro,email_pro;
     de.hdodenhof.circleimageview.CircleImageView profile_image,profile_image_edit,p_image_shade_edit;
     ImageView cover_image;
@@ -78,6 +78,7 @@ public class ProfileFragment extends Fragment {
 
 //        Hooks of edit buttons
         edit_btn = view.findViewById(R.id.edit_btn);
+        save_btn = view.findViewById(R.id.save_btn);
         update_btn = view.findViewById(R.id.update_btn);
         profile_tab = view.findViewById(R.id.profile_tab);
         profile_edit_tab = view.findViewById(R.id.profile_edit_tab);
@@ -138,6 +139,11 @@ public class ProfileFragment extends Fragment {
             profile_tab.setVisibility(View.GONE);
             profile_edit_tab.setVisibility(View.VISIBLE);
             edit_btn.setVisibility(View.GONE);
+            save_btn.setVisibility(View.VISIBLE);
+        });
+
+        save_btn.setOnClickListener(v -> {
+            save_btn.setVisibility(View.GONE);
             update_btn.setVisibility(View.VISIBLE);
         });
 

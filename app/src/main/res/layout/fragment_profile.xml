@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:visibility="visible"
+        android:visibility="gone"
         android:orientation="vertical">
         <!--    for background images-->
         <ImageView
@@ -508,7 +508,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:visibility="gone"
+        android:visibility="visible"
         android:orientation="vertical">
 
         <LinearLayout
@@ -521,23 +521,24 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight=".5"
+                android:layout_weight=".4"
+                android:layout_marginTop="10dp"
                 android:layout_gravity="center"
                 android:gravity="center"
                 >
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/profile_image_edit"
-                    android:layout_width="180dp"
-                    android:layout_height="180dp"
+                    android:layout_width="160dp"
+                    android:layout_height="160dp"
                     android:layout_gravity="center"
                     android:scaleType="centerCrop"
                     android:src="@drawable/ibdc_logo" />
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/p_image_shade_edit"
-                    android:layout_width="180dp"
-                    android:layout_height="180dp"
+                    android:layout_width="160dp"
+                    android:layout_height="160dp"
                     android:layout_gravity="center"
                     android:scaleType="centerCrop"
                     android:src="@drawable/edit_photo"
@@ -551,14 +552,15 @@
                     android:id="@+id/linearLayout"
                     android:layout_width="300dp"
                     android:layout_height="0dp"
-                    android:layout_weight="1.4"
+                    android:layout_weight="1.5"
                     android:layout_gravity="center"
                     android:background="@drawable/round_textbox"
                     android:elevation="20dp"
+                    android:layout_marginTop="10dp"
                     android:gravity="center"
                     android:orientation="vertical"
                     android:padding="15dp"
-                    android:weightSum="9"
+                    android:weightSum="8"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -577,7 +579,7 @@
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:inputType="textCapWords"
                             android:singleLine="true" />
                     </com.google.android.material.textfield.TextInputLayout>
@@ -589,23 +591,6 @@
                         android:layout_weight="1"
                         android:layout_marginTop="5dp"
                         android:hint="@string/last_name"
-                        android:textColorHint="#000000"
-                        app:hintTextColor="#000000">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:inputType="textCapWords"
-                            android:singleLine="true" />
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:layout_marginTop="5dp"
-                        android:hint="@string/blood_group"
                         android:textColorHint="#000000"
                         app:hintTextColor="#000000">
 
@@ -701,10 +686,20 @@
                             android:singleLine="true" />
                     </com.google.android.material.textfield.TextInputLayout>
 
-                    <Button
+
+                        <Button
+                            android:id="@+id/save_btn"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:text="@string/save_profile"
+                            />
+
+                        <Button
                             android:id="@+id/update_btn"
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
+                            android:visibility="gone"
                             android:layout_weight="1"
                             android:text="@string/update_profile"
                             />

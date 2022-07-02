@@ -35,8 +35,8 @@
     <string name="Email">Enter Email Here…</string>
     <string name="cover">cover</string>
     <string name="register">Register</string>
-    <string name="last_name">Last Name</string>
-    <string name="first_name">First Name</string>
+    <string name="last_name">নামের টাইটেল</string>
+    <string name="first_name">নাম</string>
     <string name="motive">আমি বাঁচাতে চাই একটি প্রাণ,\nতাইতো করবো রক্তদান!</string>
     <string name="address">Address</string>
     <string name="next">Next</string>
@@ -96,7 +96,7 @@
     <string name="div_txt">রাজশাহী</string>
     <string name="edit_button">Edit Button</string>
     <string name="edit_profile">Edit Profile</string>
-    <string name="save_profile">Save Profile</string>
+    <string name="save_profile">Save</string>
     <string name="Email_bn">ইমেল</string>
     <string name="verified">Verified ! ✔</string>
     <string name="verifying">Verifying…</string>
