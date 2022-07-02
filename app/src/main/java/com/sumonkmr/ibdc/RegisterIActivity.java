@@ -84,6 +84,8 @@ public class RegisterIActivity extends AppCompatActivity {
         values.put("Village","None");
         values.put("Mobile","None");
         values.put("BloodGroup","None");
+        values.put("lastDonateDate","None");
+        values.put("bloodImg_url","None");
 
         FirebaseDatabase.getInstance().getReference("Donors")
                 .child(uid).setValue(values).addOnCompleteListener(task -> {

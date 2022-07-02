@@ -73,7 +73,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder>{
                 .with(context)
                 .load(bloodImg_url)
                 .centerCrop()
-                .placeholder(R.drawable.developer)
+                .placeholder(R.drawable.ibdc_logo)
                 .into(holder.bloodImg);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -87,7 +87,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder>{
                     .with(holder.bloodImg)
                     .load(bloodImg_url)
                     .centerCrop()
-                    .placeholder(R.drawable.developer)
+                    .placeholder(R.drawable.ibdc_logo)
                     .into(holder.bloodImg);
         }
 

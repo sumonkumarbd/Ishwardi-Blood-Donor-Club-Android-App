@@ -47,10 +47,11 @@ import okhttp3.internal.cache.DiskLruCache;
 
 public class ProfileFragment extends Fragment {
 
-    Button edit_btn, edit_save_btn;
+    androidx.constraintlayout.widget.ConstraintLayout profile_tab, profile_edit_tab;
+    Button edit_btn, update_btn;
     TextView f_name, l_name, mobile_number_pro, blood_grp_pro, village_pro, tehsil_pro, district_pro, state_pro, lastDonateDate_pro,email_pro;
-    ImageView name_Edit, number_Edit, blood_Edit, vil_Edit, upa_Edit, dis_Edit, div_Edit, last_donate_Edit,profile_image,cover_image,email_Edit;
-    de.hdodenhof.circleimageview.CircleImageView profile_edit_image;
+    de.hdodenhof.circleimageview.CircleImageView profile_edit_image,profile_image;
+    ImageView cover_image;
     Uri filepath;
     Bitmap bitmap;
     String userId,profile_url;
@@ -77,17 +78,9 @@ public class ProfileFragment extends Fragment {
 
 //        Hooks of edit buttons
         edit_btn = view.findViewById(R.id.edit_btn);
-        edit_save_btn = view.findViewById(R.id.edit_save_btn);
-        name_Edit = view.findViewById(R.id.name_Edit);
-        number_Edit = view.findViewById(R.id.number_Edit);
-        blood_Edit = view.findViewById(R.id.blood_Edit);
-        vil_Edit = view.findViewById(R.id.vil_Edit);
-        upa_Edit = view.findViewById(R.id.upa_Edit);
-        dis_Edit = view.findViewById(R.id.dis_Edit);
-        div_Edit = view.findViewById(R.id.div_Edit);
-        last_donate_Edit = view.findViewById(R.id.last_donate_Edit);
-        profile_edit_image = view.findViewById(R.id.profile_edit_image);
-        email_Edit = view.findViewById(R.id.email_Edit);
+        update_btn = view.findViewById(R.id.update_btn);
+        profile_tab = view.findViewById(R.id.profile_tab);
+        profile_edit_tab = view.findViewById(R.id.profile_edit_tab);
         profile_image = view.findViewById(R.id.profile_image);
         cover_image = view.findViewById(R.id.cover_image);
 
@@ -113,19 +106,20 @@ public class ProfileFragment extends Fragment {
                     lastDonateDate_pro.setText(Objects.requireNonNull(snapshot.child("lastDonateDate").getValue()).toString());
                     profile_url = (Objects.requireNonNull(snapshot.child("bloodImg_url").getValue()).toString());
 
-                    Glide
-                            .with(view)
-                            .load(profile_url)
-                            .centerCrop()
-                            .placeholder(R.drawable.developer)
-                            .into(profile_image);
+                        Glide
+                                .with(view)
+                                .load(profile_url)
+                                .centerCrop()
+                                .placeholder(R.drawable.ibdc_logo)
+                                .into(profile_image);
 
-                    Glide
-                            .with(view)
-                            .load(profile_url)
-                            .centerCrop()
-                            .placeholder(R.drawable.developer)
-                            .into(cover_image);
+                        Glide
+                                .with(view)
+                                .load(profile_url)
+                                .centerCrop()
+                                .placeholder(R.drawable.ibdc_logo)
+                                .into((ImageView) cover_image);
+
                 }
             }
 
@@ -139,36 +133,21 @@ public class ProfileFragment extends Fragment {
 
 //        View.OnClickListener
         edit_btn.setOnClickListener(v -> {
+            profile_tab.setVisibility(View.GONE);
+            profile_edit_tab.setVisibility(View.VISIBLE);
             edit_btn.setVisibility(View.GONE);
-            edit_save_btn.setVisibility(View.VISIBLE);
-            name_Edit.setVisibility(View.VISIBLE);
-            number_Edit.setVisibility(View.VISIBLE);
-            blood_Edit.setVisibility(View.VISIBLE);
-            vil_Edit.setVisibility(View.VISIBLE);
-            upa_Edit.setVisibility(View.VISIBLE);
-            dis_Edit.setVisibility(View.VISIBLE);
-            div_Edit.setVisibility(View.VISIBLE);
-            last_donate_Edit.setVisibility(View.VISIBLE);
-            profile_edit_image.setVisibility(View.VISIBLE);
-            email_Edit.setVisibility(View.VISIBLE);
+            update_btn.setVisibility(View.VISIBLE);
         });
 
-        edit_save_btn.setOnClickListener(v -> {
+        update_btn.setOnClickListener(v -> {
+            profile_edit_tab.setVisibility(View.GONE);
+            profile_tab.setVisibility(View.VISIBLE);
+            update_btn.setVisibility(View.GONE);
             edit_btn.setVisibility(View.VISIBLE);
-            edit_save_btn.setVisibility(View.GONE);
-            name_Edit.setVisibility(View.GONE);
-            number_Edit.setVisibility(View.GONE);
-            blood_Edit.setVisibility(View.GONE);
-            vil_Edit.setVisibility(View.GONE);
-            upa_Edit.setVisibility(View.GONE);
-            dis_Edit.setVisibility(View.GONE);
-            div_Edit.setVisibility(View.GONE);
-            last_donate_Edit.setVisibility(View.GONE);
-            profile_edit_image.setVisibility(View.GONE);
-            email_Edit.setVisibility(View.GONE);
+
         });
 
-        profile_edit_image.setOnClickListener(v -> {
+        update_btn.setOnClickListener(v -> {
             Dexter.withContext(requireContext().getApplicationContext())
                     .withPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
                     .withListener(new PermissionListener() {
