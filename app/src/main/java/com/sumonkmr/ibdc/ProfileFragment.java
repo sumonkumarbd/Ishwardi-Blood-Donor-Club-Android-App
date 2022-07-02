@@ -2,6 +2,7 @@ package com.sumonkmr.ibdc;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -47,9 +48,11 @@ import okhttp3.internal.cache.DiskLruCache;
 
 public class ProfileFragment extends Fragment {
 
+    Context context;
     androidx.constraintlayout.widget.ConstraintLayout profile_tab, profile_edit_tab;
     Button edit_btn,save_btn, update_btn;
     TextView f_name, l_name, mobile_number_pro, blood_grp_pro, village_pro, tehsil_pro, district_pro, state_pro, lastDonateDate_pro,email_pro;
+    com.google.android.material.textfield.TextInputEditText f_name_edit;
     de.hdodenhof.circleimageview.CircleImageView profile_image,profile_image_edit,p_image_shade_edit;
     ImageView cover_image;
     Uri filepath;
@@ -86,7 +89,9 @@ public class ProfileFragment extends Fragment {
         cover_image = view.findViewById(R.id.cover_image);
         profile_image_edit = view.findViewById(R.id.profile_image_edit);
         p_image_shade_edit = view.findViewById(R.id.p_image_shade_edit);
+        f_name_edit = view.findViewById(R.id.f_name_edit);
 
+        context = getContext();
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         userId = currentUser.getUid();
         FirebaseDatabase db = FirebaseDatabase.getInstance();
@@ -156,7 +161,7 @@ public class ProfileFragment extends Fragment {
         });
 
         p_image_shade_edit.setOnClickListener(v -> {
-            Dexter.withContext(requireContext().getApplicationContext())
+            Dexter.withContext(context)
                     .withPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
                     .withListener(new PermissionListener() {
                         @Override
@@ -184,10 +189,11 @@ public class ProfileFragment extends Fragment {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        if (requestCode == 101 && resultCode == 1) {
+        if (requestCode == 101 && resultCode == -1) {
+            assert data != null;
             filepath = data.getData();
             try {
-               InputStream inputStream = requireActivity().getContentResolver().openInputStream(filepath);
+               InputStream inputStream = context.getContentResolver().openInputStream(filepath);
                bitmap = BitmapFactory.decodeStream(inputStream);
                 profile_image_edit.setImageBitmap(bitmap);
             } catch (Exception ex) {

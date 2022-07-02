@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:visibility="gone"
+        android:visibility="visible"
         android:orientation="vertical">
         <!--    for background images-->
         <ImageView
@@ -383,7 +383,7 @@
                         <Button
                             android:id="@+id/edit_btn"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_height="40dp"
                             android:layout_gravity="end"
                             android:layout_marginEnd="5dp"
                             android:gravity="center"
@@ -508,7 +508,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:visibility="visible"
+        android:visibility="gone"
         android:orientation="vertical">
 
         <LinearLayout
@@ -578,6 +578,7 @@
                         app:hintTextColor="#000000">
 
                         <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/f_name_edit"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:inputType="textCapWords"
@@ -678,6 +679,7 @@
                         android:hint="@string/last_donate"
                         android:textColorHint="#000000"
                         app:hintTextColor="#000000">
+
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:layout_width="match_parent"
