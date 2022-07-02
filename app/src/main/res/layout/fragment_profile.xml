@@ -55,7 +55,7 @@
             <TextView
                 android:id="@+id/email_key"
                 android:layout_width="0dp"
-                android:layout_weight=".40"
+                android:layout_weight=".38"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="10dp"
                 android:elevation="@dimen/minor_shadow"
@@ -624,7 +624,6 @@
                     android:src="@drawable/ic_baseline_edit_24"
                     android:visibility="gone" />
             </LinearLayout>
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

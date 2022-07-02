@@ -98,6 +98,9 @@
     <string name="edit_profile">Edit Profile</string>
     <string name="save_profile">Save Profile</string>
     <string name="Email_bn">ইমেল</string>
+    <string name="verified">Verified ! ✔</string>
+    <string name="verifying">Verifying…</string>
+    <string name="not_verified">Not Verified!</string>
 
     <!--    end Profile-->
 

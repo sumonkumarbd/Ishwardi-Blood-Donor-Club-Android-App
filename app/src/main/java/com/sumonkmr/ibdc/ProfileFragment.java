@@ -20,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -51,9 +52,8 @@ public class ProfileFragment extends Fragment {
     ImageView name_Edit, number_Edit, blood_Edit, vil_Edit, upa_Edit, dis_Edit, div_Edit, last_donate_Edit,profile_image,cover_image,email_Edit;
     de.hdodenhof.circleimageview.CircleImageView profile_edit_image;
     Uri filepath;
-    URL url;
     Bitmap bitmap;
-    String userId;
+    String userId,profile_url;
 
 
     @SuppressLint("MissingInflatedId")
@@ -110,6 +110,22 @@ public class ProfileFragment extends Fragment {
                     district_pro.setText(Objects.requireNonNull(snapshot.child("District").getValue()).toString());
                     state_pro.setText(Objects.requireNonNull(snapshot.child("State").getValue()).toString());
                     email_pro.setText(Objects.requireNonNull(snapshot.child("Email").getValue()).toString());
+                    lastDonateDate_pro.setText(Objects.requireNonNull(snapshot.child("lastDonateDate").getValue()).toString());
+                    profile_url = (Objects.requireNonNull(snapshot.child("bloodImg_url").getValue()).toString());
+
+                    Glide
+                            .with(view)
+                            .load(profile_url)
+                            .centerCrop()
+                            .placeholder(R.drawable.developer)
+                            .into(profile_image);
+
+                    Glide
+                            .with(view)
+                            .load(profile_url)
+                            .centerCrop()
+                            .placeholder(R.drawable.developer)
+                            .into(cover_image);
                 }
             }
 

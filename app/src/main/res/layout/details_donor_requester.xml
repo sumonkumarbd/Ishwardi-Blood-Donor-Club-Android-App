@@ -26,7 +26,7 @@
     <LinearLayout
         android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
-        android:layout_height="130dp"
+        android:layout_height="140dp"
         android:background="#45000000"
         android:gravity="top"
         android:orientation="vertical"
@@ -198,17 +198,16 @@
                     android:layout_height="wrap_content"
                     android:clickable="true"
                     android:contextClickable="true"
-                    android:ellipsize="marquee"
                     android:focusable="true"
                     android:focusableInTouchMode="true"
                     android:fontFamily="@font/varela_round"
-                    android:freezesText="true"
                     android:marqueeRepeatLimit="marquee_forever"
                     android:maxWidth="120dp"
                     android:singleLine="true"
                     android:elevation="@dimen/minor_shadow"
                     android:text="@string/last_donate_date"
                     android:textColor="@color/white"
+                    android:textStyle="bold"
                     android:textSize="@dimen/card_txt" />
 
 
@@ -227,12 +226,12 @@
         android:layout_height="40dp"
         android:src="@drawable/ic_baseline_share_24"
         android:tooltipText="Share"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
-        app:layout_constraintEnd_toStartOf="@+id/call"
-        app:layout_constraintHorizontal_bias="0.3"
-        app:layout_constraintStart_toStartOf="@+id/bloodImg_url"
+        app:layout_constraintBottom_toBottomOf="@+id/call"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.049"
+        app:layout_constraintStart_toEndOf="@+id/call"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.076" />
+        app:layout_constraintVertical_bias="0.8" />
 
     <ImageView
         android:id="@+id/call"
@@ -243,8 +242,8 @@
         android:src="@drawable/ic_baseline_call_24"
         android:tooltipText="Call"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
-        app:layout_constraintEnd_toEndOf="@+id/bloodImg_url"
-        app:layout_constraintTop_toTopOf="@+id/bloodImg_url"
+        app:layout_constraintStart_toStartOf="@+id/bloodImg"
+        app:layout_constraintTop_toTopOf="@+id/bloodImg"
         app:layout_constraintVertical_bias="0.047" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

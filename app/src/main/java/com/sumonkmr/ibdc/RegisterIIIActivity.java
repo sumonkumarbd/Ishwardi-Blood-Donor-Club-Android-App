@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,6 +35,9 @@ public class RegisterIIIActivity extends AppCompatActivity {
 
     EditText mobile,textVerification;
     TextView submit;
+    String lastDonateDate;
+    ImageView bloodImg;
+
 
     boolean isVerified = false, isSubmit = false;
 
@@ -56,13 +60,15 @@ public class RegisterIIIActivity extends AppCompatActivity {
         mobile = findViewById(R.id.mobileEditText);
         textVerification = findViewById(R.id.verificationText);
         submit = findViewById(R.id.btnVerifySubmit);
+        lastDonateDate = getString(R.string.last_donate_date);
+        bloodImg = findViewById(R.id.bloodImg);
     }
 
 
     PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
         @Override
         public void onVerificationCompleted(PhoneAuthCredential credential) {
-            textVerification.setText("Verified ! ✔");
+            textVerification.setText(R.string.verified);
             addToDatabase();
         }
 
@@ -98,6 +104,8 @@ public class RegisterIIIActivity extends AppCompatActivity {
         values.put("Step","Done");
         values.put("Mobile",mobile.getText().toString());
         values.put("BloodGroup",bloodgrp.getText().toString());
+        values.put("lastDonateDate",lastDonateDate);
+        values.put("bloodImg",bloodImg);
         values.put("Visible","True");
         FirebaseDatabase.getInstance().getReference("Donors/"+FirebaseAuth.getInstance().getUid())
                 .updateChildren(values)
@@ -128,7 +136,7 @@ public class RegisterIIIActivity extends AppCompatActivity {
                         .build();
 
                 PhoneAuthProvider.verifyPhoneNumber(options);
-                textVerification.setText("Verifying...");
+                textVerification.setText(R.string.verifying);
             }
             if (mobile.getText().toString().isEmpty()) {
                 mobile.setError("Enter Mobile Number!");
@@ -143,9 +151,9 @@ public class RegisterIIIActivity extends AppCompatActivity {
                                 addToDatabase();
                             }else {
                                 Toast.makeText(RegisterIIIActivity.this, "Error!\n"+task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                                submit.setText("Verify");
+                                submit.setText(R.string.verify_txt);
                                 mobile.setEnabled(true);
-                                textVerification.setText("Not Verified!");
+                                textVerification.setText(R.string.not_verified);
                                 isVerified = false;
                                 isSubmit = false;
                             }

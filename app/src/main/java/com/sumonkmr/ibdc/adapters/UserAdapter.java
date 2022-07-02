@@ -11,7 +11,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.karumi.dexter.Dexter;
 import com.squareup.picasso.Picasso;
+import com.sumonkmr.ibdc.DisplayDonorsActivity;
 import com.sumonkmr.ibdc.R;
 import com.sumonkmr.ibdc.StringCaseConverter;
 import com.sumonkmr.ibdc.listeners.MyOnClickListener;
@@ -66,22 +69,26 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder>{
         holder.fullName.setText(s);
         holder.bloodGroup.setText(bloodgroup);
         holder.lastDonateDate.setText(lastDonateDate);
-        holder.village_pro.setText(village);
-        holder.tehsil_pro.setText(tehsil);
-        holder.district_pro.setText(district);
-        holder.state_pro.setText(state);
-        holder.blood_grp_pro.setText(bloodgroup);
-        Picasso.get()
+        Glide
+                .with(context)
                 .load(bloodImg_url)
-                .placeholder(R.drawable.ibdc_logo)
+                .centerCrop()
+                .placeholder(R.drawable.developer)
                 .into(holder.bloodImg);
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             holder.state.setText(state);
             holder.district.setTooltipText(district);
             holder.tehsil.setTooltipText(tehsil);
             holder.village.setTooltipText(village);
             holder.fullName.setTooltipText(fname);
-            holder.lastDonateDate.setText(lastDonateDate);
+            holder.lastDonateDate.setTooltipText(lastDonateDate);
+            Glide
+                    .with(holder.bloodImg)
+                    .load(bloodImg_url)
+                    .centerCrop()
+                    .placeholder(R.drawable.developer)
+                    .into(holder.bloodImg);
         }
 
 
@@ -102,7 +109,6 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder>{
     static class UserHolder extends RecyclerView.ViewHolder{
 
         TextView fullName,bloodGroup,state,district,tehsil,village,lastDonateDate;
-        TextView f_name,l_name,mobile_number_pro,blood_grp_pro,village_pro,tehsil_pro,district_pro,state_pro,lastDonateDate_pro;
 
         ImageView share,call,bloodImg;
 
@@ -118,17 +124,6 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder>{
             share = itemView.findViewById(R.id.share);
             lastDonateDate = itemView.findViewById(R.id.lastDonateDate);
             bloodImg = itemView.findViewById(R.id.bloodImg);
-            f_name = itemView.findViewById(R.id.f_name);
-            l_name = itemView.findViewById(R.id.l_name);
-            mobile_number_pro = itemView.findViewById(R.id.mobile_number_pro);
-            blood_grp_pro = itemView.findViewById(R.id.blood_grp_pro);
-            village_pro = itemView.findViewById(R.id.village_pro);
-            tehsil_pro = itemView.findViewById(R.id.tehsil_pro);
-            district_pro = itemView.findViewById(R.id.district_pro);
-            state_pro = itemView.findViewById(R.id.state_pro);
-            state_pro = itemView.findViewById(R.id.state_pro);
-            state_pro = itemView.findViewById(R.id.state_pro);
-            lastDonateDate_pro = itemView.findViewById(R.id.lastDonateDate_pro);
 
 
 
