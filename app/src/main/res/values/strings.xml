@@ -17,14 +17,14 @@
     <string name="ibdc">Ishwardi Blood Donor Club</string>
     <string name="forgot_password">Forgot Password?</string>
     <string name="login">LOGIN</string>
-    <string name="enter_phone_no">ফোন নাম্বার দিন..</string>
-    <string name="enter_password">পাসওয়ার্ড দিন..</string>
+    <string name="enter_phone_no">Enter Phone Number!</string>
+    <string name="enter_password">Enter Password!</string>
     <string name="login1">লগইন!</string>
     <string name="todo">TODO</string>
     <string name="todo1">TODO</string>
     <string name="already_have_an_account_log_in">Already have an account? Log in</string>
     <string name="confirm_password">Confirm Password</string>
-    <string name="sign_up">সাইন আপ!</string>
+    <string name="sign_up">SignUp!</string>
     <string name="enter_full_name">Enter Full Name</string>
     <string name="enter_city_name">Enter City Name</string>
     <string name="title_activity_listand_map">ListandMapActivity</string>
