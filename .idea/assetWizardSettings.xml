@@ -301,7 +301,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="file:/$PROJECT_DIR$/../../Program_Files/Android/Sdk/icons/material/materialicons/edit/baseline_edit_24.xml" />
+                                      <entry key="url" value="file:/$PROJECT_DIR$/../../Program_Files/Android/Sdk/icons/material/materialicons/arrow_back/baseline_arrow_back_24.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -312,7 +312,7 @@
                         <option name="values">
                           <map>
                             <entry key="color" value="bf1f2d" />
-                            <entry key="outputName" value="edit_red" />
+                            <entry key="outputName" value="ic_baseline_arrow_back_24" />
                             <entry key="sourceFile" value="D:\work_station\blood_bank-main" />
                           </map>
                         </option>

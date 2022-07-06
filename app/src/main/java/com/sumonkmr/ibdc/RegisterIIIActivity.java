@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -34,7 +35,7 @@ public class RegisterIIIActivity extends AppCompatActivity {
     AutoCompleteTextView bloodgrp;
 
     EditText mobile,textVerification;
-    TextView submit;
+    Button submit;
     String lastDonateDate;
     ImageView bloodImg;
 
@@ -89,8 +90,8 @@ public class RegisterIIIActivity extends AppCompatActivity {
         public void onCodeSent(@NonNull String verificationId,
                                @NonNull PhoneAuthProvider.ForceResendingToken token) {
 
-            textVerification.setText("Enter OTP!");
-            submit.setText("Submit");
+            textVerification.setHint("Enter Otp!!");
+            submit.setText(R.string.submit);
             id = verificationId;
             isSubmit = true;
 
@@ -113,7 +114,7 @@ public class RegisterIIIActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if(task.isSuccessful()){
-                            startActivity(new Intent(RegisterIIIActivity.this,DashBoard                        .class));
+                            startActivity(new Intent(RegisterIIIActivity.this,DashBoard.class));
                             RegisterIIIActivity.this.finish();
                         }else {
                             Toast.makeText(RegisterIIIActivity.this, "Error!", Toast.LENGTH_SHORT).show();

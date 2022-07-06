@@ -17,14 +17,14 @@
     <string name="ibdc">Ishwardi Blood Donor Club</string>
     <string name="forgot_password">Forgot Password?</string>
     <string name="login">LOGIN</string>
-    <string name="enter_phone_no">Enter Phone No</string>
-    <string name="enter_password">Enter Password</string>
-    <string name="login1">LOGIN</string>
+    <string name="enter_phone_no">ফোন নাম্বার দিন..</string>
+    <string name="enter_password">পাসওয়ার্ড দিন..</string>
+    <string name="login1">লগইন!</string>
     <string name="todo">TODO</string>
     <string name="todo1">TODO</string>
     <string name="already_have_an_account_log_in">Already have an account? Log in</string>
     <string name="confirm_password">Confirm Password</string>
-    <string name="sign_up">SIGN UP</string>
+    <string name="sign_up">সাইন আপ!</string>
     <string name="enter_full_name">Enter Full Name</string>
     <string name="enter_city_name">Enter City Name</string>
     <string name="title_activity_listand_map">ListandMapActivity</string>
@@ -94,14 +94,22 @@
     <string name="upa_txt">ঈশ্বরদী</string>
     <string name="dis_txt">পাবনা</string>
     <string name="div_txt">রাজশাহী</string>
-    <string name="edit_button">Edit Button</string>
-    <string name="edit_profile">Edit Profile</string>
-    <string name="save_profile">Save</string>
+    <string name="edit_button">ইডিট!!</string>
+    <string name="edit_profile">ইডিট!</string>
+    <string name="save_profile">সেভ!</string>
     <string name="Email_bn">ইমেল</string>
     <string name="verified">Verified ! ✔</string>
     <string name="verifying">Verifying…</string>
     <string name="not_verified">Not Verified!</string>
-    <string name="update_profile">Update Profile!</string>
+    <string name="update_profile">আপডেট প্রোফাইল!</string>
+    <string name="backbutton">backButton</string>
+    <string name="age">বয়স</string>
+    <string name="birthdate">জন্ম তারিখ</string>
+    <string name="submit">Submit</string>
+    <string name="updating">অপেক্ষা করুন ছবি আপডেট হচ্ছে…</string>
+    <string name="Updated">অভিনন্দন!!তথ্য আপডেট সম্পূর্ণ✓✓</string>
+    <string name="Updated_img">অভিনন্দন!!ছবি আপডেট সম্পূর্ণ✓✓</string>
+    <string name="failed">তথ্য আপডেট অসম্পূর্ণ✖✖</string>
 
     <!--    end Profile-->
 

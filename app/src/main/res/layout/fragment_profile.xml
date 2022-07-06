@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:visibility="gone"
+        android:visibility="visible"
         android:orientation="vertical">
         <!--    for background images-->
         <ImageView
@@ -26,6 +26,9 @@
             android:scaleType="centerCrop"
             android:src="@drawable/ibdc_logo" />
 
+        <!--    for background images-->
+
+        <!--details box-->
         <View
             android:id="@+id/cover_shed"
             android:layout_width="match_parent"
@@ -34,11 +37,11 @@
             android:background="@color/semi_tns_background"
             app:layout_constraintBottom_toBottomOf="@+id/cover_image"
             app:layout_constraintEnd_toEndOf="@+id/cover_image"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/cover_image"
-            app:layout_constraintTop_toTopOf="@+id/cover_image" />
-        <!--    for background images-->
+            app:layout_constraintTop_toTopOf="@+id/cover_image"
+            app:layout_constraintVertical_bias="0.0" />
 
-        <!--details box-->
         <LinearLayout
             android:id="@+id/info_box"
             android:layout_width="match_parent"
@@ -64,7 +67,7 @@
                 <TextView
                     android:id="@+id/email_key"
                     android:layout_width="0dp"
-                    android:layout_weight=".38"
+                    android:layout_weight=".58"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
                     android:elevation="@dimen/minor_shadow"
@@ -73,7 +76,7 @@
                     android:singleLine="true"
                     android:text="@string/Email_bn"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/form_txt" />
+                    android:textSize="@dimen/profile_txt" />
 
                 <TextView
                     android:layout_width="0dp"
@@ -81,7 +84,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/colon"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/form_txt"
+                    android:textSize="@dimen/profile_txt"
                     android:textStyle="bold" />
 
                 <TextView
@@ -103,7 +106,7 @@
                     android:singleLine="true"
                     android:text="@string/Email_bn"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/form_txt" />
+                    android:textSize="@dimen/profile_txt" />
 
             </LinearLayout>
 
@@ -123,7 +126,7 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_marginStart="5dp"
-                    android:layout_weight="1.05"
+                    android:layout_weight="1.7"
                     android:layout_gravity="bottom"
                     android:gravity="bottom"
                     android:paddingTop="20dp"
@@ -138,6 +141,18 @@
                         android:orientation="vertical">
 
                         <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="10dp"
+                            android:elevation="@dimen/minor_shadow"
+                            android:fontFamily="@font/varela_round"
+                            android:maxWidth="210dp"
+                            android:singleLine="true"
+                            android:text="@string/birthdate"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/profile_txt" />
+
+                        <TextView
                             android:id="@+id/Village_key"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -148,8 +163,7 @@
                             android:singleLine="true"
                             android:text="@string/village"
                             android:textColor="@color/white"
-                            android:textSize="@dimen/form_txt" />
-
+                            android:textSize="@dimen/profile_txt" />
 
                         <TextView
                             android:id="@+id/upazila_key"
@@ -162,8 +176,7 @@
                             android:singleLine="true"
                             android:text="@string/upazila"
                             android:textColor="@color/white"
-                            android:textSize="@dimen/form_txt" />
-
+                            android:textSize="@dimen/profile_txt" />
 
                         <TextView
                             android:id="@+id/district_key"
@@ -176,8 +189,7 @@
                             android:singleLine="true"
                             android:text="@string/district"
                             android:textColor="@color/white"
-                            android:textSize="@dimen/form_txt" />
-
+                            android:textSize="@dimen/profile_txt" />
 
                         <TextView
                             android:id="@+id/division_key"
@@ -190,7 +202,7 @@
                             android:singleLine="true"
                             android:text="@string/divisions"
                             android:textColor="@color/white"
-                            android:textSize="@dimen/form_txt" />
+                            android:textSize="@dimen/profile_txt" />
 
                     </LinearLayout><!--                Address key's-->
 
@@ -207,7 +219,7 @@
                             android:layout_height="wrap_content"
                             android:text="@string/colon"
                             android:textColor="@color/white"
-                            android:textSize="@dimen/form_txt"
+                            android:textSize="@dimen/profile_txt"
                             android:textStyle="bold" />
 
                         <TextView
@@ -215,7 +227,7 @@
                             android:layout_height="wrap_content"
                             android:text="@string/colon"
                             android:textColor="@color/white"
-                            android:textSize="@dimen/form_txt"
+                            android:textSize="@dimen/profile_txt"
                             android:textStyle="bold" />
 
                         <TextView
@@ -223,7 +235,7 @@
                             android:layout_height="wrap_content"
                             android:text="@string/colon"
                             android:textColor="@color/white"
-                            android:textSize="@dimen/form_txt"
+                            android:textSize="@dimen/profile_txt"
                             android:textStyle="bold" />
 
                         <TextView
@@ -231,7 +243,15 @@
                             android:layout_height="wrap_content"
                             android:text="@string/colon"
                             android:textColor="@color/white"
-                            android:textSize="@dimen/form_txt"
+                            android:textSize="@dimen/profile_txt"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/colon"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/profile_txt"
                             android:textStyle="bold" />
                     </LinearLayout><!--                Colon's-->
 
@@ -244,6 +264,18 @@
                         android:orientation="vertical">
 
                         <TextView
+                            android:id="@+id/birthDate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:elevation="@dimen/minor_shadow"
+                            android:fontFamily="@font/varela_round"
+                            android:maxWidth="210dp"
+                            android:singleLine="true"
+                            android:text="@string/last_donate_date"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/profile_txt" />
+
+                        <TextView
                             android:id="@+id/village_pro"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -253,7 +285,7 @@
                             android:singleLine="true"
                             android:text="@string/vil_txt"
                             android:textColor="@color/white"
-                            android:textSize="@dimen/form_txt" />
+                            android:textSize="@dimen/profile_txt" />
 
                         <TextView
                             android:id="@+id/tehsil_pro"
@@ -265,7 +297,7 @@
                             android:singleLine="true"
                             android:text="@string/upa_txt"
                             android:textColor="@color/white"
-                            android:textSize="@dimen/form_txt" />
+                            android:textSize="@dimen/profile_txt" />
 
                         <TextView
                             android:id="@+id/district_pro"
@@ -277,7 +309,7 @@
                             android:singleLine="true"
                             android:text="@string/dis_txt"
                             android:textColor="@color/white"
-                            android:textSize="@dimen/form_txt" />
+                            android:textSize="@dimen/profile_txt" />
 
                         <TextView
                             android:id="@+id/state_pro"
@@ -297,7 +329,7 @@
                             android:singleLine="true"
                             android:text="@string/div_txt"
                             android:textColor="@color/white"
-                            android:textSize="@dimen/form_txt" />
+                            android:textSize="@dimen/profile_txt" />
 
 
 
@@ -310,7 +342,7 @@
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight=".95"
+                    android:layout_weight=".75"
                     android:gravity="center"
                     android:orientation="vertical"
                     android:weightSum="1.8">
@@ -342,12 +374,11 @@
                             android:singleLine="true"
                             android:text="@string/last_donate"
                             android:textColor="@color/white"
-                            android:textSize="@dimen/form_txt" />
+                            android:textSize="@dimen/profile_txt" />
 
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="2dp"
-                            android:layout_marginHorizontal="15dp"
                             android:background="@color/colorPrimary"
                             android:elevation="@dimen/minor_shadow" />
 
@@ -367,7 +398,7 @@
                             android:singleLine="true"
                             android:text="@string/last_donate_date"
                             android:textColor="@color/white"
-                            android:textSize="@dimen/form_txt" />
+                            android:textSize="@dimen/profile_txt" />
 
                     </LinearLayout>
 
@@ -404,7 +435,7 @@
         <LinearLayout
             android:id="@+id/title_header_box"
             android:layout_width="match_parent"
-            android:layout_height="125dp"
+            android:layout_height="130dp"
             android:layout_marginHorizontal="10dp"
             android:background="@color/semi_tns_background"
             android:orientation="horizontal"
@@ -430,6 +461,9 @@
                     android:layout_gravity="center"
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="10dp"
+                    app:civ_border_color="@color/colorAccentDark"
+                    app:civ_border_width="5dp"
+                    android:elevation="@dimen/shadow"
                     android:scaleType="centerCrop"
                     android:src="@drawable/ibdc_logo" />
 
@@ -457,7 +491,7 @@
                         android:fontFamily="@font/text_font"
                         android:text="@string/first_name"
                         android:textColor="@color/white"
-                        android:textSize="@dimen/card_header_txt"
+                        android:textSize="@dimen/manu_txt"
                         android:textStyle="bold" />
 
                     <TextView
@@ -508,7 +542,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:visibility="visible"
+        android:visibility="gone"
         android:orientation="vertical">
 
         <LinearLayout
@@ -518,7 +552,18 @@
             android:weightSum="2"
             >
 
-            <RelativeLayout
+            <ImageButton
+                android:id="@+id/update_back"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="10dp"
+                android:background="@color/tns"
+                android:elevation="@dimen/shadow"
+                android:src="@drawable/backpng"
+                android:contentDescription="@string/backbutton" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight=".8"
@@ -529,39 +574,62 @@
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/profile_image_edit"
-                    android:layout_width="320dp"
-                    android:layout_height="320dp"
+                    android:layout_width="274dp"
+                    android:layout_height="274dp"
                     android:layout_gravity="center"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/ibdc_logo" />
+                    android:src="@drawable/ibdc_logo"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/progressbar"
+                    app:layout_constraintHorizontal_bias=".5"
+                    app:layout_constraintStart_toStartOf="@+id/progressbar"
+                    app:layout_constraintTop_toTopOf="@+id/progressbar" />
+
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/p_image_shade_edit"
-                    android:layout_width="320dp"
-                    android:layout_height="320dp"
+                    android:layout_width="274dp"
+                    android:layout_height="274dp"
                     android:layout_gravity="center"
                     android:scaleType="centerCrop"
                     android:src="@drawable/edit_photo"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/progressbar"
+                    app:layout_constraintHorizontal_bias=".5"
+                    app:layout_constraintStart_toStartOf="@+id/progressbar"
+                    app:layout_constraintTop_toTopOf="@+id/progressbar" />
+
+                <ProgressBar
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:indeterminate="false"
+                    android:id="@+id/progressbar"
+                    android:layout_gravity="center"
+                    style="@style/Widget.MaterialComponents.CircularProgressIndicator"
+                    android:progressDrawable="@drawable/coustom_progressbar"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.516"
+                    app:layout_constraintHorizontal_bias=".5"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </RelativeLayout>
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <LinearLayout
                     android:id="@+id/linearLayout"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="1"
+                    android:layout_weight="1.1"
                     android:layout_gravity="center"
                     android:background="@drawable/round_textbox"
                     android:elevation="20dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="10dp"
                     android:layout_marginHorizontal="15dp"
                     android:gravity="center"
                     android:orientation="vertical"
                     android:padding="10dp"
-                    android:weightSum="2"
+                    android:weightSum="2.4"
                     >
 
 <!--                    name lay-->
@@ -746,12 +814,30 @@
                                 android:id="@+id/lastDonateDate_edit"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:textSize="@dimen/card_txt"
+                                android:textSize="@dimen/tab_label"
                                 android:inputType="none" />
 
                         </com.google.android.material.textfield.TextInputLayout>
 
                 </LinearLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight=".4"
+                        android:layout_marginHorizontal="2dp"
+                        android:hint="@string/birthdate"
+                        android:textColorHint="#000000"
+                        app:hintTextColor="#000000">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/birthDate_edit"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="none" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
 
                         <Button
                             android:id="@+id/save_btn"
@@ -760,17 +846,6 @@
                             android:layout_weight=".4"
                             android:text="@string/save_profile"
                             />
-
-                        <Button
-                            android:id="@+id/update_btn"
-                            android:layout_width="match_parent"
-                            android:layout_height="0dp"
-                            android:visibility="gone"
-                            android:layout_weight=".4"
-                            android:text="@string/update_profile"
-                            />
-
-
                 </LinearLayout>
 
 

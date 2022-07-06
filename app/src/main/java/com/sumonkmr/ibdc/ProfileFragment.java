@@ -15,19 +15,24 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
+import android.webkit.MimeTypeMap;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -36,7 +41,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.PermissionToken;
 import com.karumi.dexter.listener.PermissionDeniedResponse;
@@ -46,29 +53,31 @@ import com.karumi.dexter.listener.single.PermissionListener;
 import com.sumonkmr.ibdc.model.User;
 
 import java.io.InputStream;
-import java.net.URL;
-import java.text.SimpleDateFormat;
-import java.time.Month;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.Objects;
-
-import okhttp3.internal.cache.DiskLruCache;
 
 
 public class ProfileFragment extends Fragment {
 
     Context context;
     androidx.constraintlayout.widget.ConstraintLayout profile_tab, profile_edit_tab;
-    Button edit_btn,save_btn, update_btn;
-    TextView f_name, l_name, mobile_number_pro, blood_grp_pro, village_pro, tehsil_pro, district_pro, state_pro, lastDonateDate_pro,email_pro;
+    Button edit_btn,save_btn;
+    ImageButton update_back;
+    TextView f_name, l_name, mobile_number_pro, blood_grp_pro, village_pro, tehsil_pro, district_pro, state_pro, lastDonateDate_pro,email_pro,birthDate;
     com.google.android.material.textfield.TextInputEditText f_name_edit,l_name_edit,village_edit;
     de.hdodenhof.circleimageview.CircleImageView profile_image,profile_image_edit,p_image_shade_edit;
-    AutoCompleteTextView Division,District,Upazila,bloodGrpDropDown,lastDonateDate_edit;
+    AutoCompleteTextView Division,District,Upazila,bloodGrpDropDown,lastDonateDate_edit,birthDate_edit;
     ImageView cover_image;
     Uri filepath;
     Bitmap bitmap;
     String userId,profile_url;
-    int day,month,year;
+    Uri profile_uri;
+    int d,m,y;
+   private StorageReference storageReference;
+   private DatabaseReference dbReference;
+   private FirebaseDatabase db;
+   private ProgressBar progressbar;
 
 
     @SuppressLint("MissingInflatedId")
@@ -89,12 +98,14 @@ public class ProfileFragment extends Fragment {
         district_pro = view.findViewById(R.id.district_pro);
         state_pro = view.findViewById(R.id.state_pro);
         email_pro = view.findViewById(R.id.email_pro);
+        birthDate = view.findViewById(R.id.birthDate);
         lastDonateDate_pro = view.findViewById(R.id.lastDonateDate_pro);
+        progressbar = view.findViewById(R.id.progressbar);
 
 //        Hooks of edit buttons
         edit_btn = view.findViewById(R.id.edit_btn);
         save_btn = view.findViewById(R.id.save_btn);
-        update_btn = view.findViewById(R.id.update_btn);
+        update_back = view.findViewById(R.id.update_back);
         profile_tab = view.findViewById(R.id.profile_tab);
         profile_edit_tab = view.findViewById(R.id.profile_edit_tab);
         profile_image = view.findViewById(R.id.profile_image);
@@ -109,94 +120,32 @@ public class ProfileFragment extends Fragment {
         Division = view.findViewById(R.id.stateDropDrown_edit);
         bloodGrpDropDown = view.findViewById(R.id.bloodGrpDropDown_edit);
         lastDonateDate_edit = view.findViewById(R.id.lastDonateDate_edit);
-        
+        birthDate_edit = view.findViewById(R.id.birthDate_edit);
+
+        //        Methods
         initializeAddressFilters();
         LastDonateDatePicker();
 
+//        Database references
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         userId = currentUser.getUid();
-        FirebaseDatabase db = FirebaseDatabase.getInstance();
-        DatabaseReference dbReference = db.getReference().child("Donors");
-        StorageReference storageReference = FirebaseStorage.getInstance().getReference();
-
-        dbReference.child(userId).addValueEventListener(new ValueEventListener() {
-            @SuppressLint("SuspiciousIndentation")
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()){
-                    f_name.setText(Objects.requireNonNull(snapshot.child("FName").getValue()).toString());
-                    l_name.setText(Objects.requireNonNull(snapshot.child("LName").getValue()).toString());
-                    mobile_number_pro.setText(Objects.requireNonNull(snapshot.child("Mobile").getValue()).toString());
-                    blood_grp_pro.setText(Objects.requireNonNull(snapshot.child("BloodGroup").getValue()).toString());
-                    village_pro.setText(Objects.requireNonNull(snapshot.child("Village").getValue()).toString());
-                    tehsil_pro.setText(Objects.requireNonNull(snapshot.child("Upazila").getValue()).toString());
-                    district_pro.setText(Objects.requireNonNull(snapshot.child("District").getValue()).toString());
-                    state_pro.setText(Objects.requireNonNull(snapshot.child("State").getValue()).toString());
-                    email_pro.setText(Objects.requireNonNull(snapshot.child("Email").getValue()).toString());
-                    lastDonateDate_pro.setText(Objects.requireNonNull(snapshot.child("lastDonateDate").getValue()).toString());
-                    profile_url = (Objects.requireNonNull(snapshot.child("bloodImg_url").getValue()).toString());
-
-//                    Edit tabs
-                    f_name_edit.setText(Objects.requireNonNull(snapshot.child("FName").getValue()).toString());
-                    l_name_edit.setText(Objects.requireNonNull(snapshot.child("LName").getValue()).toString());
-                    village_edit.setText(Objects.requireNonNull(snapshot.child("Village").getValue()).toString());
-                    Upazila.setText(Objects.requireNonNull(snapshot.child("Upazila").getValue()).toString());
-                    District.setText(Objects.requireNonNull(snapshot.child("District").getValue()).toString());
-                    Division.setText(Objects.requireNonNull(snapshot.child("State").getValue()).toString());
-                    bloodGrpDropDown.setText(Objects.requireNonNull(snapshot.child("BloodGroup").getValue()).toString());
-                    lastDonateDate_edit.setText(Objects.requireNonNull(snapshot.child("lastDonateDate").getValue()).toString());
-
-                        Glide
-                                .with(view)
-                                .load(profile_url)
-                                .centerCrop()
-                                .placeholder(R.drawable.ibdc_logo)
-                                .into(profile_image);
-
-                        Glide
-                                .with(view)
-                                .load(profile_url)
-                                .centerCrop()
-                                .placeholder(R.drawable.ibdc_logo)
-                                .into((ImageView) cover_image);
-
-                    Glide
-                            .with(view)
-                            .load(profile_url)
-                            .centerCrop()
-                            .placeholder(R.drawable.ibdc_logo)
-                            .into((ImageView) profile_image_edit);
-
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
-
+        getValueOnDatabase();
 
 //        View.OnClickListener
 
         edit_btn.setOnClickListener(v -> {
             profile_tab.setVisibility(View.GONE);
             profile_edit_tab.setVisibility(View.VISIBLE);
-            edit_btn.setVisibility(View.GONE);
             save_btn.setVisibility(View.VISIBLE);
         });
 
         save_btn.setOnClickListener(v -> {
-            save_btn.setVisibility(View.GONE);
-            update_btn.setVisibility(View.VISIBLE);
+            addToDatabase();
         });
 
-        update_btn.setOnClickListener(v -> {
+        update_back.setOnClickListener(v -> {
             profile_edit_tab.setVisibility(View.GONE);
             profile_tab.setVisibility(View.VISIBLE);
-            update_btn.setVisibility(View.GONE);
-            edit_btn.setVisibility(View.VISIBLE);
 
         });
 
@@ -208,7 +157,7 @@ public class ProfileFragment extends Fragment {
                         public void onPermissionGranted(PermissionGrantedResponse permissionGrantedResponse) {
                             Intent intent = new Intent(Intent.ACTION_PICK);
                             intent.setType("image/*");
-                            intent.setAction(intent.ACTION_GET_CONTENT);
+                            intent.setAction(Intent.ACTION_GET_CONTENT);
                             startActivityForResult(Intent.createChooser(intent, "Browse For Image"), 101);
                         }
 
@@ -236,6 +185,7 @@ public class ProfileFragment extends Fragment {
                InputStream inputStream = context.getContentResolver().openInputStream(filepath);
                bitmap = BitmapFactory.decodeStream(inputStream);
                 profile_image_edit.setImageBitmap(bitmap);
+                processImageUpload();
             } catch (Exception ex) {
             }
             super.onActivityResult(requestCode, resultCode, data);
@@ -576,9 +526,11 @@ public class ProfileFragment extends Fragment {
             }
         });
 
-        String[] bloodGroups = getResources().getStringArray(R.array.blood_groups);
-        ArrayAdapter<String> adapter=new ArrayAdapter<String>(context, android.R.layout.simple_dropdown_item_1line,bloodGroups);
-        bloodGrpDropDown.setAdapter(adapter);
+        bloodGrpDropDown.setOnClickListener(v -> {
+            String[] bloodGroups = getResources().getStringArray(R.array.blood_groups);
+            ArrayAdapter<String> adapter=new ArrayAdapter<String>(context, android.R.layout.simple_dropdown_item_1line,bloodGroups);
+            bloodGrpDropDown.setAdapter(adapter);
+        });
 
     }
 
@@ -588,24 +540,187 @@ public class ProfileFragment extends Fragment {
         lastDonateDate_edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                year = calendar.get(Calendar.YEAR);
-                month = calendar.get(Calendar.MONTH);
-                day = calendar.get(Calendar.DAY_OF_MONTH);
+                y = calendar.get(Calendar.YEAR);
+                m = calendar.get(Calendar.MONTH);
+                d = calendar.get(Calendar.DAY_OF_MONTH);
                 DatePickerDialog datePickerDialog = new DatePickerDialog(context, new DatePickerDialog.OnDateSetListener() {
                     @SuppressLint("SetTextI18n")
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        lastDonateDate_edit.setText(dayOfMonth+"/"+month+"/"+year);
+                        lastDonateDate_edit.setText(dayOfMonth+ "/"+(month+1)+"/"+year);
                     }
-                },year,month,day);
+                },y,m,d);
+                datePickerDialog.show();
+            }
+        });
+
+        birthDate_edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                y = calendar.get(Calendar.YEAR);
+                m = calendar.get(Calendar.MONTH);
+                d = calendar.get(Calendar.DAY_OF_MONTH);
+                DatePickerDialog datePickerDialog = new DatePickerDialog(context, new DatePickerDialog.OnDateSetListener() {
+                    @SuppressLint("SetTextI18n")
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        birthDate_edit.setText(dayOfMonth+ "/"+(month+1)+"/"+year);
+                    }
+                },y,m,d);
                 datePickerDialog.show();
             }
         });
     }
 
-    private void updateToFirebase(){
 
+    private String getExtention(){
+        MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
+        return mimeTypeMap.getExtensionFromMimeType(context.getContentResolver().getType(filepath));
     }
+
+    private void processImageUpload(){
+            final StorageReference uploader = storageReference.child(String.format("profile_image/User Id : %s/profile_picture.%s",userId,getExtention()));
+            uploader.putFile(filepath)
+                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            Toast.makeText(context, R.string.Updated_img, Toast.LENGTH_SHORT).show();
+                            uploader.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                @Override
+                                public void onSuccess(Uri uri) {
+                                    if (!filepath.toString().isEmpty()){
+                                        profileImg(uri);
+                                    }
+                                }
+                            });
+                        }
+                    })
+                    .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
+                            long per = (100*snapshot.getBytesTransferred())/snapshot.getTotalByteCount();
+                            progressbar.setProgress((int) per);
+                            progressbar.setMax(100);
+                            Toast.makeText(context, R.string.updating, Toast.LENGTH_SHORT).show();
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(context, R.string.failed, Toast.LENGTH_SHORT).show();
+                        }
+                    });
+    }
+
+
+    private void addToDatabase() {
+        HashMap<String,Object> values = new HashMap<>();
+        values.put("FName", Objects.requireNonNull(f_name_edit.getText()).toString());
+        values.put("LName", Objects.requireNonNull(l_name_edit.getText()).toString());
+        values.put("State",Division.getText().toString());
+        values.put("District",District.getText().toString());
+        values.put("Upazila",Upazila.getText().toString());
+        values.put("Village", Objects.requireNonNull(village_edit.getText()).toString());
+        values.put("BloodGroup",bloodGrpDropDown.getText().toString());
+        values.put("lastDonateDate",lastDonateDate_edit.getText().toString());
+        values.put("birthdate",birthDate_edit.getText().toString());
+        FirebaseDatabase.getInstance().getReference("Donors/"+FirebaseAuth.getInstance().getUid())
+                .updateChildren(values)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if(task.isSuccessful()){
+                            Toast.makeText(context, R.string.Updated, Toast.LENGTH_SHORT).show();
+                        }else {
+                            Toast.makeText(context, R.string.failed, Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+
+    }//addToDatabase
+
+    private void getValueOnDatabase(){
+        db = FirebaseDatabase.getInstance();
+        dbReference = db.getReference().child("Donors");
+        storageReference = FirebaseStorage.getInstance().getReference();
+        dbReference.child(userId).addValueEventListener(new ValueEventListener() {
+            @SuppressLint("SuspiciousIndentation")
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()){
+
+                    f_name.setText(Objects.requireNonNull(snapshot.child("FName").getValue()).toString());
+                    l_name.setText(Objects.requireNonNull(snapshot.child("LName").getValue()).toString());
+                    mobile_number_pro.setText(Objects.requireNonNull(snapshot.child("Mobile").getValue()).toString());
+                    blood_grp_pro.setText(Objects.requireNonNull(snapshot.child("BloodGroup").getValue()).toString());
+                    village_pro.setText(Objects.requireNonNull(snapshot.child("Village").getValue()).toString());
+                    tehsil_pro.setText(Objects.requireNonNull(snapshot.child("Upazila").getValue()).toString());
+                    district_pro.setText(Objects.requireNonNull(snapshot.child("District").getValue()).toString());
+                    state_pro.setText(Objects.requireNonNull(snapshot.child("State").getValue()).toString());
+                    email_pro.setText(Objects.requireNonNull(snapshot.child("Email").getValue()).toString());
+                    birthDate.setText(Objects.requireNonNull(snapshot.child("birthdate").getValue()).toString());
+                    lastDonateDate_pro.setText(Objects.requireNonNull(snapshot.child("lastDonateDate").getValue()).toString());
+                    profile_url = (Objects.requireNonNull(snapshot.child("bloodImg_url").getValue()).toString());
+
+//                    Edit tabs
+                    f_name_edit.setText(Objects.requireNonNull(snapshot.child("FName").getValue()).toString());
+                    l_name_edit.setText(Objects.requireNonNull(snapshot.child("LName").getValue()).toString());
+                    village_edit.setText(Objects.requireNonNull(snapshot.child("Village").getValue()).toString());
+                    Upazila.setText(Objects.requireNonNull(snapshot.child("Upazila").getValue()).toString());
+                    District.setText(Objects.requireNonNull(snapshot.child("District").getValue()).toString());
+                    Division.setText(Objects.requireNonNull(snapshot.child("State").getValue()).toString());
+                    bloodGrpDropDown.setText(Objects.requireNonNull(snapshot.child("BloodGroup").getValue()).toString());
+                    lastDonateDate_edit.setText(Objects.requireNonNull(snapshot.child("lastDonateDate").getValue()).toString());
+                    birthDate_edit.setText(Objects.requireNonNull(snapshot.child("birthdate").getValue()).toString());
+
+
+                    Glide
+                            .with(context)
+                            .load(profile_url)
+                            .centerCrop()
+                            .placeholder(R.drawable.ibdc_logo)
+                            .into(profile_image);
+
+                    Glide
+                            .with(context)
+                            .load(profile_url)
+                            .centerCrop()
+                            .placeholder(R.drawable.ibdc_logo)
+                            .into((ImageView) cover_image);
+
+                    Glide
+                            .with(context)
+                            .load(profile_url)
+                            .centerCrop()
+                            .placeholder(R.drawable.ibdc_logo)
+                            .into((ImageView) profile_image_edit);
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    private void profileImg(Uri uri){
+        HashMap<String,Object> values = new HashMap<>();
+        values.put("bloodImg_url",uri.toString());
+        FirebaseDatabase.getInstance().getReference("Donors/"+FirebaseAuth.getInstance().getUid())
+                .updateChildren(values)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if(task.isSuccessful()){
+                            Toast.makeText(context, R.string.Updated, Toast.LENGTH_SHORT).show();
+                        }else {
+                            Toast.makeText(context, R.string.failed, Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+    }
+
 
 
 }//base
