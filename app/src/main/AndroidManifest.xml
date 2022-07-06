@@ -27,7 +27,6 @@
             android:name=".DashBoard"
             android:exported="false" />
         <activity android:name=".DisplayDonorsActivity" />
-        <activity android:name=".DispalyRequestsActivity" />
         <activity android:name=".RegisterIIIActivity" />
         <activity android:name=".RegisterIIActivity" />
         <activity android:name=".RegisterIActivity" />

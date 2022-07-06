@@ -52,6 +52,7 @@
     <string name="close">Close</string>
     <string name="profile_name">Profile name</string>
     <string name="home">Home</string>
+    <string name="dashboard">Dashboard</string>
     <string name="logout">Logout</string>
     <string name="about">About Us</string>
     <string name="created_by">Created by</string>
@@ -94,9 +95,9 @@
     <string name="upa_txt">ঈশ্বরদী</string>
     <string name="dis_txt">পাবনা</string>
     <string name="div_txt">রাজশাহী</string>
-    <string name="edit_button">ইডিট!!</string>
-    <string name="edit_profile">ইডিট!</string>
-    <string name="save_profile">সেভ!</string>
+    <string name="edit_button">Edit!!</string>
+    <string name="edit_profile">Edit!</string>
+    <string name="save_profile">Save Profile!</string>
     <string name="Email_bn">ইমেল</string>
     <string name="verified">Verified ! ✔</string>
     <string name="verifying">Verifying…</string>

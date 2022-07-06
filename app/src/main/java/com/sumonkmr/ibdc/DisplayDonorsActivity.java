@@ -40,7 +40,6 @@ public class DisplayDonorsActivity extends AppCompatActivity {
     AutoCompleteTextView DivisionFilter,districtFilter,UpazilaFilter, bloodGrpFilter;
     User self;
     String uid = FirebaseAuth.getInstance().getUid();
-    PopupMenu popupMenu;
 
 
     @Override
@@ -390,40 +389,6 @@ public class DisplayDonorsActivity extends AppCompatActivity {
         UpazilaFilter = findViewById(R.id.upazilaFilter);
 //        bloodGrpFilter = findViewById(R.id.bloodGrpFilter); // if get blood filter in search then comment out this line and also xml
 
-        popupMenu = new PopupMenu(this, findViewById(R.id.more));
-        popupMenu.getMenuInflater().inflate(R.menu.donors_menu,popupMenu.getMenu());
-        popupMenu.setOnMenuItemClickListener(item -> {
-
-            if(item.getItemId() == R.id.changePass){
-                FirebaseAuth.getInstance().sendPasswordResetEmail(self.getEmail());
-                Snackbar snack = Snackbar.make(findViewById(android.R.id.content),"Password Reset Link Sent On Registered Email.", Snackbar.LENGTH_LONG);
-                View view1 = snack.getView();
-                FrameLayout.LayoutParams params =(FrameLayout.LayoutParams)view1.getLayoutParams();
-                params.gravity = Gravity.CENTER_VERTICAL;
-                view1.setLayoutParams(params);
-
-                if(self!=null) {
-                    FirebaseAuth.getInstance().sendPasswordResetEmail(self.getEmail());
-                }else {
-                    snack.setText("Error Occurred!");
-                }
-
-                snack.show();
-            }else if(item.getItemId() == R.id.logout){
-                FirebaseAuth.getInstance().signOut();
-                startActivity(new Intent(this,SplashScreen.class));
-                DisplayDonorsActivity.this.finish();
-            }else if(item.getItemId() == R.id.visibleDonors){
-                if(item.isChecked()){
-                    item.setChecked(false);
-                    updateVisible(false);
-                }else {
-                    item.setChecked(true);
-                    updateVisible(true);
-                }
-            }
-            return true;
-        });
         self = new User();
         list = findViewById(R.id.donorsList);
         users = new ArrayList<>();
@@ -535,7 +500,6 @@ public class DisplayDonorsActivity extends AppCompatActivity {
                         }
                         if (user.getUID().equals(uid)) {
                             self = user;
-                            popupMenu.getMenu().findItem(R.id.visibleDonors).setChecked(self.getVisible().equals("True"));
                         }
                     }
                 }
@@ -555,15 +519,8 @@ public class DisplayDonorsActivity extends AppCompatActivity {
         adapter.notifyDataSetChanged();
     }
 
-    public void viewRequestList(View view) {
-        startActivity(new Intent(DisplayDonorsActivity.this,DispalyRequestsActivity.class));
-        this.finish();
-    }
 
-    public void popUp(View view) {
 
-        popupMenu.show();
-    }
 
 
 
