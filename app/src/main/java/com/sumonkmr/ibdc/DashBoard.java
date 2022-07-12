@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -133,7 +134,7 @@ public class DashBoard extends AppCompatActivity implements View.OnClickListener
                 break;
 
             case R.id.ll_Share:
-                Toast.makeText(this, "Share...", Toast.LENGTH_SHORT).show();
+                shareApp();
                 break;
 
             case R.id.ll_Logout:
@@ -168,5 +169,14 @@ public class DashBoard extends AppCompatActivity implements View.OnClickListener
         transaction.commit();
     }
 
+    private void shareApp(){
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("text/plain");
+        String subject = "একজন রক্তযোদ্ধা সবসময় একটি জীবন বাঁচাতে সর্বদায় সদয়...";
+        String shareBody = "https://play.google.com/store/apps/details?id=com.sumonkmr.ibdc";
+        intent.putExtra(Intent.EXTRA_SUBJECT,subject);
+        intent.putExtra(Intent.EXTRA_TEXT,shareBody);
+        startActivity(Intent.createChooser(intent,"Share for Helps Others..."));
+    }
 
 }
