@@ -84,6 +84,7 @@
     <string name="about_me">About Me</string>
 
     <string name="contact">Contact</string>
+    <string name="image_size_meg">*Min 1MB Size!</string>
 
     <string name="skills">Skills</string>
 

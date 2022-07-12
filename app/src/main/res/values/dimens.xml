@@ -14,4 +14,5 @@
     <dimen name="minor_shadow">2dp</dimen>
     <dimen name="card_txt">14sp</dimen>
     <dimen name="card_header_txt">20sp</dimen>
+    <dimen name="hint_size">8sp</dimen>
 </resources>

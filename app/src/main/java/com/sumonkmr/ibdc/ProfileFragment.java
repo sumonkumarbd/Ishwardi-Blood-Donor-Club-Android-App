@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,6 +51,7 @@ import com.karumi.dexter.listener.PermissionDeniedResponse;
 import com.karumi.dexter.listener.PermissionGrantedResponse;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.single.PermissionListener;
+import com.squareup.picasso.Picasso;
 import com.sumonkmr.ibdc.model.User;
 
 import java.io.InputStream;
@@ -141,6 +143,13 @@ public class ProfileFragment extends Fragment {
 
         save_btn.setOnClickListener(v -> {
             addToDatabase();
+            Handler handler = new Handler();
+            Runnable runnable = () -> {
+                profile_edit_tab.setVisibility(View.GONE);
+                profile_tab.setVisibility(View.VISIBLE);
+            };
+
+            handler.postDelayed(runnable,3000);
         });
 
         update_back.setOnClickListener(v -> {
