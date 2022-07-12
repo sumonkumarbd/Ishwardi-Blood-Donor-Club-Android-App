@@ -73,6 +73,7 @@ public class DashBoard extends AppCompatActivity implements View.OnClickListener
         LinearLayout ll_Home = menuView.findViewById(R.id.ll_Home);
         LinearLayout ll_Profile = menuView.findViewById(R.id.ll_Profile);
         LinearLayout ll_Share = menuView.findViewById(R.id.ll_Share);
+        LinearLayout ll_about_us = menuView.findViewById(R.id.ll_about_us);
         LinearLayout ll_Logout = menuView.findViewById(R.id.ll_Logout);
         profile_name_menu = menuView.findViewById(R.id.profile_name_menu);
         profile_image_menu = menuView.findViewById(R.id.profile_image_menu);
@@ -112,6 +113,7 @@ public class DashBoard extends AppCompatActivity implements View.OnClickListener
         ll_Profile.setOnClickListener(this);
         ll_Share.setOnClickListener(this);
         ll_Logout.setOnClickListener(this);
+        ll_about_us.setOnClickListener(this);
 
 
 
@@ -137,16 +139,16 @@ public class DashBoard extends AppCompatActivity implements View.OnClickListener
                 shareApp();
                 break;
 
+            case R.id.ll_about_us:
+                startActivity(new Intent(this, AboutUs.class));
+                break;
+
             case R.id.ll_Logout:
                 auth.signOut();
                 startActivity(new Intent(this,SplashScreen.class));
                 break;
 
-//            case R.id.about_us:
-////                startActivity(new Intent(this, AboutUs.class));
-//                Toast.makeText(this, "This is About Us", Toast.LENGTH_SHORT).show();
-//                break;
-//
+
 //            case R.id.find_donors:
 ////                startActivity(new Intent(this, DisplayDonorsActivity.class));
 //                Toast.makeText(this, "This is Donors", Toast.LENGTH_SHORT).show();
