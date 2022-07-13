@@ -374,7 +374,6 @@ public class RegisterIIActivity extends AppCompatActivity {
         Upazila = findViewById(R.id.upazilaDropDrown);
         Village = findViewById(R.id.VillageRegister);
         nextToII = findViewById(R.id.nextButtonII);
-
     }
 
     public void registerIII(View view) {

@@ -9,7 +9,7 @@
     android:layout_marginStart="10dp"
     android:layout_marginBottom="10dp"
     android:gravity="center"
-    android:layout_height="220dp">
+    android:layout_height="240dp">
 
     <ImageView
         android:id="@+id/bloodImg"

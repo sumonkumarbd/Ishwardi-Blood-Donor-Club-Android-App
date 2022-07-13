@@ -13,13 +13,13 @@
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="280dp"
-        android:layout_height="250dp"
+        android:layout_height="280dp"
         android:background="@drawable/round_textbox"
         android:elevation="20dp"
         android:gravity="center"
         android:orientation="vertical"
         android:padding="10dp"
-        android:weightSum="3"
+        android:weightSum="4"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
@@ -64,6 +64,24 @@
                 android:paddingEnd="0dp"
                 android:hint="@string/blood_group"
                 android:inputType="" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:hint="@string/last_donate"
+            android:textColorHint="#000000"
+            app:hintTextColor="#000000">
+
+            <AutoCompleteTextView
+                android:id="@+id/lastDonateDate_reg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/tab_label"
+                android:inputType="none" />
+
         </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -165,19 +183,71 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout"
         app:layout_constraintVertical_bias="0.781" />
 
-    <com.airbnb.lottie.LottieAnimationView
+    <!--profile_image-->
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/regAnim"
-        android:layout_width="match_parent"
+        android:layout_width="250dp"
         android:layout_height="250dp"
+        android:layout_marginTop="10dp"
         app:layout_constraintBottom_toTopOf="@+id/textView7"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.317"
-        app:lottie_autoPlay="true"
-        app:lottie_loop="true"
-        app:lottie_rawRes="@raw/login_new" />
+        app:layout_constraintVertical_bias="0.1">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profile_image_reg"
+            android:layout_width="180dp"
+            android:layout_height="180dp"
+            android:layout_gravity="center"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ibdc_logo"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/progressbar"
+            app:layout_constraintHorizontal_bias=".5"
+            app:layout_constraintStart_toStartOf="@+id/progressbar"
+            app:layout_constraintTop_toTopOf="@+id/progressbar" />
+
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/p_image_shade_reg"
+            android:layout_width="180dp"
+            android:layout_height="180dp"
+            android:layout_gravity="center"
+            android:scaleType="centerCrop"
+            android:src="@drawable/edit_photo"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/progressbar"
+            app:layout_constraintHorizontal_bias=".5"
+            app:layout_constraintStart_toStartOf="@+id/progressbar"
+            app:layout_constraintTop_toTopOf="@+id/progressbar" />
+
+        <TextView
+            android:id="@+id/profile_image_hint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/image_size_meg"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/hint_size"
+            app:layout_constraintBottom_toBottomOf="@+id/profile_image_reg"
+            app:layout_constraintEnd_toEndOf="@+id/progressbar" />
+
+        <ProgressBar
+            android:id="@+id/progressbar"
+            style="@style/Widget.MaterialComponents.CircularProgressIndicator"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:indeterminate="false"
+            android:progressDrawable="@drawable/coustom_progressbar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout><!--profile_image-->
 
     <TextView
         android:id="@+id/textView7"

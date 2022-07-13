@@ -620,6 +620,22 @@ public class ProfileFragment extends Fragment {
                     });
     }
 
+    private void profileImg(Uri uri){
+        HashMap<String,Object> values = new HashMap<>();
+        values.put("bloodImg_url",uri.toString());
+        FirebaseDatabase.getInstance().getReference("Donors/"+FirebaseAuth.getInstance().getUid())
+                .updateChildren(values)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if(task.isSuccessful()){
+                            Toast.makeText(context, R.string.Updated, Toast.LENGTH_SHORT).show();
+                        }else {
+                            Toast.makeText(context, R.string.failed, Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+    }
 
     private void addToDatabase() {
         HashMap<String,Object> values = new HashMap<>();
@@ -713,22 +729,6 @@ public class ProfileFragment extends Fragment {
         });
     }
 
-    private void profileImg(Uri uri){
-        HashMap<String,Object> values = new HashMap<>();
-        values.put("bloodImg_url",uri.toString());
-        FirebaseDatabase.getInstance().getReference("Donors/"+FirebaseAuth.getInstance().getUid())
-                .updateChildren(values)
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if(task.isSuccessful()){
-                            Toast.makeText(context, R.string.Updated, Toast.LENGTH_SHORT).show();
-                        }else {
-                            Toast.makeText(context, R.string.failed, Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-    }
 
 
 

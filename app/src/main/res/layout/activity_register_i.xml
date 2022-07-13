@@ -24,42 +24,70 @@
         app:layout_constraintTop_toBottomOf="@+id/textView7"
         app:layout_constraintVertical_bias="0.037">
 
-
-        <EditText
-            android:id="@+id/fNameInput"
-            style="@style/Widget.MaterialComponents.TextView"
+<!--        name-->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginVertical="10dp"
+            android:orientation="horizontal"
             android:layout_weight="1"
-            android:autofillHints=""
-            android:background="@drawable/text_box_border_coustom"
-            android:drawableStart="@drawable/ic_baseline_how_to_reg_24"
-            android:ems="10"
-            android:hint="@string/first_name"
-            android:inputType="textPersonName"
-            android:padding="3dp"
-            android:textColor="@android:color/background_dark"
-            android:textColorHint="@android:color/darker_gray"
-            android:textSize="@dimen/form_txt" />
+            android:weightSum="2"
+            android:layout_marginVertical="10dp"
+            >
+            <EditText
+                android:id="@+id/fNameInput"
+                style="@style/Widget.MaterialComponents.TextView"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginEnd="2dp"
+                android:autofillHints=""
+                android:background="@drawable/text_box_border_coustom"
+                android:drawableStart="@drawable/ic_baseline_how_to_reg_24"
+                android:ems="10"
+                android:hint="@string/first_name"
+                android:inputType="textPersonName"
+                android:padding="3dp"
+                android:textColor="@android:color/background_dark"
+                android:textColorHint="@android:color/darker_gray"
+                android:textSize="@dimen/form_txt" />
 
-        <EditText
-            android:id="@+id/lNameInput"
-            style="@style/Widget.MaterialComponents.TextView"
+            <EditText
+                android:id="@+id/lNameInput"
+                style="@style/Widget.MaterialComponents.TextView"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginStart="2dp"
+                android:autofillHints=""
+                android:layout_marginHorizontal="2dp"
+                android:background="@drawable/text_box_border_coustom"
+                android:drawableStart="@drawable/ic_baseline_how_to_reg_24"
+                android:ems="10"
+                android:hint="@string/last_name"
+                android:inputType="textPersonName"
+                android:padding="3dp"
+                android:textColor="@android:color/black"
+                android:textColorHint="@android:color/darker_gray"
+                android:textSize="@dimen/form_txt" />
+
+        </LinearLayout><!--        name-->
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginVertical="10dp"
             android:layout_weight="1"
-            android:autofillHints=""
-            android:background="@drawable/text_box_border_coustom"
-            android:drawableStart="@drawable/ic_baseline_how_to_reg_24"
-            android:ems="10"
-            android:hint="@string/last_name"
-            android:inputType="textPersonName"
-            android:padding="3dp"
-            android:textColor="@android:color/black"
-            android:textColorHint="@android:color/darker_gray"
-            android:textSize="@dimen/form_txt" />
+            android:hint="@string/birthdate"
+            android:textColorHint="#000000"
+            app:hintTextColor="#000000">
+
+            <AutoCompleteTextView
+                android:id="@+id/birthDate_reg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="none" />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
         <EditText
             android:id="@+id/emailInput"
@@ -176,18 +204,20 @@
         app:layout_constraintVertical_bias="0.80" />
 
     <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/regAnim"
-        android:layout_width="match_parent"
+        android:id="@+id/lottie_view"
+        android:layout_width="250dp"
         android:layout_height="250dp"
-        app:layout_constraintBottom_toTopOf="@+id/textView7"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.317"
+        android:layout_marginTop="10dp"
+        android:visibility="visible"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
-        app:lottie_rawRes="@raw/login_new" />
+        app:lottie_rawRes="@raw/login_new"
+        app:layout_constraintBottom_toTopOf="@+id/textView7"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.1"/>
 
     <TextView
         android:id="@+id/textView7"
@@ -207,7 +237,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.137"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/regAnim" />
+        app:layout_constraintTop_toBottomOf="@+id/lottie_view" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline4"
