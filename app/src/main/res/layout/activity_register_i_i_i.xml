@@ -13,7 +13,7 @@
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="280dp"
-        android:layout_height="280dp"
+        android:layout_height="300dp"
         android:background="@drawable/round_textbox"
         android:elevation="20dp"
         android:gravity="center"
@@ -149,7 +149,7 @@
     <ImageView
         android:id="@+id/imageView2"
         android:layout_width="150dp"
-        android:layout_height="829dp"
+        android:layout_height="match_parent"
         android:layout_marginStart="260dp"
         android:contentDescription="@string/todo"
         android:scaleType="fitXY"
@@ -159,13 +159,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.836"
-        app:srcCompat="@drawable/border" />
+        app:srcCompat="@drawable/border"/>
 
 
     <Button
         android:id="@+id/btnVerifySubmit"
-        android:layout_width="99dp"
-        android:layout_height="39dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:background="@color/tns"
         android:layout_marginEnd="32dp"
         android:fontFamily="@font/poppins"
@@ -181,7 +181,7 @@
         app:layout_constraintHorizontal_bias="0.938"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="0.781" />
+        app:layout_constraintVertical_bias="0.75" />
 
     <!--profile_image-->
     <androidx.constraintlayout.widget.ConstraintLayout
