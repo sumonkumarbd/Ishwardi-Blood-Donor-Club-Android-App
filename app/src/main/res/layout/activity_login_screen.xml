@@ -192,29 +192,28 @@
         app:layout_constraintVertical_bias="0.836"
         app:srcCompat="@drawable/border" />
 
+
     <Button
         android:id="@+id/logon_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="32dp"
         android:background="@color/tns"
+        android:clickable="true"
+        android:focusable="true"
         android:fontFamily="@font/poppins"
         android:onClick="LoginNow"
         android:text="@string/login"
-        android:clickable="true"
         android:textAlignment="center"
         android:textColor="@color/white"
-        android:textSize="@dimen/profile_txt"
+        android:textSize="@dimen/form_txt"
         android:textStyle="bold"
         android:typeface="monospace"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.932"
+        app:layout_constraintHorizontal_bias="0.796"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView6"
-        app:layout_constraintVertical_bias="0.82"
-        android:focusable="true" />
-
+        app:layout_constraintVertical_bias="0.82" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline4"

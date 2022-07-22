@@ -62,6 +62,7 @@ public class RegisterIIIActivity extends AppCompatActivity {
     de.hdodenhof.circleimageview.CircleImageView profile_image_reg,p_image_shade_reg;
     EditText mobile,textVerification;
     Button submit;
+    com.airbnb.lottie.LottieAnimationView loadingAim3;
    final Context  context = RegisterIIIActivity.this;
     boolean isVerified = false, isSubmit = false;
     TextView profile_image_hint;
@@ -210,6 +211,7 @@ public class RegisterIIIActivity extends AppCompatActivity {
         p_image_shade_reg = findViewById(R.id.p_image_shade_reg);
         profile_image_hint = findViewById(R.id.profile_image_hint);
         progressbar = findViewById(R.id.progressbar_reg);
+        loadingAim3 = findViewById(R.id.loadingAim3);
     }
 
 
@@ -237,7 +239,7 @@ public class RegisterIIIActivity extends AppCompatActivity {
         public void onCodeSent(@NonNull String verificationId,
                                @NonNull PhoneAuthProvider.ForceResendingToken token) {
 
-            textVerification.setHint("Enter Otp!!");
+            textVerification.setHint(R.string.enter_Otp);
             submit.setText(R.string.submit);
             id = verificationId;
             isSubmit = true;
@@ -247,7 +249,7 @@ public class RegisterIIIActivity extends AppCompatActivity {
     };
 
     private void addToDatabase() {
-
+        loadingAim3.setVisibility(View.VISIBLE);
         HashMap<String,Object> values = new HashMap<>();
         values.put("Step","Done");
         values.put("Mobile",mobile.getText().toString());
@@ -260,6 +262,7 @@ public class RegisterIIIActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if(task.isSuccessful()){
+                            loadingAim3.setVisibility(View.GONE);
                             startActivity(new Intent(RegisterIIIActivity.this,DashBoard.class));
                             RegisterIIIActivity.this.finish();
                         }else {

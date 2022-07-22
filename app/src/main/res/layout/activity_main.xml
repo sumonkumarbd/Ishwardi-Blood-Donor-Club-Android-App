@@ -10,8 +10,8 @@
 
     <View
         android:id="@+id/v"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
         android:background="@drawable/ibdc_logo_tns"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/t1"
@@ -20,23 +20,22 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.238" />
 
+
     <TextView
         android:id="@+id/t1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:fontFamily="@font/varela_round"
-        android:text="@string/ibdc"
+        android:text="@string/thank_txt"
         android:textAlignment="center"
         android:textColor="@color/colorPrimary"
-        android:textSize="45sp"
+        android:textSize="@dimen/form_txt"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/v"
-        app:layout_constraintVertical_bias="0.196" />
-
+        app:layout_constraintVertical_bias="0.299" />
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/animation_view"

@@ -27,7 +27,7 @@
                 android:layout_height="80dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginStart="10dp"
-                android:src="@drawable/ibdc_logo_tns"
+                android:src="@drawable/ibdc_logo_1"
                 app:civ_border_width="2dp"
                 app:civ_border_color="@color/colorAccentDark"
                 android:elevation="@dimen/minor_shadow"/>
@@ -47,7 +47,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="17dp"
                 android:background="@color/white"
                 />
 
@@ -64,7 +64,7 @@
                 <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:src="@drawable/ibdc_logo_tns"
+                    android:src="@drawable/ibdc_logo_1"
                      />
 
                 <TextView
@@ -99,7 +99,7 @@
                     android:layout_marginHorizontal="16dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Profile"
+                    android:text="@string/profile"
                     android:textColor="@color/white"/>
 
             </LinearLayout>
@@ -127,7 +127,7 @@
                     android:layout_marginHorizontal="16dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Share"
+                    android:text="@string/share"
                     android:textColor="@color/white"/>
 
             </LinearLayout>

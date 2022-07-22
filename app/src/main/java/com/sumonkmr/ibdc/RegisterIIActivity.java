@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,7 +21,8 @@ public class RegisterIIActivity extends AppCompatActivity {
     AutoCompleteTextView Division, District, Upazila;
 
     com.google.android.material.textfield.TextInputEditText Village;
-    TextView nextToII;
+    Button nextToII;
+    com.airbnb.lottie.LottieAnimationView loadingAim2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -374,9 +376,11 @@ public class RegisterIIActivity extends AppCompatActivity {
         Upazila = findViewById(R.id.upazilaDropDrown);
         Village = findViewById(R.id.VillageRegister);
         nextToII = findViewById(R.id.nextButtonII);
+        loadingAim2 = findViewById(R.id.loadingAim2);
     }
 
     public void registerIII(View view) {
+        loadingAim2.setVisibility(View.VISIBLE);
         String districtT,tehsilT,villageT,stateT;
         districtT = District.getText().toString();
         tehsilT = Upazila.getText().toString();
@@ -399,6 +403,7 @@ public class RegisterIIActivity extends AppCompatActivity {
         if(villageT.isEmpty()){
             Village.setError("Fill this field.");
         }
+        loadingAim2.setVisibility(View.GONE);
         startActivity(new Intent(RegisterIIActivity.this,RegisterIIIActivity.class));
     }
 

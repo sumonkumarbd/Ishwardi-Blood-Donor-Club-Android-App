@@ -16,6 +16,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -48,6 +49,8 @@ public class RegisterIActivity extends AppCompatActivity {
     EditText fName,lName,email,pass;
     AutoCompleteTextView birthDate_reg;
     int d,m,y;
+    Button nextButtonII;
+    com.airbnb.lottie.LottieAnimationView loadingAim1;
 
 
     @Override
@@ -77,6 +80,8 @@ public class RegisterIActivity extends AppCompatActivity {
         email = findViewById(R.id.emailInput);
         pass = findViewById(R.id.passInput);
         birthDate_reg = findViewById(R.id.birthDate_reg);
+        nextButtonII = findViewById(R.id.nextButtonII);
+        loadingAim1 = findViewById(R.id.loadingAim1);
 
     }
 
@@ -125,6 +130,7 @@ public class RegisterIActivity extends AppCompatActivity {
 
     private void addToDatabase(String uid, String f_name, String l_name, String emailText, String birthdate) {
 
+        loadingAim1.setVisibility(View.VISIBLE);
         HashMap<String,String>values = new HashMap<>();
         values.put("FName",f_name);
         values.put("LName",l_name);
@@ -146,6 +152,7 @@ public class RegisterIActivity extends AppCompatActivity {
         FirebaseDatabase.getInstance().getReference("Donors")
                 .child(uid).setValue(values).addOnCompleteListener(task -> {
                     if(task.isSuccessful()){
+                        loadingAim1.setVisibility(View.GONE);
                         startActivity(new Intent(RegisterIActivity.this,RegisterIIActivity.class));
                     }
                 });

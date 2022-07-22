@@ -132,7 +132,7 @@
         app:srcCompat="@drawable/splash" />
 
     <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/loadingAim"
+        android:id="@+id/loadingAim3"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:visibility="invisible"
