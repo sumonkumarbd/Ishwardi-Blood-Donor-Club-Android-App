@@ -162,12 +162,13 @@
         app:srcCompat="@drawable/border"/>
 
 
+    <!--profile_image-->
+
     <Button
         android:id="@+id/btnVerifySubmit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@color/tns"
-        android:layout_marginEnd="32dp"
         android:fontFamily="@font/poppins"
         android:onClick="verifyAndSubmit"
         android:text="@string/verify_txt"
@@ -178,12 +179,11 @@
         android:typeface="monospace"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.938"
+        app:layout_constraintHorizontal_bias="0.888"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout"
         app:layout_constraintVertical_bias="0.75" />
 
-    <!--profile_image-->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/regAnim"
         android:layout_width="250dp"
