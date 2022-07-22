@@ -403,8 +403,8 @@ public class DisplayDonorsActivity extends AppCompatActivity {
             User sent = temp.get(position);
             Intent sendIntent = new Intent();
             sendIntent.setAction(Intent.ACTION_SEND);
-            sendIntent.putExtra(Intent.EXTRA_TITLE,"Be Hero, Donate Blood.");
-            sendIntent.putExtra(Intent.EXTRA_TEXT, "Hello.\n"+"Here is the Information about blood Donor:\n"+sent.getFName()+" "+sent.getLName()+"\nBlood Group : "+sent.getBloodGroup()+"\nAddress:"+sent.getState()+" "+sent.getDistrict()+" "+sent.getUpazila()+"\nMobile Number :"+sent.getMobile());
+            sendIntent.putExtra(Intent.EXTRA_TITLE,R.string.motive);
+            sendIntent.putExtra(Intent.EXTRA_TEXT, "Hello.\n"+"Here is the Information about blood Donor:\n"+sent.getFName()+" "+sent.getLName()+"\nBlood Group : "+sent.getBloodGroup()+"\nAddress : "+sent.getVillage()+" ,"+sent.getUpazila()+" ,"+sent.getDistrict()+" ,"+sent.getState()+"\nMobile Number : "+sent.getMobile());
             sendIntent.setType("text/plain");
             Intent shareIntent = Intent.createChooser(sendIntent, "Be Hero, Donate Blood.");
             startActivity(shareIntent);

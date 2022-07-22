@@ -92,12 +92,16 @@ public class DashBoard extends AppCompatActivity implements View.OnClickListener
                     String f_name = (Objects.requireNonNull(snapshot.child("FName").getValue()).toString());
                     String l_name = (Objects.requireNonNull(snapshot.child("LName").getValue()).toString());
                    profile_name_menu.setText(String.format("%s %s",f_name,l_name));
-                    Glide
-                            .with(DashBoard.this)
-                            .load(profile_img_url)
-                            .centerCrop()
-                            .placeholder(R.drawable.ibdc_logo)
-                            .into(profile_image_menu);
+
+                   if (!(profile_img_url == null)){
+                       Glide
+                               .with(DashBoard.this)
+                               .load(profile_img_url)
+                               .centerCrop()
+                               .placeholder(R.drawable.ibdc_logo)
+                               .into(profile_image_menu);
+                   }
+
                 }
             }
 
