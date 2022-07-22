@@ -31,7 +31,7 @@
 1. Phone Number Authentication not working.<br>
     -->Set Your Apps SHA-1 in the Firebase Console. Make sure you enabled Phone Number Sign-In Method.
 2. App is crashing. What to do?<br>
-    -->Send log on Facebook [SumonKmr Development Studio](https://www.facebook.com/sumonkmr.studio). I try to resolve.
+    -->Send log on Facebook [SumonKmr Development Studio](https://www.facebook.com/sumonkmr.studio). We'll try to resolve.
 3. Other Questions.<br>
     -->Feel free to Connect with me on Telegram [Sumon Kmr](http://t.me/sumonkmr).
 
