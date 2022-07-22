@@ -204,10 +204,10 @@
             android:scaleType="centerCrop"
             android:src="@drawable/ibdc_logo"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/progressbar"
+            app:layout_constraintEnd_toEndOf="@+id/progressbar_reg"
             app:layout_constraintHorizontal_bias=".5"
-            app:layout_constraintStart_toStartOf="@+id/progressbar"
-            app:layout_constraintTop_toTopOf="@+id/progressbar" />
+            app:layout_constraintStart_toStartOf="@+id/progressbar_reg"
+            app:layout_constraintTop_toTopOf="@+id/progressbar_reg" />
 
 
         <de.hdodenhof.circleimageview.CircleImageView
@@ -218,10 +218,10 @@
             android:scaleType="centerCrop"
             android:src="@drawable/edit_photo"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/progressbar"
+            app:layout_constraintEnd_toEndOf="@+id/progressbar_reg"
             app:layout_constraintHorizontal_bias=".5"
-            app:layout_constraintStart_toStartOf="@+id/progressbar"
-            app:layout_constraintTop_toTopOf="@+id/progressbar" />
+            app:layout_constraintStart_toStartOf="@+id/progressbar_reg"
+            app:layout_constraintTop_toTopOf="@+id/progressbar_reg" />
 
         <TextView
             android:id="@+id/profile_image_hint"
@@ -231,10 +231,10 @@
             android:textColor="@color/colorPrimary"
             android:textSize="@dimen/hint_size"
             app:layout_constraintBottom_toBottomOf="@+id/profile_image_reg"
-            app:layout_constraintEnd_toEndOf="@+id/progressbar" />
+            app:layout_constraintEnd_toEndOf="@+id/progressbar_reg" />
 
         <ProgressBar
-            android:id="@+id/progressbar"
+            android:id="@+id/progressbar_reg"
             style="@style/Widget.MaterialComponents.CircularProgressIndicator"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

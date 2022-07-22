@@ -39,6 +39,7 @@ import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.PhoneAuthProvider;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -61,7 +62,7 @@ public class RegisterIIIActivity extends AppCompatActivity {
     de.hdodenhof.circleimageview.CircleImageView profile_image_reg,p_image_shade_reg;
     EditText mobile,textVerification;
     Button submit;
-    Context context;
+   final Context  context = RegisterIIIActivity.this;
     boolean isVerified = false, isSubmit = false;
     TextView profile_image_hint;
 
@@ -80,8 +81,8 @@ public class RegisterIIIActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_i_i_i);
-        context = RegisterIIIActivity.this;
         initializeComponents();
+        storageReference = FirebaseStorage.getInstance().getReference();
 
         p_image_shade_reg.setOnClickListener(v -> {
             Dexter.withContext(context)
@@ -126,7 +127,7 @@ public class RegisterIIIActivity extends AppCompatActivity {
         ArrayAdapter<String> adapter=new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line,bloodGroups);
 
         bloodgrp.setAdapter(adapter);
-    }
+    }//onCreate
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -137,6 +138,7 @@ public class RegisterIIIActivity extends AppCompatActivity {
                 InputStream inputStream = getContentResolver().openInputStream(filepath);
                 bitmap = BitmapFactory.decodeStream(inputStream);
                 profile_image_reg.setImageBitmap(bitmap);
+                processImageUpload();
             } catch (Exception ex) {
             }
             super.onActivityResult(requestCode, resultCode, data);
@@ -207,6 +209,7 @@ public class RegisterIIIActivity extends AppCompatActivity {
         profile_image_reg = findViewById(R.id.profile_image_reg);
         p_image_shade_reg = findViewById(R.id.p_image_shade_reg);
         profile_image_hint = findViewById(R.id.profile_image_hint);
+        progressbar = findViewById(R.id.progressbar_reg);
     }
 
 
