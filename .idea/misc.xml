@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/work_station/IBDC App/app/src/main/res/drawable/bg_overlay.xml" value="0.156" />
         <entry key="..\:/work_station/IBDC App/app/src/main/res/drawable/card.xml" value="0.1565" />
         <entry key="..\:/work_station/IBDC App/app/src/main/res/drawable/circleyellowfil.xml" value="0.1565" />
         <entry key="..\:/work_station/IBDC App/app/src/main/res/drawable/circularbordersolid.xml" value="0.1555" />
@@ -30,6 +31,7 @@
         <entry key="..\:/work_station/IBDC App/app/src/main/res/layout/fragment_home.xml" value="0.18" />
         <entry key="..\:/work_station/IBDC App/app/src/main/res/layout/fragment_profile.xml" value="0.25" />
         <entry key="..\:/work_station/IBDC App/app/src/main/res/layout/fragment_setting.xml" value="0.1423076923076923" />
+        <entry key="..\:/work_station/IBDC App/app/src/main/res/layout/image_slider.xml" value="0.14145299145299145" />
         <entry key="..\:/work_station/IBDC App/app/src/main/res/layout/nav_footer.xml" value="0.5029469548133595" />
         <entry key="..\:/work_station/IBDC App/app/src/main/res/layout/nav_header.xml" value="0.1082427536231884" />
         <entry key="..\:/work_station/IBDC App/app/src/main/res/layout/profile_ui.xml" value="0.9637096774193549" />

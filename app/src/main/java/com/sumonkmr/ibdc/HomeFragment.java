@@ -6,21 +6,33 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.denzcoskun.imageslider.ImageSlider;
+import com.denzcoskun.imageslider.constants.ScaleTypes;
+import com.denzcoskun.imageslider.models.SlideModel;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 
 public class HomeFragment extends Fragment {
 
     RelativeLayout ins,benefit,be_donor,find_donors, about_us,rate_us;
-    TextView notice_board;
+    ImageSlider image_slider;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -28,13 +40,15 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        notice_board = view.findViewById(R.id.notice_board);
         ins = view.findViewById(R.id.ins);
         benefit = view.findViewById(R.id.benefit);
         be_donor = view.findViewById(R.id.be_donor);
         find_donors = view.findViewById(R.id.find_donors);
         about_us = view.findViewById(R.id.about_us);
         rate_us = view.findViewById(R.id.rate_us);
+        image_slider = view.findViewById(R.id.image_slider);
+
+        ImageSlider();
 
         ins.setOnClickListener(v -> {
             startActivity(new Intent(getContext(), ProfitOfBloodDonation.class));
@@ -64,6 +78,32 @@ public class HomeFragment extends Fragment {
         return view;
 
     }
+
+    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+    private void ImageSlider(){
+        final List<SlideModel> donationImages = new ArrayList<>();
+
+        FirebaseDatabase.getInstance().getReference().child("donationImages")
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        for (DataSnapshot dataSnapshot:snapshot.getChildren()){
+                            donationImages.add(new SlideModel(dataSnapshot.child("url").getValue().toString(),dataSnapshot.child("title").getValue().toString(), ScaleTypes.FIT));
+                        }
+                        image_slider.setImageList(donationImages,ScaleTypes.FIT);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+    }
+
+    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 
     //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>

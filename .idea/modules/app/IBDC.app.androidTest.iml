@@ -115,6 +115,7 @@
     <orderEntry type="library" scope="TEST" name="Gradle: com.airbnb.android:lottie:5.0.3@aar" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: nl.psdcompany:duo-navigation-drawer:3.0.0@aar" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: de.hdodenhof:circleimageview:3.1.0@aar" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: com.github.denzcoskun:ImageSlideshow:0.1.0@aar" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: androidx.annotation:annotation-experimental:1.0.0@aar" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: androidx.tracing:tracing:1.0.0@aar" level="project" />
   </component>

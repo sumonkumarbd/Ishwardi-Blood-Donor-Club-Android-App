@@ -39,18 +39,14 @@
                 android:elevation="20dp"
                 android:background="@color/colorPrimary"
                 >
-                <TextView
-                    android:id="@+id/notice_board"
+                <com.denzcoskun.imageslider.ImageSlider
+                    android:id="@+id/image_slider"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="@string/notice_board"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:layout_margin="10dp"
-                    android:textColor="@color/white"
-                    android:textStyle="italic"
-                    android:textSize="@dimen/form_txt"
-                    />
+                    app:iss_auto_cycle="true"
+                    app:iss_period="1000"
+                    app:iss_delay="0"/>
+                
             </LinearLayout>
 
             <!--    Category-->
