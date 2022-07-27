@@ -8,110 +8,293 @@
     tools:context=".AboutUs">
 
     <!--    content-->
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+        <TextView
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="@color/colorPrimary"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/title_font"
+            android:text="@string/app_name"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="@dimen/manu_txt"
+            android:textStyle="bold" />
+    </androidx.appcompat.widget.Toolbar>
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible"
+        >
+        <!--    Header-->
+        <ImageView
+            android:id="@+id/headerVictor"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:contentDescription="@string/header"
+            android:scaleType="centerCrop"
+            android:src="@drawable/header_victor"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:weightSum="1.1"
+            >
+            <!--    main card-->
+            <LinearLayout
+                android:id="@+id/mainCard"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:visibility="visible"
-                >
-                <!--    Header-->
-                <ImageView
-                    android:id="@+id/headerVictor"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:layout_marginTop="50dp"
+                android:layout_marginHorizontal="15dp"
+                android:background="@drawable/upper_redius"
+                android:elevation="@dimen/shadow"
+                android:gravity="top"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/headerVictor">
+
+
+                <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="100dp"
-                    android:contentDescription="@string/header"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/header_victor"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="5dp"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/text_font"
+                    android:text="@string/about_us"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/manu_txt"
+                    android:textStyle="bold" />
 
-                    <!--    main card-->
-                <LinearLayout
-                    android:id="@+id/mainCard"
+                <View
                     android:layout_width="match_parent"
-                    android:layout_height="730dp"
-                    android:layout_marginHorizontal="15dp"
-                    android:background="@drawable/upper_redius"
-                    android:elevation="@dimen/shadow"
-                    android:gravity="top"
-                    android:orientation="vertical"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="1.0">
+                    android:layout_height="2dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/colorAccentDark" />
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginTop="20dp"
-                        android:text="@string/motive"
-                        android:textAlignment="textStart"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="@dimen/manu_txt"
-                        android:fontFamily="@font/text_font"
-                        android:textStyle="bold" />
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="2dp"
-                        android:layout_marginVertical="10dp"
-                        android:background="@color/colorPrimary" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="10dp"
-                        android:justificationMode="inter_word"
-                        android:text="@string/about_des"
-                        android:textAlignment="textStart"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="@dimen/form_txt"
-                        android:fontFamily="@font/text_font"
-                        android:textStyle="bold" />
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="5dp"
+                    >
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="end"
-                        android:gravity="end"
-                        android:layout_marginEnd="10dp"
-                        android:orientation="horizontal"
-                        tools:ignore="UseCompoundDrawables">
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/ibdc_small"
-                            android:layout_gravity="bottom"
-                            android:layout_marginStart="5dp"
-                            />
+                        android:orientation="vertical"
+                        >
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="5dp"
-                            android:gravity="center"
-                            android:text="@string/founder"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="20dp"
                             android:fontFamily="@font/text_font"
+                            android:text="@string/starting"
+                            android:textAlignment="textStart"
                             android:textColor="@color/colorPrimary"
-                            android:textSize="@dimen/tab_label"
+                            android:textSize="@dimen/manu_txt"
                             android:textStyle="bold" />
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="2dp"
+                            android:layout_marginTop="2dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginHorizontal="5dp"
+                            android:background="@color/colorAccentDark"
+                            />
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="10dp"
+                            android:fontFamily="@font/des_font"
+                            android:text="@string/motive"
+                            android:textAlignment="center"
+                            android:textColor="@color/goodgrey"
+                            android:textSize="@dimen/form_txt"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="10dp"
+                            android:fontFamily="@font/des_font"
+                            android:text="@string/about_des"
+                            android:textAlignment="textStart"
+                            android:textColor="@color/goodgrey"
+                            android:textSize="@dimen/form_txt"
+                            android:textStyle="bold" />
+
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="20dp"
+                            android:fontFamily="@font/text_font"
+                            android:text="@string/admins"
+                            android:textAlignment="textStart"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="@dimen/manu_txt"
+                            android:textStyle="bold" />
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="2dp"
+                            android:layout_marginTop="2dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginHorizontal="5dp"
+                            android:background="@color/colorAccentDark"
+                            />
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="10dp"
+                            android:fontFamily="@font/des_font"
+                            android:text=""
+                            android:textAlignment="textStart"
+                            android:textColor="@color/goodgrey"
+                            android:textSize="@dimen/form_txt"
+                            android:textStyle="bold" />
+
+
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="20dp"
+                            android:fontFamily="@font/text_font"
+                            android:text="@string/created_by_bn"
+                            android:textAlignment="textStart"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="@dimen/manu_txt"
+                            android:textStyle="bold" />
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="2dp"
+                            android:layout_marginTop="2dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginHorizontal="5dp"
+                            android:background="@color/colorAccentDark"
+                            />
+                        <ImageView
+                            android:id="@+id/dev_img"
+                            android:layout_width="match_parent"
+                            android:layout_height="200dp"
+                            android:layout_marginHorizontal="5dp"
+                            android:src="@drawable/developer_wide"
+                            android:contentDescription="@string/cover" />
+                        <TextView
+                            android:id="@+id/dev_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="10dp"
+                            android:fontFamily="@font/des_font"
+                            android:layout_marginTop="10dp"
+                            android:text="@string/developer_name"
+                            android:textAlignment="textStart"
+                            android:textColor="@color/blue"
+                            android:textSize="@dimen/card_header_txt"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="10dp"
+                            android:fontFamily="@font/des_font"
+                            android:layout_marginTop="5dp"
+                            android:text="@string/post"
+                            android:textAlignment="textStart"
+                            android:textColor="@color/goodgrey"
+                            android:textSize="@dimen/card_txt"
+                            android:textStyle="bold" />
+                        <LinearLayout
+                            android:id="@+id/sds"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+                            <de.hdodenhof.circleimageview.CircleImageView
+                                xmlns:app="http://schemas.android.com/apk/res-auto"
+                                android:id="@+id/profile_image"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:src="@drawable/sds_logo"
+                                app:civ_border_width="2dp"
+                                app:civ_border_color="#ffffff"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/sds"
+                                android:textSize="@dimen/form_txt"
+                                android:textColor="@color/colorPrimary"
+                                android:fontFamily="@font/varela_round"
+                                />
+                        </LinearLayout>
+                        <TextView
+                            android:id="@+id/sdsEmail"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="7sp"
+                            android:layout_marginBottom="10dp"
+                            android:text="@string/developer_email"
+                            android:textSize="@dimen/card_txt"
+                            android:textColor="@color/blue"
+                            android:fontFamily="@font/varela_round"
+                            />
+
+                        <TextView
+                            android:id="@+id/moreApps"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="7sp"
+                            android:layout_marginVertical="10dp"
+                            android:text="@string/moreApps"
+                            android:textSize="@dimen/card_txt"
+                            android:textColor="@color/blue"
+                            android:fontFamily="@font/varela_round"
+                            />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="2dp"
+                            android:layout_marginTop="2dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginHorizontal="5dp"
+                            android:background="@color/colorAccentDark"
+                            />
+
+
                     </LinearLayout>
 
-                </LinearLayout>
+                </ScrollView>
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@color/colorAccentDark" />
+
+
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
     <!--    finished content-->
 
 </LinearLayout>

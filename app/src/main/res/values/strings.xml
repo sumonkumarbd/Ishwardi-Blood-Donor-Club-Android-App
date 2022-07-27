@@ -38,7 +38,7 @@
     <string name="register">নিবন্ধন</string>
     <string name="last_name">নামের টাইটেল</string>
     <string name="first_name">শুরুর নাম</string>
-    <string name="motive">আমি বাঁচাতে চাই একটি প্রাণ,\nতাইতো করবো রক্তদান!</string>
+    <string name="motive"><i>আমি বাঁচাতে চাই একটি প্রাণ,\nতাইতো করবো রক্তদান!</i></string>
     <string name="address">ঠিকানা</string>
     <string name="next">পরবর্তী</string>
     <string name="village">গ্রাম</string>
@@ -58,15 +58,19 @@
     <string name="logout">লগ আউট</string>
     <string name="about">আমাদের সম্পর্কে…</string>
     <string name="created_by">Created by</string>
-    <string name="sds">SumonKmr Development Studio</string>
-    <string name="developer_email">Email : sumonkmrofficial@gmail.com</string>
     <string name="instructions"><b>নির্দেশাবলী</b></string>
     <string name="why_donate"><b>রক্তদানের উপকারিতা</b></string>
     <string name="be_donor"><b>রক্তদাতা হউন</b></string>
     <string name="search_donor"><b>রক্তদাতা খুঁজুন</b></string>
     <string name="about_us"><b>আমাদের সম্পর্কে জানুন</b></string>
     <string name="rate_us"><b>আমাদের সম্পর্কে বলুন</b></string>
-    <string name="about_des">এই স্লোগানকে বুকে ধারণ করে  রক্তের অভাবে মুমূর্ষু রোগীদের পাশে দাড়ানোর উদ্দেশ্যে নিয়ে পথ চলা শুরু করে ঈশ্বরদী ব্লাড ডোনার ক্লাব।২০২০ সালে করোনা মহামারী মধ্যে যখন সবাই ঘর বন্দী হয়ে যায় তখন অনেক টা সেচ্ছায় রক্তদাতা দের কে খুজে পাওয়া মুশকিল হয়ে যায়।কিন্তু হাসপাতালে রক্তের হা হা কার কমতে থাকে না বরং বাড়তেই থাকে। অবশেষে ২০২০ সালের ৭ই জুলাই রক্তদানের সংগঠন হিসাবে প্রতিষ্ঠা করা হয় ঈশ্বরদী ব্লাড ডোনার ক্লাব।আমরা বেশীরভাগ সময় দেখি রোগীর লোক সেচ্ছায় রক্তদাতাদের সাথে যোগাযোগ করতে পারে না। যার কারনে রোগীর লোক সহজে তাদের রোগীর জন্য রক্ত যোগার করতে হিমশিম খায়।সেচ্ছায় রক্তদাতা ও রোগীর লোকদের মধ্যে যোগাযোগ করিয়ে দেওয়ার কাজ টা করে যাচ্ছে ঈশ্বরদী ব্লাড ডোনার ক্লাব।\nআপনাদের ভালোবাসায় ঈশ্বরদী ব্লাড ডোনার ক্লাব আরো সামনের দিকে এগিয়ে যাবে ইনশাআল্লাহ।\n
+    <string name="about_des"><b>এই স্লোগানকে বুকে ধারণ করে  রক্তের অভাবে মুমূর্ষু রোগীদের পাশে দাড়ানোর উদ্দেশ্যে নিয়ে পথ চলা শুরু
+        করে ঈশ্বরদী ব্লাড ডোনার ক্লাব।২০২০ সালে করোনা মহামারী মধ্যে যখন সবাই ঘর বন্দী হয়ে যায় তখন অনেক টা সেচ্ছায় রক্তদাতা দের কে
+        খুজে পাওয়া মুশকিল হয়ে যায়।কিন্তু হাসপাতালে রক্তের হাহাকার কমতে থাকে না বরং বাড়তেই থাকে। অবশেষে ২০২০ সালের ৭ই জুলাই
+        রক্তদানের সংগঠন হিসাবে প্রতিষ্ঠা করা হয় ঈশ্বরদী ব্লাড ডোনার ক্লাব।ঈশ্বরদী ব্লাড ডোনার ক্লাব একটি অরাজনৈতিক সামাজিক সংগঠন।আমরা বেশীরভাগ সময় দেখি রোগীর লোক সেচ্ছায় রক্তদাতাদের
+        সাথে যোগাযোগ করতে পারে না। যার কারনে রোগীর লোক সহজে তাদের রোগীর জন্য রক্ত যোগার করতে হিমশিম খায়।সেচ্ছায় রক্তদাতা
+        ও রোগীর লোকদের মধ্যে যোগাযোগ করিয়ে দেওয়ার কাজ টা করে যাচ্ছে ঈশ্বরদী ব্লাড ডোনার ক্লাব।\n\nসকলের ভালোবাসায় ঈশ্বরদী ব্লাড
+        ডোনার ক্লাব আরো সামনের দিকে এগিয়ে যাবে আপনাদের সম্মেলিত সহযোগিতায়।</b>\n\n
     </string>
     <string name="founder">সাদেকুল ইসলাম শিমুল\nপ্রতিষ্ঠাতা\nঈশ্বরদী ব্লাড ডোনার ক্লাব</string>
     <string name="profit_of_blood_donation">রক্তদানের উপকারিতা</string>
@@ -173,9 +177,15 @@
     <string name="ins_des4.1"><u>তথসুত্রঃ ইন্টারনেট।</u></string>
 
 
+<!--    AboutUs-->
+    <string name="starting">সূচনা</string>
+    <string name="admins">পরিচালনামণ্ডলী সমূহ</string>
+    <string name="moreApps"><b>এখানে ক্লিক করে আমাদের আরও অ্যাপ্সগুলি দেখুন…</b></string>
+
+
 
     <string name="hintforlocation">আপনার স্থান নির্বাচন করুন</string>
-    <string name="developer_name">সুমন কুমার</string>
+    <string name="developer_name"><b>Sumon Kumar</b></string>
     <string name="last_donate">শেষ রক্তদান</string>
     <string name="last_donate_date">০৩/১২/২০২১ ইং</string>
 
@@ -222,6 +232,12 @@
     <string name="share">শেয়ার</string>
 
     <!--    end Profile-->
+
+<!--    Developer info-->
+    <string name="created_by_bn">অ্যাপ্সটি ডেভেলপ করেছেন</string>
+    <string name="post"><b>Founder, Executive Director and Lead Developer</b></string>
+    <string name="sds"><b>SumonKmr Development Studio</b></string>
+    <string name="developer_email">Email : <b>sumonkmrofficial@gmail.com</b></string>
 
     <array name="blood_groups">
         <item>A+</item>

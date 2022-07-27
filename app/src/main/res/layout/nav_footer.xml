@@ -22,7 +22,7 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/profile_image"
+        android:id="@+id/sds_image"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:src="@drawable/sds_logo"
@@ -30,6 +30,7 @@
         app:civ_border_color="#ffffff"/>
 
     <TextView
+        android:id="@+id/sds_dash"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
@@ -40,6 +41,7 @@
         />
 
     <TextView
+        android:id="@+id/mail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"

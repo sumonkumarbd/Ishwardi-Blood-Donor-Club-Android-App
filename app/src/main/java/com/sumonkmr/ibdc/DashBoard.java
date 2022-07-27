@@ -35,8 +35,8 @@ import nl.psdcompany.duonavigationdrawer.widgets.DuoDrawerToggle;
 public class DashBoard extends AppCompatActivity implements View.OnClickListener {
 
     DuoDrawerLayout drawerLayout;
-    de.hdodenhof.circleimageview.CircleImageView profile_image_menu;
-    TextView profile_name_menu;
+    de.hdodenhof.circleimageview.CircleImageView profile_image_menu,sds_image;
+    TextView profile_name_menu,sds_dash,mail;
     String uid;
     FirebaseAuth auth;
 
@@ -77,6 +77,9 @@ public class DashBoard extends AppCompatActivity implements View.OnClickListener
         LinearLayout ll_Logout = menuView.findViewById(R.id.ll_Logout);
         profile_name_menu = menuView.findViewById(R.id.profile_name_menu);
         profile_image_menu = menuView.findViewById(R.id.profile_image_menu);
+        sds_dash = menuView.findViewById(R.id.sds_dash);
+        sds_image = menuView.findViewById(R.id.sds_image);
+        mail = menuView.findViewById(R.id.mail);
 
 
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -118,6 +121,9 @@ public class DashBoard extends AppCompatActivity implements View.OnClickListener
         ll_Share.setOnClickListener(this);
         ll_Logout.setOnClickListener(this);
         ll_about_us.setOnClickListener(this);
+        sds_dash.setOnClickListener(this);
+        sds_image.setOnClickListener(this);
+        mail.setOnClickListener(this);
 
 
 
@@ -152,13 +158,33 @@ public class DashBoard extends AppCompatActivity implements View.OnClickListener
                 startActivity(new Intent(this,SplashScreen.class));
                 break;
 
+            case R.id.mail:
+                Intent intent = new Intent(Intent.ACTION_SEND);
+                intent.putExtra(Intent.EXTRA_EMAIL,new String[]{"sumonkmrofficial@gmail.com"});
+                intent.putExtra(Intent.EXTRA_SUBJECT,"Im Sending Email From IBDC App");
+                intent.putExtra(Intent.EXTRA_TEXT,"Please Type Your Massage Here : \n");
+                intent.setType("massage/rfc822");
+                startActivity(intent);
+                break;
+
+            case R.id.sds_dash:
+                gotoUrl("https://www.facebook.com/sumonkmr.studio/");
+                break;
+
+            case R.id.sds_image:
+                gotoUrl("https://play.google.com/store/apps/dev?id=6877143126125387449");
+                break;
+
 
 //            case R.id.find_donors:
 ////                startActivity(new Intent(this, DisplayDonorsActivity.class));
 //                Toast.makeText(this, "This is Donors", Toast.LENGTH_SHORT).show();
 //                break;
 
-        }
+        }// switch finished
+
+
+
         drawerLayout.closeDrawer();
     }
 
@@ -183,6 +209,11 @@ public class DashBoard extends AppCompatActivity implements View.OnClickListener
         intent.putExtra(Intent.EXTRA_SUBJECT,subject);
         intent.putExtra(Intent.EXTRA_TEXT,shareBody);
         startActivity(Intent.createChooser(intent,"Share for Helps Others..."));
+    }
+
+    private void gotoUrl(String url){
+        Uri uri = Uri.parse(url);
+        startActivity(new Intent(Intent.ACTION_VIEW,uri));
     }
 
 }
