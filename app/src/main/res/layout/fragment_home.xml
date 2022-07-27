@@ -59,6 +59,48 @@
                 >
 
                 <LinearLayout
+                    android:id="@+id/sec_row"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:layout_margin="10dp"
+                    android:elevation="@dimen/shadow"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:background="@drawable/white_box"
+                    android:weightSum="2.01"
+                    android:orientation="horizontal">
+
+
+
+                    <RelativeLayout
+                        android:id="@+id/find_donors"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        >
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/ibdc_logo_tns"
+                            />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_alignParentBottom="true"
+                            android:text="@string/search_donor"
+                            android:gravity="center"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/form_txt"
+                            android:fontFamily="@font/text_font"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginHorizontal="5dp"
+                            android:background="@color/semi_tns_background" />
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
                     android:id="@+id/first_row"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
@@ -91,15 +133,15 @@
 
                         <TextView
                             android:layout_width="match_parent"
-                            android:layout_height="30dp"
+                            android:layout_height="40dp"
                             android:layout_alignParentBottom="true"
                             android:text="@string/instructions"
                             android:gravity="center"
                             android:textColor="@color/white"
                             android:textSize="@dimen/form_txt"
                             android:fontFamily="@font/text_font"
-                            android:layout_marginVertical="10dp"
-                            android:layout_marginHorizontal="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginHorizontal="3dp"
                             android:background="@color/semi_tns_background" />
                     </RelativeLayout>
 
@@ -108,7 +150,7 @@
                         android:layout_marginVertical="10dp"
                         android:elevation="@dimen/minor_shadow"
                         android:layout_height="match_parent"
-                        android:background="@color/colorPrimary"
+                        android:background="@color/colorAccentDark"
                         />
 
                     <RelativeLayout
@@ -131,102 +173,15 @@
 
                         <TextView
                             android:layout_width="match_parent"
-                            android:layout_height="30dp"
+                            android:layout_height="40dp"
                             android:layout_alignParentBottom="true"
                             android:text="@string/why_donate"
                             android:gravity="center"
                             android:textColor="@color/white"
                             android:textSize="@dimen/form_txt"
                             android:fontFamily="@font/text_font"
-                            android:layout_marginVertical="10dp"
-                            android:layout_marginHorizontal="5dp"
-                            android:background="@color/semi_tns_background" />
-                    </RelativeLayout>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/sec_row"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:layout_margin="10dp"
-                    android:elevation="@dimen/shadow"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:background="@drawable/white_box"
-                    android:weightSum="2.01"
-                    android:orientation="horizontal">
-
-                    <RelativeLayout
-                        android:id="@+id/be_donor"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        >
-
-                        <com.airbnb.lottie.LottieAnimationView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginEnd="10dp"
-                            android:layout_marginBottom="10dp"
-                            app:lottie_autoPlay="true"
-                            app:lottie_loop="true"
-                            app:lottie_rawRes="@raw/save_life" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="30dp"
-                            android:layout_alignParentBottom="true"
-                            android:text="@string/be_donor"
-                            android:gravity="center"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/form_txt"
-                            android:fontFamily="@font/text_font"
-                            android:layout_marginVertical="10dp"
-                            android:layout_marginHorizontal="5dp"
-                            android:background="@color/semi_tns_background" />
-                    </RelativeLayout>
-
-                    <View
-                        android:layout_width="2dp"
-                        android:layout_marginVertical="10dp"
-                        android:elevation="@dimen/minor_shadow"
-                        android:layout_height="match_parent"
-                        android:background="@color/colorPrimary"
-                        />
-
-                    <RelativeLayout
-                        android:id="@+id/find_donors"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        >
-
-                        <com.airbnb.lottie.LottieAnimationView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginEnd="10dp"
-                            android:layout_marginBottom="10dp"
-                            app:lottie_autoPlay="true"
-                            app:lottie_loop="true"
-                            app:lottie_rawRes="@raw/search_blood" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="30dp"
-                            android:layout_alignParentBottom="true"
-                            android:text="@string/search_donor"
-                            android:gravity="center"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/form_txt"
-                            android:fontFamily="@font/text_font"
-                            android:layout_marginVertical="10dp"
-                            android:layout_marginHorizontal="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginHorizontal="3dp"
                             android:background="@color/semi_tns_background" />
                     </RelativeLayout>
 
@@ -265,15 +220,15 @@
 
                         <TextView
                             android:layout_width="match_parent"
-                            android:layout_height="30dp"
+                            android:layout_height="40dp"
                             android:layout_alignParentBottom="true"
                             android:text="@string/about_us"
                             android:gravity="center"
                             android:textColor="@color/white"
                             android:textSize="@dimen/form_txt"
                             android:fontFamily="@font/text_font"
-                            android:layout_marginVertical="10dp"
-                            android:layout_marginHorizontal="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginHorizontal="3dp"
                             android:background="@color/semi_tns_background" />
                     </RelativeLayout>
 
@@ -282,7 +237,7 @@
                         android:layout_marginVertical="10dp"
                         android:elevation="@dimen/minor_shadow"
                         android:layout_height="match_parent"
-                        android:background="@color/colorPrimary"
+                        android:background="@color/colorAccentDark"
                         />
 
                     <RelativeLayout
@@ -305,15 +260,15 @@
 
                         <TextView
                             android:layout_width="match_parent"
-                            android:layout_height="30dp"
+                            android:layout_height="40dp"
                             android:layout_alignParentBottom="true"
                             android:text="@string/rate_us"
                             android:gravity="center"
                             android:textColor="@color/white"
                             android:textSize="@dimen/form_txt"
                             android:fontFamily="@font/text_font"
-                            android:layout_marginVertical="10dp"
-                            android:layout_marginHorizontal="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginHorizontal="3dp"
                             android:background="@color/semi_tns_background" />
                     </RelativeLayout>
 

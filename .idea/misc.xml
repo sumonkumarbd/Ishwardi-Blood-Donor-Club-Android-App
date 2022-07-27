@@ -11,14 +11,17 @@
         <entry key="..\:/work_station/IBDC App/app/src/main/res/drawable/ic_arrow_back_24dp.xml" value="0.1565" />
         <entry key="..\:/work_station/IBDC App/app/src/main/res/drawable/upper_redius.xml" value="0.1565" />
         <entry key="..\:/work_station/IBDC App/app/src/main/res/font/actor.xml" value="0.15263157894736842" />
+        <entry key="..\:/work_station/IBDC App/app/src/main/res/font/des_font.xml" value="0.1703111858704794" />
         <entry key="..\:/work_station/IBDC App/app/src/main/res/font/text_font.xml" value="0.15175438596491228" />
+        <entry key="..\:/work_station/IBDC App/app/src/main/res/font/title_font.xml" value="0.17115222876366695" />
         <entry key="..\:/work_station/IBDC App/app/src/main/res/layout/about_us.xml" value="0.18" />
+        <entry key="..\:/work_station/IBDC App/app/src/main/res/layout/activity_be_donor.xml" value="0.1423076923076923" />
         <entry key="..\:/work_station/IBDC App/app/src/main/res/layout/activity_dash_board.xml" value="0.14" />
         <entry key="..\:/work_station/IBDC App/app/src/main/res/layout/activity_dispaly_requests.xml" value="0.10673076923076923" />
         <entry key="..\:/work_station/IBDC App/app/src/main/res/layout/activity_display_donors.xml" value="0.22" />
         <entry key="..\:/work_station/IBDC App/app/src/main/res/layout/activity_instraction.xml" value="0.19" />
         <entry key="..\:/work_station/IBDC App/app/src/main/res/layout/activity_instruction.xml" value="0.21" />
-        <entry key="..\:/work_station/IBDC App/app/src/main/res/layout/activity_instructions.xml" value="0.1170940170940171" />
+        <entry key="..\:/work_station/IBDC App/app/src/main/res/layout/activity_instructions.xml" value="0.16" />
         <entry key="..\:/work_station/IBDC App/app/src/main/res/layout/activity_login_screen.xml" value="0.17" />
         <entry key="..\:/work_station/IBDC App/app/src/main/res/layout/activity_main.xml" value="0.21" />
         <entry key="..\:/work_station/IBDC App/app/src/main/res/layout/activity_main2.xml" value="0.1082427536231884" />

@@ -14,7 +14,18 @@
         android:layout_height="?attr/actionBarSize"
         android:background="@color/colorPrimary"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/title_font"
+            android:text="@string/app_name"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="@dimen/manu_txt"
+            android:textStyle="bold" />
+    </androidx.appcompat.widget.Toolbar>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -33,12 +44,18 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:weightSum="1.1"
+            >
             <!--    main card-->
             <LinearLayout
                 android:id="@+id/mainCard"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
                 android:layout_marginTop="50dp"
                 android:layout_marginHorizontal="15dp"
                 android:background="@drawable/upper_redius"
@@ -52,27 +69,28 @@
 
 
                 <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginTop="20dp"
-                            android:fontFamily="@font/text_font"
-                            android:text="@string/profit_of_blood_donation"
-                            android:textAlignment="textStart"
-                            android:textColor="@color/colorPrimary"
-                            android:textSize="@dimen/manu_txt"
-                            android:textStyle="bold" />
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/text_font"
+                    android:text="@string/profit_of_blood_donation"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/manu_txt"
+                    android:textStyle="bold" />
 
-                   <View
-                            android:layout_width="match_parent"
-                            android:layout_height="2dp"
-                            android:layout_marginTop="10dp"
-                            android:background="@color/colorPrimary" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/colorAccentDark" />
 
 
                 <ScrollView
                     android:layout_width="match_parent"
-                    android:layout_height="590dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="5dp"
                     >
 
                     <LinearLayout
@@ -85,11 +103,10 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginHorizontal="10dp"
-                            android:fontFamily="@font/text_font"
-                            android:justificationMode="inter_word"
+                            android:fontFamily="@font/des_font"
                             android:text="@string/profit_of_blood_donation1"
                             android:textAlignment="textStart"
-                            android:textColor="@color/colorPrimary"
+                            android:textColor="@color/goodgrey"
                             android:textSize="@dimen/form_txt"
                             android:textStyle="bold" />
 
@@ -97,12 +114,23 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginHorizontal="10dp"
-                            android:fontFamily="@font/text_font"
-                            android:justificationMode="inter_word"
+                            android:fontFamily="@font/des_font"
                             android:text="@string/profit_of_blood_donation2"
                             android:textAlignment="textStart"
-                            android:textColor="@color/colorPrimary"
+                            android:textColor="@color/goodgrey"
                             android:textSize="@dimen/form_txt"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="10dp"
+                            android:layout_marginTop="10dp"
+                            android:fontFamily="@font/des_font"
+                            android:text="@string/ins_des4.1"
+                            android:textAlignment="textStart"
+                            android:textColor="@color/goodgrey"
+                            android:textSize="@dimen/hint_size"
                             android:textStyle="bold" />
 
                     </LinearLayout>
@@ -112,12 +140,14 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="2dp"
-                    android:background="@color/colorPrimary" />
+                    android:background="@color/colorAccentDark" />
 
 
             </LinearLayout>
 
 
+
+        </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
     <!--    finished content-->

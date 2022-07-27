@@ -197,13 +197,25 @@
         android:orientation="vertical"
         android:tag="@string/tag_content">
 
+        <!--    content-->
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="@color/colorPrimary"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/title_font"
+                android:text="@string/app_name"
+                android:textAlignment="textStart"
+                android:textColor="@color/white"
+                android:textSize="@dimen/manu_txt"
+                android:textStyle="bold" />
+        </androidx.appcompat.widget.Toolbar>
 
         <FrameLayout
             android:id="@+id/container"

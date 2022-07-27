@@ -42,7 +42,6 @@ public class HomeFragment extends Fragment {
 
         ins = view.findViewById(R.id.ins);
         benefit = view.findViewById(R.id.benefit);
-        be_donor = view.findViewById(R.id.be_donor);
         find_donors = view.findViewById(R.id.find_donors);
         about_us = view.findViewById(R.id.about_us);
         rate_us = view.findViewById(R.id.rate_us);
@@ -51,16 +50,13 @@ public class HomeFragment extends Fragment {
         ImageSlider();
 
         ins.setOnClickListener(v -> {
-            startActivity(new Intent(getContext(), ProfitOfBloodDonation.class));
+            startActivity(new Intent(getContext(), Instructions.class));
         });
 
         benefit.setOnClickListener(v -> {
             startActivity(new Intent(getContext(), ProfitOfBloodDonation.class));
         });
 
-        be_donor.setOnClickListener(v -> {
-//            startActivity(new Intent(getContext(),.class));
-        });
 
         find_donors.setOnClickListener(v -> {
             startActivity(new Intent(getContext(),DisplayDonorsActivity.class));
