@@ -155,28 +155,26 @@
         app:layout_constraintVertical_bias="0.836"
         app:srcCompat="@drawable/border" />
 
-
     <Button
         android:id="@+id/nextButtonII"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/_100dp"
+        android:layout_height="@dimen/_40dp"
+        android:layout_marginEnd="@dimen/_30dp"
+        android:layout_marginBottom="@dimen/_33dp"
         android:background="@color/tns"
         android:clickable="true"
         android:focusable="true"
         android:fontFamily="@font/poppins"
-        android:text="@string/next"
         android:onClick="registerIII"
+        android:text="@string/next"
         android:textAlignment="center"
         android:textColor="@color/white"
-        android:textSize="@dimen/form_txt"
+        android:textSize="@dimen/_18sp"
         android:textStyle="bold"
         android:typeface="monospace"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.82"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="0.76" />
+        app:layout_constraintStart_toStartOf="@+id/imageView2" />
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/regAnim"

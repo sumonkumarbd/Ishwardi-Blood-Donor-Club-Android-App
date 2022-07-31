@@ -33,11 +33,12 @@
     <string name="title_dashboard">ড্যাশবোর্ড</string>
     <string name="title_notifications">নোটিফিকেশন</string>
     <string name="search">সার্চ</string>
-    <string name="Email">ইমেল দিন…</string>
+    <string name="Email">ইমেল</string>
+    <string name="phone">নাম্বার</string>
     <string name="cover">কভার</string>
     <string name="register">নিবন্ধন</string>
-    <string name="last_name">নামের টাইটেল</string>
-    <string name="first_name">শুরুর নাম</string>
+    <string name="last_name">পদবী</string>
+    <string name="first_name">নাম</string>
     <string name="motive"><i>আমি বাঁচাতে চাই একটি প্রাণ,\nতাইতো করবো রক্তদান!</i></string>
     <string name="address">ঠিকানা</string>
     <string name="next">পরবর্তী</string>
@@ -47,7 +48,7 @@
     <string name="blood_group">রক্তের গ্রূপ</string>
     <string name="verify">OTP ভেরিফাই করুন!</string>
     <string name="enter_Otp">OTP দিন!!</string>
-    <string name="verify_txt">ভেরিফাই!!</string>
+    <string name="verify_txt">ভেরিফাই!</string>
     <string name="header">হেডার</string>
     <string name="notice_board">নোটিশ বোর্ড</string>
     <string name="open">খোলা</string>
@@ -56,7 +57,7 @@
     <string name="home">হোম</string>
     <string name="dashboard">ড্যাশবোর্ড</string>
     <string name="logout">লগ আউট</string>
-    <string name="about">আমাদের সম্পর্কে…</string>
+    <string name="about">আমাদের সম্পর্কে জানুন…</string>
     <string name="created_by">Created by</string>
     <string name="instructions"><b>নির্দেশাবলী</b></string>
     <string name="why_donate"><b>রক্তদানের উপকারিতা</b></string>
@@ -230,11 +231,13 @@
     <string name="failed">তথ্য আপডেট অসম্পূর্ণ✖✖</string>
     <string name="profile">প্রোফাইল</string>
     <string name="share">শেয়ার</string>
+    <string name="privacy">প্রাইভেসি পলেসি</string>
+    <string name="fb_grp">আমদের ফেইসবুক গ্রুপ</string>
 
     <!--    end Profile-->
 
 <!--    Developer info-->
-    <string name="created_by_bn">অ্যাপ্সটি ডেভেলপ করেছেন</string>
+    <string name="created_by_bn">ডেভেলপার</string>
     <string name="post"><b>Founder, Executive Director and Lead Developer</b></string>
     <string name="sds"><b>SumonKmr Development Studio</b></string>
     <string name="developer_email">Email : <b>sumonkmrofficial@gmail.com</b></string>

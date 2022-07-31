@@ -104,7 +104,6 @@
 
             </LinearLayout>
 
-
             <LinearLayout
                 android:id="@+id/ll_Share"
                 android:gravity="center_vertical"
@@ -119,7 +118,7 @@
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:src="@drawable/share_icon"
-                     />
+                    />
 
                 <TextView
                     android:fontFamily="@font/actor"
@@ -145,7 +144,7 @@
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:src="@drawable/about_icon"
-                     />
+                    />
 
                 <TextView
                     android:fontFamily="@font/actor"
@@ -154,6 +153,60 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/about"
+                    android:textColor="@color/white"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_fb"
+                android:gravity="center_vertical"
+                android:layout_marginTop="24dp"
+                android:layout_marginHorizontal="20dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:ignore="UseCompoundDrawables">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/fb_grp"
+                    />
+
+                <TextView
+                    android:fontFamily="@font/actor"
+                    android:textSize="@dimen/manu_txt"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/fb_grp"
+                    android:textColor="@color/white"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_privacy"
+                android:gravity="center_vertical"
+                android:layout_marginTop="24dp"
+                android:layout_marginHorizontal="20dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:ignore="UseCompoundDrawables">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/privacy"
+                    />
+
+                <TextView
+                    android:fontFamily="@font/actor"
+                    android:textSize="@dimen/manu_txt"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/privacy"
                     android:textColor="@color/white"/>
 
             </LinearLayout>

@@ -15,8 +15,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.sumonkmr.ibdc.model.User;
 
-//Programmed by Vinayak Patil
-//On Tue, 11-05-21
+//Programmed by SumonKmr
+//On Tue, 02-05-22
 
 public class SplashScreen extends AppCompatActivity {
 

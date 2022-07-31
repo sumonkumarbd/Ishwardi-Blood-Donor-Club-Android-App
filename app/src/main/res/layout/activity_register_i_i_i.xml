@@ -12,8 +12,8 @@
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="280dp"
-        android:layout_height="300dp"
+        android:layout_width="@dimen/_220dp"
+        android:layout_height="@dimen/_230dp"
         android:background="@drawable/round_textbox"
         android:elevation="20dp"
         android:gravity="center"
@@ -33,7 +33,7 @@
             style="@style/Widget.MaterialComponents.TextView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginVertical="10dp"
+            android:layout_marginVertical="@dimen/_10dp"
             android:layout_weight="1"
             android:autofillHints=""
             android:background="@drawable/text_box_border_coustom"
@@ -148,7 +148,7 @@
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="150dp"
+        android:layout_width="@dimen/_120dp"
         android:layout_height="match_parent"
         android:layout_marginStart="260dp"
         android:contentDescription="@string/todo"
@@ -166,28 +166,30 @@
 
     <Button
         android:id="@+id/btnVerifySubmit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/_110dp"
+        android:layout_height="@dimen/_42dp"
+        android:layout_marginEnd="@dimen/_30dp"
+        android:layout_marginBottom="@dimen/_33dp"
         android:background="@color/tns"
+        android:clickable="true"
+        android:focusable="true"
         android:fontFamily="@font/poppins"
         android:onClick="verifyAndSubmit"
         android:text="@string/verify_txt"
         android:textAlignment="center"
         android:textColor="@color/white"
-        android:textSize="18sp"
+        android:textSize="@dimen/_18sp"
         android:textStyle="bold"
         android:typeface="monospace"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.888"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="0.75" />
+        app:layout_constraintStart_toStartOf="@+id/imageView2" />
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/regAnim"
-        android:layout_width="250dp"
-        android:layout_height="250dp"
+        android:layout_width="@dimen/_180dp"
+        android:layout_height="@dimen/_180dp"
         android:layout_marginTop="10dp"
         app:layout_constraintBottom_toTopOf="@+id/textView7"
         app:layout_constraintEnd_toEndOf="parent"
@@ -198,8 +200,8 @@
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/profile_image_reg"
-            android:layout_width="180dp"
-            android:layout_height="180dp"
+            android:layout_width="@dimen/_130dp"
+            android:layout_height="@dimen/_130dp"
             android:layout_gravity="center"
             android:scaleType="centerCrop"
             android:src="@drawable/ibdc_logo"
@@ -212,8 +214,8 @@
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/p_image_shade_reg"
-            android:layout_width="180dp"
-            android:layout_height="180dp"
+            android:layout_width="@dimen/_130dp"
+            android:layout_height="@dimen/_130dp"
             android:layout_gravity="center"
             android:scaleType="centerCrop"
             android:src="@drawable/edit_photo"

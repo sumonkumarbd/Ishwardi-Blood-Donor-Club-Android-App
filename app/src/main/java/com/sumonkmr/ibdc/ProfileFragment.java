@@ -697,23 +697,19 @@ public class ProfileFragment extends Fragment {
                     lastDonateDate_edit.setText(Objects.requireNonNull(snapshot.child("lastDonateDate").getValue()).toString());
                     birthDate_edit.setText(Objects.requireNonNull(snapshot.child("birthdate").getValue()).toString());
 
-
-                    Glide
-                            .with(context)
+                    Glide.with(context)
                             .load(profile_url)
                             .centerCrop()
                             .placeholder(R.drawable.ibdc_logo)
                             .into(profile_image);
 
-                    Glide
-                            .with(context)
+                    Glide.with(context)
                             .load(profile_url)
                             .centerCrop()
                             .placeholder(R.drawable.ibdc_logo)
                             .into((ImageView) cover_image);
 
-                    Glide
-                            .with(context)
+                    Glide.with(context)
                             .load(profile_url)
                             .centerCrop()
                             .placeholder(R.drawable.ibdc_logo)

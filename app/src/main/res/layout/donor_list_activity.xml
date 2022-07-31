@@ -14,7 +14,18 @@
         android:layout_height="?attr/actionBarSize"
         android:background="@color/colorPrimary"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/title_font"
+            android:text="@string/app_name"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="@dimen/manu_txt"
+            android:textStyle="bold" />
+    </androidx.appcompat.widget.Toolbar>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -38,8 +49,7 @@
         <LinearLayout
             android:id="@+id/mainCard"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="50dp"
+            android:layout_height="@dimen/_500dp"
             android:layout_marginHorizontal="15dp"
             android:background="@drawable/upper_redius"
             android:elevation="@dimen/shadow"
@@ -47,40 +57,42 @@
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/headerVictor">
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.4">
 
 
             <LinearLayout
                 android:id="@+id/linearLayout"
                 android:layout_width="match_parent"
                 android:layout_height="165dp"
-                android:background="@drawable/round_textbox"
-                android:layout_marginTop="10dp"
-                android:padding="10dp"
-                android:layout_marginHorizontal="10dp"
-                android:elevation="20dp"
-                android:gravity="center"
                 android:layout_gravity="center"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/round_textbox"
+                android:baselineAligned="false"
+                android:elevation="@dimen/shadow"
+                android:gravity="center"
                 android:orientation="vertical"
-                android:weightSum="2"
-                android:baselineAligned="false">
+                android:padding="10dp"
+                android:weightSum="2">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:gravity="center"
-                    android:text="@string/search_donor"
-                    />
+                    android:text="@string/search_donor" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
+                    android:baselineAligned="false"
                     android:orientation="horizontal"
-                    android:weightSum="2"
-                    android:baselineAligned="false">
+                    android:weightSum="2">
+
                     <com.google.android.material.textfield.TextInputLayout
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                         android:layout_width="0dp"
@@ -99,21 +111,21 @@
 
                     </com.google.android.material.textfield.TextInputLayout>
 
-<!--                    <com.google.android.material.textfield.TextInputLayout-->
-<!--                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"-->
-<!--                        android:layout_width="0dp"-->
-<!--                        android:layout_height="match_parent"-->
-<!--                        android:layout_weight="1"-->
-<!--                        android:textColorHint="#000000"-->
-<!--                        app:hintTextColor="#000000">-->
-<!--                        <com.google.android.material.textfield.MaterialAutoCompleteTextView-->
-<!--                            android:id="@+id/bloodGrpFilter"-->
-<!--                            android:layout_width="match_parent"-->
-<!--                            android:drawableStart="@drawable/ic_baseline_invert_colors_24"-->
-<!--                            android:layout_height="match_parent"-->
-<!--                            android:hint="@string/blood_group"-->
-<!--                            android:inputType="" />-->
-<!--                    </com.google.android.material.textfield.TextInputLayout>-->
+                    <!--                    <com.google.android.material.textfield.TextInputLayout-->
+                    <!--                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"-->
+                    <!--                        android:layout_width="0dp"-->
+                    <!--                        android:layout_height="match_parent"-->
+                    <!--                        android:layout_weight="1"-->
+                    <!--                        android:textColorHint="#000000"-->
+                    <!--                        app:hintTextColor="#000000">-->
+                    <!--                        <com.google.android.material.textfield.MaterialAutoCompleteTextView-->
+                    <!--                            android:id="@+id/bloodGrpFilter"-->
+                    <!--                            android:layout_width="match_parent"-->
+                    <!--                            android:drawableStart="@drawable/ic_baseline_invert_colors_24"-->
+                    <!--                            android:layout_height="match_parent"-->
+                    <!--                            android:hint="@string/blood_group"-->
+                    <!--                            android:inputType="" />-->
+                    <!--                    </com.google.android.material.textfield.TextInputLayout>-->
 
                 </LinearLayout>
 
@@ -121,9 +133,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
+                    android:baselineAligned="false"
                     android:orientation="horizontal"
-                    android:weightSum="2"
-                    android:baselineAligned="false">
+                    android:weightSum="2">
 
                     <com.google.android.material.textfield.TextInputLayout
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
@@ -167,38 +179,23 @@
                 </LinearLayout>
 
 
-
             </LinearLayout>
 
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="@dimen/_5dp"
                 android:background="@color/colorAccentDark" />
 
 
-            <ScrollView
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/donorsList"
                 android:layout_width="match_parent"
-                android:layout_height="500dp"
-                android:layout_marginVertical="5dp"
-                >
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/_5dp"
+                android:elevation="@dimen/minor_shadow" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    >
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="4.2"
-                        android:id="@+id/donorsList"/>
-
-                </LinearLayout>
-
-            </ScrollView>
 
             <View
                 android:layout_width="match_parent"
@@ -207,7 +204,6 @@
 
 
         </LinearLayout>
-
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

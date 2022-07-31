@@ -1,6 +1,7 @@
 package com.sumonkmr.ibdc;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -72,8 +73,10 @@ public class DashBoard extends AppCompatActivity implements View.OnClickListener
 
         LinearLayout ll_Home = menuView.findViewById(R.id.ll_Home);
         LinearLayout ll_Profile = menuView.findViewById(R.id.ll_Profile);
+        LinearLayout ll_fb = menuView.findViewById(R.id.ll_fb);
         LinearLayout ll_Share = menuView.findViewById(R.id.ll_Share);
         LinearLayout ll_about_us = menuView.findViewById(R.id.ll_about_us);
+        LinearLayout ll_privacy = menuView.findViewById(R.id.ll_privacy);
         LinearLayout ll_Logout = menuView.findViewById(R.id.ll_Logout);
         profile_name_menu = menuView.findViewById(R.id.profile_name_menu);
         profile_image_menu = menuView.findViewById(R.id.profile_image_menu);
@@ -96,14 +99,13 @@ public class DashBoard extends AppCompatActivity implements View.OnClickListener
                     String l_name = (Objects.requireNonNull(snapshot.child("LName").getValue()).toString());
                    profile_name_menu.setText(String.format("%s %s",f_name,l_name));
 
-                   if (!(profile_img_url == null)){
-                       Glide
-                               .with(DashBoard.this)
+                         Glide.with(getApplicationContext())
                                .load(profile_img_url)
                                .centerCrop()
                                .placeholder(R.drawable.ibdc_logo)
                                .into(profile_image_menu);
-                   }
+
+
 
                 }
             }
@@ -118,9 +120,11 @@ public class DashBoard extends AppCompatActivity implements View.OnClickListener
 
         ll_Home.setOnClickListener(this);
         ll_Profile.setOnClickListener(this);
+        ll_fb.setOnClickListener(this);
         ll_Share.setOnClickListener(this);
         ll_Logout.setOnClickListener(this);
         ll_about_us.setOnClickListener(this);
+        ll_privacy.setOnClickListener(this);
         sds_dash.setOnClickListener(this);
         sds_image.setOnClickListener(this);
         mail.setOnClickListener(this);
@@ -145,7 +149,11 @@ public class DashBoard extends AppCompatActivity implements View.OnClickListener
                 replace(new ProfileFragment(),"Profile");
                 break;
 
-            case R.id.ll_Share:
+            case R.id.ll_fb:
+                gotoUrl("https://www.facebook.com/groups/ibdcbd");
+                break;
+
+                case R.id.ll_Share:
                 shareApp();
                 break;
 
@@ -153,7 +161,11 @@ public class DashBoard extends AppCompatActivity implements View.OnClickListener
                 startActivity(new Intent(this, AboutUs.class));
                 break;
 
-            case R.id.ll_Logout:
+            case R.id.ll_privacy:
+                gotoUrl("https://ibdcprivacypolicy.blogspot.com/");
+                break;
+
+                case R.id.ll_Logout:
                 auth.signOut();
                 startActivity(new Intent(this,SplashScreen.class));
                 break;

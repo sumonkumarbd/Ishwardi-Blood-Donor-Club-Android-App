@@ -3,73 +3,21 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/work_station/IBDC App/app/src/main/res/drawable/bg_overlay.xml" value="0.156" />
-        <entry key="..\:/work_station/IBDC App/app/src/main/res/drawable/card.xml" value="0.1565" />
-        <entry key="..\:/work_station/IBDC App/app/src/main/res/drawable/circleyellowfil.xml" value="0.1565" />
-        <entry key="..\:/work_station/IBDC App/app/src/main/res/drawable/circularbordersolid.xml" value="0.1555" />
-        <entry key="..\:/work_station/IBDC App/app/src/main/res/drawable/coustom_progressbar.xml" value="0.1" />
-        <entry key="..\:/work_station/IBDC App/app/src/main/res/drawable/ic_arrow_back_24dp.xml" value="0.1565" />
-        <entry key="..\:/work_station/IBDC App/app/src/main/res/drawable/upper_redius.xml" value="0.1565" />
-        <entry key="..\:/work_station/IBDC App/app/src/main/res/font/actor.xml" value="0.15263157894736842" />
-        <entry key="..\:/work_station/IBDC App/app/src/main/res/font/des_font.xml" value="0.1703111858704794" />
-        <entry key="..\:/work_station/IBDC App/app/src/main/res/font/text_font.xml" value="0.15175438596491228" />
-        <entry key="..\:/work_station/IBDC App/app/src/main/res/font/title_font.xml" value="0.17115222876366695" />
-        <entry key="..\:/work_station/IBDC App/app/src/main/res/layout/about_us.xml" value="0.18137254901960784" />
-        <entry key="..\:/work_station/IBDC App/app/src/main/res/layout/activity_be_donor.xml" value="0.1423076923076923" />
-        <entry key="..\:/work_station/IBDC App/app/src/main/res/layout/activity_dash_board.xml" value="0.14" />
-        <entry key="..\:/work_station/IBDC App/app/src/main/res/layout/activity_dispaly_requests.xml" value="0.10673076923076923" />
-        <entry key="..\:/work_station/IBDC App/app/src/main/res/layout/activity_display_donors.xml" value="0.22" />
-        <entry key="..\:/work_station/IBDC App/app/src/main/res/layout/activity_instraction.xml" value="0.19" />
-        <entry key="..\:/work_station/IBDC App/app/src/main/res/layout/activity_instruction.xml" value="0.21" />
-        <entry key="..\:/work_station/IBDC App/app/src/main/res/layout/activity_instructions.xml" value="0.16" />
-        <entry key="..\:/work_station/IBDC App/app/src/main/res/layout/activity_login_screen.xml" value="0.17" />
-        <entry key="..\:/work_station/IBDC App/app/src/main/res/layout/activity_main.xml" value="0.21" />
-        <entry key="..\:/work_station/IBDC App/app/src/main/res/layout/activity_main2.xml" value="0.1082427536231884" />
-        <entry key="..\:/work_station/IBDC App/app/src/main/res/layout/activity_profit_of_donation.xml" value="0.12017543859649123" />
-        <entry key="..\:/work_station/IBDC App/app/src/main/res/layout/activity_register_i.xml" value="0.21" />
-        <entry key="..\:/work_station/IBDC App/app/src/main/res/layout/activity_register_i_i.xml" value="0.25" />
-        <entry key="..\:/work_station/IBDC App/app/src/main/res/layout/activity_register_i_i_i.xml" value="0.25" />
-        <entry key="..\:/work_station/IBDC App/app/src/main/res/layout/details_donor_requester.xml" value="0.18" />
-        <entry key="..\:/work_station/IBDC App/app/src/main/res/layout/donor_list_activity.xml" value="0.16" />
-        <entry key="..\:/work_station/IBDC App/app/src/main/res/layout/fragment_home.xml" value="0.18" />
-        <entry key="..\:/work_station/IBDC App/app/src/main/res/layout/fragment_profile.xml" value="0.25" />
-        <entry key="..\:/work_station/IBDC App/app/src/main/res/layout/fragment_setting.xml" value="0.1423076923076923" />
-        <entry key="..\:/work_station/IBDC App/app/src/main/res/layout/image_slider.xml" value="0.14145299145299145" />
-        <entry key="..\:/work_station/IBDC App/app/src/main/res/layout/nav_footer.xml" value="0.4135702746365105" />
-        <entry key="..\:/work_station/IBDC App/app/src/main/res/layout/nav_header.xml" value="0.1082427536231884" />
-        <entry key="..\:/work_station/IBDC App/app/src/main/res/layout/profile_ui.xml" value="0.9637096774193549" />
-        <entry key="..\:/work_station/IBDC App/app/src/main/res/menu/context_menu.xml" value="0.1423076923076923" />
-        <entry key="..\:/work_station/IBDC App/app/src/main/res/menu/donors_menu.xml" value="0.21" />
-        <entry key="..\:/work_station/IBDC App/app/src/main/res/menu/menu.xml" value="0.22" />
-        <entry key="..\:/work_station/blood_bank-main/app/src/main/res/drawable/blood_drop.xml" value="0.1945" />
-        <entry key="..\:/work_station/blood_bank-main/app/src/main/res/drawable/card.xml" value="0.1565" />
-        <entry key="..\:/work_station/blood_bank-main/app/src/main/res/drawable/ic_baseline_call_24.xml" value="0.1565" />
-        <entry key="..\:/work_station/blood_bank-main/app/src/main/res/drawable/ic_baseline_invert_colors_24.xml" value="0.1565" />
-        <entry key="..\:/work_station/blood_bank-main/app/src/main/res/drawable/ic_compare_black_24dp.xml" value="0.1945" />
-        <entry key="..\:/work_station/blood_bank-main/app/src/main/res/drawable/round_button.xml" value="0.1945" />
-        <entry key="..\:/work_station/blood_bank-main/app/src/main/res/drawable/round_textbox.xml" value="0.1565" />
-        <entry key="..\:/work_station/blood_bank-main/app/src/main/res/drawable/text_box_border_coustom.xml" value="0.1565" />
-        <entry key="..\:/work_station/blood_bank-main/app/src/main/res/drawable/white_box.xml" value="0.1565" />
-        <entry key="..\:/work_station/blood_bank-main/app/src/main/res/font/.xml" value="0.21666666666666667" />
-        <entry key="..\:/work_station/blood_bank-main/app/src/main/res/font/actor.xml" value="0.21666666666666667" />
-        <entry key="..\:/work_station/blood_bank-main/app/src/main/res/layout-v26/activity_dispaly_requests.xml" value="0.18645833333333334" />
-        <entry key="..\:/work_station/blood_bank-main/app/src/main/res/layout/activity_dash_board.xml" value="0.18" />
-        <entry key="..\:/work_station/blood_bank-main/app/src/main/res/layout/activity_dispaly_requests.xml" value="0.25" />
-        <entry key="..\:/work_station/blood_bank-main/app/src/main/res/layout/activity_display_donors.xml" value="0.18" />
-        <entry key="..\:/work_station/blood_bank-main/app/src/main/res/layout/activity_login_screen.xml" value="0.25" />
-        <entry key="..\:/work_station/blood_bank-main/app/src/main/res/layout/activity_main.xml" value="0.18645833333333334" />
-        <entry key="..\:/work_station/blood_bank-main/app/src/main/res/layout/activity_navigation_bar_manu.xml" value="0.14" />
-        <entry key="..\:/work_station/blood_bank-main/app/src/main/res/layout/activity_register_i.xml" value="0.2" />
-        <entry key="..\:/work_station/blood_bank-main/app/src/main/res/layout/activity_register_i_i.xml" value="0.22" />
-        <entry key="..\:/work_station/blood_bank-main/app/src/main/res/layout/activity_register_i_i_i.xml" value="0.22" />
-        <entry key="..\:/work_station/blood_bank-main/app/src/main/res/layout/details_donor_requester.xml" value="0.25" />
+        <entry key="..\:/android_projects/projects/Productions/IBDC App/app/src/main/res/drawable/thumb.xml" value="0.1025" />
+        <entry key="..\:/android_projects/projects/Productions/IBDC App/app/src/main/res/drawable/track.xml" value="0.1025" />
+        <entry key="..\:/android_projects/projects/Productions/IBDC App/app/src/main/res/layout/about_us.xml" value="0.13796296296296295" />
+        <entry key="..\:/android_projects/projects/Productions/IBDC App/app/src/main/res/layout/activity_dash_board.xml" value="0.15416666666666667" />
+        <entry key="..\:/android_projects/projects/Productions/IBDC App/app/src/main/res/layout/activity_instructions.xml" value="0.15416666666666667" />
+        <entry key="..\:/android_projects/projects/Productions/IBDC App/app/src/main/res/layout/activity_login_screen.xml" value="0.23013130615065652" />
+        <entry key="..\:/android_projects/projects/Productions/IBDC App/app/src/main/res/layout/activity_register_i.xml" value="0.15416666666666667" />
+        <entry key="..\:/android_projects/projects/Productions/IBDC App/app/src/main/res/layout/activity_register_i_i.xml" value="0.15416666666666667" />
+        <entry key="..\:/android_projects/projects/Productions/IBDC App/app/src/main/res/layout/activity_register_i_i_i.xml" value="0.18" />
+        <entry key="..\:/android_projects/projects/Productions/IBDC App/app/src/main/res/layout/details_donor_requester.xml" value="0.15416666666666667" />
+        <entry key="..\:/android_projects/projects/Productions/IBDC App/app/src/main/res/layout/donor_list_activity.xml" value="0.16" />
+        <entry key="..\:/android_projects/projects/Productions/IBDC App/app/src/main/res/layout/fragment_home.xml" value="0.15416666666666667" />
+        <entry key="..\:/android_projects/projects/Productions/IBDC App/app/src/main/res/layout/fragment_profile.xml" value="0.15416666666666667" />
+        <entry key="..\:/android_projects/projects/Productions/IBDC App/app/src/main/res/layout/nav_footer.xml" value="0.15416666666666667" />
       </map>
     </option>
-  </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
-    <output url="file://$PROJECT_DIR$/build/classes" />
-  </component>
-  <component name="ProjectType">
-    <option name="id" value="Android" />
   </component>
 </project>

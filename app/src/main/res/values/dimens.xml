@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="s">45</dimen>
-    <dimen name="activity_horizontal_margin">16dp</dimen>
-    <dimen name="activity_vertical_margin">16dp</dimen>
-    <dimen name="tab_max_width">264dp</dimen>
-    <dimen name="tab_padding_bottom">16dp</dimen>
-    <dimen name="tab_label">12sp</dimen>
-    <dimen name="custom_tab_layout_height">72dp</dimen>
-    <dimen name="form_txt">18sp</dimen>
-    <dimen name="profile_txt">16sp</dimen>
-    <dimen name="manu_txt">25sp</dimen>
-    <dimen name="shadow">15dp</dimen>
-    <dimen name="minor_shadow">2dp</dimen>
-    <dimen name="card_txt">14sp</dimen>
-    <dimen name="card_header_txt">20sp</dimen>
-    <dimen name="hint_size">8sp</dimen>
+    <dimen name="activity_horizontal_margin">@dimen/_16dp</dimen>
+    <dimen name="activity_vertical_margin">@dimen/_16dp</dimen>
+    <dimen name="tab_max_width">@dimen/_264dp</dimen>
+    <dimen name="tab_padding_bottom">@dimen/_16dp</dimen>
+    <dimen name="tab_label">@dimen/_10sp</dimen>
+    <dimen name="custom_tab_layout_height">@dimen/_72dp</dimen>
+    <dimen name="form_txt">@dimen/_14sp</dimen>
+    <dimen name="profile_txt">@dimen/_12dp</dimen>
+    <dimen name="manu_txt">@dimen/_20dp</dimen>
+    <dimen name="shadow">@dimen/_10dp</dimen>
+    <dimen name="minor_shadow">@dimen/_1sp</dimen>
+    <dimen name="card_txt">@dimen/_10sp</dimen>
+    <dimen name="card_header_txt">@dimen/_18sp</dimen>
+    <dimen name="hint_size">@dimen/_4sp</dimen>
 </resources>

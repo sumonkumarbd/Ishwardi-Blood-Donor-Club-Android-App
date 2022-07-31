@@ -53,6 +53,7 @@ import com.karumi.dexter.listener.single.PermissionListener;
 import java.io.InputStream;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 public class RegisterIIIActivity extends AppCompatActivity {
@@ -63,21 +64,22 @@ public class RegisterIIIActivity extends AppCompatActivity {
     EditText mobile,textVerification;
     Button submit;
     com.airbnb.lottie.LottieAnimationView loadingAim3;
-   final Context  context = RegisterIIIActivity.this;
+    final Context  context = RegisterIIIActivity.this;
     boolean isVerified = false, isSubmit = false;
     TextView profile_image_hint;
 
     Uri filepath;
     Bitmap bitmap;
-    String userId,profile_url;
+    String userId,otpid;
     Uri profile_uri;
     int d,m,y;
     private StorageReference storageReference;
     private DatabaseReference dbReference;
     private FirebaseDatabase db;
     private ProgressBar progressbar;
-
     String id;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -215,10 +217,12 @@ public class RegisterIIIActivity extends AppCompatActivity {
     }
 
 
+
     PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+
         @Override
         public void onVerificationCompleted(PhoneAuthCredential credential) {
-            textVerification.setText(R.string.verified);
+            textVerification.setText(id);
             addToDatabase();
         }
 
@@ -226,9 +230,9 @@ public class RegisterIIIActivity extends AppCompatActivity {
         public void onVerificationFailed(FirebaseException e) {
 
             if (e instanceof FirebaseAuthInvalidCredentialsException) {
-               textVerification.setText("Failed!");
+               textVerification.setText("অসমাপ্ত!");
             } else if (e instanceof FirebaseTooManyRequestsException) {
-                textVerification.setText("Message Quota Exceeded!\nTry Again After few Hours!");
+                textVerification.setText("কিছুক্ষন পর আবার চেষ্টা করুন...");
             }
 
            mobile.setEnabled(true);
@@ -280,7 +284,7 @@ public class RegisterIIIActivity extends AppCompatActivity {
             if (!isVerified && !mobile.getText().toString().isEmpty() && !bloodgrp.getText().toString().isEmpty()) {
                 PhoneAuthOptions options = PhoneAuthOptions.newBuilder(FirebaseAuth.getInstance())
                         .setPhoneNumber("+88" + mobile.getText().toString())
-                        .setTimeout(60L, TimeUnit.SECONDS)
+                        .setTimeout(15L, TimeUnit.SECONDS)
                         .setActivity(RegisterIIIActivity.this)
                         .setCallbacks(mCallbacks)
                         .build();
@@ -293,7 +297,7 @@ public class RegisterIIIActivity extends AppCompatActivity {
             }
         }else {
             PhoneAuthCredential credential = PhoneAuthProvider.getCredential(id,textVerification.getText().toString());
-            FirebaseAuth.getInstance().getCurrentUser().linkWithCredential(credential)
+            Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).linkWithCredential(credential)
                     .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
