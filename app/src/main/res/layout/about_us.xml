@@ -101,7 +101,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
-                            android:visibility="gone">
+                            android:visibility="visible">
 
                             <TextView
                                 android:layout_width="match_parent"
@@ -464,7 +464,7 @@
                                         android:layout_marginHorizontal="10dp"
                                         android:layout_marginTop="5dp"
                                         android:fontFamily="@font/des_font"
-                                        android:text="@string/sadiqul_position"
+                                        android:text="@string/harun_position"
                                         android:textAlignment="center"
                                         android:textColor="@color/goodgrey"
                                         android:textSize="@dimen/card_txt"
@@ -580,7 +580,7 @@
                                         android:layout_marginHorizontal="10dp"
                                         android:layout_marginTop="5dp"
                                         android:fontFamily="@font/des_font"
-                                        android:text="@string/rakibul_position"
+                                        android:text="@string/mamun_position"
                                         android:textAlignment="center"
                                         android:textColor="@color/goodgrey"
                                         android:textSize="@dimen/card_txt"
@@ -768,7 +768,6 @@
 
 
             </LinearLayout>
-
 
         </LinearLayout>
 
