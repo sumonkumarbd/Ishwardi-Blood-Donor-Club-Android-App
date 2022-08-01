@@ -9,6 +9,7 @@ import android.appwidget.AppWidgetHost;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.Patterns;
@@ -60,6 +61,7 @@ public class LoginScreenActivity extends AppCompatActivity {
     String s_phn_logIn,s_passLogin_p,id;
     private final FirebaseDatabase db = FirebaseDatabase.getInstance();
     DatabaseReference dbReference;
+    boolean doubleBackToExitPressedOnce = false;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -153,7 +155,7 @@ public class LoginScreenActivity extends AppCompatActivity {
                                 loadingAim.setVisibility(View.VISIBLE);
                                 startActivity(new Intent(LoginScreenActivity.this,SplashScreen.class));
                             }else {
-                                Toast.makeText(LoginScreenActivity.this, "Incorrect Email or Password!", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(LoginScreenActivity.this, "ইমেল অথবা পাসওয়ার্ড ভুল!!", Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
@@ -222,36 +224,53 @@ public class LoginScreenActivity extends AppCompatActivity {
 
     private void signInWithPhoneAuthCredential(PhoneAuthCredential credential) {
         mAuth.signInWithCredential(credential)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            FirebaseUser user = task.getResult().getUser();
-                            assert user != null;
-                            if (user.getEmail() != null){
-                                startActivity(new Intent(LoginScreenActivity.this,SplashScreen.class));
-                                finish();
-                            }else {
-                                user.delete();
-                                Toast.makeText(LoginScreenActivity.this, "এই নম্বর টি নিবন্ধিত নয়!", Toast.LENGTH_SHORT).show();
-                                Handler handler = new Handler();
-                                Runnable runnable = () -> {
-                                    startActivity(new Intent(LoginScreenActivity.this,RegisterIActivity.class));
-                                };
-                                handler.postDelayed(runnable,4000);
-                            }
+                .addOnCompleteListener(this, task -> {
+                    if (task.isSuccessful()) {
+                        // Sign in success, update UI with the signed-in user's information
+                        FirebaseUser user = task.getResult().getUser();
+                        assert user != null;
+                        if (user.getEmail() != null){
+                            startActivity(new Intent(LoginScreenActivity.this,SplashScreen.class));
+                            finish();
+                        }else {
+                            user.delete();
+                            Toast.makeText(LoginScreenActivity.this, "এই নম্বর টি নিবন্ধিত নয়!", Toast.LENGTH_SHORT).show();
+                            Handler handler = new Handler();
+                            Runnable runnable = () -> {
+                                startActivity(new Intent(LoginScreenActivity.this,RegisterIActivity.class));
+                            };
+                            handler.postDelayed(runnable,4000);
+                        }
 
-                            // Update UI
-                        } else {
-                            // Sign in failed, display a message and update the UI
-                            if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
-                                // The verification code entered was invalid
-                                Toast.makeText(LoginScreenActivity.this, "Please Give Us Valid Information's!!", Toast.LENGTH_SHORT).show();
-                            }
+                        // Update UI
+                    } else {
+                        // Sign in failed, display a message and update the UI
+                        if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
+                            // The verification code entered was invalid
+                            Toast.makeText(LoginScreenActivity.this, "তথ্য সঠিক নয়...!!", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
     }//signInWithPhoneAuthCredential
+
+
+    @Override
+    public void onBackPressed() {
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed();
+            return;
+        }
+
+        this.doubleBackToExitPressedOnce = true;
+        Toast.makeText(this, "পুনরায় ব্যাক বাটন প্রেস করুন!", Toast.LENGTH_SHORT).show();
+
+        new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce=false;
+            }
+        }, 2000);
+    }
 
 }//root
