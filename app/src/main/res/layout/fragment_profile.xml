@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:visibility="visible"
+        android:visibility="gone"
         android:orientation="vertical">
         <!--    for background images-->
         <ImageView
@@ -542,40 +542,45 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:visibility="gone"
+        android:visibility="visible"
         android:orientation="vertical">
 
+<!--        Root Edit-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:weightSum="3"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             >
 
             <ImageButton
                 android:id="@+id/update_back"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginStart="10dp"
+                android:layout_width="@dimen/_20dp"
+                android:layout_height="@dimen/_20dp"
+                android:layout_marginStart="@dimen/_10dp"
+                android:layout_marginTop="@dimen/_10dp"
                 android:background="@color/tns"
+                android:contentDescription="@string/backbutton"
                 android:elevation="@dimen/shadow"
-                android:src="@drawable/backpng"
-                android:contentDescription="@string/backbutton" />
+                android:src="@drawable/backpng" />
+
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1.25"
                 android:layout_marginTop="@dimen/_minus_20dp"
-                android:orientation="vertical"
-                >
+                android:layout_weight="1.25"
+                android:orientation="vertical">
+
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
-                    android:gravity="center"
-                    >
+                    android:gravity="center">
 
                     <ProgressBar
                         android:id="@+id/progressbar"
@@ -626,43 +631,41 @@
                         app:layout_constraintEnd_toEndOf="@+id/profile_image_edit" />
 
 
-
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </LinearLayout>
 
+              <LinearLayout
+                    android:id="@+id/linearLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_gravity="center"
+                    android:layout_marginHorizontal="@dimen/_12dp"
+                    android:layout_weight="1.8"
+                    android:background="@drawable/round_textbox"
+                    android:elevation="@dimen/_5dp"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="@dimen/_8dp"
+                    android:weightSum="2.4">
 
-          <LinearLayout
-           android:id="@+id/linearLayout"
-           android:layout_width="match_parent"
-           android:layout_height="0dp"
-           android:layout_weight="1.85"
-           android:layout_gravity="center"
-           android:background="@drawable/round_textbox"
-           android:elevation="@dimen/_5dp"
-           android:layout_marginHorizontal="@dimen/_12dp"
-           android:gravity="center"
-           android:orientation="vertical"
-           android:padding="@dimen/_8dp"
-           android:weightSum="2.4"
-           >
-
-<!--                    name lay-->
+                    <!--                    name lay-->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight=".4"
-                        android:weightSum="2"
+                        android:baselineAligned="false"
                         android:orientation="horizontal"
-                        tools:ignore="NestedWeights"
-                        android:baselineAligned="false">
+                        android:weightSum="2"
+                        tools:ignore="NestedWeights">
+
                         <com.google.android.material.textfield.TextInputLayout
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
+                            android:layout_marginHorizontal="2dp"
                             android:layout_weight="1"
                             android:hint="@string/first_name"
-                            android:layout_marginHorizontal="2dp"
                             android:textColorHint="#000000"
                             app:hintTextColor="#000000">
 
@@ -678,9 +681,9 @@
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
+                            android:layout_marginHorizontal="2dp"
                             android:layout_weight="1"
                             android:hint="@string/last_name"
-                            android:layout_marginHorizontal="2dp"
                             android:textColorHint="#000000"
                             app:hintTextColor="#000000">
 
@@ -698,111 +701,112 @@
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight=".4"
-                        android:weightSum="2"
+                        android:baselineAligned="false"
                         android:orientation="horizontal"
-                        tools:ignore="NestedWeights"
-                        android:baselineAligned="false">
-                    <com.google.android.material.textfield.TextInputLayout
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:layout_marginHorizontal="2dp"
-                        android:hint="@string/divisions"
-                        android:textColorHint="#000000"
-                        app:hintTextColor="#000000">
-
-                        <AutoCompleteTextView
-                            android:id="@+id/stateDropDrown_edit"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint=""
-                            android:inputType="none" />
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:layout_marginHorizontal="2dp"
-                        android:hint="@string/district"
-                        android:textColorHint="#000000"
-                        app:hintTextColor="#000000">
-
-                        <AutoCompleteTextView
-                            android:id="@+id/districtDropDrown_edit"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint=""
-                            android:inputType="none" />
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight=".4"
                         android:weightSum="2"
-                        android:orientation="horizontal"
-                        tools:ignore="NestedWeights"
-                        android:baselineAligned="false">
+                        tools:ignore="NestedWeights">
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:layout_marginHorizontal="2dp"
-                        android:hint="@string/upazila"
-                        android:textColorHint="#000000"
-                        app:hintTextColor="#000000">
+                        <com.google.android.material.textfield.TextInputLayout
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginHorizontal="2dp"
+                            android:layout_weight="1"
+                            android:hint="@string/divisions"
+                            android:textColorHint="#000000"
+                            app:hintTextColor="#000000">
 
-                        <AutoCompleteTextView
-                            android:id="@+id/upazilaDropDrown_edit"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:inputType="none" />
+                            <AutoCompleteTextView
+                                android:id="@+id/stateDropDrown_edit"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint=""
+                                android:inputType="none" />
 
-                    </com.google.android.material.textfield.TextInputLayout>
+                        </com.google.android.material.textfield.TextInputLayout>
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:layout_marginHorizontal="2dp"
-                        android:hint="@string/village"
-                        android:textColorHint="#000000"
-                        app:hintTextColor="#000000">
+                        <com.google.android.material.textfield.TextInputLayout
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginHorizontal="2dp"
+                            android:layout_weight="1"
+                            android:hint="@string/district"
+                            android:textColorHint="#000000"
+                            app:hintTextColor="#000000">
 
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/village_edit"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:inputType="textCapWords"
-                            android:singleLine="true" />
-                    </com.google.android.material.textfield.TextInputLayout>
+                            <AutoCompleteTextView
+                                android:id="@+id/districtDropDrown_edit"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint=""
+                                android:inputType="none" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight=".4"
-                        android:weightSum="2"
+                        android:baselineAligned="false"
                         android:orientation="horizontal"
-                        tools:ignore="NestedWeights"
-                        android:baselineAligned="false">
+                        android:weightSum="2"
+                        tools:ignore="NestedWeights">
 
-                    <com.google.android.material.textfield.TextInputLayout
+                        <com.google.android.material.textfield.TextInputLayout
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_weight="1"
                             android:layout_marginHorizontal="2dp"
+                            android:layout_weight="1"
+                            android:hint="@string/upazila"
+                            android:textColorHint="#000000"
+                            app:hintTextColor="#000000">
+
+                            <AutoCompleteTextView
+                                android:id="@+id/upazilaDropDrown_edit"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="none" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginHorizontal="2dp"
+                            android:layout_weight="1"
+                            android:hint="@string/village"
+                            android:textColorHint="#000000"
+                            app:hintTextColor="#000000">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/village_edit"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="textCapWords"
+                                android:singleLine="true" />
+                        </com.google.android.material.textfield.TextInputLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight=".4"
+                        android:baselineAligned="false"
+                        android:orientation="horizontal"
+                        android:weightSum="2"
+                        tools:ignore="NestedWeights">
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginHorizontal="2dp"
+                            android:layout_weight="1"
                             android:hint="@string/blood_group"
                             android:textColorHint="#000000"
                             app:hintTextColor="#000000">
@@ -815,12 +819,12 @@
 
                         </com.google.android.material.textfield.TextInputLayout>
 
-                    <com.google.android.material.textfield.TextInputLayout
+                        <com.google.android.material.textfield.TextInputLayout
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_weight="1"
                             android:layout_marginHorizontal="2dp"
+                            android:layout_weight="1"
                             android:hint="@string/last_donate"
                             android:textColorHint="#000000"
                             app:hintTextColor="#000000">
@@ -829,19 +833,19 @@
                                 android:id="@+id/lastDonateDate_edit"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:textSize="@dimen/tab_label"
-                                android:inputType="none" />
+                                android:inputType="none"
+                                android:textSize="@dimen/tab_label" />
 
                         </com.google.android.material.textfield.TextInputLayout>
 
-                </LinearLayout>
+                    </LinearLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:layout_weight=".4"
                         android:layout_marginHorizontal="2dp"
+                        android:layout_weight=".4"
                         android:hint="@string/birthdate"
                         android:textColorHint="#000000"
                         app:hintTextColor="#000000">
@@ -854,16 +858,16 @@
 
                     </com.google.android.material.textfield.TextInputLayout>
 
-              <Button
-                            android:id="@+id/save_btn"
-                            android:layout_width="match_parent"
-                            android:layout_height="0dp"
-                            android:layout_weight=".4"
-                            android:text="@string/save_profile"
-                            />
+                    <Button
+                        android:id="@+id/save_btn"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight=".4"
+                        android:text="@string/save_profile" />
                 </LinearLayout>
 
         </LinearLayout>
+<!--        root Edit-->
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

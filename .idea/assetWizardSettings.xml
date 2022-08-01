@@ -3,9 +3,47 @@
   <component name="WizardSettings">
     <option name="children">
       <map>
-        <entry key="vectorWizard">
+        <entry key="imageWizard">
           <value>
             <PersistentState />
+          </value>
+        </entry>
+        <entry key="vectorWizard">
+          <value>
+            <PersistentState>
+              <option name="children">
+                <map>
+                  <entry key="vectorAssetStep">
+                    <value>
+                      <PersistentState>
+                        <option name="children">
+                          <map>
+                            <entry key="clipartAsset">
+                              <value>
+                                <PersistentState>
+                                  <option name="values">
+                                    <map>
+                                      <entry key="url" value="file:/D:/Program_Files/Android/Sdk/icons/material/materialicons/phone_iphone/baseline_phone_iphone_24.xml" />
+                                    </map>
+                                  </option>
+                                </PersistentState>
+                              </value>
+                            </entry>
+                          </map>
+                        </option>
+                        <option name="values">
+                          <map>
+                            <entry key="color" value="bf1f2d" />
+                            <entry key="outputName" value="ic_baseline_phone_iphone_24" />
+                            <entry key="sourceFile" value="G:\android_projects\projects\Productions\IBDC App" />
+                          </map>
+                        </option>
+                      </PersistentState>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </PersistentState>
           </value>
         </entry>
       </map>

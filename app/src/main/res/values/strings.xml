@@ -33,8 +33,8 @@
     <string name="title_dashboard">ড্যাশবোর্ড</string>
     <string name="title_notifications">নোটিফিকেশন</string>
     <string name="search">সার্চ</string>
-    <string name="Email">ইমেল</string>
-    <string name="phone">নাম্বার</string>
+    <string name="Email"><i>ই-ইমেল</i></string>
+    <string name="phone"><i>ফোন</i></string>
     <string name="cover">কভার</string>
     <string name="register">নিবন্ধন</string>
     <string name="last_name">পদবী</string>
