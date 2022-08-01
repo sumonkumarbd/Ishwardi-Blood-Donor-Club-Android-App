@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 public class AboutUs extends AppCompatActivity {
 
-    LinearLayout sds;
+    LinearLayout sds,sadequl,rakibul,harun,mamun;
     TextView dev_name,sdsEmail,moreApps;
     ImageView dev_img;
 
@@ -49,6 +49,23 @@ public class AboutUs extends AppCompatActivity {
         });
 
 
+//        Directors onClick
+        sadequl.setOnClickListener(v-> {
+            gotoUrl("https://www.facebook.com/sadequl71");
+        });
+
+        rakibul.setOnClickListener(v-> {
+            gotoUrl("https://www.facebook.com/rakibul.shakil.7");
+        });
+
+        harun.setOnClickListener(v-> {
+            gotoUrl("https://www.facebook.com/harunmehedi70");
+        });
+
+        mamun.setOnClickListener(v-> {
+            gotoUrl("https://www.facebook.com/jsjs.hshsh.522");
+        });
+
     }//Finished On create!
 
     private void Innit(){
@@ -57,6 +74,10 @@ public class AboutUs extends AppCompatActivity {
         dev_name = findViewById(R.id.dev_name);
         dev_img = findViewById(R.id.dev_img);
         moreApps = findViewById(R.id.moreApps);
+        sadequl = findViewById(R.id.sadequl);
+        rakibul = findViewById(R.id.rakibul);
+        harun = findViewById(R.id.harun);
+        mamun = findViewById(R.id.mamun);
     }
 
     private void gotoUrl(String url){
