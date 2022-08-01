@@ -14,14 +14,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:visibility="gone"
+        android:visibility="visible"
         android:orientation="vertical">
         <!--    for background images-->
         <ImageView
             android:id="@+id/cover_image"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="8dp"
+            android:layout_margin="@dimen/_8dp"
             android:contentDescription="@string/cover"
             android:scaleType="centerCrop"
             android:src="@drawable/ibdc_logo" />
@@ -92,8 +92,8 @@
                         android:elevation="@dimen/shadow"
                         android:scaleType="centerCrop"
                         android:src="@drawable/ibdc_logo"
-                        app:civ_border_color="@color/colorAccentDark"
-                        app:civ_border_width="@dimen/_5dp" />
+                        app:civ_border_color="@color/colorPrimary"
+                        app:civ_border_width="@dimen/_3dp" />
 
                 </RelativeLayout>
 
@@ -542,7 +542,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:visibility="visible"
+        android:visibility="gone"
         android:orientation="vertical">
 
 <!--        Root Edit-->
