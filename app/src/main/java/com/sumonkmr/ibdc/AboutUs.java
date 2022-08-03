@@ -1,20 +1,30 @@
 package com.sumonkmr.ibdc;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
 public class AboutUs extends AppCompatActivity {
 
     LinearLayout sds,sadequl,rakibul,harun,mamun;
-    TextView dev_name,sdsEmail,moreApps;
+    TextView dev_name,sdsEmail,moreApps,sadequl_phn,rakibul_phn,harun_phn,mamun_phn;
     ImageView dev_img;
+    private static final int Request_call = 1;
+    String sadequl_num = "tel:+8801764942671";
+    String rakibul_num = "tel:+8801726641227";
+    String harun_num = "tel:+8801849696823";
+    String mamun_num = "tel:+8801821897961";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +32,21 @@ public class AboutUs extends AppCompatActivity {
         setContentView(R.layout.about_us);
 
         Innit();
+        sadequl_phn.setOnClickListener(v-> {
+            callActions(sadequl_num);
+        });
+
+        rakibul_phn.setOnClickListener(v -> {
+            callActions(rakibul_num);
+        });
+
+        harun_phn.setOnClickListener(v -> {
+            callActions(harun_num);
+        });
+
+        mamun_phn.setOnClickListener(v -> {
+            callActions(mamun_num);
+        });
 
         dev_img.setOnClickListener(v -> {
             gotoUrl("https://www.facebook.com/developer.sumonkmr");
@@ -78,10 +103,26 @@ public class AboutUs extends AppCompatActivity {
         rakibul = findViewById(R.id.rakibul);
         harun = findViewById(R.id.harun);
         mamun = findViewById(R.id.mamun);
+        mamun_phn = findViewById(R.id.mamun_phn);
+        harun_phn = findViewById(R.id.harun_phn);
+        sadequl_phn = findViewById(R.id.sadequl_phn);
+        rakibul_phn = findViewById(R.id.rakibul_phn);
     }
 
     private void gotoUrl(String url){
         Uri uri = Uri.parse(url);
         startActivity(new Intent(Intent.ACTION_VIEW,uri));
     }
+
+
+    public void callActions(String number){
+            Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse(number));
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED){
+                ActivityCompat.requestPermissions(this,new String[] {Manifest.permission.CALL_PHONE},Request_call);
+            }else {
+                startActivity(intent);
+            }
+    }
+
+
 }

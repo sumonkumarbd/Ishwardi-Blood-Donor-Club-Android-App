@@ -180,7 +180,6 @@
                                 android:weightSum="2">
                                 <!--                                sadequl-->
                                 <LinearLayout
-                                    android:id="@+id/sadequl"
                                     android:layout_width="0dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
@@ -188,6 +187,7 @@
                                     android:orientation="vertical">
 
                                     <LinearLayout
+                                        android:id="@+id/sadequl"
                                         android:layout_width="match_parent"
                                         android:layout_height="@dimen/_160dp"
                                         android:gravity="center"
@@ -276,6 +276,7 @@
                                             app:civ_border_width="2dp" />
 
                                         <TextView
+                                            android:id="@+id/sadequl_phn"
                                             android:layout_width="wrap_content"
                                             android:layout_height="match_parent"
                                             android:fontFamily="@font/varela_round"
@@ -295,7 +296,6 @@
 
                                 <!--                                rakibul-->
                                 <LinearLayout
-                                    android:id="@+id/rakibul"
                                     android:layout_width="0dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
@@ -303,6 +303,7 @@
                                     android:orientation="vertical">
 
                                     <LinearLayout
+                                        android:id="@+id/rakibul"
                                         android:layout_width="match_parent"
                                         android:layout_height="@dimen/_160dp"
                                         android:gravity="center"
@@ -391,6 +392,7 @@
                                             app:civ_border_width="2dp" />
 
                                         <TextView
+                                            android:id="@+id/rakibul_phn"
                                             android:layout_width="wrap_content"
                                             android:layout_height="match_parent"
                                             android:fontFamily="@font/varela_round"
@@ -413,7 +415,6 @@
                                 android:weightSum="2">
                                 <!--Harun-->
                                 <LinearLayout
-                                    android:id="@+id/harun"
                                     android:layout_width="0dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
@@ -421,6 +422,7 @@
                                     android:orientation="vertical">
 
                                     <LinearLayout
+                                        android:id="@+id/harun"
                                         android:layout_width="match_parent"
                                         android:layout_height="@dimen/_160dp"
                                         android:gravity="center"
@@ -510,6 +512,7 @@
                                             app:civ_border_width="2dp" />
 
                                         <TextView
+                                            android:id="@+id/harun_phn"
                                             android:layout_width="wrap_content"
                                             android:layout_height="match_parent"
                                             android:fontFamily="@font/varela_round"
@@ -529,7 +532,6 @@
 
                                 <!--                                mamun-->
                                 <LinearLayout
-                                    android:id="@+id/mamun"
                                     android:layout_width="0dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
@@ -537,6 +539,7 @@
                                     android:orientation="vertical">
 
                                     <LinearLayout
+                                        android:id="@+id/mamun"
                                         android:layout_width="match_parent"
                                         android:layout_height="@dimen/_160dp"
                                         android:gravity="center"
@@ -625,6 +628,7 @@
                                             app:civ_border_width="2dp" />
 
                                         <TextView
+                                            android:id="@+id/mamun_phn"
                                             android:layout_width="wrap_content"
                                             android:layout_height="match_parent"
                                             android:fontFamily="@font/varela_round"
