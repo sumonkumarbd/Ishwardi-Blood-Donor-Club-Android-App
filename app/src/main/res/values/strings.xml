@@ -245,22 +245,22 @@
 
 <!--    Directors Info-->
 <!--    Sadequl-->
-    <string name="sadikul">মোঃ সাদিকুল ইসলাম শিমুল</string>
+    <string name="sadikul">সাদেকুল ইসলাম শিমুল</string>
     <string name="sadiqul_position">প্রতিষ্ঠাতা</string>
     <string name="sadiqul_num">01764–942671</string>
 
     <!--    rakibul-->
-    <string name="rakibul">মোঃ রাকবুল শাকিল</string>
+    <string name="rakibul">রাকিবুল শাকিল</string>
     <string name="rakibul_position">পরিচালক</string>
     <string name="rakibul_num">01726–641227</string>
 
     <!--    harun-->
-    <string name="harun">মোঃ হারুন মেহেদী</string>
+    <string name="harun">হারুন মেহেদী</string>
     <string name="harun_position">সহকারী পরিচালক</string>
     <string name="harun_num">01849–696823</string>
 
     <!--    mamun-->
-    <string name="mamun">মোঃ মামুন হোসেন</string>
+    <string name="mamun">মামুন হোসেন</string>
     <string name="mamun_position">সহকারী পরিচালক</string>
     <string name="mamun_num">01821–897961</string>
 
