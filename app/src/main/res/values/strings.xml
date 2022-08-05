@@ -1104,6 +1104,8 @@
     <string name="password_update">পাসওয়ার্ড পরিবর্তন করুন।</string>
     <string name="changeEmail"> ইমেল পরিবর্তন করুন।</string>
     <string name="change_phone">মোবাইল নাম্বার পরিবর্তন করন।</string>
+    <string name="reset"><b>রিসেট করুন!</b></string>
+    <string name="cancel"><b>বাতিল করুন!</b></string>
     <!--   End Sylet Division District-->
 
     <!--Finished Districts Array-->

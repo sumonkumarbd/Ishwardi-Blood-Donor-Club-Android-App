@@ -5,8 +5,10 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.appwidget.AppWidgetHost;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -14,6 +16,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -23,6 +26,8 @@ import android.widget.Toast;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.FirebaseTooManyRequestsException;
@@ -47,13 +52,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
+import java.util.function.Function;
 
 public class LoginScreenActivity extends AppCompatActivity {
 
 
-    EditText Email,Pass,phn_logIn,passLogin_p;
-    Button login,logon_btn_p,login_submit;
+    EditText Email,Pass,phn_logIn,passLogin_p,resetPass;
+    Button login,logon_btn_p,login_submit,resetBtn,cBtn;
     LottieAnimationView loadingAim;
+    TextView forgot_pass;
     androidx.appcompat.widget.SwitchCompat logSwitch;
     LinearLayout emailLgn,phnLgn;
     FirebaseAuth mAuth;
@@ -62,6 +69,7 @@ public class LoginScreenActivity extends AppCompatActivity {
     private final FirebaseDatabase db = FirebaseDatabase.getInstance();
     DatabaseReference dbReference;
     boolean doubleBackToExitPressedOnce = false;
+    Dialog dialog;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -79,12 +87,18 @@ public class LoginScreenActivity extends AppCompatActivity {
         loadingAim = findViewById(R.id.loadingAim);
         logSwitch = findViewById(R.id.logSwitch);
         emailLgn = findViewById(R.id.emailLgn);
+        forgot_pass = findViewById(R.id.forgot_pass);
         phnLgn = findViewById(R.id.phnLgn);
         phn_logIn = findViewById(R.id.phn_logIn);
         passLogin_p = findViewById(R.id.passLogin_p);
         s_phn_logIn = phn_logIn.getText().toString();
         s_passLogin_p = passLogin_p.getText().toString();
         loadingAim.setVisibility(View.GONE);
+
+
+//        Functions
+        DialogSetup();
+
 
         logSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked){
@@ -123,7 +137,6 @@ public class LoginScreenActivity extends AppCompatActivity {
             }
 
         });
-
 
 
 
@@ -273,4 +286,56 @@ public class LoginScreenActivity extends AppCompatActivity {
         }, 2000);
     }
 
+
+
+    private void DialogSetup(){
+        Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.reset_pass_dialog);
+
+        String emailExceptions = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$";
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            dialog.getWindow().setBackgroundDrawable(getDrawable(R.drawable.custom_dialog_background));
+        }
+
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.setCancelable(false); //Optional
+        dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation; //Setting the animations to dialog
+
+        resetPass = dialog.findViewById(R.id.resetPass);
+        resetBtn = dialog.findViewById(R.id.resetBtn);
+        cBtn = dialog.findViewById(R.id.cBtn);
+
+        forgot_pass.setOnClickListener(v-> {
+            dialog.show();
+        });
+
+        resetBtn.setOnClickListener(v -> {
+            if (!resetPass.getText().toString().isEmpty() && resetPass.getText().toString().matches(emailExceptions)) {
+                mAuth.sendPasswordResetEmail(resetPass.getText().toString())
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void unused) {
+                                Toast.makeText(getApplicationContext(), "রিকুয়েস্ট সম্পূর্ণ হয়েছে, অনুগ্রহপূর্বক ইমেইল ইনবক্স/স্পাম মেইল বক্স চেক করুন!!", Toast.LENGTH_SHORT).show();
+                                dialog.dismiss();
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(getApplicationContext(), "ইমেইল টি ডাটাবেসে পাওয়া যাইনি!!", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+            }else {
+                Toast.makeText(this, "ইমেইল টি সঠিক নয়!!", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        cBtn.setOnClickListener(v -> {
+            dialog.dismiss();
+        });
+
+
+
+    }
 }//root

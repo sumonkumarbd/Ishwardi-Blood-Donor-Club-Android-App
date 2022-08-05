@@ -8,7 +8,7 @@
     tools:context=".LoginScreenActivity">
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/forgot_pass"
         android:layout_width="@dimen/_120dp"
         android:layout_height="@dimen/_20dp"
         android:layout_marginStart="@dimen/_50dp"
@@ -21,11 +21,11 @@
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/loginAnim"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_150dp"
+        android:layout_width="@dimen/_140dp"
+        android:layout_height="@dimen/_140dp"
         app:layout_constraintBottom_toTopOf="@+id/textView7"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.317"
@@ -37,7 +37,6 @@
         android:id="@+id/textView7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="@dimen/_8dp"
         android:layout_marginEnd="@dimen/_8dp"
@@ -85,7 +84,7 @@
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView7"
-        app:layout_constraintVertical_bias="0.103">
+        app:layout_constraintVertical_bias="0">
 
         <!--    for Email LogIn-->
         <LinearLayout
@@ -231,7 +230,7 @@
         android:layout_width="@dimen/_80dp"
         android:layout_height="@dimen/_40dp"
         android:layout_marginEnd="@dimen/_30dp"
-        android:layout_marginBottom="@dimen/_33dp"
+        android:layout_marginBottom="@dimen/_31dp"
         android:background="@color/tns"
         android:clickable="true"
         android:focusable="true"
@@ -307,7 +306,7 @@
         android:text="@string/sign_up"
         android:textColor="#3B3F3D"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView6"
+        app:layout_constraintStart_toEndOf="@+id/forgot_pass"
         app:layout_constraintTop_toBottomOf="@+id/edit_tabs" />
 
     <ImageView
