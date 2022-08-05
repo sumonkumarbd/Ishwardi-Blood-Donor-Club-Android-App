@@ -73,6 +73,7 @@ public class DashBoard extends AppCompatActivity implements View.OnClickListener
 
         LinearLayout ll_Home = menuView.findViewById(R.id.ll_Home);
         LinearLayout ll_Profile = menuView.findViewById(R.id.ll_Profile);
+        LinearLayout ll_Setting = menuView.findViewById(R.id.ll_Setting);
         LinearLayout ll_fb = menuView.findViewById(R.id.ll_fb);
         LinearLayout ll_Share = menuView.findViewById(R.id.ll_Share);
         LinearLayout ll_about_us = menuView.findViewById(R.id.ll_about_us);
@@ -120,6 +121,7 @@ public class DashBoard extends AppCompatActivity implements View.OnClickListener
 
         ll_Home.setOnClickListener(this);
         ll_Profile.setOnClickListener(this);
+        ll_Setting.setOnClickListener(this);
         ll_fb.setOnClickListener(this);
         ll_Share.setOnClickListener(this);
         ll_Logout.setOnClickListener(this);
@@ -147,6 +149,10 @@ public class DashBoard extends AppCompatActivity implements View.OnClickListener
 
             case R.id.ll_Profile:
                 replace(new ProfileFragment(),"Profile");
+                break;
+
+                case R.id.ll_Setting:
+                replace(new SettingFragments(),"Setting");
                 break;
 
             case R.id.ll_fb:

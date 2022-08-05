@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SettingFragments">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/setting"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/_10dp"
+        android:textSize="@dimen/manu_txt"
+        android:textColor="@color/colorPrimary"
+        android:elevation="@dimen/shadow"
+        android:textStyle="bold"
+        android:fontFamily="@font/text_font"
+        />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_2dp"
+        android:background="@color/colorAccentDark"
+        android:layout_marginHorizontal="@dimen/_10dp"
+        />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10dp"
+            android:layout_marginTop="@dimen/_20dp"
+            android:text="@string/changeEmail"
+            android:textSize="@dimen/form_txt"
+            android:textColor="@color/colorPrimary"
+            android:elevation="@dimen/shadow"
+            android:textStyle="bold"
+            android:fontFamily="@font/des_font"
+            app:drawableStartCompat="@drawable/ic_baseline_alternate_email_24" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10dp"
+            android:layout_marginTop="@dimen/_20dp"
+            android:text="@string/password_update"
+            android:textSize="@dimen/form_txt"
+            android:textColor="@color/colorPrimary"
+            android:elevation="@dimen/shadow"
+            android:textStyle="bold"
+            android:fontFamily="@font/des_font"
+            app:drawableStartCompat="@drawable/ic_baseline_person_pin_24" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10dp"
+            android:layout_marginTop="@dimen/_20dp"
+            android:text="@string/change_phone"
+            android:textSize="@dimen/form_txt"
+            android:textColor="@color/colorPrimary"
+            android:elevation="@dimen/shadow"
+            android:textStyle="bold"
+            android:fontFamily="@font/des_font"
+            app:drawableStartCompat="@drawable/ic_baseline_phone_iphone_24" />
+
+
+    </LinearLayout>
+
+</FrameLayout>

@@ -144,7 +144,7 @@
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:src="@drawable/about_icon"
-                    />
+                    android:contentDescription="@string/cover" />
 
                 <TextView
                     android:fontFamily="@font/actor"
@@ -207,6 +207,33 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/privacy"
+                    android:textColor="@color/white"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_Setting"
+                android:gravity="center_vertical"
+                android:layout_marginTop="24dp"
+                android:layout_marginHorizontal="20dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:ignore="UseCompoundDrawables">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/settings"
+                    />
+
+                <TextView
+                    android:fontFamily="@font/actor"
+                    android:textSize="@dimen/manu_txt"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/setting"
                     android:textColor="@color/white"/>
 
             </LinearLayout>

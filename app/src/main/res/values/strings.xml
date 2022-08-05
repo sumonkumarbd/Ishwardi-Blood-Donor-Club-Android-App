@@ -75,8 +75,7 @@
     </string>
     <string name="founder">সাদেকুল ইসলাম শিমুল\nপ্রতিষ্ঠাতা\nঈশ্বরদী ব্লাড ডোনার ক্লাব</string>
     <string name="profit_of_blood_donation">রক্তদানের উপকারিতা</string>
-    <string
-        name="profit_of_blood_donation1">
+    <string name="profit_of_blood_donation1">
         রক্তদান হল কোন প্রাপ্তবয়স্ক সুস্থ মানুষের স্বেচ্ছায় রক্ত দেবার প্রক্রিয়া।
         এই দান করা রক্ত পরিসঞ্চালন করা হয় অথবা অংশীকরণের মাধ্যমে ঔষধে পরিণত করা হয়।
         উন্নত দেশে বেশিরভাগ রক্তদাতাই হলেন স্বেচ্ছায় রক্তদাতা, যারা সামাজিক দায়বদ্ধতা থেকে রক্তদান করেন।
@@ -93,8 +92,7 @@
         রক্ত নেওয়া হয়। পরিসঞ্চালনে ব্যবহৃত বেশির ভাগ রক্ত উপাদানই অল্প আয়ু বিশিষ্ট, এবং এ কারণে অপরিবর্তিত সরবরাহ নিশ্চিত করা একটি
         সবসময়কার সমস্যা।
     </string>
-    <string
-        name="profit_of_blood_donation2">
+    <string name="profit_of_blood_donation2">
         <b>\n১. রক্তদানের প্রথম এবং প্রধান কারণ,একজনের দানকৃত রক্ত আরেকজন মানুষের জীবন বাঁচাবে।\n\n
            ২. রক্তদান স্বাস্থ্যের জন্য অত্যন্ত উপকারী।
         রক্তদান করার সঙ্গে সঙ্গে শরীরের মধ্যে অবস্থিত ‘বোন ম্যারো’ নতুন কণিকা তৈরির জন্য উদ্দীপ্ত হয় এবং রক্তদানের ২ সপ্তাহের মধ্যে নতুন
@@ -178,11 +176,10 @@
     <string name="ins_des4.1"><u>তথসুত্রঃ ইন্টারনেট।</u></string>
 
 
-<!--    AboutUs-->
+    <!--    AboutUs-->
     <string name="starting">সূচনা</string>
     <string name="admins">পরিচালনামণ্ডলী সমূহ</string>
     <string name="moreApps"><b>এখানে ক্লিক করে আমাদের আরও অ্যাপ্সগুলি দেখুন…</b></string>
-
 
 
     <string name="hintforlocation">আপনার স্থান নির্বাচন করুন</string>
@@ -231,20 +228,21 @@
     <string name="failed">তথ্য আপডেট অসম্পূর্ণ✖✖</string>
     <string name="profile">প্রোফাইল</string>
     <string name="share">শেয়ার</string>
+    <string name="setting">সেটিংস</string>
     <string name="privacy">প্রাইভেসি পলেসি</string>
     <string name="fb_grp">আমদের ফেইসবুক গ্রুপ</string>
 
     <!--    end Profile-->
 
-<!--    Developer info-->
+    <!--    Developer info-->
     <string name="created_by_bn">ডেভেলপার</string>
     <string name="post"><b>Founder, Executive Director and Lead Developer</b></string>
     <string name="sds"><b>SumonKmr Development Studio</b></string>
     <string name="developer_email">Email : <b>sumonkmrofficial@gmail.com</b></string>
 
 
-<!--    Directors Info-->
-<!--    Sadequl-->
+    <!--    Directors Info-->
+    <!--    Sadequl-->
     <string name="sadikul">সাদেকুল ইসলাম শিমুল</string>
     <string name="sadiqul_position">প্রতিষ্ঠাতা</string>
     <string name="sadiqul_num">01764–942671</string>
@@ -263,7 +261,6 @@
     <string name="mamun">মামুন হোসেন</string>
     <string name="mamun_position">সহকারী পরিচালক</string>
     <string name="mamun_num">01821–897961</string>
-
 
 
     <array name="blood_groups">
@@ -1102,6 +1099,11 @@
         <item>লাখাই</item>
         <item>শায়েস্তাগঞ্জ</item>
     </array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="password_update">পাসওয়ার্ড পরিবর্তন করুন।</string>
+    <string name="changeEmail"> ইমেল পরিবর্তন করুন।</string>
+    <string name="change_phone">মোবাইল নাম্বার পরিবর্তন করন।</string>
     <!--   End Sylet Division District-->
 
     <!--Finished Districts Array-->
