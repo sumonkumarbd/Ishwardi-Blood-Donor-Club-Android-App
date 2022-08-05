@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/android_projects/projects/Productions/IBDC App/app/src/main/res/drawable/coustom_progressbar.xml" value="0.156" />
         <entry key="..\:/android_projects/projects/Productions/IBDC App/app/src/main/res/drawable/ic_outline_local_phone_24.xml" value="0.156" />
         <entry key="..\:/android_projects/projects/Productions/IBDC App/app/src/main/res/drawable/thumb.xml" value="0.1025" />
         <entry key="..\:/android_projects/projects/Productions/IBDC App/app/src/main/res/drawable/track.xml" value="0.1025" />
@@ -10,8 +11,9 @@
         <entry key="..\:/android_projects/projects/Productions/IBDC App/app/src/main/res/layout/activity_dash_board.xml" value="0.15416666666666667" />
         <entry key="..\:/android_projects/projects/Productions/IBDC App/app/src/main/res/layout/activity_instructions.xml" value="0.15416666666666667" />
         <entry key="..\:/android_projects/projects/Productions/IBDC App/app/src/main/res/layout/activity_login_screen.xml" value="0.14" />
+        <entry key="..\:/android_projects/projects/Productions/IBDC App/app/src/main/res/layout/activity_main.xml" value="0.10953947368421052" />
         <entry key="..\:/android_projects/projects/Productions/IBDC App/app/src/main/res/layout/activity_profit_of_donation.xml" value="0.10953947368421052" />
-        <entry key="..\:/android_projects/projects/Productions/IBDC App/app/src/main/res/layout/activity_register_i.xml" value="0.15416666666666667" />
+        <entry key="..\:/android_projects/projects/Productions/IBDC App/app/src/main/res/layout/activity_register_i.xml" value="0.1734375" />
         <entry key="..\:/android_projects/projects/Productions/IBDC App/app/src/main/res/layout/activity_register_i_i.xml" value="0.15416666666666667" />
         <entry key="..\:/android_projects/projects/Productions/IBDC App/app/src/main/res/layout/activity_register_i_i_i.xml" value="0.18" />
         <entry key="..\:/android_projects/projects/Productions/IBDC App/app/src/main/res/layout/details_donor_requester.xml" value="0.15416666666666667" />
@@ -23,4 +25,5 @@
       </map>
     </option>
   </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="11" project-jdk-type="JavaSDK" />
 </project>

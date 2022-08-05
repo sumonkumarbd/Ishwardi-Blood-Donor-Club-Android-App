@@ -10,13 +10,13 @@
     <LinearLayout
         android:id="@+id/edit_tabs"
         android:layout_width="@dimen/_220dp"
-        android:layout_height="@dimen/_260dp"
+        android:layout_height="@dimen/_220dp"
         android:background="@drawable/round_textbox"
         android:elevation="@dimen/_20dp"
         android:gravity="center"
         android:orientation="vertical"
         android:padding="@dimen/_10dp"
-        android:weightSum="4"
+        android:weightSum="4.2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
@@ -24,7 +24,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView7"
         app:layout_constraintVertical_bias="0.037">
 
-<!--        name-->
+        <!--        name-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -76,7 +76,7 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_weight="1.2"
             android:hint="@string/birthdate"
             android:textColorHint="#000000"
             app:hintTextColor="#000000">
@@ -84,8 +84,9 @@
             <AutoCompleteTextView
                 android:id="@+id/birthDate_reg"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="none" />
+                android:layout_height="match_parent"
+                android:textSize="@dimen/card_txt"
+                 />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -131,8 +132,8 @@
         android:layout_height="wrap_content"
         android:text="@string/motive"
         android:textColor="@color/colorPrimary"
-        android:textSize="24sp"
-        android:layout_marginTop="10dp"
+        android:textSize="@dimen/form_txt"
+        android:layout_marginTop="@dimen/_10dp"
         android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -141,8 +142,8 @@
 
     <ImageView
         android:id="@+id/imageView4"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
+        android:layout_width="@dimen/_80dp"
+        android:layout_height="@dimen/_80dp"
         android:contentDescription="@string/todo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -187,7 +188,7 @@
         android:layout_width="@dimen/_100dp"
         android:layout_height="@dimen/_40dp"
         android:layout_marginEnd="@dimen/_30dp"
-        android:layout_marginBottom="@dimen/_33dp"
+        android:layout_marginBottom="@dimen/_31dp"
         android:background="@color/tns"
         android:clickable="true"
         android:focusable="true"
@@ -206,8 +207,8 @@
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/lottie_view"
-        android:layout_width="@dimen/_150dp"
-        android:layout_height="@dimen/_150dp"
+        android:layout_width="@dimen/_130dp"
+        android:layout_height="@dimen/_130dp"
         android:layout_marginTop="@dimen/_10dp"
         android:visibility="visible"
         app:lottie_autoPlay="true"

@@ -8,10 +8,11 @@
     tools:context=".SplashScreen">
 
 
-    <View
+    <ImageView
         android:id="@+id/v"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
+        android:layout_height="@dimen/_140dp"
+        android:layout_marginHorizontal="@dimen/_10dp"
         android:background="@drawable/ibdc_logo_tns"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/t1"

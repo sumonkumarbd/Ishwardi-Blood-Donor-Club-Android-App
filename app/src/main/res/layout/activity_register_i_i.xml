@@ -11,13 +11,13 @@
 
     <LinearLayout
         android:id="@+id/edit_tabs"
-        android:layout_width="280dp"
-        android:layout_height="300dp"
+        android:layout_width="@dimen/_230dp"
+        android:layout_height="@dimen/_230dp"
         android:background="@drawable/round_textbox"
         android:elevation="20dp"
         android:gravity="center"
         android:orientation="vertical"
-        android:padding="10dp"
+        android:padding="@dimen/_10dp"
         android:weightSum="4"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -84,7 +84,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:hint="Village"
+            android:hint="@string/village"
             android:textColorHint="#000000"
             app:hintTextColor="#000000">
 
@@ -104,8 +104,8 @@
         android:layout_height="wrap_content"
         android:text="@string/motive"
         android:textColor="@color/colorPrimary"
-        android:textSize="24sp"
-        android:layout_marginTop="10dp"
+        android:textSize="@dimen/form_txt"
+        android:layout_marginTop="@dimen/_10dp"
         android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -114,8 +114,8 @@
 
     <ImageView
         android:id="@+id/imageView4"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
+        android:layout_width="@dimen/_80dp"
+        android:layout_height="@dimen/_80dp"
         android:contentDescription="@string/todo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -160,7 +160,7 @@
         android:layout_width="@dimen/_100dp"
         android:layout_height="@dimen/_40dp"
         android:layout_marginEnd="@dimen/_30dp"
-        android:layout_marginBottom="@dimen/_33dp"
+        android:layout_marginBottom="@dimen/_31dp"
         android:background="@color/tns"
         android:clickable="true"
         android:focusable="true"
@@ -178,17 +178,19 @@
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/regAnim"
-        android:layout_width="match_parent"
-        android:layout_height="250dp"
-        app:layout_constraintBottom_toTopOf="@+id/textView7"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.317"
+        android:layout_width="@dimen/_130dp"
+        android:layout_height="@dimen/_130dp"
+        android:layout_marginTop="@dimen/_10dp"
+        android:visibility="visible"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
-        app:lottie_rawRes="@raw/login_new" />
+        app:lottie_rawRes="@raw/login_new"
+        app:layout_constraintBottom_toTopOf="@+id/textView7"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.1" />
 
     <TextView
         android:id="@+id/textView7"
