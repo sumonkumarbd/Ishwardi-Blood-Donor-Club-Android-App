@@ -64,7 +64,7 @@
 
 
             <LinearLayout
-                android:id="@+id/linearLayout"
+                android:id="@+id/edit_tabs"
                 android:layout_width="match_parent"
                 android:layout_height="165dp"
                 android:layout_gravity="center"

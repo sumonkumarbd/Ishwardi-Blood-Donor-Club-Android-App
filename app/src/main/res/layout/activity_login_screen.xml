@@ -17,7 +17,7 @@
         android:text="@string/forgot_password"
         android:textColor="#3B3F3D"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/edit_tabs" />
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/loginAnim"
@@ -72,7 +72,7 @@
         app:track="@drawable/track" />
 
     <LinearLayout
-        android:id="@+id/linearLayout"
+        android:id="@+id/edit_tabs"
         android:layout_width="@dimen/_220dp"
         android:layout_height="@dimen/_130dp"
         android:gravity="center"
@@ -203,7 +203,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.206"
         app:layout_constraintStart_toEndOf="@+id/imageView4"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        app:layout_constraintTop_toBottomOf="@+id/edit_tabs"
         app:layout_constraintVertical_bias="0.875"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
@@ -308,7 +308,7 @@
         android:textColor="#3B3F3D"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView6"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/edit_tabs" />
 
     <ImageView
         android:id="@+id/logo"
@@ -323,7 +323,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.477"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        app:layout_constraintTop_toBottomOf="@+id/edit_tabs"
         app:layout_constraintVertical_bias="0.5" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
