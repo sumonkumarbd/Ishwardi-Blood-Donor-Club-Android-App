@@ -32,6 +32,7 @@
         />
 
         <TextView
+            android:id="@+id/change_Email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_10dp"
@@ -45,6 +46,7 @@
             app:drawableStartCompat="@drawable/ic_baseline_alternate_email_24" />
 
         <TextView
+            android:id="@+id/change_password"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_10dp"
@@ -58,6 +60,7 @@
             app:drawableStartCompat="@drawable/ic_baseline_person_pin_24" />
 
         <TextView
+            android:id="@+id/changeNumber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_10dp"

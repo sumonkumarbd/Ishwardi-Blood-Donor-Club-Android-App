@@ -70,6 +70,7 @@ public class LoginScreenActivity extends AppCompatActivity {
     DatabaseReference dbReference;
     boolean doubleBackToExitPressedOnce = false;
     Dialog dialog;
+    String emailExceptions;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -78,6 +79,8 @@ public class LoginScreenActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login_screen);
 
         mAuth = FirebaseAuth.getInstance();
+        mAuth.setLanguageCode("bn");
+        emailExceptions = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$";
         
         Email = findViewById(R.id.emailLogin);
         Pass = findViewById(R.id.passLogin);
@@ -127,9 +130,9 @@ public class LoginScreenActivity extends AppCompatActivity {
         login_submit.setOnClickListener(view -> {
 
             if(passLogin_p.getText().toString().isEmpty())
-                Toast.makeText(getApplicationContext(),"Blank Field can not be processed",Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),"ওটিপি দিন!!",Toast.LENGTH_LONG).show();
             else if(passLogin_p.getText().toString().length()!=6)
-                Toast.makeText(getApplicationContext(),"INvalid OTP",Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),"ওটিপি সঠিক নয়!!",Toast.LENGTH_LONG).show();
             else
             {
                 PhoneAuthCredential credential=PhoneAuthProvider.getCredential(id,passLogin_p.getText().toString());
@@ -152,11 +155,11 @@ public class LoginScreenActivity extends AppCompatActivity {
         String s_email = Email.getText().toString();
         String s_pass = Pass.getText().toString();
         if (!s_email.matches(emailPattern)){
-            Toast.makeText(this, "Please Enter a Valid Email...", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "অনুগ্রহ পূর্বক একটি সঠিক ইমেইল দিন!!", Toast.LENGTH_SHORT).show();
         }
 
         if (TextUtils.isEmpty(s_pass)){
-            Toast.makeText(this, "Enter a Valid Password!!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "কমপক্ষে ৬ অক্ষর বা তার অধিক পাসওয়ার্ড দিন!!", Toast.LENGTH_SHORT).show();
         }
 
         if(!s_email.isEmpty() && !s_pass.isEmpty()){
@@ -167,6 +170,7 @@ public class LoginScreenActivity extends AppCompatActivity {
                             if(task.isSuccessful()){
                                 loadingAim.setVisibility(View.VISIBLE);
                                 startActivity(new Intent(LoginScreenActivity.this,SplashScreen.class));
+                                finish();
                             }else {
                                 Toast.makeText(LoginScreenActivity.this, "ইমেল অথবা পাসওয়ার্ড ভুল!!", Toast.LENGTH_SHORT).show();
                             }
@@ -289,10 +293,8 @@ public class LoginScreenActivity extends AppCompatActivity {
 
 
     private void DialogSetup(){
-        Dialog dialog = new Dialog(this);
+        dialog = new Dialog(this);
         dialog.setContentView(R.layout.reset_pass_dialog);
-
-        String emailExceptions = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$";
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             dialog.getWindow().setBackgroundDrawable(getDrawable(R.drawable.custom_dialog_background));

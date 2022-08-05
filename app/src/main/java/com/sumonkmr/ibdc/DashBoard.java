@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.Menu;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -40,6 +42,7 @@ public class DashBoard extends AppCompatActivity implements View.OnClickListener
     TextView profile_name_menu,sds_dash,mail;
     String uid;
     FirebaseAuth auth;
+    boolean doubleBackToExitPressedOnce = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -232,6 +235,25 @@ public class DashBoard extends AppCompatActivity implements View.OnClickListener
     private void gotoUrl(String url){
         Uri uri = Uri.parse(url);
         startActivity(new Intent(Intent.ACTION_VIEW,uri));
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed();
+            return;
+        }
+
+        this.doubleBackToExitPressedOnce = true;
+        Toast.makeText(this, "পুনরায় ব্যাক বাটন প্রেস করুন!", Toast.LENGTH_SHORT).show();
+
+        new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce=false;
+            }
+        }, 2000);
     }
 
 }

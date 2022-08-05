@@ -67,7 +67,6 @@ public class RegisterIIIActivity extends AppCompatActivity {
     final Context  context = RegisterIIIActivity.this;
     boolean isVerified = false, isSubmit = false;
     TextView profile_image_hint;
-
     Uri filepath;
     Bitmap bitmap;
     String userId,otpid;
@@ -78,6 +77,7 @@ public class RegisterIIIActivity extends AppCompatActivity {
     private FirebaseDatabase db;
     private ProgressBar progressbar;
     String id;
+    FirebaseAuth mAuth;
 
 
     @Override
@@ -85,8 +85,9 @@ public class RegisterIIIActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_i_i_i);
         initializeComponents();
+        mAuth = FirebaseAuth.getInstance();
+        mAuth.setLanguageCode("bn");
         storageReference = FirebaseStorage.getInstance().getReference();
-
         p_image_shade_reg.setOnClickListener(v -> {
             Dexter.withContext(context)
                     .withPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
@@ -189,7 +190,7 @@ public class RegisterIIIActivity extends AppCompatActivity {
     private void profileImg(Uri uri){
         HashMap<String,Object> values = new HashMap<>();
         values.put("bloodImg_url",uri.toString());
-        FirebaseDatabase.getInstance().getReference("Donors/"+FirebaseAuth.getInstance().getUid())
+        FirebaseDatabase.getInstance().getReference("Donors/"+mAuth.getUid())
                 .updateChildren(values)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
@@ -260,7 +261,7 @@ public class RegisterIIIActivity extends AppCompatActivity {
         values.put("BloodGroup",bloodgrp.getText().toString());
         values.put("lastDonateDate",lastDonateDate_reg.getText().toString());
         values.put("Visible","True");
-        FirebaseDatabase.getInstance().getReference("Donors/"+FirebaseAuth.getInstance().getUid())
+        FirebaseDatabase.getInstance().getReference("Donors/"+mAuth.getUid())
                 .updateChildren(values)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
@@ -282,7 +283,7 @@ public class RegisterIIIActivity extends AppCompatActivity {
         mobile.setEnabled(false);
         if(!isSubmit) {
             if (!isVerified && !mobile.getText().toString().isEmpty() && !bloodgrp.getText().toString().isEmpty()) {
-                PhoneAuthOptions options = PhoneAuthOptions.newBuilder(FirebaseAuth.getInstance())
+                PhoneAuthOptions options = PhoneAuthOptions.newBuilder(mAuth)
                         .setPhoneNumber("+88" + mobile.getText().toString())
                         .setTimeout(15L, TimeUnit.SECONDS)
                         .setActivity(RegisterIIIActivity.this)
@@ -297,7 +298,7 @@ public class RegisterIIIActivity extends AppCompatActivity {
             }
         }else {
             PhoneAuthCredential credential = PhoneAuthProvider.getCredential(id,textVerification.getText().toString());
-            Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).linkWithCredential(credential)
+            Objects.requireNonNull(mAuth.getCurrentUser()).linkWithCredential(credential)
                     .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
