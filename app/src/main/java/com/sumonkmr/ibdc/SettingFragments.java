@@ -18,17 +18,26 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.EmailAuthCredential;
+import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
+import java.util.Objects;
 
 public class SettingFragments extends Fragment {
 
-    TextView change_Email,change_password,changeNumber;
-    EditText resetPass;
-    Button resetBtn,cBtn;
+    TextView change_Email, change_password, changeNumber;
+    EditText email_resetPass, oldPass_resetPass, newPass_resetPass;
+    Button resetBtn, cBtn;
     String emailExceptions;
     FirebaseAuth mAuth;
+    FirebaseUser Currentuser;
 
 
     @Override
@@ -37,6 +46,8 @@ public class SettingFragments extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.setting_fragments, container, false);
         mAuth = FirebaseAuth.getInstance();
+        Currentuser = mAuth.getCurrentUser();
+
         emailExceptions = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$";
 
         change_Email = view.findViewById(R.id.change_Email);
@@ -50,50 +61,73 @@ public class SettingFragments extends Fragment {
         DialogSetup();
 
 
-
         return view;
     }//onCreate VIew
 
 
-    private void DialogSetup(){
+    private void DialogSetup() {
 
         Dialog dialog;
         dialog = new Dialog(getContext());
-        dialog.setContentView(R.layout.reset_pass_dialog);
+        dialog.setContentView(R.layout.change_password_dialog);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            dialog.getWindow().setBackgroundDrawableResource(getDrawable(R.drawable.custom_dialog_background));
+            dialog.getWindow().setBackgroundDrawableResource(R.drawable.custom_dialog_background);
         }
         dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         dialog.setCancelable(false); //Optional
         dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation; //Setting the animations to dialog
 
-        resetPass = dialog.findViewById(R.id.resetPass);
+
         resetBtn = dialog.findViewById(R.id.resetBtn);
         cBtn = dialog.findViewById(R.id.cBtn);
 
-        change_password.setOnClickListener(v-> {
+
+        change_password.setOnClickListener(v -> {
             dialog.show();
         });
 
         resetBtn.setOnClickListener(v -> {
-            if (!resetPass.getText().toString().isEmpty() && resetPass.getText().toString().matches(emailExceptions)) {
-                mAuth.sendPasswordResetEmail(resetPass.getText().toString())
-                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void unused) {
-                                Toast.makeText(getContext(), "সম্পূর্ণ হয়েছে!,অনুগ্রহপূর্বক ইমেইল ইনবক্স/স্পাম মেইল বক্স চেক করুন!!", Toast.LENGTH_SHORT).show();
-                                dialog.dismiss();
-                            }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(getContext(), "ইমেইল টি ডাটাবেসে পাওয়া যাইনি!!", Toast.LENGTH_SHORT).show();
-                            }
-                        });
-            }else {
-                Toast.makeText(getContext(), "ইমেইল টি সঠিক নয়!!", Toast.LENGTH_SHORT).show();
+            email_resetPass = dialog.findViewById(R.id.email_resetPass);
+            oldPass_resetPass = dialog.findViewById(R.id.oldPass_resetPass);
+            newPass_resetPass = dialog.findViewById(R.id.newPass_resetPass);
+            final String userEmail = Currentuser.getEmail();
+            assert userEmail != null;
+
+            if (!email_resetPass.getText().toString().isEmpty() && email_resetPass.getText().toString().matches(emailExceptions)) {
+                if (!oldPass_resetPass.getText().toString().isEmpty() && oldPass_resetPass.getText().toString().length() >= 6) {
+                    if (!newPass_resetPass.getText().toString().isEmpty() && newPass_resetPass.getText().toString().length() >= 6) {
+                        AuthCredential credential = EmailAuthProvider.getCredential(email_resetPass.getText().toString(), oldPass_resetPass.getText().toString());
+                        if (Objects.equals(userEmail, email_resetPass.getText().toString())) {
+                            Currentuser.reauthenticate(credential)
+                                    .addOnCompleteListener(task -> {
+                                        if (task.isSuccessful()) {
+                                            Currentuser.updatePassword(newPass_resetPass.getText().toString()).addOnSuccessListener(unused -> {
+                                                dialog.dismiss();
+                                                email_resetPass.setText("");
+                                                oldPass_resetPass.setText("");
+                                                newPass_resetPass.setText("");
+                                                Toast.makeText(getContext(), "পাসওয়ার্ড পরিবর্তন সফল হয়েছে!", Toast.LENGTH_SHORT).show();
+                                            }).addOnFailureListener(e -> Toast.makeText(getContext(), "পাসওয়ার্ড পরিবর্তন অসফল, দয়াকরে পুনরায় চেষ্টা করুন!", Toast.LENGTH_SHORT).show());
+                                        }
+                                    })
+                                    .addOnFailureListener(e -> {
+                                        Toast.makeText(getContext(), "আপনার পাসওয়ার্ড টি ভুল! অনুগ্রহপূর্বক সঠিক পাসওয়ার্ড দিন!!", Toast.LENGTH_SHORT).show();
+                                    });
+                        }else {
+                            Toast.makeText(getContext(), "আপনার প্রদানকৃত ইমেইল টি নিবন্ধিত নয়!", Toast.LENGTH_SHORT).show();
+                        }
+
+                    } else {
+                        newPass_resetPass.setError("কমপক্ষে ৬ অক্ষর/নম্বার ব্যাবহার করে পাসওয়ার্ড দিন!");
+                    }
+
+                } else {
+                    oldPass_resetPass.setError("কমপক্ষে ৬ অক্ষর/নম্বার ব্যাবহার করে পাসওয়ার্ড দিন!");
+                }
+
+            } else {
+                email_resetPass.setError("আপনার ইমেইল টি সঠিক নয়!");
             }
         });
 
@@ -102,11 +136,6 @@ public class SettingFragments extends Fragment {
         });
 
 
-
-    }
-
-    private int getDrawable(int custom_dialog_background) {
-        return R.drawable.custom_dialog_background;
     }
 
 
