@@ -236,9 +236,9 @@
 
     <!--    Developer info-->
     <string name="created_by_bn">ডেভেলপার</string>
-    <string name="post"><b>Founder, Executive Director and Lead Developer</b></string>
+    <string name="post"><b>Founder and Lead Programmer</b></string>
     <string name="sds"><b>SumonKmr Development Studio</b></string>
-    <string name="developer_email">Email : <b>sumonkmrofficial@gmail.com</b></string>
+    <string name="developer_email"><b>Email : sumonkmrofficial@gmail.com</b></string>
 
 
     <!--    Directors Info-->

@@ -17,29 +17,32 @@
         android:theme="@style/Theme.IbdcBySumonKmr">
         <activity
             android:name=".Instructions"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".ProfitOfBloodDonation"
             android:exported="false" />
         <activity
             android:name=".AboutUs"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".DashBoard"
+            android:screenOrientation="portrait"
             android:exported="false"
             android:windowSoftInputMode="adjustPan"
             />
-        <activity android:name=".DisplayDonorsActivity" />
-        <activity android:name=".RegisterIIIActivity" />
-        <activity android:name=".RegisterIIActivity" />
-        <activity android:name=".RegisterIActivity" />
-        <activity android:name=".LoginScreenActivity" />
+        <activity android:name=".DisplayDonorsActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".RegisterIIIActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".RegisterIIActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".RegisterIActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".LoginScreenActivity" android:screenOrientation="portrait"/>
         <activity
             android:name=".SplashScreen"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.IbdcBySumonKmrNoStatusBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

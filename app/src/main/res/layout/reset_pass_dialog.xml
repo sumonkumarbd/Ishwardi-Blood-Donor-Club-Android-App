@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/round_textbox"
-        android:elevation="@dimen/_20dp"
+        android:elevation="@dimen/shadow"
         android:padding="@dimen/_10dp"
         android:layout_marginHorizontal="@dimen/_30dp"
         android:orientation="vertical"

@@ -185,23 +185,23 @@
 
     <Button
         android:id="@+id/nextButtonII"
-        android:layout_width="@dimen/_100dp"
+        android:layout_width="@dimen/_80dp"
         android:layout_height="@dimen/_40dp"
-        android:layout_marginEnd="@dimen/_30dp"
-        android:layout_marginBottom="@dimen/_31dp"
+        android:layout_marginStart="@dimen/_1dp"
+        android:layout_marginBottom="@dimen/_30dp"
         android:background="@color/tns"
         android:clickable="true"
         android:focusable="true"
         android:fontFamily="@font/poppins"
         android:onClick="nextRegisterPage"
         android:text="@string/next"
-        android:textAlignment="center"
+        android:textAlignment="viewStart"
         android:textColor="@color/white"
-        android:textSize="@dimen/_18sp"
+        android:textSize="@dimen/form_txt"
         android:textStyle="bold"
         android:typeface="monospace"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView2"
         app:layout_constraintStart_toStartOf="@+id/imageView2" />
 
 
