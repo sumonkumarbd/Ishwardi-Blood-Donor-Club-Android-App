@@ -33,7 +33,7 @@ import java.util.Objects;
 public class SettingFragments extends Fragment {
 
     TextView change_Email, change_password, changeNumber;
-    EditText email_resetPass, oldPass_resetPass, newPass_resetPass;
+    EditText reNew_pass, oldPass_resetPass, newPass_resetPass;
     Button resetBtn, cBtn;
     String emailExceptions;
     FirebaseAuth mAuth;
@@ -88,46 +88,47 @@ public class SettingFragments extends Fragment {
         });
 
         resetBtn.setOnClickListener(v -> {
-            email_resetPass = dialog.findViewById(R.id.email_resetPass);
+            reNew_pass = dialog.findViewById(R.id.reNew_pass);
             oldPass_resetPass = dialog.findViewById(R.id.oldPass_resetPass);
             newPass_resetPass = dialog.findViewById(R.id.newPass_resetPass);
             final String userEmail = Currentuser.getEmail();
             assert userEmail != null;
 
-            if (!email_resetPass.getText().toString().isEmpty() && email_resetPass.getText().toString().matches(emailExceptions)) {
-                if (!oldPass_resetPass.getText().toString().isEmpty() && oldPass_resetPass.getText().toString().length() >= 6) {
-                    if (!newPass_resetPass.getText().toString().isEmpty() && newPass_resetPass.getText().toString().length() >= 6) {
-                        AuthCredential credential = EmailAuthProvider.getCredential(email_resetPass.getText().toString(), oldPass_resetPass.getText().toString());
-                        if (Objects.equals(userEmail, email_resetPass.getText().toString())) {
+            if (!oldPass_resetPass.getText().toString().isEmpty() && oldPass_resetPass.getText().toString().length() >= 6) {
+                if (!newPass_resetPass.getText().toString().isEmpty() && newPass_resetPass.getText().toString().length() >= 6) {
+                    if (!reNew_pass.getText().toString().isEmpty() && reNew_pass.getText().toString().length() >= 6) {
+                        AuthCredential credential = EmailAuthProvider.getCredential(Currentuser.getEmail(), oldPass_resetPass.getText().toString());
+                        if (Objects.equals(newPass_resetPass.getText().toString(), reNew_pass.getText().toString())) {
                             Currentuser.reauthenticate(credential)
                                     .addOnCompleteListener(task -> {
                                         if (task.isSuccessful()) {
                                             Currentuser.updatePassword(newPass_resetPass.getText().toString()).addOnSuccessListener(unused -> {
                                                 dialog.dismiss();
-                                                email_resetPass.setText("");
                                                 oldPass_resetPass.setText("");
                                                 newPass_resetPass.setText("");
+                                                reNew_pass.setText("");
                                                 Toast.makeText(getContext(), "পাসওয়ার্ড পরিবর্তন সফল হয়েছে!", Toast.LENGTH_SHORT).show();
                                             }).addOnFailureListener(e -> Toast.makeText(getContext(), "পাসওয়ার্ড পরিবর্তন অসফল, দয়াকরে পুনরায় চেষ্টা করুন!", Toast.LENGTH_SHORT).show());
                                         }
                                     })
                                     .addOnFailureListener(e -> {
-                                        Toast.makeText(getContext(), "আপনার পাসওয়ার্ড টি ভুল! অনুগ্রহপূর্বক সঠিক পাসওয়ার্ড দিন!!", Toast.LENGTH_SHORT).show();
+                                        oldPass_resetPass.setError("আপনার পাসওয়ার্ড টি ভুল! অনুগ্রহপূর্বক সঠিক পাসওয়ার্ড দিন!!");
                                     });
                         }else {
-                            Toast.makeText(getContext(), "আপনার প্রদানকৃত ইমেইল টি নিবন্ধিত নয়!", Toast.LENGTH_SHORT).show();
+                            newPass_resetPass.setError("পাসওয়ার্ড মিল নয়!");
+                            reNew_pass.setError("পাসওয়ার্ড মিল নয়!");
                         }
 
                     } else {
-                        newPass_resetPass.setError("কমপক্ষে ৬ অক্ষর/নম্বার ব্যাবহার করে পাসওয়ার্ড দিন!");
+                        reNew_pass.setError("কমপক্ষে ৬ অক্ষর/নম্বার ব্যাবহার করে পাসওয়ার্ড দিন!");
                     }
 
                 } else {
-                    oldPass_resetPass.setError("কমপক্ষে ৬ অক্ষর/নম্বার ব্যাবহার করে পাসওয়ার্ড দিন!");
+                    newPass_resetPass.setError("কমপক্ষে ৬ অক্ষর/নম্বার ব্যাবহার করে পাসওয়ার্ড দিন!");
                 }
 
             } else {
-                email_resetPass.setError("আপনার ইমেইল টি সঠিক নয়!");
+                oldPass_resetPass.setError("কমপক্ষে ৬ অক্ষর/নম্বার ব্যাবহার করে পাসওয়ার্ড দিন!");
             }
         });
 

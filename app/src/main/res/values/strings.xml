@@ -37,6 +37,7 @@
     <string name="Email"><i> ই-ইমেল</i></string>
     <string name="old_Password"><i> বর্তমান পাসওয়ার্ড দিন!</i></string>
     <string name="new_Password"><i> নতুন পাসওয়ার্ড দিন!</i></string>
+    <string name="re_new_Password"><i> পুনরায় নতুন পাসওয়ার্ড দিন!</i></string>
     <string name="phone"><i>ফোন</i></string>
     <string name="cover">কভার</string>
     <string name="register">নিবন্ধন</string>
