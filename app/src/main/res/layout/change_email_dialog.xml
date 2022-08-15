@@ -1,37 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:background="@color/tns"
-
+    android:orientation="vertical"
     >
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/round_textbox"
-        android:elevation="@dimen/_20dp"
-        android:padding="@dimen/_10dp"
         android:layout_marginHorizontal="@dimen/_30dp"
+        android:background="@drawable/round_textbox"
+        android:elevation="@dimen/shadow"
         android:orientation="vertical"
-        >
+        android:padding="@dimen/_10dp">
 
 
         <ImageView
             android:layout_width="@dimen/_80dp"
             android:layout_height="@dimen/_40dp"
-            android:src="@drawable/ibdc_logo_tns"
             android:layout_gravity="center"
-            />
+            android:src="@drawable/ibdc_logo_tns" />
 
         <TextView
             android:id="@+id/textView3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10dp"
             android:elevation="@dimen/shadow"
             android:fontFamily="@font/des_font"
             android:gravity="center"
-            android:layout_marginTop="@dimen/_10dp"
             android:text="@string/changeEmail"
             android:textColor="@color/colorPrimary"
             android:textSize="@dimen/manu_txt" />
@@ -42,60 +42,121 @@
             android:layout_height="@dimen/_2dp"
             android:layout_marginTop="@dimen/_10dp"
             android:layout_marginBottom="@dimen/_5dp"
-            android:background="@color/colorAccentDark"
-            />
+            android:background="@color/colorAccentDark" />
 
-        <EditText
-            android:id="@+id/pastEmail"
-            style="@style/Widget.MaterialComponents.TextView"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_40dp"
-            android:layout_marginVertical="10dp"
-            android:layout_marginHorizontal="@dimen/_30dp"
-            android:autofillHints=""
-            android:background="@drawable/text_box_border_coustom"
-            android:drawableStart="@drawable/ic_baseline_mark_email_unread_24"
-            android:ems="10"
-            android:hint="@string/Email"
-            android:inputType="textEmailAddress"
-            android:padding="3dp"
-            android:textColor="@android:color/background_dark"
-            android:textColorHint="@android:color/darker_gray"
-            android:textSize="@dimen/profile_txt" />
+
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginHorizontal="@dimen/_20dp"
-            android:layout_marginTop="@dimen/_5dp"
-            android:layout_marginBottom="@dimen/_10dp"
-            android:weightSum="2">
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/cBtn"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/_40dp"
-                android:layout_weight="1"
-                android:layout_marginHorizontal="@dimen/_5dp"
-                android:text="@string/cancel"
-                android:textSize="@dimen/card_txt"
-                android:elevation="@dimen/shadow"
-                android:textColor="@color/colorPrimary"
-                />
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_marginHorizontal="@dimen/_10dp"
+            android:weightSum="4">
 
-            <Button
-                android:id="@+id/resetBtn"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/_40dp"
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginBottom="@dimen/_5dp"
                 android:layout_weight="1"
-                android:layout_marginHorizontal="@dimen/_5dp"
-                android:textSize="@dimen/card_txt"
-                android:elevation="@dimen/shadow"
-                android:text="@string/reset"
-                />
+                android:hint="@string/current_email">
+
+                <EditText
+                    android:id="@+id/oldMail"
+                    style="@style/Widget.MaterialComponents.TextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:autofillHints=""
+                    android:background="@drawable/text_box_border_coustom"
+                    android:ems="10"
+                    android:inputType="textEmailAddress"
+                    android:textColor="@android:color/background_dark"
+                    android:textColorHint="@android:color/darker_gray"
+                    android:textSize="@dimen/profile_txt" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginBottom="@dimen/_5dp"
+                android:layout_weight="1"
+                android:hint="@string/new_email">
+
+                <EditText
+                    android:id="@+id/newMail"
+                    style="@style/Widget.MaterialComponents.TextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:autofillHints=""
+                    android:background="@drawable/text_box_border_coustom"
+                    android:ems="10"
+                    android:inputType="textEmailAddress"
+                    android:textColor="@android:color/background_dark"
+                    android:textColorHint="@android:color/darker_gray"
+                    android:textSize="@dimen/profile_txt" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginBottom="@dimen/_5dp"
+                android:layout_weight="1"
+                android:hint="@string/enter_password"
+                app:passwordToggleEnabled="true">
+
+                <EditText
+                    android:id="@+id/passForCngMail"
+                    style="@style/Widget.MaterialComponents.TextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:autofillHints=""
+                    android:background="@drawable/text_box_border_coustom"
+                    android:ems="10"
+                    android:inputType="textPassword"
+                    android:textColor="@android:color/background_dark"
+                    android:textColorHint="@android:color/darker_gray"
+                    android:textSize="@dimen/profile_txt" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:layout_marginTop="@dimen/_5dp"
+                android:layout_marginBottom="@dimen/_5dp"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/cBtn_email"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginHorizontal="@dimen/_5dp"
+                    android:layout_weight="1"
+                    android:elevation="@dimen/shadow"
+                    android:text="@string/cancel"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/card_txt" />
+
+                <Button
+                    android:id="@+id/resetBtn_email"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginHorizontal="@dimen/_5dp"
+                    android:layout_weight="1"
+                    android:elevation="@dimen/shadow"
+                    android:text="@string/reset"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/card_txt" />
+            </LinearLayout>
+
+
         </LinearLayout>
 
 
     </LinearLayout>
+
 
 </LinearLayout>

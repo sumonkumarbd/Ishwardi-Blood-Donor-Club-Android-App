@@ -19,7 +19,7 @@
     <string name="change_password">পাসওয়ার্ড পরিবর্তন করুন!</string>
     <string name="login">লগইন</string>
     <string name="enter_phone_no">মোবাইল নম্বর দিন!</string>
-    <string name="enter_password">পাসওয়ার্ড দিন!</string>
+    <string name="enter_password">পাসওয়ার্ড দিন…</string>
     <string name="login1">লগইন!</string>
     <string name="thank_txt">রক্তদানে উদ্ভুদ্ধ হওয়ায় আপনাকে ধন্যবাদ!!</string>
     <string name="todo">TODO</string>
@@ -35,9 +35,9 @@
     <string name="title_notifications">নোটিফিকেশন</string>
     <string name="search">সার্চ</string>
     <string name="Email"><i> ই-ইমেল</i></string>
-    <string name="old_Password">বর্তমান পাসওয়ার্ড দিন!</string>
-    <string name="new_Password">নতুন পাসওয়ার্ড দিন!</string>
-    <string name="re_new_Password">পুনরায় নতুন পাসওয়ার্ড দিন!</string>
+    <string name="old_Password">বর্তমান পাসওয়ার্ড দিন…</string>
+    <string name="new_Password">নতুন পাসওয়ার্ড দিন…</string>
+    <string name="re_new_Password">কনফ্রম পাসওয়ার্ড দিন…</string>
     <string name="phone"><i>ফোন</i></string>
     <string name="cover">কভার</string>
     <string name="register">নিবন্ধন</string>
@@ -1110,6 +1110,8 @@
     <string name="change_phone">মোবাইল নাম্বার পরিবর্তন করন।</string>
     <string name="reset"><b>রিসেট করুন!</b></string>
     <string name="cancel"><b>বাতিল করুন!</b></string>
+    <string name="current_email">বর্তমান ইমেইল দিন</string>
+    <string name="new_email">নতুন ইমেইল দিন</string>
     <!--   End Sylet Division District-->
 
     <!--Finished Districts Array-->
