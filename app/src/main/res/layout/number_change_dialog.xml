@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:background="@color/tns"
+    android:orientation="vertical"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginHorizontal="@dimen/_30dp"
+        android:background="@drawable/round_textbox"
+        android:elevation="@dimen/shadow"
+        android:orientation="vertical"
+        android:padding="@dimen/_10dp">
+
+
+        <ImageView
+            android:layout_width="@dimen/_80dp"
+            android:layout_height="@dimen/_40dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ibdc_logo_tns" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10dp"
+            android:elevation="@dimen/shadow"
+            android:fontFamily="@font/des_font"
+            android:gravity="center"
+            android:text="@string/change_phone"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/manu_txt" />
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_2dp"
+            android:layout_marginTop="@dimen/_10dp"
+            android:layout_marginBottom="@dimen/_5dp"
+            android:background="@color/colorAccentDark" />
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_marginHorizontal="@dimen/_10dp"
+            android:weightSum="4">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginBottom="@dimen/_5dp"
+                android:layout_weight="1"
+                android:hint="@string/current_phone">
+
+                <EditText
+                    android:id="@+id/oldNum"
+                    style="@style/Widget.MaterialComponents.TextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:autofillHints=""
+                    android:background="@drawable/text_box_border_coustom"
+                    android:ems="10"
+                    android:inputType="number"
+                    android:textColor="@android:color/background_dark"
+                    android:textColorHint="@android:color/darker_gray"
+                    android:textSize="@dimen/profile_txt" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginBottom="@dimen/_5dp"
+                android:layout_weight="1"
+                android:hint="@string/new_phone">
+
+                <EditText
+                    android:id="@+id/newNum"
+                    style="@style/Widget.MaterialComponents.TextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:autofillHints=""
+                    android:background="@drawable/text_box_border_coustom"
+                    android:ems="10"
+                    android:inputType="number"
+                    android:textColor="@android:color/background_dark"
+                    android:textColorHint="@android:color/darker_gray"
+                    android:textSize="@dimen/profile_txt" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginBottom="@dimen/_5dp"
+                android:layout_weight="1">
+
+                <EditText
+                    android:id="@+id/otpForCngNum"
+                    style="@style/Widget.MaterialComponents.TextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:autofillHints=""
+                    android:background="@drawable/text_box_border_coustom"
+                    android:ems="10"
+                    android:inputType="number"
+                    android:textColor="@android:color/background_dark"
+                    android:textColorHint="@android:color/darker_gray"
+                    android:textSize="@dimen/profile_txt" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:layout_marginTop="@dimen/_5dp"
+                android:layout_marginBottom="@dimen/_5dp"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/cBtn_Num"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginHorizontal="@dimen/_5dp"
+                    android:layout_weight="1"
+                    android:elevation="@dimen/shadow"
+                    android:text="@string/cancel"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/card_txt" />
+
+                <Button
+                    android:id="@+id/resetBtn_Num"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginHorizontal="@dimen/_5dp"
+                    android:layout_weight="1"
+                    android:elevation="@dimen/shadow"
+                    android:text="@string/verify_txt"
+                    android:visibility="visible"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/card_txt" />
+
+                <Button
+                    android:id="@+id/resetBtn_Num_done"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginHorizontal="@dimen/_5dp"
+                    android:layout_weight="1"
+                    android:elevation="@dimen/shadow"
+                    android:text="@string/submit"
+                    android:visibility="gone"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/card_txt" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</LinearLayout>
