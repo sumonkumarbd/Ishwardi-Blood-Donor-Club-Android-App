@@ -1112,8 +1112,9 @@
     <string name="cancel"><b>বাতিল করুন!</b></string>
     <string name="current_email">বর্তমান ইমেইল দিন</string>
     <string name="new_email">নতুন ইমেইল দিন</string>
-    <string name="new_phone">নতুন মোবাইল নাম্বার দিন...</string>
-    <string name="current_phone">বর্তমান মোবাইল নাম্বার দিন...</string>
+    <string name="new_phone">নতুন মোবাইল নাম্বার দিন…</string>
+    <string name="current_phone">বর্তমান মোবাইল নাম্বার দিন…</string>
+    <string name="if_not_donate_before">পূর্বে রক্তদান না করে থাকলে টিক দিন</string>
     <!--   End Sylet Division District-->
 
     <!--Finished Districts Array-->

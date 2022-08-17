@@ -13,7 +13,7 @@
     <LinearLayout
         android:id="@+id/edit_tabs"
         android:layout_width="@dimen/_230dp"
-        android:layout_height="@dimen/_230dp"
+        android:layout_height="@dimen/_240dp"
         android:background="@drawable/round_textbox"
         android:elevation="20dp"
         android:gravity="center"
@@ -34,7 +34,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginVertical="@dimen/_10dp"
-            android:layout_weight=".90"
+            android:layout_weight=".70"
             android:autofillHints=""
             android:background="@drawable/text_box_border_coustom"
             android:drawableStart="@drawable/ic_baseline_call_24"
@@ -52,7 +52,7 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1.1"
+            android:layout_weight="1"
             android:textColorHint="#000000"
             app:hintTextColor="#000000">
             <com.google.android.material.textfield.MaterialAutoCompleteTextView
@@ -66,15 +66,23 @@
                 android:inputType="" />
         </com.google.android.material.textfield.TextInputLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1.6"
+            android:layout_marginTop="@dimen/_3dp"
+            android:weightSum="1.5"
+            android:orientation="vertical">
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1.1"
+            android:layout_weight="1"
             android:hint="@string/last_donate"
-            android:layout_marginTop="@dimen/_3dp"
             android:textColorHint="#000000"
-            app:hintTextColor="#000000">
+            app:hintTextColor="#000000"
+
+            >
 
             <AutoCompleteTextView
                 android:id="@+id/lastDonateDate_reg"
@@ -85,6 +93,33 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight=".5"
+                android:orientation="horizontal"
+                android:layout_gravity="center"
+                android:gravity="center"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/if_not_donate_before"
+                    android:textColor="@color/colorPrimary"
+                    android:fontFamily="@font/des_font"
+                    android:layout_marginEnd="@dimen/_5dp"
+                    />
+            <CheckBox
+                android:id="@+id/lastDonate_check"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                />
+
+            </LinearLayout>
+        </LinearLayout>
+
 
         <EditText
             android:id="@+id/verificationText"
@@ -92,7 +127,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginVertical="10dp"
-            android:layout_weight=".90"
+            android:layout_weight=".70"
             android:autofillHints=""
             android:background="@drawable/text_box_border_coustom"
             android:drawableStart="@drawable/ic_baseline_mark_email_unread_24"

@@ -18,10 +18,13 @@ import android.webkit.MimeTypeMap;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -67,6 +70,7 @@ public class RegisterIIIActivity extends AppCompatActivity {
     final Context  context = RegisterIIIActivity.this;
     boolean isVerified = false, isSubmit = false;
     TextView profile_image_hint;
+    CheckBox lastDonate_check;
     Uri filepath;
     Bitmap bitmap;
     String userId,otpid;
@@ -111,6 +115,12 @@ public class RegisterIIIActivity extends AppCompatActivity {
                         }
                     }).check();
         });
+
+        lastDonate_check.setOnCheckedChangeListener((buttonView, isChecked) ->
+                lastDonateDate_reg.setEnabled(!isChecked)
+
+        );
+
 
         final Calendar calendar = Calendar.getInstance();
         lastDonateDate_reg.setOnClickListener(v -> {
@@ -215,6 +225,7 @@ public class RegisterIIIActivity extends AppCompatActivity {
         profile_image_hint = findViewById(R.id.profile_image_hint);
         progressbar = findViewById(R.id.progressbar_reg);
         loadingAim3 = findViewById(R.id.loadingAim3);
+        lastDonate_check = findViewById(R.id.lastDonate_check);
     }
 
 
@@ -259,7 +270,11 @@ public class RegisterIIIActivity extends AppCompatActivity {
         values.put("Step","Done");
         values.put("Mobile",mobile.getText().toString());
         values.put("BloodGroup",bloodgrp.getText().toString());
-        values.put("lastDonateDate",lastDonateDate_reg.getText().toString());
+        if (lastDonate_check.isChecked()){
+            values.put("lastDonateDate","পূর্বে করিনি।");
+        }else {
+            values.put("lastDonateDate",lastDonateDate_reg.getText().toString());
+        }
         values.put("Visible","True");
         FirebaseDatabase.getInstance().getReference("Donors/"+mAuth.getUid())
                 .updateChildren(values)
