@@ -17,8 +17,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.FirebaseTooManyRequestsException;
 import com.google.firebase.auth.AuthCredential;
@@ -39,7 +41,7 @@ public class SettingFragments extends Fragment {
 
     TextView change_Email, change_password, changeNumber;
     EditText reNew_pass, oldPass_resetPass, newPass_resetPass,oldMail,newMail,passForCngMail,oldNum,newNum, otpForCngNum;
-    Button resetBtn, cBtn,resetBtn_Num_done;
+    Button resetBtn, cBtn,resetBtn_Num_done,resetBtn_Num,cBtn_Num;
     String emailExceptions;
     FirebaseAuth mAuth;
     FirebaseUser user;
@@ -232,8 +234,8 @@ public class SettingFragments extends Fragment {
         newNum = dialog.findViewById(R.id.newNum);
         otpForCngNum = dialog.findViewById(R.id.otpForCngNum);
 
-        resetBtn = dialog.findViewById(R.id.resetBtn_Num);
-        cBtn = dialog.findViewById(R.id.cBtn_Num);
+        resetBtn_Num = dialog.findViewById(R.id.resetBtn_Num);
+        cBtn_Num = dialog.findViewById(R.id.cBtn_Num);
         resetBtn_Num_done = dialog.findViewById(R.id.resetBtn_Num_done);
 
         otpForCngNum.setHint(R.string.enter_Otp);
@@ -242,39 +244,21 @@ public class SettingFragments extends Fragment {
             dialog.show();
         });
 
-        resetBtn.setOnClickListener(v-> {
+        resetBtn_Num.setOnClickListener(v-> {
             initOpt();
         });
 
 
         resetBtn_Num_done.setOnClickListener(view -> {
-
-            if(otpForCngNum.getText().toString().length()!=6) {
-                Toast.makeText(getContext(), "ওটিপি সঠিক নয়!!", Toast.LENGTH_LONG).show();
-            }else if(otpForCngNum.getText().toString().isEmpty()) {
-                Toast.makeText(getContext(), "ওটিপি দিন!!", Toast.LENGTH_LONG).show();
-            }else {
-                PhoneAuthCredential credential=PhoneAuthProvider.getCredential(id,otpForCngNum.getText().toString());
-                user.updatePhoneNumber(credential).addOnSuccessListener(unused -> {
-                    Toast.makeText(getContext(), "অভিনন্দন!!", Toast.LENGTH_SHORT).show();
-                    UpdatePhnInDB();
-                    oldNum.setText("");
-                    newNum.setText("");
-                    otpForCngNum.setText("");
-                    dialog.dismiss();
-                }).addOnFailureListener(e -> {
-                    Toast.makeText(getContext(), "দুঃখিত, সঠিক তথ্য দিয়ে পুনরায় চেষ্টা করুন!", Toast.LENGTH_SHORT).show();
-                });
-            }
-
+            updatePhoneNum();
         });
 
 
-        cBtn.setOnClickListener(v -> {
+        cBtn_Num.setOnClickListener(v -> {
             oldNum.setText("");
             newNum.setText("");
             otpForCngNum.setText("");
-            resetBtn.setVisibility(View.VISIBLE);
+            resetBtn_Num.setVisibility(View.VISIBLE);
             resetBtn_Num_done.setVisibility(View.GONE);
             otpForCngNum.setHint(R.string.enter_Otp);
             dialog.dismiss();
@@ -282,73 +266,10 @@ public class SettingFragments extends Fragment {
 
 
 
-    }
-
-
-    PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
-
-        @Override
-        public void onVerificationCompleted(PhoneAuthCredential credential) {
-            user.updatePhoneNumber(credential);
-        }
-
-        @Override
-        public void onVerificationFailed(FirebaseException e) {
-
-            if (e instanceof FirebaseAuthInvalidCredentialsException) {
-                otpForCngNum.setHint("অসমাপ্ত!");
-            } else if (e instanceof FirebaseTooManyRequestsException) {
-                otpForCngNum.setHint("কিছুক্ষন পর আবার চেষ্টা করুন...");
-            }
-
-            resetBtn.setEnabled(true);
-
-        }
-
-        @Override
-        public void onCodeSent(@NonNull String verificationId,
-                               @NonNull PhoneAuthProvider.ForceResendingToken token) {
-
-            resetBtn.setText(R.string.submit);
-            id = verificationId;
-            isSubmit = true;
-
-        }
-
-    };
-
-
-    private void initOpt(){
-
-        if (oldNum.getText().toString().isEmpty() || oldNum.getText().toString().length() != 11){
-            oldNum.setError("আপনার বর্তমান নাম্বারটি সঠিক ভাবে লিখুন!");
-            resetBtn.setVisibility(View.VISIBLE);
-            resetBtn_Num_done.setVisibility(View.GONE);
-        }else if(newNum.getText().toString().isEmpty() || newNum.getText().toString().length() != 11) {
-            newNum.setError("আপনার নতুন নাম্বারটি সঠিক ভাবে লিখুন!");
-            resetBtn.setVisibility(View.VISIBLE);
-            resetBtn_Num_done.setVisibility(View.GONE);
-
-        }else {
-            resetBtn.setVisibility(View.GONE);
-            resetBtn_Num_done.setVisibility(View.VISIBLE);
-            otpForCngNum.setHint(R.string.verifying);
-            PhoneAuthOptions options =
-                    PhoneAuthOptions.newBuilder(mAuth)
-                            .setPhoneNumber("+88" + oldNum.getText().toString())       // Phone number to verify
-                            .setTimeout(30L, TimeUnit.SECONDS) // Timeout and unit
-                            .setActivity(requireActivity())// Activity (for callback binding)
-                            .setCallbacks(mCallbacks)          // OnVerificationStateChangedCallbacks
-                            .build();
-            PhoneAuthProvider.verifyPhoneNumber(options);
-
-//            loadingAim.setVisibility(View.VISIBLE);
-
-        }
-
-
 
     }
+
+
 
 
 
@@ -369,12 +290,12 @@ public class SettingFragments extends Fragment {
 
     private void UpdatePhnInDB() {
         HashMap<String,Object> values = new HashMap<>();
-        values.put("Mobile",user.getPhoneNumber());
+        values.put("Mobile",newNum.getText().toString());
         FirebaseDatabase.getInstance().getReference("Donors/"+user.getUid())
                 .updateChildren(values)
                 .addOnCompleteListener(task -> {
                     if(task.isSuccessful()){
-                        Toast.makeText(getContext(), "আপনার নতুন নাম্বারঃ "+user.getPhoneNumber(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "আপনার নতুন নাম্বারঃ "+newNum.getText().toString(), Toast.LENGTH_SHORT).show();
                     }else {
                         Toast.makeText(getContext(), R.string.failed, Toast.LENGTH_SHORT).show();
                     }
@@ -382,5 +303,83 @@ public class SettingFragments extends Fragment {
 
     }//addToDatabase
 
+
+    private void initOpt(){
+
+        if (oldNum.getText().toString().isEmpty() || oldNum.getText().toString().length() != 11){
+            oldNum.setError("আপনার বর্তমান নাম্বারটি সঠিক ভাবে লিখুন!");
+            resetBtn_Num.setVisibility(View.VISIBLE);
+            resetBtn_Num_done.setVisibility(View.GONE);
+        }else if(newNum.getText().toString().isEmpty() || newNum.getText().toString().length() != 11) {
+            newNum.setError("আপনার নতুন নাম্বারটি সঠিক ভাবে লিখুন!");
+            resetBtn_Num.setVisibility(View.VISIBLE);
+            resetBtn_Num_done.setVisibility(View.GONE);
+
+        }else {
+            resetBtn_Num.setVisibility(View.GONE);
+            resetBtn_Num_done.setVisibility(View.VISIBLE);
+            otpForCngNum.setHint(R.string.verifying);
+            PhoneAuthOptions options =
+                    PhoneAuthOptions.newBuilder(mAuth)
+                            .setPhoneNumber("+88" + oldNum.getText().toString())       // Phone number to verify
+                            .setTimeout(30L, TimeUnit.SECONDS) // Timeout and unit
+                            .setActivity(requireActivity())// Activity (for callback binding)
+                            .setCallbacks(new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+                                @Override
+                                public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
+                                    user.reauthenticate(phoneAuthCredential);
+                                }
+
+                                @Override
+                                public void onVerificationFailed(@NonNull FirebaseException e) {
+                                    if (e instanceof FirebaseAuthInvalidCredentialsException) {
+                                        otpForCngNum.setHint("অসমাপ্ত!");
+                                    } else if (e instanceof FirebaseTooManyRequestsException) {
+                                        otpForCngNum.setHint("কিছুক্ষন পর আবার চেষ্টা করুন...");
+                                        resetBtn.setEnabled(true);
+                                    }
+                                }
+
+                                @Override
+                                public void onCodeSent(@NonNull String verificationId,
+                                                       @NonNull PhoneAuthProvider.ForceResendingToken token) {
+
+                                    resetBtn_Num.setText(R.string.submit);
+                                    id = verificationId;
+                                    isSubmit = true;
+
+                                }
+                            })          // OnVerificationStateChangedCallbacks
+                            .build();
+            PhoneAuthProvider.verifyPhoneNumber(options);
+
+//            loadingAim.setVisibility(View.VISIBLE);
+
+        }
+    }//init otp
+
+    private void updatePhoneNum(){
+        if(otpForCngNum.getText().toString().length()!=6) {
+            Toast.makeText(getContext(), "ওটিপি সঠিক নয়!!", Toast.LENGTH_LONG).show();
+        }else if(otpForCngNum.getText().toString().isEmpty()) {
+            Toast.makeText(getContext(), "ওটিপি দিন!!", Toast.LENGTH_LONG).show();
+        }else {
+            PhoneAuthCredential credential=PhoneAuthProvider.getCredential(id,otpForCngNum.getText().toString());
+            user.reauthenticate(credential).addOnSuccessListener(unused -> {
+                Toast.makeText(getContext(), "অভিনন্দন!!", Toast.LENGTH_SHORT).show();
+                user.updatePhoneNumber(credential).addOnSuccessListener(unused1 -> {
+                    UpdatePhnInDB();
+                    oldNum.setText("");
+                    newNum.setText("");
+                    otpForCngNum.setText("");
+                }).addOnFailureListener(e -> {
+                    Toast.makeText(getContext(), "দুঃখিত, সঠিক তথ্য দিয়ে পুনরায় চেষ্টা করুন!", Toast.LENGTH_SHORT).show();
+                });
+
+            }).addOnFailureListener(e -> {
+                Toast.makeText(getContext(), "দুঃখিত, সঠিক তথ্য দিয়ে পুনরায় চেষ্টা করুন!", Toast.LENGTH_SHORT).show();
+            });
+        }
+    }//updatePhoneNum
 
 }
