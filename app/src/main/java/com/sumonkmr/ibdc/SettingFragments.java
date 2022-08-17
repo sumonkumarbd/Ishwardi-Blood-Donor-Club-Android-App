@@ -274,6 +274,9 @@ public class SettingFragments extends Fragment {
             oldNum.setText("");
             newNum.setText("");
             otpForCngNum.setText("");
+            resetBtn.setVisibility(View.VISIBLE);
+            resetBtn_Num_done.setVisibility(View.GONE);
+            otpForCngNum.setHint(R.string.enter_Otp);
             dialog.dismiss();
         });
 
@@ -333,7 +336,7 @@ public class SettingFragments extends Fragment {
             PhoneAuthOptions options =
                     PhoneAuthOptions.newBuilder(mAuth)
                             .setPhoneNumber("+88" + oldNum.getText().toString())       // Phone number to verify
-                            .setTimeout(15L, TimeUnit.SECONDS) // Timeout and unit
+                            .setTimeout(30L, TimeUnit.SECONDS) // Timeout and unit
                             .setActivity(requireActivity())// Activity (for callback binding)
                             .setCallbacks(mCallbacks)          // OnVerificationStateChangedCallbacks
                             .build();
