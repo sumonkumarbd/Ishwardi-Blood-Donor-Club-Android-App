@@ -229,17 +229,17 @@
                     android:layout_height="wrap_content"
                     android:clickable="true"
                     android:contextClickable="true"
+                    android:elevation="@dimen/minor_shadow"
                     android:focusable="true"
                     android:focusableInTouchMode="true"
                     android:fontFamily="@font/varela_round"
                     android:marqueeRepeatLimit="marquee_forever"
                     android:maxWidth="120dp"
                     android:singleLine="true"
-                    android:elevation="@dimen/minor_shadow"
                     android:text="@string/last_donate_date"
-                    android:textColor="@color/white"
-                    android:textStyle="bold"
-                    android:textSize="@dimen/form_txt" />
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/_10sp"
+                    android:textStyle="bold" />
 
 
             </LinearLayout>

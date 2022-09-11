@@ -824,15 +824,16 @@
                             android:layout_marginHorizontal="2dp"
                             android:layout_weight="1"
                             android:hint="@string/last_donate"
-                            android:textColorHint="#000000"
-                            app:hintTextColor="#000000">
+                            android:textColorHint="@color/black"
+                            app:hintTextColor="@color/black">
 
                             <AutoCompleteTextView
                                 android:id="@+id/lastDonateDate_edit"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:inputType="none"
-                                android:textSize="@dimen/tab_label" />
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="@dimen/_8sp"/>
 
                         </com.google.android.material.textfield.TextInputLayout>
 

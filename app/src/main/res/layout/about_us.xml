@@ -148,6 +148,7 @@
 
                         <!--                        Directors-->
                         <LinearLayout
+                            android:visibility="visible"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="vertical">
@@ -198,7 +199,8 @@
                                             android:layout_width="@dimen/_130dp"
                                             android:layout_height="@dimen/_130dp"
                                             android:src="@drawable/sadekul"
-                                            app:civ_border_color="@color/colorPrimary"
+                                            app:civ_border_color="@color/grey"
+                                            android:elevation="@dimen/shadow"
                                             app:civ_border_width="@dimen/_5dp"
                                             tools:ignore="TooDeepLayout" />
 
@@ -314,7 +316,8 @@
                                             android:layout_width="@dimen/_130dp"
                                             android:layout_height="@dimen/_130dp"
                                             android:src="@drawable/rakibul_sakil"
-                                            app:civ_border_color="@color/colorPrimary"
+                                            app:civ_border_color="@color/grey"
+                                            android:elevation="@dimen/shadow"
                                             app:civ_border_width="@dimen/_5dp"
                                             tools:ignore="TooDeepLayout" />
 
@@ -433,7 +436,8 @@
                                             android:layout_width="@dimen/_130dp"
                                             android:layout_height="@dimen/_130dp"
                                             android:src="@drawable/harun_mahedi"
-                                            app:civ_border_color="@color/colorPrimary"
+                                            app:civ_border_color="@color/grey"
+                                            android:elevation="@dimen/shadow"
                                             app:civ_border_width="@dimen/_5dp"
                                             tools:ignore="TooDeepLayout" />
 
@@ -550,7 +554,8 @@
                                             android:layout_width="@dimen/_130dp"
                                             android:layout_height="@dimen/_130dp"
                                             android:src="@drawable/mamun"
-                                            app:civ_border_color="@color/colorPrimary"
+                                            app:civ_border_color="@color/grey"
+                                            android:elevation="@dimen/shadow"
                                             app:civ_border_width="@dimen/_5dp"
                                             tools:ignore="TooDeepLayout" />
 
@@ -673,11 +678,15 @@
                                 android:layout_marginBottom="5dp"
                                 android:background="@color/colorAccentDark" />
 
-                            <ImageView
+                            <de.hdodenhof.circleimageview.CircleImageView
                                 android:id="@+id/dev_img"
-                                android:layout_width="match_parent"
-                                android:layout_height="200dp"
-                                android:layout_marginHorizontal="5dp"
+                                android:layout_width="@dimen/_200dp"
+                                android:layout_height="@dimen/_200dp"
+                                android:layout_marginVertical="@dimen/_5dp"
+                                app:civ_border_color="@color/grey"
+                                android:elevation="@dimen/shadow"
+                                app:civ_border_width="@dimen/_5dp"
+                                android:layout_gravity="center"
                                 android:contentDescription="@string/cover"
                                 android:src="@drawable/devimg" />
 
@@ -685,11 +694,10 @@
                                 android:id="@+id/dev_name"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginHorizontal="10dp"
                                 android:layout_marginTop="10dp"
                                 android:fontFamily="@font/des_font"
                                 android:text="@string/developer_name"
-                                android:textAlignment="textStart"
+                                android:textAlignment="center"
                                 android:textColor="@color/blue"
                                 android:textSize="@dimen/card_header_txt"
                                 android:textStyle="bold" />
@@ -697,11 +705,10 @@
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginHorizontal="10dp"
                                 android:layout_marginTop="5dp"
                                 android:fontFamily="@font/des_font"
                                 android:text="@string/post"
-                                android:textAlignment="textStart"
+                                android:textAlignment="center"
                                 android:textColor="@color/goodgrey"
                                 android:textSize="@dimen/card_txt"
                                 android:textStyle="bold" />
@@ -710,6 +717,7 @@
                                 android:id="@+id/sds"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:gravity="center"
                                 android:orientation="horizontal">
 
                                 <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -733,8 +741,8 @@
                                 android:id="@+id/sdsEmail"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginStart="7sp"
                                 android:layout_marginBottom="10dp"
+                                android:layout_gravity="center"
                                 android:fontFamily="@font/varela_round"
                                 android:text="@string/developer_email"
                                 android:textColor="@color/blue"
@@ -745,7 +753,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginVertical="10dp"
-                                android:layout_marginStart="7sp"
+                                android:layout_gravity="center"
                                 android:fontFamily="@font/varela_round"
                                 android:text="@string/moreApps"
                                 android:textColor="@color/blue"

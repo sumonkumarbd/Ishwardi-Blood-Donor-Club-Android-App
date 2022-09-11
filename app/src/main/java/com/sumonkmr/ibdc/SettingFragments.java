@@ -147,7 +147,7 @@ public class SettingFragments extends Fragment {
 
 
 
-    }
+    }//email Change
 
 
     private void PassWordChange() {
@@ -217,7 +217,7 @@ public class SettingFragments extends Fragment {
         });
 
 
-    }
+    }//password Change
 
     private void NumberChange() {
 
@@ -267,7 +267,7 @@ public class SettingFragments extends Fragment {
 
 
 
-    }
+    }//Number Change
 
 
 
@@ -288,6 +288,9 @@ public class SettingFragments extends Fragment {
 
     }//addToDatabase
 
+
+
+    //need to implement blow 3 function for Change number functions...
     private void UpdatePhnInDB() {
         HashMap<String,Object> values = new HashMap<>();
         values.put("Mobile",newNum.getText().toString());
@@ -295,14 +298,13 @@ public class SettingFragments extends Fragment {
                 .updateChildren(values)
                 .addOnCompleteListener(task -> {
                     if(task.isSuccessful()){
-                        Toast.makeText(getContext(), "আপনার নতুন নাম্বারঃ "+newNum.getText().toString(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "আপনার নতুন নাম্বারঃ "+user.getPhoneNumber(), Toast.LENGTH_SHORT).show();
                     }else {
                         Toast.makeText(getContext(), R.string.failed, Toast.LENGTH_SHORT).show();
                     }
                 });
 
     }//addToDatabase
-
 
     private void initOpt(){
 
@@ -327,7 +329,7 @@ public class SettingFragments extends Fragment {
                             .setCallbacks(new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
                                 @Override
                                 public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
-                                    user.reauthenticate(phoneAuthCredential);
+
                                 }
 
                                 @Override
@@ -365,17 +367,14 @@ public class SettingFragments extends Fragment {
             Toast.makeText(getContext(), "ওটিপি দিন!!", Toast.LENGTH_LONG).show();
         }else {
             PhoneAuthCredential credential=PhoneAuthProvider.getCredential(id,otpForCngNum.getText().toString());
-            user.reauthenticate(credential).addOnSuccessListener(unused -> {
-                Toast.makeText(getContext(), "অভিনন্দন!!", Toast.LENGTH_SHORT).show();
-                user.updatePhoneNumber(credential).addOnSuccessListener(unused1 -> {
-                    UpdatePhnInDB();
-                    oldNum.setText("");
-                    newNum.setText("");
-                    otpForCngNum.setText("");
-                }).addOnFailureListener(e -> {
-                    Toast.makeText(getContext(), "দুঃখিত, সঠিক তথ্য দিয়ে পুনরায় চেষ্টা করুন!", Toast.LENGTH_SHORT).show();
-                });
-
+            user.updatePhoneNumber(credential).addOnCompleteListener(task -> {
+                if (task.isSuccessful()){
+                    Toast.makeText(getContext(), "নাম্বার আপডেট সম্পূর্ণ!!", Toast.LENGTH_SHORT).show();
+                        UpdatePhnInDB();
+                        oldNum.setText("");
+                        newNum.setText("");
+                        otpForCngNum.setText("");
+                }
             }).addOnFailureListener(e -> {
                 Toast.makeText(getContext(), "দুঃখিত, সঠিক তথ্য দিয়ে পুনরায় চেষ্টা করুন!", Toast.LENGTH_SHORT).show();
             });
