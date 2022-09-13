@@ -171,7 +171,7 @@ public class DashBoard extends AppCompatActivity implements View.OnClickListener
                 break;
 
             case R.id.ll_privacy:
-                gotoUrl("https://ibdcprivacypolicy.blogspot.com/");
+                gotoUrl("https://sites.google.com/view/ibdcprivacypolicy/home/");
                 break;
 
                 case R.id.ll_Logout:
