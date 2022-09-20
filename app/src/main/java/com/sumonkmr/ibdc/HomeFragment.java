@@ -89,7 +89,7 @@ public class HomeFragment extends Fragment {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         for (DataSnapshot dataSnapshot:snapshot.getChildren()){
-                            donationImages.add(new SlideModel(dataSnapshot.child("url").getValue().toString(),dataSnapshot.child("title").getValue().toString(), ScaleTypes.FIT));
+                            donationImages.add(new SlideModel(Objects.requireNonNull(dataSnapshot.child("url").getValue()).toString(), Objects.requireNonNull(dataSnapshot.child("title").getValue()).toString(), ScaleTypes.FIT));
                         }
                         image_slider.setImageList(donationImages,ScaleTypes.FIT);
                     }

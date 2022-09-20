@@ -94,41 +94,50 @@
             android:weightSum="2"
             android:orientation="vertical"
             >
-            <EditText
-                style="@style/Widget.MaterialComponents.TextView"
-                android:id="@+id/emailLogin"
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
+                android:layout_marginBottom="@dimen/_5dp"
                 android:layout_weight="1"
-                android:layout_marginVertical="@dimen/_10dp"
-                android:background="@drawable/text_box_border_coustom"
-                android:drawableStart="@drawable/ic_baseline_mark_email_unread_24"
-                android:ems="10"
-                android:textSize="@dimen/_13sp"
-                android:padding="@dimen/_5dp"
-                android:hint="@string/Email"
-                android:inputType="textEmailAddress"
-                android:textColor="@android:color/background_dark"
-                android:textColorHint="@android:color/darker_gray"
-                android:autofillHints="" />
+                android:hint="@string/Email">
 
-            <EditText
-                style="@style/Widget.MaterialComponents.TextView"
-                android:id="@+id/passLogin"
+                <EditText
+                    android:id="@+id/emailLogin"
+                    style="@style/Widget.MaterialComponents.TextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:autofillHints=""
+                    android:background="@drawable/text_box_border_coustom"
+                    android:ems="10"
+                    android:inputType="textEmailAddress"
+                    android:textColor="@android:color/background_dark"
+                    android:textColorHint="@android:color/darker_gray"
+                    android:textSize="@dimen/profile_txt" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_marginVertical="@dimen/_10dp"
+                android:layout_marginBottom="@dimen/_5dp"
                 android:layout_weight="1"
-                android:autofillHints=""
-                android:background="@drawable/text_box_border_coustom"
-                android:drawableStart="@drawable/ic_baseline_keyboard_hide_24"
-                android:ems="10"
                 android:hint="@string/enter_password"
-                android:inputType="textPassword"
-                android:padding="@dimen/_5dp"
-                android:textColor="@android:color/black"
-                android:textColorHint="@android:color/darker_gray"
-                android:textSize="@dimen/_13sp" />
+                app:passwordToggleEnabled="true">
+
+                <EditText
+                    android:id="@+id/passLogin"
+                    style="@style/Widget.MaterialComponents.TextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:autofillHints=""
+                    android:background="@drawable/text_box_border_coustom"
+                    android:ems="10"
+                    android:inputType="textPassword"
+                    android:textColor="@android:color/background_dark"
+                    android:textColorHint="@android:color/darker_gray"
+                    android:textSize="@dimen/profile_txt" />
+
+            </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout><!--    for Email LogIn-->
 
         <!--    For Phone LogIn-->

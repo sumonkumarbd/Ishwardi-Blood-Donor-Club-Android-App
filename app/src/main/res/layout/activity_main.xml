@@ -11,7 +11,7 @@
     <ImageView
         android:id="@+id/v"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_140dp"
+        android:layout_height="@dimen/_132dp"
         android:layout_marginHorizontal="@dimen/_10dp"
         android:background="@drawable/ibdc_logo_tns"
         app:layout_constraintBottom_toBottomOf="parent"
