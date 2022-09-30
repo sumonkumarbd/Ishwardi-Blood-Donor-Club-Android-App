@@ -85,6 +85,7 @@
                 android:id="@+id/birthDate_reg"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:inputType="none"
                 android:textSize="@dimen/card_txt"
                  />
 

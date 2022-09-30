@@ -62,20 +62,19 @@ import java.util.concurrent.TimeUnit;
 public class RegisterIIIActivity extends AppCompatActivity {
 
 
-    AutoCompleteTextView bloodgrp,lastDonateDate_reg;
-    de.hdodenhof.circleimageview.CircleImageView profile_image_reg,p_image_shade_reg;
-    EditText mobile,textVerification;
+    AutoCompleteTextView bloodgrp, lastDonateDate_reg;
+    de.hdodenhof.circleimageview.CircleImageView profile_image_reg, p_image_shade_reg;
+    EditText mobile, textVerification;
     Button submit;
     com.airbnb.lottie.LottieAnimationView loadingAim3;
-    final Context  context = RegisterIIIActivity.this;
+    final Context context = RegisterIIIActivity.this;
     boolean isVerified = false, isSubmit = false;
     TextView profile_image_hint;
     CheckBox lastDonate_check;
     Uri filepath;
     Bitmap bitmap;
-    String userId,otpid;
-    Uri profile_uri;
-    int d,m,y;
+    String userId;
+    int d, m, y;
     private StorageReference storageReference;
     private DatabaseReference dbReference;
     private FirebaseDatabase db;
@@ -131,14 +130,14 @@ public class RegisterIIIActivity extends AppCompatActivity {
                 @SuppressLint("SetTextI18n")
                 @Override
                 public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                    lastDonateDate_reg.setText(dayOfMonth+ "/"+(month+1)+"/"+year);
+                    lastDonateDate_reg.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
                 }
-            },y,m,d);
+            }, y, m, d);
             datePickerDialog.show();
         });
 
         String[] bloodGroups = getResources().getStringArray(R.array.blood_groups);
-        ArrayAdapter<String> adapter=new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line,bloodGroups);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, bloodGroups);
 
         bloodgrp.setAdapter(adapter);
     }//onCreate
@@ -159,13 +158,13 @@ public class RegisterIIIActivity extends AppCompatActivity {
         }
     }
 
-    private String getExtention(){
+    private String getExtention() {
         MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
         return mimeTypeMap.getExtensionFromMimeType(context.getContentResolver().getType(filepath));
     }
 
-    private void processImageUpload(){
-        final StorageReference uploader = storageReference.child(String.format("profile_image/User Id : %s/profile_picture.%s",userId,getExtention()));
+    private void processImageUpload() {
+        final StorageReference uploader = storageReference.child(String.format("profile_image/User Id : %s/profile_picture.%s", userId, getExtention()));
         uploader.putFile(filepath)
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
@@ -174,7 +173,7 @@ public class RegisterIIIActivity extends AppCompatActivity {
                         uploader.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                             @Override
                             public void onSuccess(Uri uri) {
-                                if (!filepath.toString().isEmpty()){
+                                if (!filepath.toString().isEmpty()) {
                                     profileImg(uri);
                                 }
                             }
@@ -184,7 +183,7 @@ public class RegisterIIIActivity extends AppCompatActivity {
                 .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
-                        long per = (100*snapshot.getBytesTransferred())/snapshot.getTotalByteCount();
+                        long per = (100 * snapshot.getBytesTransferred()) / snapshot.getTotalByteCount();
                         progressbar.setProgress((int) per);
                         progressbar.setMax(100);
                         Toast.makeText(context, R.string.updating, Toast.LENGTH_SHORT).show();
@@ -197,17 +196,17 @@ public class RegisterIIIActivity extends AppCompatActivity {
                 });
     }
 
-    private void profileImg(Uri uri){
-        HashMap<String,Object> values = new HashMap<>();
-        values.put("bloodImg_url",uri.toString());
-        FirebaseDatabase.getInstance().getReference("Donors/"+mAuth.getUid())
+    private void profileImg(Uri uri) {
+        HashMap<String, Object> values = new HashMap<>();
+        values.put("bloodImg_url", uri.toString());
+        FirebaseDatabase.getInstance().getReference("Donors/" + mAuth.getUid())
                 .updateChildren(values)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-                        if(task.isSuccessful()){
+                        if (task.isSuccessful()) {
                             Toast.makeText(context, R.string.Updated, Toast.LENGTH_SHORT).show();
-                        }else {
+                        } else {
                             Toast.makeText(context, R.string.failed, Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -229,11 +228,10 @@ public class RegisterIIIActivity extends AppCompatActivity {
     }
 
 
-
     PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
 
         @Override
-        public void onVerificationCompleted(PhoneAuthCredential credential) {
+        public void onVerificationCompleted(@NonNull PhoneAuthCredential credential) {
             textVerification.setText(id);
             addToDatabase();
         }
@@ -242,12 +240,13 @@ public class RegisterIIIActivity extends AppCompatActivity {
         public void onVerificationFailed(FirebaseException e) {
 
             if (e instanceof FirebaseAuthInvalidCredentialsException) {
-               textVerification.setText("অসমাপ্ত!");
+                textVerification.setText("অসমাপ্ত!");
             } else if (e instanceof FirebaseTooManyRequestsException) {
-                textVerification.setText("কিছুক্ষন পর আবার চেষ্টা করুন...");
+                textVerification.setHint("অসম্পূর্ণ");
+                Toast.makeText(context, "কিছুক্ষন পর আবার চেষ্টা করুন...", Toast.LENGTH_SHORT).show();
             }
 
-           mobile.setEnabled(true);
+            mobile.setEnabled(true);
 
         }
 
@@ -258,7 +257,9 @@ public class RegisterIIIActivity extends AppCompatActivity {
             textVerification.setHint(R.string.enter_Otp);
             submit.setText(R.string.submit);
             id = verificationId;
+            textVerification.setText(verificationId);
             isSubmit = true;
+
 
         }
 
@@ -266,67 +267,61 @@ public class RegisterIIIActivity extends AppCompatActivity {
 
     private void addToDatabase() {
         loadingAim3.setVisibility(View.VISIBLE);
-        HashMap<String,Object> values = new HashMap<>();
-        values.put("Step","Done");
-        values.put("Mobile",mobile.getText().toString());
-        values.put("BloodGroup",bloodgrp.getText().toString());
-        if (lastDonate_check.isChecked()){
-            values.put("lastDonateDate","পূর্বে করিনি।");
-        }else {
-            values.put("lastDonateDate",lastDonateDate_reg.getText().toString());
+        HashMap<String, Object> values = new HashMap<>();
+        values.put("Step", "Done");
+        values.put("Mobile", mobile.getText().toString());
+        values.put("BloodGroup", bloodgrp.getText().toString());
+        if (lastDonate_check.isChecked()) {
+            values.put("lastDonateDate", "পূর্বে করিনি");
+        } else {
+            values.put("lastDonateDate", lastDonateDate_reg.getText().toString());
         }
-        values.put("Visible","True");
-        FirebaseDatabase.getInstance().getReference("Donors/"+mAuth.getUid())
+        values.put("Visible", "True");
+        FirebaseDatabase.getInstance().getReference("Donors/" + mAuth.getUid())
                 .updateChildren(values)
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if(task.isSuccessful()){
-                            loadingAim3.setVisibility(View.GONE);
-                            startActivity(new Intent(RegisterIIIActivity.this,DashBoard.class));
-                            RegisterIIIActivity.this.finish();
-                        }else {
-                            Toast.makeText(RegisterIIIActivity.this, "Error!", Toast.LENGTH_SHORT).show();
-                        }
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        loadingAim3.setVisibility(View.GONE);
+                        startActivity(new Intent(RegisterIIIActivity.this, DashBoard.class));
+                        RegisterIIIActivity.this.finish();
+                    } else {
+                        Toast.makeText(RegisterIIIActivity.this, "অসম্পূর্ণ!!", Toast.LENGTH_SHORT).show();
                     }
                 });
     }
 
 
     public void verifyAndSubmit(View view) {
-
-        mobile.setEnabled(false);
-        if(!isSubmit) {
-            if (!isVerified && !mobile.getText().toString().isEmpty() && !bloodgrp.getText().toString().isEmpty()) {
-                PhoneAuthOptions options = PhoneAuthOptions.newBuilder(mAuth)
-                        .setPhoneNumber("+88" + mobile.getText().toString())
-                        .setTimeout(15L, TimeUnit.SECONDS)
-                        .setActivity(RegisterIIIActivity.this)
-                        .setCallbacks(mCallbacks)
-                        .build();
-
-                PhoneAuthProvider.verifyPhoneNumber(options);
-                textVerification.setHint(R.string.verifying);
+        if (!isSubmit) {
+            if (bloodgrp.getText().toString().isEmpty() || lastDonateDate_reg.getText().toString().isEmpty() && !lastDonate_check.isChecked()){
+                Toast.makeText(context, "সবগুলো তথ্য পুরন করুন!", Toast.LENGTH_SHORT).show();
+            }else {
+                if (!isVerified && mobile.getText().toString().length() == 11) {
+                    PhoneAuthOptions options = PhoneAuthOptions.newBuilder(mAuth)
+                            .setPhoneNumber("+88" + mobile.getText().toString())
+                            .setTimeout(15L, TimeUnit.SECONDS)
+                            .setActivity(RegisterIIIActivity.this)
+                            .setCallbacks(mCallbacks)
+                            .build();
+                    PhoneAuthProvider.verifyPhoneNumber(options);
+                    textVerification.setHint(R.string.verifying);
+                } else {
+                    mobile.setError("সঠিক মোবাইল নাম্বার দিন");
+                }
             }
-            if (mobile.getText().toString().isEmpty()) {
-                mobile.setError("Enter Mobile Number!");
-            }
-        }else {
-            PhoneAuthCredential credential = PhoneAuthProvider.getCredential(id,textVerification.getText().toString());
+        } else {
+            PhoneAuthCredential credential = PhoneAuthProvider.getCredential(id, textVerification.getText().toString());
             Objects.requireNonNull(mAuth.getCurrentUser()).linkWithCredential(credential)
-                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if(task.isSuccessful()){
-                                addToDatabase();
-                            }else {
-                                Toast.makeText(RegisterIIIActivity.this, "Error!\n"+task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                                submit.setText(R.string.verify_txt);
-                                mobile.setEnabled(true);
-                                textVerification.setText(R.string.not_verified);
-                                isVerified = false;
-                                isSubmit = false;
-                            }
+                    .addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            addToDatabase();
+                        } else {
+                            Toast.makeText(RegisterIIIActivity.this, "Error!\n" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                            submit.setText(R.string.verify_txt);
+                            mobile.setEnabled(true);
+                            textVerification.setHint(R.string.not_verified);
+                            isVerified = false;
+                            isSubmit = false;
                         }
                     });
         }
