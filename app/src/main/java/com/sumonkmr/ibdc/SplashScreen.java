@@ -36,7 +36,7 @@ public class SplashScreen extends AppCompatActivity {
                 if(user != null){
                     getSelf();
                 }else {
-                    startActivity(new Intent(SplashScreen.this,LoginScreenActivity.class));
+                    startActivity(new Intent(SplashScreen.this,GoogleSignInAndSignUP.class));
                     SplashScreen.this.finish();
                 }
 

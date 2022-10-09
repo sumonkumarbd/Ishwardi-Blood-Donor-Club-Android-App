@@ -5,47 +5,64 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <application
+        android:name=".OneSignalApplications"
         android:allowBackup="true"
         android:exported="true"
-        android:launchMode="singleTop"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:launchMode="singleTop"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:name=".OneSignalApplications"
         android:theme="@style/Theme.IbdcBySumonKmr">
         <activity
+            android:name=".GoogleSignInAndSignUP"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".Instructions"
-            android:screenOrientation="portrait"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ProfitOfBloodDonation"
             android:exported="false" />
         <activity
             android:name=".AboutUs"
-            android:screenOrientation="portrait"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".DashBoard"
-            android:screenOrientation="portrait"
             android:exported="false"
-            android:windowSoftInputMode="adjustPan"
-            />
-        <activity android:name=".DisplayDonorsActivity" android:screenOrientation="portrait"/>
-        <activity android:name=".RegisterIIIActivity" android:screenOrientation="portrait"/>
-        <activity android:name=".RegisterIIActivity" android:screenOrientation="portrait"/>
-        <activity android:name=".RegisterIActivity" android:screenOrientation="portrait"/>
-        <activity android:name=".LoginScreenActivity" android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".DisplayDonorsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".RegisterIIIActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".RegisterIIActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".RegisterIActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".LoginScreenActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".SplashScreen"
+            android:exported="true"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.IbdcBySumonKmrNoStatusBar"
-            android:exported="true">
+            android:theme="@style/Theme.IbdcBySumonKmrNoStatusBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
