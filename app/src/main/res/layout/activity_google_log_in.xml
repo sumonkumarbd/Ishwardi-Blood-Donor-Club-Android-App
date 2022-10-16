@@ -6,17 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".GoogleLogIn">
 
-    <TextView
-        android:id="@+id/forgot_pass"
-        android:layout_width="@dimen/_120dp"
-        android:layout_height="@dimen/_20dp"
-        android:layout_marginStart="@dimen/_50dp"
-        android:layout_marginTop="@dimen/_5dp"
-        android:fontFamily="@font/poppins"
-        android:text="@string/forgot_password"
-        android:textColor="#3B3F3D"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_tabs" />
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/loginAnim"
@@ -68,32 +57,47 @@
         app:layout_constraintTop_toBottomOf="@+id/textView7"
         app:layout_constraintVertical_bias="0">
 
-        <com.google.android.gms.common.SignInButton
-            android:id="@+id/google_signIn"
+        <ImageView
+            android:id="@+id/logo"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            />
-
-        <com.google.android.gms.common.SignInButton
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            />
+            android:layout_height="match_parent"
+            android:elevation="@dimen/shadow"
+            android:gravity="center"
+            android:src="@drawable/ibdc_logo_tns"
+            android:text="@string/motive"
+            android:textColor="@color/colorPrimary"
+            android:padding="@dimen/_5dp"
+            app:layout_constraintBottom_toBottomOf="@+id/edit_tabs"
+            app:layout_constraintEnd_toEndOf="@+id/edit_tabs"
+            app:layout_constraintStart_toStartOf="@+id/edit_tabs"
+            app:layout_constraintTop_toTopOf="@+id/edit_tabs" />
 
     </LinearLayout>
 
+
+    <ImageButton
+        android:id="@+id/google_signIn"
+        android:layout_width="@dimen/_90dp"
+        android:layout_height="@dimen/_90dp"
+        android:src="@drawable/google"
+        android:background="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/loadingAim"
+        app:layout_constraintEnd_toEndOf="@+id/imageView2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edit_tabs"
+        app:layout_constraintVertical_bias="0.547"
+        android:contentDescription="@string/cover" />
 
     <ImageView
         android:id="@+id/imageView4"
         android:layout_width="@dimen/_80dp"
         android:layout_height="@dimen/_80dp"
+        android:layout_marginStart="8dp"
         android:contentDescription="@string/todo"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.096"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/logo"
-        app:layout_constraintVertical_bias="0.567"
+        app:layout_constraintTop_toBottomOf="@+id/edit_tabs"
+        app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@drawable/splash" />
 
     <com.airbnb.lottie.LottieAnimationView
@@ -127,67 +131,8 @@
         app:srcCompat="@drawable/border" />
 
 
-    <Button
-        android:id="@+id/logon_btn"
-        android:layout_width="@dimen/_80dp"
-        android:layout_height="@dimen/_40dp"
-        android:layout_marginStart="@dimen/_1dp"
-        android:layout_marginBottom="@dimen/_30dp"
-        android:background="@color/tns"
-        android:clickable="true"
-        android:focusable="true"
-        android:fontFamily="@font/poppins"
-        android:text="@string/login"
-        android:textAlignment="viewStart"
-        android:textColor="@color/white"
-        android:textSize="@dimen/form_txt"
-        android:textStyle="bold"
-        android:typeface="monospace"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView2"
-        app:layout_constraintStart_toStartOf="@+id/imageView2" />
 
-    <Button
-        android:id="@+id/logon_btn_p"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/_40dp"
-        android:layout_marginEnd="@dimen/_20dp"
-        android:layout_marginBottom="@dimen/_33dp"
-        android:background="@color/tns"
-        android:clickable="true"
-        android:focusable="true"
-        android:fontFamily="@font/poppins"
-        android:visibility="gone"
-        android:text="@string/verify_txt"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textSize="@dimen/_16sp"
-        android:textStyle="bold"
-        android:typeface="monospace"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        />
 
-    <Button
-        android:id="@+id/login_submit"
-        android:layout_width="@dimen/_80dp"
-        android:layout_height="@dimen/_40dp"
-        android:layout_marginEnd="@dimen/_30dp"
-        android:layout_marginBottom="@dimen/_33dp"
-        android:background="@color/tns"
-        android:clickable="true"
-        android:focusable="true"
-        android:fontFamily="@font/poppins"
-        android:visibility="gone"
-        android:text="@string/submit"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textSize="@dimen/_16sp"
-        android:textStyle="bold"
-        android:typeface="monospace"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline4"
@@ -196,34 +141,5 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_begin="@dimen/_566dp" />
 
-    <TextView
-        android:id="@+id/g_signUp"
-        android:layout_width="@dimen/_50dp"
-        android:layout_height="@dimen/_20dp"
-        android:layout_marginEnd="@dimen/_8dp"
-        android:layout_marginTop="@dimen/_5dp"
-        android:fontFamily="@font/poppins"
-        android:gravity="center"
-        android:text="@string/sign_up"
-        android:textColor="#3B3F3D"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/forgot_pass"
-        app:layout_constraintTop_toBottomOf="@+id/edit_tabs" />
-
-    <ImageView
-        android:id="@+id/logo"
-        android:layout_width="@dimen/_170dp"
-        android:layout_height="@dimen/_75dp"
-        android:elevation="@dimen/shadow"
-        android:gravity="center"
-        android:src="@drawable/ibdc_logo_tns"
-        android:text="@string/motive"
-        android:textColor="@color/colorPrimary"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.477"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_tabs"
-        app:layout_constraintVertical_bias="0.5" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

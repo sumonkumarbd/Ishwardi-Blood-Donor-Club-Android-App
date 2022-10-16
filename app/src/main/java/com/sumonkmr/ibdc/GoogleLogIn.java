@@ -10,12 +10,15 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.PersistableBundle;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.google.android.gms.auth.api.identity.BeginSignInRequest;
 import com.google.android.gms.auth.api.identity.BeginSignInResult;
 import com.google.android.gms.auth.api.identity.Identity;
@@ -43,7 +46,8 @@ import com.google.firebase.database.annotations.Nullable;
 public class GoogleLogIn extends AppCompatActivity {
 
     private static final int REQUEST_CODE = 2;
-    SignInButton google_signIn;
+    ImageButton google_signIn;
+    LottieAnimationView loadingAim;
     TextView g_signUp;
     GoogleSignInOptions gso;
     GoogleSignInClient gsc;
@@ -66,7 +70,7 @@ public class GoogleLogIn extends AppCompatActivity {
         OneTapClientProcess();
 
         google_signIn = findViewById(R.id.google_signIn);
-        g_signUp = findViewById(R.id.g_signUp);
+        loadingAim = findViewById(R.id.loadingAim);
 
 
         google_signIn.setOnClickListener(v -> {
@@ -85,6 +89,7 @@ public class GoogleLogIn extends AppCompatActivity {
     }
 
     private void LoginProcess() {
+        loadingAim.setVisibility(View.VISIBLE);
         Intent signInIntent = gsc.getSignInIntent();
         startActivityForResult(signInIntent,REQUEST_CODE);
     }
@@ -119,9 +124,11 @@ public class GoogleLogIn extends AppCompatActivity {
                             Toast.makeText(GoogleLogIn.this, "লগ ইন সফল!", Toast.LENGTH_SHORT).show();
                             FirebaseUser user = mAuth.getCurrentUser();
                             startActivity(new Intent(getApplicationContext(),SplashScreen.class));
+                            loadingAim.setVisibility(View.INVISIBLE);
                         } else {
                             // If sign in fails, display a message to the user.
                             Toast.makeText(GoogleLogIn.this, "লগ ইন ফেল!", Toast.LENGTH_SHORT).show();
+                            loadingAim.setVisibility(View.INVISIBLE);
                         }
                     }
                 });
