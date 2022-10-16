@@ -13,7 +13,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.AutoCompleteTextView;
@@ -45,7 +44,6 @@ import com.karumi.dexter.listener.single.PermissionListener;
 import java.io.InputStream;
 import java.util.Calendar;
 import java.util.HashMap;
-import java.util.Objects;
 
 public class RegisterIActivity extends AppCompatActivity {
 
@@ -54,8 +52,6 @@ public class RegisterIActivity extends AppCompatActivity {
     int d,m,y;
     Button nextButtonII;
     com.airbnb.lottie.LottieAnimationView loadingAim1;
-
-    String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
 
 
     @Override
@@ -99,24 +95,30 @@ public class RegisterIActivity extends AppCompatActivity {
         birthdateText = birthDate_reg.getText().toString();
 
         if(f_name.isEmpty()){
-            fName.setError("অনুগ্রহপূর্বক সঠিক তথ্য দিন!");
+            fName.setError("সঠিক তথ্য দিন!");
+            nextButtonII.setActivated(false);
+        }
+        if(emailText.isEmpty()){
+            email.setError("সঠিক তথ্য দিন!");
+            nextButtonII.setActivated(false);
         }
         if (l_name.isEmpty()){
-            lName.setError("অনুগ্রহপূর্বক সঠিক তথ্য দিন!");
+            lName.setError("সঠিক তথ্য দিন!");
+            nextButtonII.setActivated(false);
         }
-        if(!emailText.matches(emailPattern)){
-            email.setError("অনুগ্রহপূর্বক সঠিক ফরমেটে ইমেইল দিন!");
+        if(passText.isEmpty() || passText.length() <= 6){
+            Toast.makeText(this, "কমপক্ষে ৬ ডিজিট এর পাসওয়ার্ড দিন!!", Toast.LENGTH_SHORT).show();
+            nextButtonII.setActivated(false);
         }
         if(birthdateText.isEmpty()){
-            Toast.makeText(this, "অনুগ্রহপূর্বক সঠিক জন্ম তারিখ দিন!", Toast.LENGTH_SHORT).show();
-        }
-        if(passText.length() < 6 && !f_name.isEmpty() && !birthdateText.isEmpty() && !emailText.isEmpty()){
-            Toast.makeText(this, "কমপক্ষে ৬ অক্ষর/নাম্বার ব্যাবহার করে পাসওয়ার্ড দিন!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "জন্ম তারিখ সঠিক দিন!", Toast.LENGTH_SHORT).show();
+            nextButtonII.setActivated(false);
         }
 
-        if(! f_name.isEmpty() && ! l_name.isEmpty() && ! emailText.isEmpty() && ! passText.isEmpty() && passText.length() > 5 && !birthdateText.isEmpty()){
+        if(! f_name.isEmpty() && ! l_name.isEmpty() && ! emailText.isEmpty() && ! passText.isEmpty()){
+            nextButtonII.setActivated(true);
             RegisterUser(f_name,l_name,emailText,passText,birthdateText);
-            loadingAim1.setVisibility(View.VISIBLE);
+            RegisterIActivity.this.finish();
         }
 
     }
@@ -129,11 +131,7 @@ public class RegisterIActivity extends AppCompatActivity {
                     if(task.isSuccessful()){
                         addToDatabase(task.getResult().getUser().getUid(),f_name,l_name,emailText,birthdateText);
                     }else {
-                        Toast.makeText(this, Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
-                        Handler handler = new Handler();
-                        Runnable runnable = () -> loadingAim1.setVisibility(View.GONE);
-                        handler.postDelayed(runnable,3000);
-
+                        Toast.makeText(RegisterIActivity.this, "সঠিক ইমেইল ও পাসওয়ার্ড দিন!", Toast.LENGTH_LONG).show();
                     }
                 });
     }

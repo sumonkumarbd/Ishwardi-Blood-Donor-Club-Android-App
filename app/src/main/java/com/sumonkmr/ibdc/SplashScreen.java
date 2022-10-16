@@ -34,9 +34,10 @@ public class SplashScreen extends AppCompatActivity {
             @Override
             public void onFinish() {
                 if(user != null){
-                    getSelf();
+                    startActivity(new Intent(SplashScreen.this,DashBoard.class));
+                    SplashScreen.this.finish();
                 }else {
-                    startActivity(new Intent(SplashScreen.this,GoogleSignInAndSignUP.class));
+                    startActivity(new Intent(SplashScreen.this,GoogleLogIn.class));
                     SplashScreen.this.finish();
                 }
 

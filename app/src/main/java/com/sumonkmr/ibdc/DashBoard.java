@@ -21,6 +21,10 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -43,6 +47,9 @@ public class DashBoard extends AppCompatActivity implements View.OnClickListener
     String uid;
     FirebaseAuth auth;
     boolean doubleBackToExitPressedOnce = false;
+    GoogleSignInOptions gso;
+    GoogleSignInClient gsc;
+    GoogleSignInAccount account;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +57,8 @@ public class DashBoard extends AppCompatActivity implements View.OnClickListener
         setContentView(R.layout.activity_dash_board);
 
         auth = FirebaseAuth.getInstance();
+        gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
+        gsc = GoogleSignIn.getClient(this,gso);
 
 
 
@@ -89,36 +98,20 @@ public class DashBoard extends AppCompatActivity implements View.OnClickListener
         mail = menuView.findViewById(R.id.mail);
 
 
-        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        assert currentUser != null;
-        uid = currentUser.getUid();
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference reference = database.getReference().child("Donors");
-        reference.child(uid).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()){
-                   String  profile_img_url = (Objects.requireNonNull(snapshot.child("bloodImg_url").getValue()).toString());
-                    String f_name = (Objects.requireNonNull(snapshot.child("FName").getValue()).toString());
-                    String l_name = (Objects.requireNonNull(snapshot.child("LName").getValue()).toString());
-                   profile_name_menu.setText(String.format("%s %s",f_name,l_name));
-
-                         Glide.with(getApplicationContext())
-                               .load(profile_img_url)
-                               .centerCrop()
-                               .placeholder(R.drawable.ibdc_logo)
-                               .into(profile_image_menu);
+        account = GoogleSignIn.getLastSignedInAccount(this);
+        if (account !=null) {
+            Uri profile_img_url = (account.getPhotoUrl());
+            String f_name = (account.getDisplayName());
+            profile_name_menu.setText(f_name);
+            Glide.with(this)
+                    .load(profile_img_url)
+                    .centerCrop()
+                    .placeholder(R.drawable.ibdc_logo)
+                    .into(profile_image_menu);
+        }
 
 
 
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
 
 
 
@@ -177,6 +170,7 @@ public class DashBoard extends AppCompatActivity implements View.OnClickListener
                 case R.id.ll_Logout:
                 auth.signOut();
                 startActivity(new Intent(this,SplashScreen.class));
+                DashBoard.this.finish();
                 break;
 
             case R.id.mail:

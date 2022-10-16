@@ -7,13 +7,13 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.HashMap;
-import java.util.Objects;
 
 public class RegisterIIActivity extends AppCompatActivity {
 
@@ -381,26 +381,43 @@ public class RegisterIIActivity extends AppCompatActivity {
 
     public void registerIII(View view) {
         loadingAim2.setVisibility(View.VISIBLE);
-        String districtT, upazilaT, villageT, divisionT;
+        String districtT,tehsilT,villageT,stateT;
         districtT = District.getText().toString();
-        upazilaT = Upazila.getText().toString();
-        villageT = Objects.requireNonNull(Village.getText()).toString();
-        divisionT = Division.getText().toString();
+        tehsilT = Upazila.getText().toString();
+        villageT = Village.getText().toString();
+        stateT = Division.getText().toString();
 
-        if (!divisionT.isEmpty() && !districtT.isEmpty() && !upazilaT.isEmpty() && !villageT.isEmpty()) {
-            loadingAim2.setVisibility(View.VISIBLE);
-            addDataToFirebaseStorage(divisionT, districtT, upazilaT, villageT, FirebaseAuth.getInstance().getUid());
-            startActivity(new Intent(RegisterIIActivity.this, RegisterIIIActivity.class));
-        }else {
-            loadingAim2.setVisibility(View.GONE);
-            Toast.makeText(this, "অনুগ্রহপূর্বক সঠিক তথ্য দিন!", Toast.LENGTH_SHORT).show();
+        if(!districtT.isEmpty() && !tehsilT.isEmpty() && !villageT.isEmpty() && !stateT.isEmpty() && !stateT.equalsIgnoreCase("State")){
+            nextToII.setActivated(true);
+            addDataToFirebaseStorage(stateT,districtT,tehsilT,villageT,FirebaseAuth.getInstance().getUid());
+            startActivity(new Intent(RegisterIIActivity.this,RegisterIIIActivity.class));
+            RegisterIIActivity.this.finish();
         }
+
+        if(stateT.isEmpty() || stateT.equalsIgnoreCase("state")){
+            Division.setError("সঠিক তথ্য দিন!");
+            nextToII.setActivated(false);
+        }
+        if(districtT.isEmpty()){
+            District.setError("সঠিক তথ্য দিন!");
+            nextToII.setActivated(false);
+        }
+        if(tehsilT.isEmpty()){
+            Upazila.setError("সঠিক তথ্য দিন!");
+            nextToII.setActivated(false);
+        }
+        if(villageT.isEmpty()){
+            Village.setError("সঠিক তথ্য দিন!");
+            nextToII.setActivated(false);
+        }
+        loadingAim2.setVisibility(View.GONE);
+
     }
 
-    private void addDataToFirebaseStorage(String divisionT, String districtT, String tehsilT, String villageT, String uid) {
+    private void addDataToFirebaseStorage(String stateT, String districtT, String tehsilT, String villageT, String uid) {
 
         HashMap<String,Object> values = new HashMap<>();
-        values.put("State", divisionT);
+        values.put("State",stateT);
         values.put("District",districtT);
         values.put("Upazila",tehsilT);
         values.put("Village",villageT);

@@ -9,6 +9,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,10 +18,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.FirebaseTooManyRequestsException;
 import com.google.firebase.auth.AuthCredential;
@@ -32,6 +29,7 @@ import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.PhoneAuthProvider;
 import com.google.firebase.database.FirebaseDatabase;
+import com.sumonkmr.ibdc.model.User;
 
 import java.util.HashMap;
 import java.util.Objects;
@@ -40,7 +38,7 @@ import java.util.concurrent.TimeUnit;
 public class SettingFragments extends Fragment {
 
     TextView change_Email, change_password, changeNumber;
-    EditText reNew_pass, oldPass_resetPass, newPass_resetPass,oldMail,newMail,passForCngMail,oldNum,newNum, otpForCngNum;
+    EditText reNew_pass, oldPass_resetPass, newPass_resetPass,oldMail,newMail,passForCngMail,oldNum,newNum, pass_Num;
     Button resetBtn, cBtn,resetBtn_Num_done,resetBtn_Num,cBtn_Num;
     String emailExceptions;
     FirebaseAuth mAuth;
@@ -232,13 +230,14 @@ public class SettingFragments extends Fragment {
 
         oldNum = dialog.findViewById(R.id.oldNum);
         newNum = dialog.findViewById(R.id.newNum);
-        otpForCngNum = dialog.findViewById(R.id.otpForCngNum);
+        pass_Num = dialog.findViewById(R.id.passForCngNum);
 
         resetBtn_Num = dialog.findViewById(R.id.resetBtn_Num);
         cBtn_Num = dialog.findViewById(R.id.cBtn_Num);
         resetBtn_Num_done = dialog.findViewById(R.id.resetBtn_Num_done);
+        resetBtn.setVisibility(View.GONE);
 
-        otpForCngNum.setHint(R.string.enter_Otp);
+        pass_Num.setHint(R.string.enter_Otp);
 
         changeNumber.setOnClickListener(v -> {
             dialog.show();
@@ -250,17 +249,17 @@ public class SettingFragments extends Fragment {
 
 
         resetBtn_Num_done.setOnClickListener(view -> {
-            updatePhoneNum();
+            updatePhoneNum(dialog);
         });
 
 
         cBtn_Num.setOnClickListener(v -> {
             oldNum.setText("");
             newNum.setText("");
-            otpForCngNum.setText("");
+            pass_Num.setText("");
             resetBtn_Num.setVisibility(View.VISIBLE);
             resetBtn_Num_done.setVisibility(View.GONE);
-            otpForCngNum.setHint(R.string.enter_Otp);
+            pass_Num.setHint(R.string.enter_Otp);
             dialog.dismiss();
         });
 
@@ -320,7 +319,7 @@ public class SettingFragments extends Fragment {
         }else {
             resetBtn_Num.setVisibility(View.GONE);
             resetBtn_Num_done.setVisibility(View.VISIBLE);
-            otpForCngNum.setHint(R.string.verifying);
+            pass_Num.setHint(R.string.verifying);
             PhoneAuthOptions options =
                     PhoneAuthOptions.newBuilder(mAuth)
                             .setPhoneNumber("+88" + oldNum.getText().toString())       // Phone number to verify
@@ -335,9 +334,9 @@ public class SettingFragments extends Fragment {
                                 @Override
                                 public void onVerificationFailed(@NonNull FirebaseException e) {
                                     if (e instanceof FirebaseAuthInvalidCredentialsException) {
-                                        otpForCngNum.setHint("অসমাপ্ত!");
+                                        pass_Num.setHint("অসমাপ্ত!");
                                     } else if (e instanceof FirebaseTooManyRequestsException) {
-                                        otpForCngNum.setHint("কিছুক্ষন পর আবার চেষ্টা করুন...");
+                                        pass_Num.setHint("কিছুক্ষন পর আবার চেষ্টা করুন...");
                                         resetBtn.setEnabled(true);
                                     }
                                 }
@@ -360,25 +359,41 @@ public class SettingFragments extends Fragment {
         }
     }//init otp
 
-    private void updatePhoneNum(){
-        if(otpForCngNum.getText().toString().length()!=6) {
-            Toast.makeText(getContext(), "ওটিপি সঠিক নয়!!", Toast.LENGTH_LONG).show();
-        }else if(otpForCngNum.getText().toString().isEmpty()) {
-            Toast.makeText(getContext(), "ওটিপি দিন!!", Toast.LENGTH_LONG).show();
+    private void updatePhoneNum(Dialog d){
+        User u = new User();
+        if(pass_Num.getText().toString().length()!=6) {
+            Toast.makeText(getContext(), "পাসওয়ার্ড সঠিক নয়!!", Toast.LENGTH_LONG).show();
+        }else if(pass_Num.getText().toString().isEmpty()) {
+            Toast.makeText(getContext(), "পাসওয়ার্ড দিন!!", Toast.LENGTH_LONG).show();
         }else {
-            PhoneAuthCredential credential=PhoneAuthProvider.getCredential(id,otpForCngNum.getText().toString());
-            user.updatePhoneNumber(credential).addOnCompleteListener(task -> {
-                if (task.isSuccessful()){
-                    Toast.makeText(getContext(), "নাম্বার আপডেট সম্পূর্ণ!!", Toast.LENGTH_SHORT).show();
-                        UpdatePhnInDB();
-                        oldNum.setText("");
-                        newNum.setText("");
-                        otpForCngNum.setText("");
+            if (Objects.equals(u.getMobile(), oldNum.toString())){
+                if (!TextUtils.isEmpty(newNum.getText()) && newNum.getText().toString().length() == 11) {
+                    AuthCredential credential = EmailAuthProvider.getCredential(Objects.requireNonNull(user.getEmail()), pass_Num.getText().toString());
+                    user.reauthenticate(credential)
+                            .addOnCompleteListener(task -> {
+                                if (task.isSuccessful()) {
+                                    d.dismiss();
+                                    UpdatePhnInDB();
+                                    oldNum.setText("");
+                                    newNum.setText("");
+                                    pass_Num.setText("");
+                                    Toast.makeText(getContext(), "নাম্বার পরিবর্তন সফল হয়েছে!", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(getContext(), "নাম্বার পরিবর্তন অসফল, দয়াকরে পুনরায় চেষ্টা করুন!", Toast.LENGTH_SHORT).show();
+                                }
+
+                            })
+                            .addOnFailureListener(e -> {
+                                Toast.makeText(getContext(), "আপনার পাসওয়ার্ড টি ভুল! অনুগ্রহপূর্বক সঠিক পাসওয়ার্ড দিন!!", Toast.LENGTH_SHORT).show();
+                            });
+                }else {
+                    newNum.setError("নাম্বার টি সঠিক নয়!");
                 }
-            }).addOnFailureListener(e -> {
-                Toast.makeText(getContext(), "দুঃখিত, সঠিক তথ্য দিয়ে পুনরায় চেষ্টা করুন!", Toast.LENGTH_SHORT).show();
-            });
+            }else {
+                oldNum.setError("নাম্বার টি সঠিক নয়!");
+            }
         }
     }//updatePhoneNum
+
 
 }
