@@ -7,6 +7,7 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -65,19 +66,19 @@ import nl.psdcompany.duonavigationdrawer.widgets.DuoDrawerToggle;
 public class DashBoard extends AppCompatActivity implements View.OnClickListener {
 
     DuoDrawerLayout drawerLayout;
-    com.google.android.material.textfield.TextInputEditText f_name_signUp,l_name_signUp,village_signUp;
-    de.hdodenhof.circleimageview.CircleImageView profile_image,profile_image_signUp,p_image_shade_signUp;
-    AutoCompleteTextView Division,District,Upazila,bloodGrpDropDown,lastDonateDate_signUp,birthDate_signUp;
+    com.google.android.material.textfield.TextInputEditText f_name_signUp, l_name_signUp, village_signUp;
+    de.hdodenhof.circleimageview.CircleImageView profile_image, profile_image_signUp, p_image_shade_signUp;
+    AutoCompleteTextView Division, District, Upazila, bloodGrpDropDown, lastDonateDate_signUp, birthDate_signUp;
     ImageView cover_image;
     de.hdodenhof.circleimageview.CircleImageView profile_image_menu, sds_image;
     TextView profile_name_menu, sds_dash, mail;
     String uid;
-    int d,m,y;
+    int d, m, y;
     Dialog dialog;
     Uri filepath;
     Bitmap bitmap;
     FirebaseAuth auth;
-    String userId,profile_url;
+    String userId, profile_url;
     boolean doubleBackToExitPressedOnce = false;
     GoogleSignInOptions gso;
     GoogleSignInClient gsc;
@@ -86,6 +87,10 @@ public class DashBoard extends AppCompatActivity implements View.OnClickListener
     private DatabaseReference dbReference;
     private FirebaseDatabase db;
     private ProgressBar progressbar;
+    MediaPlayer btn;
+    MediaPlayer okkBtn;
+    MediaPlayer cbtN;
+    MediaPlayer great_sound;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,8 +108,8 @@ public class DashBoard extends AppCompatActivity implements View.OnClickListener
         db = FirebaseDatabase.getInstance();
         dbReference = db.getReference();
         account = GoogleSignIn.getLastSignedInAccount(this);
-
         init();
+        Sounds();
     }
 
     private void init() {
@@ -122,8 +127,6 @@ public class DashBoard extends AppCompatActivity implements View.OnClickListener
 
         View contentView = drawerLayout.getContentView();
         View menuView = drawerLayout.getMenuView();
-
-
 
 
         LinearLayout ll_Home = menuView.findViewById(R.id.ll_Home);
@@ -178,44 +181,54 @@ public class DashBoard extends AppCompatActivity implements View.OnClickListener
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ll_Home:
+                btn.start();
                 replace(new HomeFragment(), "Home");
                 break;
 
             case R.id.ll_Profile:
+                btn.start();
                 replace(new ProfileFragment(), "Profile");
                 break;
 
             case R.id.ll_beDonor:
+                btn.start();
                 OpenDialog();
                 break;
 
             case R.id.ll_Setting:
+                btn.start();
                 replace(new SettingFragments(), "Setting");
                 break;
 
             case R.id.ll_fb:
+                btn.start();
                 gotoUrl("https://www.facebook.com/groups/ibdcbd");
                 break;
 
             case R.id.ll_Share:
+                btn.start();
                 shareApp();
                 break;
 
             case R.id.ll_about_us:
+                btn.start();
                 startActivity(new Intent(this, AboutUs.class));
                 break;
 
             case R.id.ll_privacy:
+                btn.start();
                 gotoUrl("https://sites.google.com/view/ibdcprivacypolicy/home/");
                 break;
 
             case R.id.ll_Logout:
+                cbtN.start();
                 auth.signOut();
                 startActivity(new Intent(this, SplashScreen.class));
                 DashBoard.this.finish();
                 break;
 
             case R.id.mail:
+                btn.start();
                 Intent intent = new Intent(Intent.ACTION_SEND);
                 intent.putExtra(Intent.EXTRA_EMAIL, new String[]{"sumonkmrofficial@gmail.com"});
                 intent.putExtra(Intent.EXTRA_SUBJECT, "Im Sending Email From IBDC App");
@@ -225,10 +238,12 @@ public class DashBoard extends AppCompatActivity implements View.OnClickListener
                 break;
 
             case R.id.sds_dash:
+                btn.start();
                 gotoUrl("https://www.facebook.com/sumonkmr.studio/");
                 break;
 
             case R.id.sds_image:
+                btn.start();
                 gotoUrl("https://play.google.com/store/apps/dev?id=6877143126125387449");
                 break;
 
@@ -249,6 +264,8 @@ public class DashBoard extends AppCompatActivity implements View.OnClickListener
 
     private void ChooseProfilePicture() {
         p_image_shade_signUp.setOnClickListener(v -> {
+            final MediaPlayer profileImg_choose = MediaPlayer.create(getApplicationContext(), R.raw.mousemp3);
+            profileImg_choose.start();
             Dexter.withContext(getApplicationContext())
                     .withPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
                     .withListener(new PermissionListener() {
@@ -289,23 +306,25 @@ public class DashBoard extends AppCompatActivity implements View.OnClickListener
         }
     }
 
-    private String getExtention(){
+    private String getExtention() {
         MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
         return mimeTypeMap.getExtensionFromMimeType(getApplicationContext().getContentResolver().getType(filepath));
     }
 
-    private void processImageUpload(){
+    private void processImageUpload() {
         progressbar = dialog.findViewById(R.id.progressbar_signUp);
-        final StorageReference uploader = storageReference.child(String.format("profile_image/User Email : %s/profile_picture.%s",account.getEmail(),getExtention()));
+        final StorageReference uploader = storageReference.child(String.format("profile_image/User Email : %s/profile_picture.%s", account.getEmail(), getExtention()));
         uploader.putFile(filepath)
                 .addOnSuccessListener(taskSnapshot -> {
                     Toast.makeText(getApplicationContext(), R.string.Updated_img, Toast.LENGTH_SHORT).show();
                     uploader.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                         @Override
                         public void onSuccess(Uri uri) {
-                            if (!filepath.toString().isEmpty()){
+                            if (!filepath.toString().isEmpty()) {
                                 profileImg(uri);
                                 progressbar.setProgressDrawable(getDrawable(R.drawable.progress_bar_success));
+                                great_sound.start();
+
                             }
                         }
                     });
@@ -313,7 +332,7 @@ public class DashBoard extends AppCompatActivity implements View.OnClickListener
                 .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
-                        long per = (100*snapshot.getBytesTransferred())/snapshot.getTotalByteCount();
+                        long per = (100 * snapshot.getBytesTransferred()) / snapshot.getTotalByteCount();
                         progressbar.setProgress((int) per);
                         progressbar.setMax(100);
                         Toast.makeText(getApplicationContext(), R.string.updating, Toast.LENGTH_SHORT).show();
@@ -326,17 +345,17 @@ public class DashBoard extends AppCompatActivity implements View.OnClickListener
                 });
     }
 
-    private void profileImg(Uri uri){
-        HashMap<String,Object> values = new HashMap<>();
-        values.put("bloodImg_url",uri.toString());
-        FirebaseDatabase.getInstance().getReference("Donors/"+FirebaseAuth.getInstance().getUid())
+    private void profileImg(Uri uri) {
+        HashMap<String, Object> values = new HashMap<>();
+        values.put("bloodImg_url", uri.toString());
+        FirebaseDatabase.getInstance().getReference("Donors/" + FirebaseAuth.getInstance().getUid())
                 .updateChildren(values)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-                        if(task.isSuccessful()){
+                        if (task.isSuccessful()) {
                             Toast.makeText(getApplicationContext(), R.string.Updated, Toast.LENGTH_SHORT).show();
-                        }else {
+                        } else {
                             Toast.makeText(getApplicationContext(), R.string.failed, Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -344,7 +363,7 @@ public class DashBoard extends AppCompatActivity implements View.OnClickListener
     }
 
     //////////////////////////////////////////////////////
-    
+
     private void OpenDialog() {
         dialog = new Dialog(this);
         dialog.setContentView(R.layout.be_donor_dialog);
@@ -377,7 +396,7 @@ public class DashBoard extends AppCompatActivity implements View.OnClickListener
         lastDonateDate_signUp = dialog.findViewById(R.id.lastDonateDate_signUp);
         birthDate_signUp = dialog.findViewById(R.id.birthDate_signUp);
 
-        
+
 //        Functions
         initializeAddressFilters();
         LastDonateDatePicker();
@@ -385,10 +404,12 @@ public class DashBoard extends AppCompatActivity implements View.OnClickListener
 
 
         ok_Btn.setOnClickListener(v -> {
+            okkBtn.start();
             dialog.dismiss();
         });
 
         cBtn.setOnClickListener(v -> {
+            cbtN.start();
             dialog.dismiss();
         });
 
@@ -407,7 +428,7 @@ public class DashBoard extends AppCompatActivity implements View.OnClickListener
 
         Division.setOnItemClickListener((parent, view, position, id) -> {
 
-            switch (Division.getText().toString()){
+            switch (Division.getText().toString()) {
                 case "ঢাকা":
                     District.setAdapter(new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.dhaka_division)));
                     break;
@@ -448,7 +469,7 @@ public class DashBoard extends AppCompatActivity implements View.OnClickListener
         });
 
         District.setOnItemClickListener((parent, view, position, id) -> {
-            switch (District.getText().toString()){
+            switch (District.getText().toString()) {
 
 //                Khulna Division
                 case "খুলনা":
@@ -730,20 +751,20 @@ public class DashBoard extends AppCompatActivity implements View.OnClickListener
 
         bloodGrpDropDown.setOnClickListener(v -> {
             String[] bloodGroups = getResources().getStringArray(R.array.blood_groups);
-            ArrayAdapter<String> adapter=new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_dropdown_item_1line,bloodGroups);
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_dropdown_item_1line, bloodGroups);
             bloodGrpDropDown.setAdapter(adapter);
         });
 
     }//initializeAddressFilters Finished
 
-    private void LastDonateDatePicker(){
+    private void LastDonateDatePicker() {
         final Calendar calendar = Calendar.getInstance();
 
         lastDonateDate_signUp.setOnClickListener(v -> {
             y = calendar.get(Calendar.YEAR);
             m = calendar.get(Calendar.MONTH);
             d = calendar.get(Calendar.DAY_OF_MONTH);
-            DatePickerDialog datePickerDialog = new DatePickerDialog(DashBoard.this, (view, year, month, dayOfMonth) -> lastDonateDate_signUp.setText(dayOfMonth+ "/"+(month+1)+"/"+year),y,m,d);
+            DatePickerDialog datePickerDialog = new DatePickerDialog(DashBoard.this, (view, year, month, dayOfMonth) -> lastDonateDate_signUp.setText(dayOfMonth + "/" + (month + 1) + "/" + year), y, m, d);
             datePickerDialog.show();
         });
 
@@ -751,7 +772,7 @@ public class DashBoard extends AppCompatActivity implements View.OnClickListener
             y = calendar.get(Calendar.YEAR);
             m = calendar.get(Calendar.MONTH);
             d = calendar.get(Calendar.DAY_OF_MONTH);
-            DatePickerDialog datePickerDialog = new DatePickerDialog(DashBoard.this, (view, year, month, dayOfMonth) -> birthDate_signUp.setText(dayOfMonth+ "/"+(month+1)+"/"+year),y,m,d);
+            DatePickerDialog datePickerDialog = new DatePickerDialog(DashBoard.this, (view, year, month, dayOfMonth) -> birthDate_signUp.setText(dayOfMonth + "/" + (month + 1) + "/" + year), y, m, d);
             datePickerDialog.show();
         });
     }//LastDonateDatePicker Finished
@@ -783,6 +804,13 @@ public class DashBoard extends AppCompatActivity implements View.OnClickListener
     private void gotoUrl(String url) {
         Uri uri = Uri.parse(url);
         startActivity(new Intent(Intent.ACTION_VIEW, uri));
+    }
+
+    public void Sounds() {
+        btn = MediaPlayer.create(getApplicationContext(), R.raw.clickbtn);
+        okkBtn = MediaPlayer.create(getApplicationContext(), R.raw.click);
+        cbtN = MediaPlayer.create(getApplicationContext(), R.raw.stop);
+        great_sound = MediaPlayer.create(getApplicationContext(), R.raw.decide);
     }
 
     @Override
