@@ -1,6 +1,7 @@
 package com.sumonkmr.ibdc;
 
 import android.annotation.SuppressLint;
+import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Intent;
 import android.net.Uri;
@@ -8,20 +9,17 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.EditText;
+import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
@@ -33,15 +31,8 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-import com.squareup.picasso.Picasso;
 
-import java.util.Objects;
+import java.util.Calendar;
 
 import nl.psdcompany.duonavigationdrawer.views.DuoDrawerLayout;
 import nl.psdcompany.duonavigationdrawer.widgets.DuoDrawerToggle;
@@ -56,6 +47,7 @@ public class DashBoard extends AppCompatActivity implements View.OnClickListener
     de.hdodenhof.circleimageview.CircleImageView profile_image_menu, sds_image;
     TextView profile_name_menu, sds_dash, mail;
     String uid;
+    int d,m,y;
     Dialog dialog;
     FirebaseAuth auth;
     boolean doubleBackToExitPressedOnce = false;
@@ -250,6 +242,7 @@ public class DashBoard extends AppCompatActivity implements View.OnClickListener
         
 //        Functions
         initializeAddressFilters();
+        LastDonateDatePicker();
 
 
         ok_Btn.setOnClickListener(v -> {
@@ -602,7 +595,27 @@ public class DashBoard extends AppCompatActivity implements View.OnClickListener
             bloodGrpDropDown.setAdapter(adapter);
         });
 
-    }
+    }//initializeAddressFilters Finished
+
+    private void LastDonateDatePicker(){
+        final Calendar calendar = Calendar.getInstance();
+
+        lastDonateDate_signUp.setOnClickListener(v -> {
+            y = calendar.get(Calendar.YEAR);
+            m = calendar.get(Calendar.MONTH);
+            d = calendar.get(Calendar.DAY_OF_MONTH);
+            DatePickerDialog datePickerDialog = new DatePickerDialog(DashBoard.this, (view, year, month, dayOfMonth) -> lastDonateDate_signUp.setText(dayOfMonth+ "/"+(month+1)+"/"+year),y,m,d);
+            datePickerDialog.show();
+        });
+
+        birthDate_signUp.setOnClickListener(v -> {
+            y = calendar.get(Calendar.YEAR);
+            m = calendar.get(Calendar.MONTH);
+            d = calendar.get(Calendar.DAY_OF_MONTH);
+            DatePickerDialog datePickerDialog = new DatePickerDialog(DashBoard.this, (view, year, month, dayOfMonth) -> birthDate_signUp.setText(dayOfMonth+ "/"+(month+1)+"/"+year),y,m,d);
+            datePickerDialog.show();
+        });
+    }//LastDonateDatePicker Finished
 
 
     private void replace(Fragment fragment, String s) {
