@@ -27,6 +27,7 @@
     <string name="already_have_an_account_log_in">Already have an account? Log in</string>
     <string name="confirm_password">পাসওয়ার্ড নিশ্চিত করুন!</string>
     <string name="sign_up">সাইনআপ!</string>
+    <string name="beDonor">রক্তদাতা হউন!</string>
     <string name="enter_full_name">Enter Full Name</string>
     <string name="enter_city_name">Enter City Name</string>
     <string name="title_activity_listand_map">ListandMapActivity</string>
@@ -1111,6 +1112,7 @@
     <string name="change_phone">মোবাইল নাম্বার পরিবর্তন করন।</string>
     <string name="reset"><b>রিসেট করুন!</b></string>
     <string name="cancel"><b>বাতিল করুন!</b></string>
+    <string name="next_remainder"><b>পরবর্তী রিমাইন্ডার!</b></string>
     <string name="current_email">বর্তমান ইমেইল দিন</string>
     <string name="new_email">নতুন ইমেইল দিন</string>
     <string name="new_phone">নতুন মোবাইল নাম্বার দিন…</string>

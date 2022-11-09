@@ -1,14 +1,21 @@
 package com.sumonkmr.ibdc;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.view.Menu;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AutoCompleteTextView;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -42,9 +49,14 @@ import nl.psdcompany.duonavigationdrawer.widgets.DuoDrawerToggle;
 public class DashBoard extends AppCompatActivity implements View.OnClickListener {
 
     DuoDrawerLayout drawerLayout;
-    de.hdodenhof.circleimageview.CircleImageView profile_image_menu,sds_image;
-    TextView profile_name_menu,sds_dash,mail;
+    com.google.android.material.textfield.TextInputEditText f_name_signUp,l_name_signUp,village_signUp;
+    de.hdodenhof.circleimageview.CircleImageView profile_image,profile_image_signUp,p_image_shade_signUp;
+    AutoCompleteTextView Division,District,Upazila,bloodGrpDropDown,lastDonateDate_signUp,birthDate_signUp;
+    ImageView cover_image;
+    de.hdodenhof.circleimageview.CircleImageView profile_image_menu, sds_image;
+    TextView profile_name_menu, sds_dash, mail;
     String uid;
+    Dialog dialog;
     FirebaseAuth auth;
     boolean doubleBackToExitPressedOnce = false;
     GoogleSignInOptions gso;
@@ -58,10 +70,7 @@ public class DashBoard extends AppCompatActivity implements View.OnClickListener
 
         auth = FirebaseAuth.getInstance();
         gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
-        gsc = GoogleSignIn.getClient(this,gso);
-
-
-
+        gsc = GoogleSignIn.getClient(this, gso);
 
 
         init();
@@ -83,8 +92,12 @@ public class DashBoard extends AppCompatActivity implements View.OnClickListener
         View contentView = drawerLayout.getContentView();
         View menuView = drawerLayout.getMenuView();
 
+
+
+
         LinearLayout ll_Home = menuView.findViewById(R.id.ll_Home);
         LinearLayout ll_Profile = menuView.findViewById(R.id.ll_Profile);
+        LinearLayout ll_beDonor = menuView.findViewById(R.id.ll_beDonor);
         LinearLayout ll_Setting = menuView.findViewById(R.id.ll_Setting);
         LinearLayout ll_fb = menuView.findViewById(R.id.ll_fb);
         LinearLayout ll_Share = menuView.findViewById(R.id.ll_Share);
@@ -99,7 +112,7 @@ public class DashBoard extends AppCompatActivity implements View.OnClickListener
 
 
         account = GoogleSignIn.getLastSignedInAccount(this);
-        if (account !=null) {
+        if (account != null) {
             Uri profile_img_url = (account.getPhotoUrl());
             String f_name = (account.getDisplayName());
             profile_name_menu.setText(f_name);
@@ -111,12 +124,9 @@ public class DashBoard extends AppCompatActivity implements View.OnClickListener
         }
 
 
-
-
-
-
         ll_Home.setOnClickListener(this);
         ll_Profile.setOnClickListener(this);
+        ll_beDonor.setOnClickListener(this);
         ll_Setting.setOnClickListener(this);
         ll_fb.setOnClickListener(this);
         ll_Share.setOnClickListener(this);
@@ -128,7 +138,6 @@ public class DashBoard extends AppCompatActivity implements View.OnClickListener
         mail.setOnClickListener(this);
 
 
-
         replace(new HomeFragment());
 
 
@@ -138,24 +147,28 @@ public class DashBoard extends AppCompatActivity implements View.OnClickListener
     @SuppressLint("NonConstantResourceId")
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.ll_Home:
-                replace(new HomeFragment(),"Home");
+                replace(new HomeFragment(), "Home");
                 break;
 
             case R.id.ll_Profile:
-                replace(new ProfileFragment(),"Profile");
+                replace(new ProfileFragment(), "Profile");
                 break;
 
-                case R.id.ll_Setting:
-                replace(new SettingFragments(),"Setting");
+            case R.id.ll_beDonor:
+                OpenDialog();
+                break;
+
+            case R.id.ll_Setting:
+                replace(new SettingFragments(), "Setting");
                 break;
 
             case R.id.ll_fb:
                 gotoUrl("https://www.facebook.com/groups/ibdcbd");
                 break;
 
-                case R.id.ll_Share:
+            case R.id.ll_Share:
                 shareApp();
                 break;
 
@@ -167,17 +180,17 @@ public class DashBoard extends AppCompatActivity implements View.OnClickListener
                 gotoUrl("https://sites.google.com/view/ibdcprivacypolicy/home/");
                 break;
 
-                case R.id.ll_Logout:
+            case R.id.ll_Logout:
                 auth.signOut();
-                startActivity(new Intent(this,SplashScreen.class));
+                startActivity(new Intent(this, SplashScreen.class));
                 DashBoard.this.finish();
                 break;
 
             case R.id.mail:
                 Intent intent = new Intent(Intent.ACTION_SEND);
-                intent.putExtra(Intent.EXTRA_EMAIL,new String[]{"sumonkmrofficial@gmail.com"});
-                intent.putExtra(Intent.EXTRA_SUBJECT,"Im Sending Email From IBDC App");
-                intent.putExtra(Intent.EXTRA_TEXT,"Please Type Your Massage Here : \n");
+                intent.putExtra(Intent.EXTRA_EMAIL, new String[]{"sumonkmrofficial@gmail.com"});
+                intent.putExtra(Intent.EXTRA_SUBJECT, "Im Sending Email From IBDC App");
+                intent.putExtra(Intent.EXTRA_TEXT, "Please Type Your Massage Here : \n");
                 intent.setType("massage/rfc822");
                 startActivity(intent);
                 break;
@@ -199,36 +212,85 @@ public class DashBoard extends AppCompatActivity implements View.OnClickListener
         }// switch finished
 
 
-
         drawerLayout.closeDrawer();
     }
+    
+    private void OpenDialog() {
+        dialog = new Dialog(this);
+        dialog.setContentView(R.layout.be_donor_dialog);
+        Button ok_Btn, cBtn;
+        EditText gName, gEmail;
+        String uEmail;
+
+        account = GoogleSignIn.getLastSignedInAccount(this);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            dialog.getWindow().setBackgroundDrawable(getDrawable(R.drawable.custom_dialog_background));
+        }
+
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.setCancelable(false); //Optional
+        dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation; //Setting the animations to dialog
+        dialog.show();
+
+
+        ok_Btn = dialog.findViewById(R.id.ok_Btn);
+        cBtn = dialog.findViewById(R.id.cBtn);
+        f_name_signUp = dialog.findViewById(R.id.f_name_signUp);
+        l_name_signUp = dialog.findViewById(R.id.l_name_signUp);
+        village_signUp = dialog.findViewById(R.id.village_signUp);
+        profile_image = dialog.findViewById(R.id.profile_image);
+        profile_image_signUp = dialog.findViewById(R.id.profile_image_signUp);
+        p_image_shade_signUp = dialog.findViewById(R.id.p_image_shade_signUp);
+        Division = dialog.findViewById(R.id.stateDropDrown_signUp);
+        District = dialog.findViewById(R.id.districtDropDrown_signUp);
+        Upazila = dialog.findViewById(R.id.upazilaDropDrown_signUp);
+        bloodGrpDropDown = dialog.findViewById(R.id.bloodGrpDropDown_signUp);
+        lastDonateDate_signUp = dialog.findViewById(R.id.lastDonateDate_signUp);
+        birthDate_signUp = dialog.findViewById(R.id.birthDate_signUp);
+        uEmail = account.getEmail();
+        Uri photoUrl = account.getPhotoUrl();
+
+
+
+        ok_Btn.setOnClickListener(v -> {
+            dialog.dismiss();
+        });
+
+        cBtn.setOnClickListener(v -> {
+            dialog.dismiss();
+        });
+
+
+    }
+
 
     private void replace(Fragment fragment, String s) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.frame,fragment);
+        transaction.replace(R.id.frame, fragment);
         transaction.addToBackStack(s);
         transaction.commit();
     }
 
     private void replace(Fragment fragment) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.frame,fragment);
+        transaction.replace(R.id.frame, fragment);
         transaction.commit();
     }
 
-    private void shareApp(){
+    private void shareApp() {
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("text/plain");
         String subject = "একজন রক্তযোদ্ধা সবসময় একটি জীবন বাঁচাতে সর্বদায় সদয়...";
         String shareBody = "https://play.google.com/store/apps/details?id=com.sumonkmr.ibdc";
-        intent.putExtra(Intent.EXTRA_SUBJECT,subject);
-        intent.putExtra(Intent.EXTRA_TEXT,shareBody);
-        startActivity(Intent.createChooser(intent,"Share for Helps Others..."));
+        intent.putExtra(Intent.EXTRA_SUBJECT, subject);
+        intent.putExtra(Intent.EXTRA_TEXT, shareBody);
+        startActivity(Intent.createChooser(intent, "Share for Helps Others..."));
     }
 
-    private void gotoUrl(String url){
+    private void gotoUrl(String url) {
         Uri uri = Uri.parse(url);
-        startActivity(new Intent(Intent.ACTION_VIEW,uri));
+        startActivity(new Intent(Intent.ACTION_VIEW, uri));
     }
 
     @Override
@@ -245,7 +307,7 @@ public class DashBoard extends AppCompatActivity implements View.OnClickListener
 
             @Override
             public void run() {
-                doubleBackToExitPressedOnce=false;
+                doubleBackToExitPressedOnce = false;
             }
         }, 2000);
     }

@@ -5,11 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Dialog;
 import android.content.Intent;
-import android.content.IntentSender;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -20,19 +18,14 @@ import android.widget.Toast;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.google.android.gms.auth.api.identity.BeginSignInRequest;
-import com.google.android.gms.auth.api.identity.BeginSignInResult;
 import com.google.android.gms.auth.api.identity.Identity;
 import com.google.android.gms.auth.api.identity.SignInClient;
-import com.google.android.gms.auth.api.identity.SignInCredential;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
@@ -159,47 +152,6 @@ public class GoogleLogIn extends AppCompatActivity {
     }
 
 
-    private void DialogForSignUp(){
-        dialog = new Dialog(this);
-        dialog.setContentView(R.layout.signupdialog);
-        Button ok_Btn,cBtn;
-        EditText gName,gEmail;
-        String uEmail;
 
-        account = GoogleSignIn.getLastSignedInAccount(this);
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            dialog.getWindow().setBackgroundDrawable(getDrawable(R.drawable.custom_dialog_background));
-        }
-
-        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        dialog.setCancelable(false); //Optional
-        dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation; //Setting the animations to dialog
-
-        ok_Btn = dialog.findViewById(R.id.ok_Btn);
-        cBtn = dialog.findViewById(R.id.cBtn);
-        gEmail = dialog.findViewById(R.id.gEmail);
-        gName = dialog.findViewById(R.id.gName);
-        uEmail = account.getEmail();
-        Uri photoUrl = account.getPhotoUrl();
-        gEmail.setHint(uEmail);
-        gName.setText(account.getDisplayName());
-        gEmail.setText(uEmail);
-
-
-
-
-
-        ok_Btn.setOnClickListener(v -> {
-            startActivity(new Intent(this,DashBoard.class));
-        });
-
-        cBtn.setOnClickListener(v -> {
-            dialog.dismiss();
-        });
-
-
-
-    }
 
 }//Root
