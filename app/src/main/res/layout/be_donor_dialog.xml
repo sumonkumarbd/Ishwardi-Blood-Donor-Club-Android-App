@@ -65,7 +65,7 @@
                 android:orientation="vertical">
 
 
-                <RelativeLayout
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -74,31 +74,48 @@
                     <ProgressBar
                         android:id="@+id/progressbar_signUp"
                         style="@style/Widget.MaterialComponents.CircularProgressIndicator"
-                        android:layout_width="@dimen/_120dp"
-                        android:layout_height="@dimen/_120dp"
+                        android:layout_width="@dimen/_140dp"
+                        android:layout_height="@dimen/_140dp"
                         android:layout_gravity="center"
                         android:foregroundGravity="center"
                         android:indeterminate="false"
-                        android:progressDrawable="@drawable/coustom_progressbar" />
+                        android:progressDrawable="@drawable/coustom_progressbar"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/profile_image_signUp"
-                        android:layout_width="@dimen/_120dp"
-                        android:layout_height="@dimen/_120dp"
+                        android:layout_width="@dimen/_100dp"
+                        android:layout_height="@dimen/_100dp"
                         android:layout_gravity="center"
+                        android:foregroundGravity="center"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/ibdc_logo" />
+                        android:src="@drawable/ibdc_logo"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        />
 
 
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/p_image_shade_signUp"
-                        android:layout_width="@dimen/_120dp"
-                        android:layout_height="@dimen/_120dp"
+                        android:layout_width="@dimen/_100dp"
+                        android:layout_height="@dimen/_100dp"
                         android:layout_gravity="center"
+                        android:foregroundGravity="center"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/edit_photo" />
+                        android:src="@drawable/edit_photo"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        />
 
-                </RelativeLayout><!--                    Photo Section-->
+
+                </androidx.constraintlayout.widget.ConstraintLayout><!--                    Photo Section-->
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -109,7 +126,7 @@
                     android:layout_marginBottom="@dimen/_10dp"
                     android:text="@string/image_size_meg"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="@dimen/hint_size" />
+                    android:textSize="@dimen/_6sp" />
 
                 <!--                    Profile Photo Section End-->
 

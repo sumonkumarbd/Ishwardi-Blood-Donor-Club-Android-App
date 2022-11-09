@@ -8,6 +8,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="tns">#00000000</color>
+    <color name="green">#02B209</color>
 
     <color name="colorPrimary">#EE3739</color>
     <color name="colorPrimaryDark">#FFFFFF</color>
@@ -24,7 +25,7 @@
 
     <color name="goodgrey">#535353</color>
 
-    <color name="blue">#173068</color>
+    <color name="blue">#104ACE</color>
 
     <color name="lightgrey">#EEEBEB</color>
 

@@ -1,9 +1,12 @@
 package com.sumonkmr.ibdc;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -11,15 +14,18 @@ import android.os.Handler;
 import android.os.Looper;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.MimeTypeMap;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
@@ -30,9 +36,28 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.PermissionDeniedResponse;
+import com.karumi.dexter.listener.PermissionGrantedResponse;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.single.PermissionListener;
 
+import java.io.InputStream;
 import java.util.Calendar;
+import java.util.HashMap;
 
 import nl.psdcompany.duonavigationdrawer.views.DuoDrawerLayout;
 import nl.psdcompany.duonavigationdrawer.widgets.DuoDrawerToggle;
@@ -49,11 +74,18 @@ public class DashBoard extends AppCompatActivity implements View.OnClickListener
     String uid;
     int d,m,y;
     Dialog dialog;
+    Uri filepath;
+    Bitmap bitmap;
     FirebaseAuth auth;
+    String userId,profile_url;
     boolean doubleBackToExitPressedOnce = false;
     GoogleSignInOptions gso;
     GoogleSignInClient gsc;
     GoogleSignInAccount account;
+    private StorageReference storageReference;
+    private DatabaseReference dbReference;
+    private FirebaseDatabase db;
+    private ProgressBar progressbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +95,14 @@ public class DashBoard extends AppCompatActivity implements View.OnClickListener
         auth = FirebaseAuth.getInstance();
         gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
         gsc = GoogleSignIn.getClient(this, gso);
-
+        //        Database references
+        FirebaseUser currentUser = auth.getCurrentUser();
+        assert currentUser != null;
+        userId = currentUser.getUid();
+        storageReference = FirebaseStorage.getInstance().getReference();
+        db = FirebaseDatabase.getInstance();
+        dbReference = db.getReference();
+        account = GoogleSignIn.getLastSignedInAccount(this);
 
         init();
     }
@@ -102,8 +141,6 @@ public class DashBoard extends AppCompatActivity implements View.OnClickListener
         sds_image = menuView.findViewById(R.id.sds_image);
         mail = menuView.findViewById(R.id.mail);
 
-
-        account = GoogleSignIn.getLastSignedInAccount(this);
         if (account != null) {
             Uri profile_img_url = (account.getPhotoUrl());
             String f_name = (account.getDisplayName());
@@ -206,6 +243,107 @@ public class DashBoard extends AppCompatActivity implements View.OnClickListener
 
         drawerLayout.closeDrawer();
     }
+
+    //////////////////////////////////////////////////////
+    //Profile Image setUp//
+
+    private void ChooseProfilePicture() {
+        p_image_shade_signUp.setOnClickListener(v -> {
+            Dexter.withContext(getApplicationContext())
+                    .withPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
+                    .withListener(new PermissionListener() {
+                        @Override
+                        public void onPermissionGranted(PermissionGrantedResponse permissionGrantedResponse) {
+                            Intent intent = new Intent(Intent.ACTION_PICK);
+                            intent.setType("image/*");
+                            intent.setAction(Intent.ACTION_GET_CONTENT);
+                            startActivityForResult(Intent.createChooser(intent, "Browse For Image"), 101);
+                        }
+
+                        @Override
+                        public void onPermissionDenied(PermissionDeniedResponse permissionDeniedResponse) {
+
+                        }
+
+                        @Override
+                        public void onPermissionRationaleShouldBeShown(PermissionRequest permissionRequest, PermissionToken permissionToken) {
+                            permissionToken.continuePermissionRequest();
+                        }
+                    }).check();
+        });
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if (requestCode == 101 && resultCode == -1) {
+            assert data != null;
+            filepath = data.getData();
+            try {
+                InputStream inputStream = getApplicationContext().getContentResolver().openInputStream(filepath);
+                bitmap = BitmapFactory.decodeStream(inputStream);
+                profile_image_signUp.setImageBitmap(bitmap);
+                processImageUpload();
+            } catch (Exception ex) {
+            }
+            super.onActivityResult(requestCode, resultCode, data);
+        }
+    }
+
+    private String getExtention(){
+        MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
+        return mimeTypeMap.getExtensionFromMimeType(getApplicationContext().getContentResolver().getType(filepath));
+    }
+
+    private void processImageUpload(){
+        progressbar = dialog.findViewById(R.id.progressbar_signUp);
+        final StorageReference uploader = storageReference.child(String.format("profile_image/User Email : %s/profile_picture.%s",account.getEmail(),getExtention()));
+        uploader.putFile(filepath)
+                .addOnSuccessListener(taskSnapshot -> {
+                    Toast.makeText(getApplicationContext(), R.string.Updated_img, Toast.LENGTH_SHORT).show();
+                    uploader.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+                            if (!filepath.toString().isEmpty()){
+                                profileImg(uri);
+                                progressbar.setProgressDrawable(getDrawable(R.drawable.progress_bar_success));
+                            }
+                        }
+                    });
+                })
+                .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
+                        long per = (100*snapshot.getBytesTransferred())/snapshot.getTotalByteCount();
+                        progressbar.setProgress((int) per);
+                        progressbar.setMax(100);
+                        Toast.makeText(getApplicationContext(), R.string.updating, Toast.LENGTH_SHORT).show();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(getApplicationContext(), R.string.failed, Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+    private void profileImg(Uri uri){
+        HashMap<String,Object> values = new HashMap<>();
+        values.put("bloodImg_url",uri.toString());
+        FirebaseDatabase.getInstance().getReference("Donors/"+FirebaseAuth.getInstance().getUid())
+                .updateChildren(values)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if(task.isSuccessful()){
+                            Toast.makeText(getApplicationContext(), R.string.Updated, Toast.LENGTH_SHORT).show();
+                        }else {
+                            Toast.makeText(getApplicationContext(), R.string.failed, Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+    }
+
+    //////////////////////////////////////////////////////
     
     private void OpenDialog() {
         dialog = new Dialog(this);
@@ -243,6 +381,7 @@ public class DashBoard extends AppCompatActivity implements View.OnClickListener
 //        Functions
         initializeAddressFilters();
         LastDonateDatePicker();
+        ChooseProfilePicture();
 
 
         ok_Btn.setOnClickListener(v -> {

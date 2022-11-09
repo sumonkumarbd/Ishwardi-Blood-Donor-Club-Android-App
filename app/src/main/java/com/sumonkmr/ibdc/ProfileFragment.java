@@ -595,10 +595,12 @@ public class ProfileFragment extends Fragment {
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                             Toast.makeText(context, R.string.Updated_img, Toast.LENGTH_SHORT).show();
                             uploader.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                @SuppressLint("UseCompatLoadingForDrawables")
                                 @Override
                                 public void onSuccess(Uri uri) {
                                     if (!filepath.toString().isEmpty()){
                                         profileImg(uri);
+                                        progressbar.setProgressDrawable(getResources().getDrawable(R.drawable.progress_bar_success));
                                     }
                                 }
                             });
