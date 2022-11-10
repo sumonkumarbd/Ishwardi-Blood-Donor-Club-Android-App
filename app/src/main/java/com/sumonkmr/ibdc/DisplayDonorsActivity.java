@@ -19,6 +19,9 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -39,13 +42,18 @@ public class DisplayDonorsActivity extends AppCompatActivity {
     ArrayList<User> users,temp;
     AutoCompleteTextView DivisionFilter,districtFilter,UpazilaFilter, bloodGrpFilter;
     User self;
-    String uid = FirebaseAuth.getInstance().getUid();
+    String uid;
+    GoogleSignInAccount account;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.donor_list_activity);
+
+        account = GoogleSignIn.getLastSignedInAccount(this);
+        assert account != null;
+        uid = account.getId();
 
         initializeComponents();
         initializeAddressFilters();

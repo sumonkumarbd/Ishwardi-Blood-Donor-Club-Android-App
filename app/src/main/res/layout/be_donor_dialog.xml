@@ -352,7 +352,7 @@
                                 android:textColor="@color/colorPrimary" />
 
                             <CheckBox
-                                android:id="@+id/lastDonate_check"
+                                android:id="@+id/lastDonate_check_signUp"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="end" />

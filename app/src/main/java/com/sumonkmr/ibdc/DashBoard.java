@@ -19,6 +19,8 @@ import android.webkit.MimeTypeMap;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -45,6 +47,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.core.utilities.Validation;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -59,6 +62,7 @@ import com.karumi.dexter.listener.single.PermissionListener;
 import java.io.InputStream;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.Objects;
 
 import nl.psdcompany.duonavigationdrawer.views.DuoDrawerLayout;
 import nl.psdcompany.duonavigationdrawer.widgets.DuoDrawerToggle;
@@ -67,7 +71,7 @@ public class DashBoard extends AppCompatActivity implements View.OnClickListener
 
     DuoDrawerLayout drawerLayout;
     com.google.android.material.textfield.TextInputEditText f_name_signUp, l_name_signUp, village_signUp;
-    de.hdodenhof.circleimageview.CircleImageView profile_image, profile_image_signUp, p_image_shade_signUp;
+    de.hdodenhof.circleimageview.CircleImageView profile_image_signUp, p_image_shade_signUp;
     AutoCompleteTextView Division, District, Upazila, bloodGrpDropDown, lastDonateDate_signUp, birthDate_signUp;
     ImageView cover_image;
     de.hdodenhof.circleimageview.CircleImageView profile_image_menu, sds_image;
@@ -79,6 +83,7 @@ public class DashBoard extends AppCompatActivity implements View.OnClickListener
     Bitmap bitmap;
     FirebaseAuth auth;
     String userId, profile_url;
+    CheckBox lastDonate_check;
     boolean doubleBackToExitPressedOnce = false;
     GoogleSignInOptions gso;
     GoogleSignInClient gsc;
@@ -348,7 +353,7 @@ public class DashBoard extends AppCompatActivity implements View.OnClickListener
     private void profileImg(Uri uri) {
         HashMap<String, Object> values = new HashMap<>();
         values.put("bloodImg_url", uri.toString());
-        FirebaseDatabase.getInstance().getReference("Donors/" + FirebaseAuth.getInstance().getUid())
+        FirebaseDatabase.getInstance().getReference("Donors/" + account.getId())
                 .updateChildren(values)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
@@ -386,7 +391,6 @@ public class DashBoard extends AppCompatActivity implements View.OnClickListener
         f_name_signUp = dialog.findViewById(R.id.f_name_signUp);
         l_name_signUp = dialog.findViewById(R.id.l_name_signUp);
         village_signUp = dialog.findViewById(R.id.village_signUp);
-        profile_image = dialog.findViewById(R.id.profile_image);
         profile_image_signUp = dialog.findViewById(R.id.profile_image_signUp);
         p_image_shade_signUp = dialog.findViewById(R.id.p_image_shade_signUp);
         Division = dialog.findViewById(R.id.stateDropDrown_signUp);
@@ -395,6 +399,12 @@ public class DashBoard extends AppCompatActivity implements View.OnClickListener
         bloodGrpDropDown = dialog.findViewById(R.id.bloodGrpDropDown_signUp);
         lastDonateDate_signUp = dialog.findViewById(R.id.lastDonateDate_signUp);
         birthDate_signUp = dialog.findViewById(R.id.birthDate_signUp);
+        lastDonate_check = dialog.findViewById(R.id.lastDonate_check_signUp);
+
+        lastDonate_check.setOnCheckedChangeListener((buttonView, isChecked) ->
+                lastDonateDate_signUp.setEnabled(!isChecked)
+        );
+
 
 
 //        Functions
@@ -415,6 +425,38 @@ public class DashBoard extends AppCompatActivity implements View.OnClickListener
 
 
     }//Finished Dialog
+
+    private void addToDatabase() {
+        HashMap<String,Object> values = new HashMap<>();
+        values.put("FName", Objects.requireNonNull(f_name_signUp.getText()).toString());
+        values.put("LName", Objects.requireNonNull(l_name_signUp.getText()).toString());
+        values.put("State",Division.getText().toString());
+        values.put("District",District.getText().toString());
+        values.put("Upazila",Upazila.getText().toString());
+        values.put("Village", Objects.requireNonNull(village_signUp.getText()).toString());
+        values.put("BloodGroup",bloodGrpDropDown.getText().toString());
+        values.put("birthdate",birthDate_signUp.getText().toString());
+        values.put("step","Done");
+        values.put("visible","True");
+        if (lastDonate_check.isChecked()){
+            values.put("lastDonateDate","পূর্বে করিনি।");
+        }else {
+            values.put("lastDonateDate",lastDonateDate_signUp.getText().toString());
+        }
+        FirebaseDatabase.getInstance().getReference("Donors/"+FirebaseAuth.getInstance().getUid())
+                .updateChildren(values)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if(task.isSuccessful()){
+                            Toast.makeText(getApplicationContext(), R.string.Updated, Toast.LENGTH_SHORT).show();
+                        }else {
+                            Toast.makeText(getApplicationContext(), R.string.failed, Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+
+    }//addToDatabase
 
     private void initializeAddressFilters() {
         Division.setOnClickListener(new View.OnClickListener() {
@@ -807,10 +849,14 @@ public class DashBoard extends AppCompatActivity implements View.OnClickListener
     }
 
     public void Sounds() {
-        btn = MediaPlayer.create(getApplicationContext(), R.raw.clickbtn);
-        okkBtn = MediaPlayer.create(getApplicationContext(), R.raw.click);
+        btn = MediaPlayer.create(getApplicationContext(), R.raw.mousemp3);
+        okkBtn = MediaPlayer.create(getApplicationContext(), R.raw.positive_beeps);
         cbtN = MediaPlayer.create(getApplicationContext(), R.raw.stop);
         great_sound = MediaPlayer.create(getApplicationContext(), R.raw.decide);
+    }
+
+    private void FormVAL(){
+//        Make Form Validation Here
     }
 
     @Override
