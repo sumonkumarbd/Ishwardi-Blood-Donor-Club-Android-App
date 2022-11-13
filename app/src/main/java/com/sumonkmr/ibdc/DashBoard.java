@@ -11,8 +11,10 @@ import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Looper;
+import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -61,6 +63,8 @@ import com.karumi.dexter.listener.PermissionGrantedResponse;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.single.PermissionListener;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -305,11 +309,9 @@ public class DashBoard extends AppCompatActivity implements View.OnClickListener
             assert data != null;
             filepath = data.getData();
             try {
-                InputStream inputStream = getApplicationContext().getContentResolver().openInputStream(filepath);
-                bitmap = BitmapFactory.decodeStream(inputStream);
-                profile_image_signUp.setImageBitmap(bitmap);
-                processImageUpload();
+                CompressImage(filepath);
             } catch (Exception ex) {
+                ex.printStackTrace();
             }
             super.onActivityResult(requestCode, resultCode, data);
         }
@@ -320,7 +322,28 @@ public class DashBoard extends AppCompatActivity implements View.OnClickListener
         return mimeTypeMap.getExtensionFromMimeType(getApplicationContext().getContentResolver().getType(filepath));
     }
 
-    private void processImageUpload() {
+    private void CompressImage(Uri image_uri){
+        try {
+            Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(),image_uri);
+            File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM);
+            String fileName = String.format("%s.jpg",account.getEmail());
+            File finalFile = new File(path,fileName);
+            FileOutputStream fileOutputStream = new FileOutputStream(finalFile);
+            bitmap.compress(Bitmap.CompressFormat.JPEG,50,fileOutputStream);
+            fileOutputStream.flush();
+            fileOutputStream.close();
+            profile_image_signUp.setImageURI(Uri.fromFile(finalFile));
+            Intent intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+            intent.setData(Uri.fromFile(finalFile));
+            sendBroadcast(intent);
+            processImageUpload(Uri.fromFile(finalFile));
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+    }
+
+    private void processImageUpload(Uri filepath) {
         progressbar = dialog.findViewById(R.id.progressbar_signUp);
         final StorageReference uploader = storageReference.child(String.format("profile_image/User Email : %s/profile_picture.%s", account.getEmail(), getExtention()));
         uploader.putFile(filepath)
