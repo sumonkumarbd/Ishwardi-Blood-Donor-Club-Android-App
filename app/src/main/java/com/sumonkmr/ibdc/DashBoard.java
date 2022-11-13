@@ -13,6 +13,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.MimeTypeMap;
@@ -21,6 +23,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -47,7 +50,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.core.utilities.Validation;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -72,7 +74,8 @@ public class DashBoard extends AppCompatActivity implements View.OnClickListener
     DuoDrawerLayout drawerLayout;
     com.google.android.material.textfield.TextInputEditText f_name_signUp, l_name_signUp, village_signUp;
     de.hdodenhof.circleimageview.CircleImageView profile_image_signUp, p_image_shade_signUp;
-    AutoCompleteTextView Division, District, Upazila, bloodGrpDropDown, lastDonateDate_signUp, birthDate_signUp;
+    AutoCompleteTextView Division, District, Upazila, bloodGrpDropDown, lastDonateDate_signUp;
+    DatePicker birthDate_signUp;
     ImageView cover_image;
     de.hdodenhof.circleimageview.CircleImageView profile_image_menu, sds_image;
     TextView profile_name_menu, sds_dash, mail;
@@ -92,6 +95,7 @@ public class DashBoard extends AppCompatActivity implements View.OnClickListener
     private DatabaseReference dbReference;
     private FirebaseDatabase db;
     private ProgressBar progressbar;
+    final Calendar calendar = Calendar.getInstance();
     MediaPlayer btn;
     MediaPlayer okkBtn;
     MediaPlayer cbtN;
@@ -401,10 +405,16 @@ public class DashBoard extends AppCompatActivity implements View.OnClickListener
         birthDate_signUp = dialog.findViewById(R.id.birthDate_signUp);
         lastDonate_check = dialog.findViewById(R.id.lastDonate_check_signUp);
 
-        lastDonate_check.setOnCheckedChangeListener((buttonView, isChecked) ->
-                lastDonateDate_signUp.setEnabled(!isChecked)
-        );
-
+        lastDonate_check.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (!isChecked){
+                lastDonateDate_signUp.setEnabled(true);
+                lastDonateDate_signUp.setText("");
+            }else {
+                lastDonateDate_signUp.setEnabled(false);
+                lastDonateDate_signUp.setError(null);
+                lastDonateDate_signUp.setText(R.string.last_donate_never);
+            }
+        });
 
 
 //        Functions
@@ -412,10 +422,13 @@ public class DashBoard extends AppCompatActivity implements View.OnClickListener
         LastDonateDatePicker();
         ChooseProfilePicture();
 
-
         ok_Btn.setOnClickListener(v -> {
-            okkBtn.start();
-            dialog.dismiss();
+            btn.start();
+            if (!validateInput()){
+                Toast.makeText(this, "সবগুলি তথ্য দিন!", Toast.LENGTH_SHORT).show();
+            }else {
+                Toast.makeText(this, "Validation Complete", Toast.LENGTH_SHORT).show();
+            }
         });
 
         cBtn.setOnClickListener(v -> {
@@ -427,30 +440,30 @@ public class DashBoard extends AppCompatActivity implements View.OnClickListener
     }//Finished Dialog
 
     private void addToDatabase() {
-        HashMap<String,Object> values = new HashMap<>();
+        HashMap<String, Object> values = new HashMap<>();
         values.put("FName", Objects.requireNonNull(f_name_signUp.getText()).toString());
         values.put("LName", Objects.requireNonNull(l_name_signUp.getText()).toString());
-        values.put("State",Division.getText().toString());
-        values.put("District",District.getText().toString());
-        values.put("Upazila",Upazila.getText().toString());
+        values.put("State", Division.getText().toString());
+        values.put("District", District.getText().toString());
+        values.put("Upazila", Upazila.getText().toString());
         values.put("Village", Objects.requireNonNull(village_signUp.getText()).toString());
-        values.put("BloodGroup",bloodGrpDropDown.getText().toString());
-        values.put("birthdate",birthDate_signUp.getText().toString());
-        values.put("step","Done");
-        values.put("visible","True");
-        if (lastDonate_check.isChecked()){
-            values.put("lastDonateDate","পূর্বে করিনি।");
-        }else {
-            values.put("lastDonateDate",lastDonateDate_signUp.getText().toString());
+        values.put("BloodGroup", bloodGrpDropDown.getText().toString());
+        values.put("birthdate",String.valueOf(birthDate_signUp));
+        values.put("step", "Done");
+        values.put("visible", "True");
+        if (lastDonate_check.isChecked()) {
+            values.put("lastDonateDate", "পূর্বে করিনি।");
+        } else {
+            values.put("lastDonateDate", lastDonateDate_signUp.getText().toString());
         }
-        FirebaseDatabase.getInstance().getReference("Donors/"+FirebaseAuth.getInstance().getUid())
+        FirebaseDatabase.getInstance().getReference("Donors/" + FirebaseAuth.getInstance().getUid())
                 .updateChildren(values)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-                        if(task.isSuccessful()){
+                        if (task.isSuccessful()) {
                             Toast.makeText(getApplicationContext(), R.string.Updated, Toast.LENGTH_SHORT).show();
-                        }else {
+                        } else {
                             Toast.makeText(getApplicationContext(), R.string.failed, Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -800,8 +813,6 @@ public class DashBoard extends AppCompatActivity implements View.OnClickListener
     }//initializeAddressFilters Finished
 
     private void LastDonateDatePicker() {
-        final Calendar calendar = Calendar.getInstance();
-
         lastDonateDate_signUp.setOnClickListener(v -> {
             y = calendar.get(Calendar.YEAR);
             m = calendar.get(Calendar.MONTH);
@@ -810,13 +821,15 @@ public class DashBoard extends AppCompatActivity implements View.OnClickListener
             datePickerDialog.show();
         });
 
-        birthDate_signUp.setOnClickListener(v -> {
-            y = calendar.get(Calendar.YEAR);
-            m = calendar.get(Calendar.MONTH);
-            d = calendar.get(Calendar.DAY_OF_MONTH);
-            DatePickerDialog datePickerDialog = new DatePickerDialog(DashBoard.this, (view, year, month, dayOfMonth) -> birthDate_signUp.setText(dayOfMonth + "/" + (month + 1) + "/" + year), y, m, d);
-            datePickerDialog.show();
-        });
+//        birthDate_signUp.setOnClickListener(v -> {
+//            y = calendar.get(Calendar.YEAR);
+//            m = calendar.get(Calendar.MONTH);
+//            d = calendar.get(Calendar.DAY_OF_MONTH);
+//            DatePickerDialog datePickerDialog = new DatePickerDialog(DashBoard.this, (view, year, month, dayOfMonth) -> {
+//                birthDate_signUp.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
+//            }, y, m, d);
+//            datePickerDialog.show();
+//        });
     }//LastDonateDatePicker Finished
 
 
@@ -848,16 +861,123 @@ public class DashBoard extends AppCompatActivity implements View.OnClickListener
         startActivity(new Intent(Intent.ACTION_VIEW, uri));
     }
 
-    public void Sounds() {
+    private void Sounds() {
         btn = MediaPlayer.create(getApplicationContext(), R.raw.mousemp3);
         okkBtn = MediaPlayer.create(getApplicationContext(), R.raw.positive_beeps);
         cbtN = MediaPlayer.create(getApplicationContext(), R.raw.stop);
         great_sound = MediaPlayer.create(getApplicationContext(), R.raw.decide);
     }
 
-    private void FormVAL(){
 //        Make Form Validation Here
+        private boolean validateInput(){
+
+            if (f_name_signUp.getText() == null || f_name_signUp.getText().toString().length() == 0){
+                f_name_signUp.setError("অনুগ্রহপূর্বক সঠিক নাম দিন!");
+                return false;
+            }else {
+                f_name_signUp.setError(null);
+            }
+
+
+            if (l_name_signUp.getText() == null || l_name_signUp.getText().toString().length() == 0){
+                l_name_signUp.setError("অনুগ্রহপূর্বক সঠিক শেষের নাম দিন!");
+                return false;
+            }else {
+                l_name_signUp.setError(null);
+            }
+
+            if (Division.getText() == null || Division.getText().toString().length() == 0){
+                Division.setError("অনুগ্রহপূর্বক সঠিক তথ্য দিন!");
+                return false;
+            }else {
+                Division.setError(null);
+            }
+
+
+            if (District.getText() == null || District.getText().toString().length() == 0){
+                District.setError("অনুগ্রহপূর্বক সঠিক তথ্য দিন!");
+                return false;
+            }else {
+                District.setError(null);
+            }
+
+
+            if (Upazila.getText() == null || Upazila.getText().toString().length() == 0){
+                Upazila.setError("অনুগ্রহপূর্বক সঠিক তথ্য দিন!");
+                return false;
+            }else {
+                Upazila.setError(null);
+            }
+
+
+            if (village_signUp.getText() == null || village_signUp.getText().toString().length() == 0){
+                village_signUp.setError("অনুগ্রহপূর্বক সঠিক তথ্য দিন!");
+                return false;
+            }else {
+                village_signUp.setError(null);
+            }
+
+
+            if (bloodGrpDropDown.getText() == null || bloodGrpDropDown.getText().toString().length() == 0){
+                bloodGrpDropDown.setError("অনুগ্রহপূর্বক সঠিক তথ্য দিন!");
+                return false;
+            }else {
+                bloodGrpDropDown.setError(null);
+            }
+
+            if (lastDonateDate_signUp.getText() == null || lastDonateDate_signUp.getText().toString().length() == 0){
+                lastDonateDate_signUp.setError("অনুগ্রহপূর্বক সঠিক তথ্য দিন!");
+                return false;
+            }else{
+                lastDonateDate_signUp.setError(null);
+            }
+            if (birthDate_signUp == null || !validateAge(birthDate_signUp.getYear())){
+                return false;
+            }
+
+            return true;
+        }
+
+    private boolean validateAge(int year) {
+        int currentYear = Calendar.getInstance().get(Calendar.YEAR);
+        int isAgeValid = currentYear - year;
+        if (isAgeValid < 18) {
+            Toast.makeText(this, "রক্তদাতা হতে কমপক্ষে ১৮ বছর বয়স প্রয়োজনীয়।", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
     }
+
+
+//    ====================================================
+//    TextWatchers
+    TextWatcher textWatcher = new TextWatcher() {
+    @Override
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+    }
+
+    @Override
+    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+    }
+
+    @Override
+    public void afterTextChanged(Editable s) {
+
+    }
+};
+
+//    ====================================================
+
+
+
+
+
+
+
+
+
 
     @Override
     public void onBackPressed() {

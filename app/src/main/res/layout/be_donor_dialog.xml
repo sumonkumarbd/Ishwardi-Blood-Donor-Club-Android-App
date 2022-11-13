@@ -359,22 +359,26 @@
 
                         </LinearLayout>
 
-                        <com.google.android.material.textfield.TextInputLayout
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/_50dp"
-                            android:layout_marginHorizontal="2dp"
-                            android:hint="@string/birthdate"
-                            android:textColorHint="#000000"
-                            app:hintTextColor="#000000">
 
-                            <AutoCompleteTextView
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:layout_marginEnd="@dimen/_5dp"
+                            android:fontFamily="@font/des_font"
+                            android:layout_marginVertical="@dimen/_5dp"
+                            android:text="@string/birthdate"
+                            style="bold"
+                            android:textColor="@color/black" />
+                            <DatePicker
                                 android:id="@+id/birthDate_signUp"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:inputType="none" />
-
-                        </com.google.android.material.textfield.TextInputLayout>
+                                android:datePickerMode="spinner"
+                                android:background="@color/tns"
+                                android:calendarViewShown="false"
+                                android:inputType="date" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
