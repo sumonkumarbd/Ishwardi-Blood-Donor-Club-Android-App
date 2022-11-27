@@ -501,6 +501,7 @@ public class DisplayDonorsActivity extends AppCompatActivity {
                 temp.clear();
                 for(DataSnapshot ds:snapshot.getChildren()){
                     User user = ds.getValue(User.class);
+                    assert user != null;
                     if(user.getStep().equals("Done")) {
                         if (user.getVisible().equals("True")) {
                             users.add(user);

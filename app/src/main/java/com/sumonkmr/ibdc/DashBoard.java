@@ -80,16 +80,13 @@ public class DashBoard extends AppCompatActivity implements View.OnClickListener
     de.hdodenhof.circleimageview.CircleImageView profile_image_signUp, p_image_shade_signUp;
     AutoCompleteTextView Division, District, Upazila, bloodGrpDropDown, lastDonateDate_signUp;
     DatePicker birthDate_signUp;
-    ImageView cover_image;
     de.hdodenhof.circleimageview.CircleImageView profile_image_menu, sds_image;
     TextView profile_name_menu, sds_dash, mail;
-    String uid;
     int d, m, y;
     Dialog dialog;
-    Uri filepath;
-    Bitmap bitmap;
+    Uri filepath, profileImg_uri;
     FirebaseAuth auth;
-    String userId, profile_url;
+    String userId;
     CheckBox lastDonate_check;
     boolean doubleBackToExitPressedOnce = false;
     GoogleSignInOptions gso;
@@ -336,12 +333,13 @@ public class DashBoard extends AppCompatActivity implements View.OnClickListener
             Intent intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
             intent.setData(Uri.fromFile(finalFile));
             sendBroadcast(intent);
-            processImageUpload(Uri.fromFile(finalFile));
+            profileImg_uri = Uri.fromFile(finalFile);
         }catch (Exception e){
             e.printStackTrace();
         }
 
     }
+
 
     private void processImageUpload(Uri filepath) {
         progressbar = dialog.findViewById(R.id.progressbar_signUp);
@@ -450,6 +448,7 @@ public class DashBoard extends AppCompatActivity implements View.OnClickListener
             if (!validateInput()){
                 Toast.makeText(this, "সবগুলি তথ্য দিন!", Toast.LENGTH_SHORT).show();
             }else {
+                processImageUpload(profileImg_uri);
                 Toast.makeText(this, "Validation Complete", Toast.LENGTH_SHORT).show();
             }
         });

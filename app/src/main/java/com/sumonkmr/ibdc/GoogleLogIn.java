@@ -49,6 +49,7 @@ public class GoogleLogIn extends AppCompatActivity {
     private final FirebaseDatabase db = FirebaseDatabase.getInstance();
     DatabaseReference dbReference;
     Dialog dialog;
+    TextView textView7;
 
 
 
@@ -69,6 +70,8 @@ public class GoogleLogIn extends AppCompatActivity {
         google_signIn.setOnClickListener(v -> {
             LoginProcess();
         });
+
+        textView7 = findViewById(R.id.textView7);
 
     }//onCreate
 
@@ -101,7 +104,9 @@ public class GoogleLogIn extends AppCompatActivity {
 
             } catch (ApiException e) {
                 // ...
-                Toast.makeText(this, "গুগল একাউন্ট সঠিক নয়!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "সফল হয় নি। দয়া করে আবার চেষ্টা করুন!", Toast.LENGTH_SHORT).show();
+
+
             }
         }
     }
