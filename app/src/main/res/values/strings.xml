@@ -27,7 +27,7 @@
     <string name="already_have_an_account_log_in">Already have an account? Log in</string>
     <string name="confirm_password">পাসওয়ার্ড নিশ্চিত করুন!</string>
     <string name="sign_up">সাইনআপ!</string>
-    <string name="beDonor">রক্তদাতা হউন!</string>
+    <string name="beDonor"><b>রক্তদাতা হউন!</b></string>
     <string name="enter_full_name">Enter Full Name</string>
     <string name="enter_city_name">Enter City Name</string>
     <string name="title_activity_listand_map">ListandMapActivity</string>
@@ -230,8 +230,9 @@
     <string name="birthdate">জন্ম তারিখ</string>
     <string name="submit">সম্পূর্ণ!!</string>
     <string name="updating">অপেক্ষা করুন ছবি আপডেট হচ্ছে…</string>
-    <string name="Updated">অভিনন্দন!!তথ্য আপডেট সম্পূর্ণ✓✓</string>
-    <string name="Updated_img">অভিনন্দন!!ছবি আপডেট সম্পূর্ণ✓✓</string>
+    <string name="cong">!!অভিনন্দন!!</string>
+    <string name="Updated">তথ্য আপডেট সম্পূর্ণ✓✓</string>
+    <string name="Updated_img">ছবি আপডেট সম্পূর্ণ✓✓</string>
     <string name="failed">তথ্য আপডেট অসম্পূর্ণ✖✖</string>
     <string name="profile">প্রোফাইল</string>
     <string name="share">শেয়ার</string>

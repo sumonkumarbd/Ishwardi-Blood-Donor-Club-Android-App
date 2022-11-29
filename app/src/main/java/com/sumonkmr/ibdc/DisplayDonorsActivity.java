@@ -2,7 +2,6 @@ package com.sumonkmr.ibdc;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.PopupMenu;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -11,19 +10,14 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.Gravity;
-import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.EditText;
-import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
@@ -39,11 +33,12 @@ public class DisplayDonorsActivity extends AppCompatActivity {
 
     RecyclerView list;
     UserAdapter adapter;
-    ArrayList<User> users,temp;
-    AutoCompleteTextView DivisionFilter,districtFilter,UpazilaFilter, bloodGrpFilter;
+    ArrayList<User> users, temp;
+    AutoCompleteTextView DivisionFilter, districtFilter, UpazilaFilter, bloodGrpFilter;
     User self;
     String uid;
     GoogleSignInAccount account;
+    FirebaseAuth auth;
 
 
     @Override
@@ -51,13 +46,17 @@ public class DisplayDonorsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.donor_list_activity);
 
-        account = GoogleSignIn.getLastSignedInAccount(this);
-        assert account != null;
-        uid = account.getId();
+//        account = GoogleSignIn.getLastSignedInAccount(this);
+//        assert account != null;
+//        uid = account.getId();
+        auth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = auth.getCurrentUser();
+        assert currentUser != null;
+        uid = currentUser.getUid();
 
         initializeComponents();
         initializeAddressFilters();
-//        getDonors();
+        getDonors();
     }
 
     private void initializeAddressFilters() {
@@ -66,7 +65,7 @@ public class DisplayDonorsActivity extends AppCompatActivity {
 //        bloodGrpFilter.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.blood_groups)));
         DivisionFilter.setOnItemClickListener((parent, view, position, id) -> {
 
-            switch (DivisionFilter.getText().toString()){
+            switch (DivisionFilter.getText().toString()) {
                 case "ঢাকা":
                     districtFilter.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.dhaka_division)));
                     break;
@@ -108,7 +107,7 @@ public class DisplayDonorsActivity extends AppCompatActivity {
 
 
         districtFilter.setOnItemClickListener((parent, view, position, id) -> {
-            switch (districtFilter.getText().toString()){
+            switch (districtFilter.getText().toString()) {
 
 //                Khulna Division
                 case "খুলনা":
@@ -389,7 +388,7 @@ public class DisplayDonorsActivity extends AppCompatActivity {
         });
 
     }
-    
+
     void initializeComponents() {
 
         DivisionFilter = findViewById(R.id.stateFilter);
@@ -404,15 +403,15 @@ public class DisplayDonorsActivity extends AppCompatActivity {
         adapter = new UserAdapter(this, users, position -> {
             //Handle call button event
             Intent intent = new Intent(Intent.ACTION_DIAL);
-            intent.setData(Uri.parse("tel:"+temp.get(position).getMobile()));
+            intent.setData(Uri.parse("tel:" + temp.get(position).getMobile()));
             startActivity(intent);
         }, position -> {
             //Handle share button event
             User sent = temp.get(position);
             Intent sendIntent = new Intent();
             sendIntent.setAction(Intent.ACTION_SEND);
-            sendIntent.putExtra(Intent.EXTRA_TITLE,R.string.motive);
-            sendIntent.putExtra(Intent.EXTRA_TEXT, "Hello.\n"+"Here is the Information about blood Donor:\n"+sent.getFName()+" "+sent.getLName()+"\nBlood Group : "+sent.getBloodGroup()+"\nAddress : "+sent.getVillage()+" ,"+sent.getUpazila()+" ,"+sent.getDistrict()+" ,"+sent.getDivision()+"\nMobile Number : "+sent.getMobile());
+            sendIntent.putExtra(Intent.EXTRA_TITLE, R.string.motive);
+            sendIntent.putExtra(Intent.EXTRA_TEXT, "Hello.\n" + "Here is the Information about blood Donor:\n" + sent.getFName() + " " + sent.getLName() + "\nBlood Group : " + sent.getBloodGroup() + "\nAddress : " + sent.getVillage() + " ," + sent.getUpazila() + " ," + sent.getDistrict() + " ," + sent.getDivision() + "\nMobile Number : " + sent.getMobile());
             sendIntent.setType("text/plain");
             Intent shareIntent = Intent.createChooser(sendIntent, "Be Hero, Donate Blood.");
             startActivity(shareIntent);
@@ -438,7 +437,6 @@ public class DisplayDonorsActivity extends AppCompatActivity {
         });
 
 
-
 //        bloodGrpFilter.addTextChangedListener(new TextWatcher() {
 //            @Override
 //            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -460,10 +458,10 @@ public class DisplayDonorsActivity extends AppCompatActivity {
     private void updateVisible(boolean b) {
         HashMap<String, Object> updateValues = new HashMap<>();
 
-        if(b){
-            updateValues.put("Visible","True");
-        }else {
-            updateValues.put("Visible","False");
+        if (b) {
+            updateValues.put("Visible", "True");
+        } else {
+            updateValues.put("Visible", "False");
         }
         FirebaseDatabase.getInstance().getReference("Donors").child(uid).updateChildren(updateValues);
     }
@@ -471,8 +469,8 @@ public class DisplayDonorsActivity extends AppCompatActivity {
     private void updateList(String s) {
         System.out.println(s);
         temp.clear();
-        for( User v : users){
-            if(v.getUpazila().toUpperCase().contains(s)||s.equalsIgnoreCase("ALL")) {
+        for (User v : users) {
+            if (v.getUpazila().toUpperCase().contains(s) || s.equalsIgnoreCase("ALL")) {
                 System.out.println(v.getUpazila());
                 temp.add(v);
             }
@@ -483,8 +481,8 @@ public class DisplayDonorsActivity extends AppCompatActivity {
     private void updateBloodGroupList(String s) {
         System.out.println(s);
         temp.clear();
-        for( User v : users){
-            if(v.getBloodGroup().toUpperCase().contains(s)||s.equalsIgnoreCase("ALL")) {
+        for (User v : users) {
+            if (v.getBloodGroup().toUpperCase().contains(s) || s.equalsIgnoreCase("ALL")) {
                 System.out.println(v.getBloodGroup());
                 temp.add(v);
             }
@@ -493,44 +491,36 @@ public class DisplayDonorsActivity extends AppCompatActivity {
     }
 
 
-//    private void getDonors() {
-//        FirebaseDatabase.getInstance().getReference("Donors").addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                users.clear();
-//                temp.clear();
-//                for(DataSnapshot ds:snapshot.getChildren()){
-//                    User user = ds.getValue(User.class);
-//                    assert user != null;
-//                    if(user.getStep().equals("Done")) {
-//                        if (user.getVisible().equals("True")) {
-//                            users.add(user);
-//                            temp.add(user);
-//                        }
-//                        if (user.getUID().equals(uid)) {
-//                            self = user;
-//                        }
-//                    }
-//                }
-//                updateList(UpazilaFilter.getText().toString());
-////                updateList(bloodGrpFilter.getText().toString());
-//                filterList();
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
-//    }
+    private void getDonors() {
+        FirebaseDatabase.getInstance().getReference("Donors").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                users.clear();
+                temp.clear();
+                for (DataSnapshot ds : snapshot.getChildren()) {
+                    User user = ds.getValue(User.class);
+                    assert user != null;
+                    if (user.getUid().equals(uid)) {
+                        self = user;
+                        users.add(user);
+                        temp.add(user);
+                    }
+                }
+                updateList(UpazilaFilter.getText().toString());
+//                updateList(bloodGrpFilter.getText().toString());
+                filterList();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
 
     private void filterList() {
         adapter.notifyDataSetChanged();
     }
-
-
-
-
 
 
 }

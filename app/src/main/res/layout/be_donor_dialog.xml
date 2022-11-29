@@ -90,8 +90,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    />
+                    app:layout_constraintTop_toTopOf="parent" />
 
 
                 <de.hdodenhof.circleimageview.CircleImageView
@@ -105,8 +104,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    />
+                    app:layout_constraintTop_toTopOf="parent" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout><!--                    Photo Section-->
@@ -189,13 +187,12 @@
 
                     </LinearLayout><!--name lay-->
 
-<!--                    phoneNum-->
+                    <!--                    phoneNum-->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_50dp"
                         android:baselineAligned="false"
-                        android:orientation="horizontal"
-                        >
+                        android:orientation="horizontal">
 
                         <com.google.android.material.textfield.TextInputLayout
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -210,12 +207,12 @@
                                 android:id="@+id/number_signUp"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:inputType="textCapWords"
+                                android:inputType="number"
                                 android:singleLine="true" />
                         </com.google.android.material.textfield.TextInputLayout>
 
                     </LinearLayout>
-<!--                    phoneNum-->
+                    <!--                    phoneNum-->
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -383,26 +380,28 @@
 
 
                     <TextView
+                        style="bold"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:gravity="center"
+                        android:layout_marginVertical="@dimen/_5dp"
                         android:layout_marginEnd="@dimen/_5dp"
                         android:fontFamily="@font/des_font"
-                        android:layout_marginVertical="@dimen/_5dp"
+                        android:gravity="center"
                         android:text="@string/birthdate"
-                        style="bold"
                         android:textColor="@color/black" />
+
                     <DatePicker
                         android:id="@+id/birthDate_signUp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:datePickerMode="spinner"
                         android:background="@color/tns"
                         android:calendarViewShown="false"
+                        android:datePickerMode="spinner"
                         android:inputType="date" />
                 </LinearLayout>
             </ScrollView>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_40dp"
@@ -411,7 +410,7 @@
                 android:orientation="horizontal"
                 android:weightSum="2">
 
-                <androidx.appcompat.widget.AppCompatButton
+                <Button
                     android:id="@+id/cBtn"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -419,7 +418,7 @@
                     android:layout_weight="1"
                     android:elevation="@dimen/shadow"
                     android:text="@string/next_remainder"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/white"
                     android:textSize="@dimen/card_txt" />
 
                 <Button
@@ -430,6 +429,7 @@
                     android:layout_weight="1"
                     android:elevation="@dimen/shadow"
                     android:text="@string/beDonor"
+                    android:textColor="@color/white"
                     android:textSize="@dimen/card_txt" />
             </LinearLayout>
             <!--        root Edit-->

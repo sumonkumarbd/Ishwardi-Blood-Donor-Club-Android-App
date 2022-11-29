@@ -1,15 +1,15 @@
 package com.sumonkmr.ibdc.model;
 
 public class User {
-    String FName,LName,UID,Email,BloodGroup,Mobile,Division,District, Upazila,Village,Img_url,birthdate,lastDonateDate;
+    String FName,LName, uid,Email,BloodGroup,Mobile,Division,District, Upazila,Village,Img_url,birthdate,lastDonateDate;
 
     public User() {
     } //default constructor
 
-    public User(String FName, String LName, String UID, String email, String bloodGroup, String mobile, String division, String district, String upazila, String village, String img_url, String birthdate, String lastDonateDate) {
+    public User(String FName, String LName, String uid, String email, String bloodGroup, String mobile, String division, String district, String upazila, String village, String img_url, String birthdate, String lastDonateDate) {
         this.FName = FName;
         this.LName = LName;
-        this.UID = UID;
+        this.uid = uid;
         Email = email;
         BloodGroup = bloodGroup;
         Mobile = mobile;
@@ -38,12 +38,12 @@ public class User {
         this.LName = LName;
     }
 
-    public String getUID() {
-        return UID;
+    public String getUid() {
+        return uid;
     }
 
-    public void setUID(String UID) {
-        this.UID = UID;
+    public void setUid(String uid) {
+        this.uid = uid;
     }
 
     public String getEmail() {

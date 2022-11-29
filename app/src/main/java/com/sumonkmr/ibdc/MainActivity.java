@@ -7,7 +7,6 @@ import android.app.Dialog;
 import android.content.ContextWrapper;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Build;
@@ -18,7 +17,6 @@ import android.os.Looper;
 import android.provider.MediaStore;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.MimeTypeMap;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -29,8 +27,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -43,9 +39,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -61,7 +55,6 @@ import com.karumi.dexter.listener.single.PermissionListener;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.InputStream;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Objects;
@@ -72,7 +65,7 @@ import nl.psdcompany.duonavigationdrawer.widgets.DuoDrawerToggle;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     DuoDrawerLayout drawerLayout;
-    final String regexStr = "^(1\\-)?[0-9]{3}\\-?[0-9]{3}\\-?[0-9]{4}$";
+    final String regexStr = "^\\s?((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?\\s?";
     com.google.android.material.textfield.TextInputEditText f_name_signUp, l_name_signUp, number_signUp, village_signUp;
     de.hdodenhof.circleimageview.CircleImageView profile_image_signUp, p_image_shade_signUp;
     AutoCompleteTextView Division, District, Upazila, bloodGrpDropDown, lastDonateDate_signUp;
@@ -90,7 +83,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     GoogleSignInClient gsc;
     GoogleSignInAccount account;
     private StorageReference storageReference;
-    private DatabaseReference dbReference;
     private FirebaseDatabase db;
     private ProgressBar progressbar;
     final Calendar calendar = Calendar.getInstance();
@@ -98,8 +90,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     MediaPlayer okkBtn;
     MediaPlayer cbtN;
     MediaPlayer great_sound;
-    File compressedImageFile;
-    ActivityResultLauncher<String> cropImg;
 
 
     @Override
@@ -118,7 +108,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         userId = currentUser.getUid();
         storageReference = FirebaseStorage.getInstance().getReference();
         db = FirebaseDatabase.getInstance();
-        dbReference = db.getReference();
+        DatabaseReference dbReference = db.getReference();
         account = GoogleSignIn.getLastSignedInAccount(this);
         init();
         Sounds();
@@ -308,10 +298,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             try {
                 assert data != null;
                 filepath = data.getData();
-                CompressImage(filepath);
-                InputStream inputStream = getApplicationContext().getContentResolver().openInputStream(filepath);
-                Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
-                profile_image_signUp.setImageBitmap(bitmap);
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), filepath);
+                ContextWrapper contextWrapper = new ContextWrapper(getApplicationContext());
+                File path = contextWrapper.getExternalFilesDir(Environment.DIRECTORY_DCIM);
+                String fileName = String.format("%s.jpg", account.getEmail());
+                File finalFile = new File(path, fileName);
+                FileOutputStream fileOutputStream = new FileOutputStream(finalFile);
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 20, fileOutputStream);
+                fileOutputStream.flush();
+                fileOutputStream.close();
+                profile_image_signUp.setImageURI(Uri.fromFile(finalFile));
+                Intent intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+                intent.setData(Uri.fromFile(finalFile));
+                sendBroadcast(intent);
+                profileImg_uri = intent.getData();
+
             } catch (Exception ex) {
                 ex.printStackTrace();
                 Toast.makeText(this, "data is not coming", Toast.LENGTH_SHORT).show();
@@ -321,78 +322,55 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
-    private void CompressImage(Uri uri) {
-        try {
-            Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), uri);
-            ContextWrapper contextWrapper = new ContextWrapper(getApplicationContext());
-            File path = contextWrapper.getExternalFilesDir(Environment.DIRECTORY_DCIM);
-            String fileName = String.format("%s.jpg", account.getEmail());
-            File finalFile = new File(path, fileName);
-            FileOutputStream fileOutputStream = new FileOutputStream(finalFile);
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 20, fileOutputStream);
-            fileOutputStream.flush();
-            fileOutputStream.close();
-            profile_image_signUp.setImageURI(Uri.fromFile(finalFile));
-            Intent intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
-            intent.setData(Uri.fromFile(finalFile));
-            sendBroadcast(intent);
-            processImageUpload(Uri.fromFile(finalFile));
-        } catch (Exception e) {
-            e.printStackTrace();
-            Toast.makeText(this, "অসম্পূর্ণ", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-
-    private void processImageUpload(Uri filepath) {
-        progressbar = dialog.findViewById(R.id.progressbar_signUp);
-        final StorageReference uploader = storageReference.child(String.format("profile_image/User Email : %s/profile_picture.%s", account.getEmail(), getExtention()));
-        uploader.putFile(filepath)
-                .addOnSuccessListener(taskSnapshot -> {
-                    Toast.makeText(getApplicationContext(), R.string.Updated_img, Toast.LENGTH_SHORT).show();
-                    uploader.getDownloadUrl().addOnSuccessListener(uri -> {
-                        if (!filepath.toString().isEmpty()) {
-//                            addToDatabase(uri);
-                            progressbar.setProgressDrawable(getDrawable(R.drawable.progress_bar_success));
-                            great_sound.start();
-//                            dialog.dismiss();
-                        }
-                    });
-                })
-                .addOnProgressListener(snapshot -> {
-                    long per = (100 * snapshot.getBytesTransferred()) / snapshot.getTotalByteCount();
-                    progressbar.setProgress((int) per);
-                    progressbar.setMax(100);
-                    Toast.makeText(getApplicationContext(), R.string.updating, Toast.LENGTH_SHORT).show();
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(getApplicationContext(), R.string.failed, Toast.LENGTH_SHORT).show();
-                    }
-                });
-    }
-
-    private String getExtention() {
-        MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
-        return mimeTypeMap.getExtensionFromMimeType(getApplicationContext().getContentResolver().getType(filepath));
-    }
-
-    private void profileImg(Uri uri) {
-        HashMap<String, Object> values = new HashMap<>();
-        values.put("bloodImg_url", uri.toString());
-        FirebaseDatabase.getInstance().getReference("Donors/" + account.getId())
-                .updateChildren(values)
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()) {
-                            Toast.makeText(getApplicationContext(), R.string.Updated, Toast.LENGTH_SHORT).show();
-                        } else {
+    private void FinalUploadDatabase() {
+        if (profileImg_uri != null) {
+            progressbar = dialog.findViewById(R.id.progressbar_signUp);
+            final StorageReference uploader = storageReference.child(String.format("profile_image/User Email : %s/profile_picture.%s", account.getEmail(), ".jpg"));
+            uploader.putFile(profileImg_uri)
+                    .addOnSuccessListener(taskSnapshot -> {
+                        Toast.makeText(getApplicationContext(), R.string.Updated_img, Toast.LENGTH_SHORT).show();
+                        uploader.getDownloadUrl().addOnSuccessListener(uri -> {
+                            if (!profileImg_uri.toString().isEmpty()) {
+                                addToDatabase(uri);
+                                progressbar.setProgressDrawable(getDrawable(R.drawable.progress_bar_success));
+                                great_sound.start();
+                                dialog.dismiss();
+                            }
+                        });
+                    })
+                    .addOnProgressListener(snapshot -> {
+                        long per = (100 * snapshot.getBytesTransferred()) / snapshot.getTotalByteCount();
+                        progressbar.setProgress((int) per);
+                        progressbar.setMax(100);
+                        Toast.makeText(getApplicationContext(), R.string.updating, Toast.LENGTH_SHORT).show();
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
                             Toast.makeText(getApplicationContext(), R.string.failed, Toast.LENGTH_SHORT).show();
                         }
-                    }
-                });
+                    });
+
+        }
+
     }
+
+
+//    private void profileImg(Uri uri) {
+//        HashMap<String, Object> values = new HashMap<>();
+//        values.put("bloodImg_url", uri.toString());
+//        FirebaseDatabase.getInstance().getReference("Donors/" + account.getId())
+//                .updateChildren(values)
+//                .addOnCompleteListener(new OnCompleteListener<Void>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<Void> task) {
+//                        if (task.isSuccessful()) {
+//                            Toast.makeText(getApplicationContext(), R.string.Updated, Toast.LENGTH_SHORT).show();
+//                        } else {
+//                            Toast.makeText(getApplicationContext(), R.string.failed, Toast.LENGTH_SHORT).show();
+//                        }
+//                    }
+//                });
+//    }
 
     //////////////////////////////////////////////////////
 
@@ -443,19 +421,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 //        Functions
         initializeAddressFilters();
-        LastDonateDatePicker();
+        FromDatePickers();
         ChooseProfilePicture();
 
         //        processImageUpload(profileImg_uri);
 
         ok_Btn.setOnClickListener(v -> {
             btn.start();//sound effect
-//            if (!validateInput()) {
-//                Toast.makeText(this, "সবগুলি তথ্য দিন!", Toast.LENGTH_SHORT).show();
-//            } else {
-//
-//                Toast.makeText(this, "Validation Complete", Toast.LENGTH_SHORT).show();
-//            }
+            if (!validateInput()) {
+                Toast.makeText(this, "সবগুলি তথ্য দিন!", Toast.LENGTH_SHORT).show();
+            } else {
+                FinalUploadDatabase();
+            }
         });
 
         cBtn.setOnClickListener(v -> {
@@ -470,25 +447,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }//Finished Dialog
 
     private void addToDatabase(Uri uri) {
+        String day, month, year, date;
+        day = String.valueOf(birthDate_signUp.getDayOfMonth());
+        month = String.valueOf(birthDate_signUp.getMonth());
+        year = String.valueOf(birthDate_signUp.getYear());
+        date = day + "/" + month + "/" + year;
         HashMap<String, Object> values = new HashMap<>();
-        values.put("UID", userId);
+        values.put("uid", userId);
         values.put("bloodImg_url", uri.toString());
         values.put("FName", Objects.requireNonNull(f_name_signUp.getText()).toString());
         values.put("LName", Objects.requireNonNull(l_name_signUp.getText()).toString());
-        values.put("Mobile", String.valueOf(number_signUp));
+        values.put("Mobile", Objects.requireNonNull(number_signUp.getText()).toString());
         values.put("Email", account.getEmail());
         values.put("State", Division.getText().toString());
         values.put("District", District.getText().toString());
         values.put("Upazila", Upazila.getText().toString());
         values.put("Village", Objects.requireNonNull(village_signUp.getText()).toString());
         values.put("BloodGroup", bloodGrpDropDown.getText().toString());
-        values.put("birthdate", String.valueOf(birthDate_signUp));
+        values.put("birthdate", date);
         if (lastDonate_check.isChecked()) {
             values.put("lastDonateDate", "পূর্বে করিনি।");
         } else {
             values.put("lastDonateDate", lastDonateDate_signUp.getText().toString());
         }
-
 
         FirebaseDatabase.getInstance().getReference("Donors/" + FirebaseAuth.getInstance().getUid())
                 .updateChildren(values)
@@ -831,21 +812,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
+        bloodGrpDropDown.setOnClickListener(v -> {
+            String[] bloodGroups = getResources().getStringArray(R.array.blood_groups);
+            ArrayAdapter<String> adapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_dropdown_item_1line, bloodGroups);
+            bloodGrpDropDown.setAdapter(adapter);
+        });
+
     }//initializeAddressFilters Finished
 
-    private void LastDonateDatePicker() {
+    private void FromDatePickers() {
         lastDonateDate_signUp.setOnClickListener(v -> {
             y = calendar.get(Calendar.YEAR);
             m = calendar.get(Calendar.MONTH);
             d = calendar.get(Calendar.DAY_OF_MONTH);
             DatePickerDialog datePickerDialog = new DatePickerDialog(MainActivity.this, (view, year, month, dayOfMonth) -> lastDonateDate_signUp.setText(dayOfMonth + "/" + (month + 1) + "/" + year), y, m, d);
             datePickerDialog.show();
-        });
-
-        bloodGrpDropDown.setOnClickListener(v -> {
-            String[] bloodGroups = getResources().getStringArray(R.array.blood_groups);
-            ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_dropdown_item_1line, bloodGroups);
-            bloodGrpDropDown.setAdapter(adapter);
         });
 
 //        birthDate_signUp.setOnClickListener(v -> {
@@ -913,7 +894,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             l_name_signUp.setError(null);
         }
 
-        if (number_signUp.getText() == null || number_signUp.getText().toString().length() == 0 && !number_signUp.getText().toString().matches(regexStr)) {
+        if (Objects.requireNonNull(number_signUp.getText()).length() != 11) {
             number_signUp.setError("অনুগ্রহপূর্বক সঠিক মোবাইল নম্বর দিন!");
             return false;
         } else {
@@ -966,6 +947,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             lastDonateDate_signUp.setError(null);
         }
         if (birthDate_signUp == null || !validateAge(birthDate_signUp.getYear())) {
+            return false;
+        }
+        if (profileImg_uri == null) {
+            Toast.makeText(this, "অনুগ্রহপূর্বক একটি ছবি সিলেক্ট করুন!", Toast.LENGTH_SHORT).show();
             return false;
         }
 
