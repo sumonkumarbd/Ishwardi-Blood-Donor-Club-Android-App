@@ -1,23 +1,23 @@
 package com.sumonkmr.ibdc.model;
 
 public class User {
-    String FName,LName, uid,Email,BloodGroup,Mobile,Division,District, Upazila,Village,Img_url,birthdate,lastDonateDate;
+    String FName,LName, uid,Email,BloodGroup,Mobile,State,District, Upazila,Village,bloodImg_url,birthdate,lastDonateDate;
 
     public User() {
     } //default constructor
 
-    public User(String FName, String LName, String uid, String email, String bloodGroup, String mobile, String division, String district, String upazila, String village, String img_url, String birthdate, String lastDonateDate) {
+    public User(String FName, String LName, String uid, String email, String bloodGroup, String mobile, String state, String district, String upazila, String village, String bloodImg_url, String birthdate, String lastDonateDate) {
         this.FName = FName;
         this.LName = LName;
         this.uid = uid;
         Email = email;
         BloodGroup = bloodGroup;
         Mobile = mobile;
-        Division = division;
+        State = state;
         District = district;
         Upazila = upazila;
         Village = village;
-        Img_url = img_url;
+        this.bloodImg_url = bloodImg_url;
         this.birthdate = birthdate;
         this.lastDonateDate = lastDonateDate;
     }
@@ -70,12 +70,12 @@ public class User {
         Mobile = mobile;
     }
 
-    public String getDivision() {
-        return Division;
+    public String getState() {
+        return State;
     }
 
-    public void setDivision(String division) {
-        Division = division;
+    public void setState(String state) {
+        State = state;
     }
 
     public String getDistrict() {
@@ -102,12 +102,12 @@ public class User {
         Village = village;
     }
 
-    public String getImg_url() {
-        return Img_url;
+    public String getBloodImg_url() {
+        return bloodImg_url;
     }
 
-    public void setImg_url(String img_url) {
-        Img_url = img_url;
+    public void setBloodImg_url(String bloodImg_url) {
+        this.bloodImg_url = bloodImg_url;
     }
 
     public String getBirthdate() {
