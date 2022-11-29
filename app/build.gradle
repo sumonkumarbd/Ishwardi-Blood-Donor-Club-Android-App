@@ -29,6 +29,12 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+    buildFeatures
+            {
+                dataBinding = true
+            }
+
 }
 
 dependencies {
@@ -63,6 +69,9 @@ dependencies {
 
 //    Dexter for runtime permission
     implementation 'com.karumi:dexter:6.2.3'
+
+    //Image size Compress
+    implementation 'com.github.yalantis:ucrop:2.2.6'
 
 //    image slider
     implementation 'com.github.denzcoskun:ImageSlideshow:0.1.0'

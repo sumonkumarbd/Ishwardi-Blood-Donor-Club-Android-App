@@ -53,12 +53,12 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder>{
     @Override
     public void onBindViewHolder(@NonNull UserHolder holder, int position) {
         String state,district,tehsil,fname,village,bloodgroup,bloodImg_url,lastDonateDate;
-        state = users.get(position).getState();
+        state = users.get(position).getDivision();
         district = users.get(position).getDistrict();
         tehsil = users.get(position).getUpazila();
         village = users.get(position).getVillage();
         bloodgroup = users.get(position).getBloodGroup();
-        bloodImg_url = users.get(position).getBloodImg_url();
+        bloodImg_url = users.get(position).getImg_url();
         lastDonateDate = users.get(position).getLastDonateDate();
         fname = String.format("%s %s", users.get(position).getFName(), users.get(position).getLName());
         String s = StringCaseConverter.convertToTitleCaseIteratingChars(fname);

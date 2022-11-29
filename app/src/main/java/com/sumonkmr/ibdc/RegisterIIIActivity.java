@@ -20,12 +20,9 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,14 +30,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.FirebaseException;
-import com.google.firebase.FirebaseTooManyRequestsException;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
-import com.google.firebase.auth.PhoneAuthCredential;
-import com.google.firebase.auth.PhoneAuthOptions;
-import com.google.firebase.auth.PhoneAuthProvider;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -57,8 +47,6 @@ import com.karumi.dexter.listener.single.PermissionListener;
 import java.io.InputStream;
 import java.util.Calendar;
 import java.util.HashMap;
-import java.util.Objects;
-import java.util.concurrent.TimeUnit;
 
 public class RegisterIIIActivity extends AppCompatActivity {
 
@@ -300,7 +288,7 @@ public class RegisterIIIActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<Void> task) {
                         if(task.isSuccessful()){
                             loadingAim3.setVisibility(View.GONE);
-                            startActivity(new Intent(RegisterIIIActivity.this,DashBoard.class));
+                            startActivity(new Intent(RegisterIIIActivity.this, MainActivity.class));
                             RegisterIIIActivity.this.finish();
                         }else {
                             Toast.makeText(RegisterIIIActivity.this, "Error!", Toast.LENGTH_SHORT).show();

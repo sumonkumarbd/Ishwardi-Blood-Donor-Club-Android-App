@@ -1,29 +1,26 @@
 package com.sumonkmr.ibdc.model;
 
 public class User {
-    String FName,LName,UID,Email,BloodGroup,Mobile,State,District, Upazila,Village,Step, Visible,RequestBlood, bloodImg_url,birthdate,lastDonateDate;
+    String FName,LName,UID,Email,BloodGroup,Mobile,Division,District, Upazila,Village,Img_url,birthdate,lastDonateDate;
 
     public User() {
     } //default constructor
 
-    public User(String FName, String LName, String UID, String email, String bloodGroup, String mobile, String state, String district, String upazila, String village, String step, String visible, String requestBlood, String bloodImg_url, String birthdate, String lastDonateDate) {
+    public User(String FName, String LName, String UID, String email, String bloodGroup, String mobile, String division, String district, String upazila, String village, String img_url, String birthdate, String lastDonateDate) {
         this.FName = FName;
         this.LName = LName;
         this.UID = UID;
         Email = email;
         BloodGroup = bloodGroup;
         Mobile = mobile;
-        State = state;
+        Division = division;
         District = district;
         Upazila = upazila;
         Village = village;
-        Step = step;
-        Visible = visible;
-        RequestBlood = requestBlood;
-        this.bloodImg_url = bloodImg_url;
+        Img_url = img_url;
         this.birthdate = birthdate;
         this.lastDonateDate = lastDonateDate;
-    }//parameterized constructor
+    }
 
     public String getFName() {
         return FName;
@@ -73,12 +70,12 @@ public class User {
         Mobile = mobile;
     }
 
-    public String getState() {
-        return State;
+    public String getDivision() {
+        return Division;
     }
 
-    public void setState(String state) {
-        State = state;
+    public void setDivision(String division) {
+        Division = division;
     }
 
     public String getDistrict() {
@@ -105,36 +102,12 @@ public class User {
         Village = village;
     }
 
-    public String getStep() {
-        return Step;
+    public String getImg_url() {
+        return Img_url;
     }
 
-    public void setStep(String step) {
-        Step = step;
-    }
-
-    public String getVisible() {
-        return Visible;
-    }
-
-    public void setVisible(String visible) {
-        Visible = visible;
-    }
-
-    public String getRequestBlood() {
-        return RequestBlood;
-    }
-
-    public void setRequestBlood(String requestBlood) {
-        RequestBlood = requestBlood;
-    }
-
-    public String getBloodImg_url() {
-        return bloodImg_url;
-    }
-
-    public void setBloodImg_url(String bloodImg_url) {
-        this.bloodImg_url = bloodImg_url;
+    public void setImg_url(String img_url) {
+        Img_url = img_url;
     }
 
     public String getBirthdate() {

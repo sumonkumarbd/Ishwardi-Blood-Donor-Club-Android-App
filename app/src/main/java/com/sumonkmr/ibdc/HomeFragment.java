@@ -83,8 +83,7 @@ public class HomeFragment extends Fragment {
 
     private void ImageSlider(){
         final List<SlideModel> donationImages = new ArrayList<>();
-
-        FirebaseDatabase.getInstance().getReference().child("donationImages")
+        FirebaseDatabase.getInstance().getReference().child("sliders")
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
