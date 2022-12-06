@@ -1,11 +1,18 @@
 package com.sumonkmr.ibdc;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.view.View;
+import android.widget.TextView;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -15,28 +22,46 @@ import com.google.firebase.auth.FirebaseUser;
 public class SplashScreen extends AppCompatActivity {
 
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    TextView t1;
+    LottieAnimationView animation_view,animation_2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
         setContentView(R.layout.splash_screen);
-        new CountDownTimer(1000, 500) {
-            @Override
-            public void onTick(long millisUntilFinished) {
 
-            }
+        t1 = findViewById(R.id.t1);
+        animation_view = findViewById(R.id.animation_view);
+        animation_2 = findViewById(R.id.animation_2);
 
-            @Override
-            public void onFinish() {
-                if(user != null){
-                    startActivity(new Intent(SplashScreen.this, MainActivity.class));
-                    SplashScreen.this.finish();
-                }else {
-                    startActivity(new Intent(SplashScreen.this,GoogleLogIn.class));
-                    SplashScreen.this.finish();
+        if (networkInfo != null && networkInfo.isConnected()){
+            new CountDownTimer(1000, 500) {
+                @Override
+                public void onTick(long millisUntilFinished) {
+
                 }
 
-            }
-        }.start();
+                @Override
+                public void onFinish() {
+                    if(user != null){
+                        startActivity(new Intent(SplashScreen.this, MainActivity.class));
+                        SplashScreen.this.finish();
+                    }else {
+                        startActivity(new Intent(SplashScreen.this,GoogleLogIn.class));
+                        SplashScreen.this.finish();
+                    }
+
+                }
+            }.start();
+        }else {
+            t1.setText("দুঃখিত ইন্টারনেট সংযোগ নেই !");
+            animation_view.setVisibility(View.GONE);
+            animation_2.setVisibility(View.VISIBLE);
+        }
+
     }
 
 //    private void getSelf() {
