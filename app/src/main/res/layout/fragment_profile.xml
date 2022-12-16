@@ -652,7 +652,7 @@
                           android:orientation="vertical"
                           >
 
-                    <!--                    name lay-->
+                    <!--name lay-->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_50dp"
@@ -697,6 +697,33 @@
                         </com.google.android.material.textfield.TextInputLayout>
 
                     </LinearLayout><!--name lay-->
+
+                          <!--                    phoneNum-->
+                          <LinearLayout
+                              android:layout_width="match_parent"
+                              android:layout_height="@dimen/_50dp"
+                              android:baselineAligned="false"
+                              android:orientation="horizontal">
+
+                              <com.google.android.material.textfield.TextInputLayout
+                                  style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                  android:layout_width="match_parent"
+                                  android:layout_height="match_parent"
+                                  android:layout_marginHorizontal="2dp"
+                                  android:hint="@string/mobile_number"
+                                  android:textColorHint="#000000"
+                                  app:hintTextColor="#000000">
+
+                                  <com.google.android.material.textfield.TextInputEditText
+                                      android:id="@+id/number_edit"
+                                      android:layout_width="match_parent"
+                                      android:layout_height="match_parent"
+                                      android:inputType="number"
+                                      android:singleLine="true" />
+                              </com.google.android.material.textfield.TextInputLayout>
+
+                          </LinearLayout>
+                          <!--                    phoneNum-->
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -830,7 +857,7 @@
                             <AutoCompleteTextView
                                 android:id="@+id/lastDonateDate_edit"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
+                                android:layout_height="match_parent"
                                 android:inputType="none"
                                 android:textColor="@color/colorPrimary"
                                 android:textSize="@dimen/_8sp"/>
@@ -846,7 +873,8 @@
                         android:layout_marginHorizontal="2dp"
                         android:hint="@string/birthdate"
                         android:textColorHint="#000000"
-                        app:hintTextColor="#000000">
+                        app:hintTextColor="#000000"
+                        tools:ignore="TooManyViews">
 
                         <AutoCompleteTextView
                             android:id="@+id/birthDate_edit"

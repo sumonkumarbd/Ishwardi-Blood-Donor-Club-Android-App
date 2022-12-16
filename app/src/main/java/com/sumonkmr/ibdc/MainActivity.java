@@ -15,6 +15,7 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.Looper;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -35,6 +36,17 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.FullScreenContentCallback;
+import com.google.android.gms.ads.LoadAdError;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.RequestConfiguration;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+import com.google.android.gms.ads.interstitial.InterstitialAd;
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -42,8 +54,11 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.karumi.dexter.Dexter;
@@ -55,8 +70,11 @@ import com.karumi.dexter.listener.single.PermissionListener;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Objects;
 
 import nl.psdcompany.duonavigationdrawer.views.DuoDrawerLayout;
@@ -76,7 +94,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Dialog dialog;
     Uri filepath, profileImg_uri;
     FirebaseAuth auth;
-    String userId;
+    DatabaseReference dbReference;
+    String userId,adsData;
     CheckBox lastDonate_check;
     boolean doubleBackToExitPressedOnce = false;
     GoogleSignInOptions gso;
@@ -90,6 +109,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     MediaPlayer okkBtn;
     MediaPlayer cbtN;
     MediaPlayer great_sound;
+    AdView mAdView;
+    Intent targetActivity;
+    // per app run-- do not show more than 3 fullscreen ad. [[Change it if your want]]
+    int fullScreenAdMaxShowCount = 3;
 
 
     @Override
@@ -97,9 +120,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        getAdsFirebase();
+
         auth = FirebaseAuth.getInstance();
         gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
         gsc = GoogleSignIn.getClient(this, gso);
+        mAdView = findViewById(R.id.adView);
 
 
         //        Database references
@@ -108,7 +134,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         userId = currentUser.getUid();
         storageReference = FirebaseStorage.getInstance().getReference();
         db = FirebaseDatabase.getInstance();
-        DatabaseReference dbReference = db.getReference();
+        dbReference = db.getReference();
         account = GoogleSignIn.getLastSignedInAccount(this);
         init();
         Sounds();
@@ -178,6 +204,163 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
+    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    boolean isVal = false;
+    public boolean getAdsFirebase() {
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference reference = database.getReference("admob");
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String settings = snapshot.child("settings").getValue(String.class);
+                String device_id = snapshot.child("device_id").getValue(String.class);
+                String banner = snapshot.child("banner").getValue(String.class);
+                String interstitials = snapshot.child("interstitials").getValue(String.class);
+                assert settings != null;
+                if (settings.contains("ON")){
+                    isVal = true;
+                    mAdView.setVisibility(View.VISIBLE);
+                    assert device_id != null;
+                    initAdmobAd(device_id);
+                    loadBannerAd();
+                    loadFullscreenAd(interstitials);
+
+                }else if (settings.contains("OFF")){
+                    isVal = false;
+                    AdView mAdView = findViewById(R.id.adView);
+                    mAdView.setVisibility(View.GONE);
+                    Toast.makeText(getApplicationContext(), "ads No Coming!", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    isVal = false;
+                    mAdView.setVisibility(View.GONE);
+                    Toast.makeText(getApplicationContext(), "Nothing!", Toast.LENGTH_SHORT).show();
+                }
+            }//onDataChange
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        return isVal;
+    }
+    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    int BANNER_AD_CLICK_COUNT =0;
+    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    private void loadBannerAd(){
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+        mAdView.setAdListener(new AdListener() {
+            @Override
+            public void onAdLoaded() {
+                // Code to be executed when an ad finishes loading.
+                if (BANNER_AD_CLICK_COUNT >=3){
+                    if(mAdView!=null) mAdView.setVisibility(View.GONE);
+                }else{
+                    if(mAdView!=null) mAdView.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onAdFailedToLoad(LoadAdError adError) {
+                // Code to be executed when an ad request fails.
+            }
+
+            @Override
+            public void onAdOpened() {
+                // Code to be executed when an ad opens an overlay that
+                // covers the screen.
+            }
+
+            @Override
+            public void onAdClicked() {
+                // Code to be executed when the user clicks on an ad.
+                BANNER_AD_CLICK_COUNT++;
+
+                if (BANNER_AD_CLICK_COUNT >=3){
+                    if(mAdView!=null) mAdView.setVisibility(View.GONE);
+                }
+
+            }
+
+            @Override
+            public void onAdClosed() {
+                // Code to be executed when the user is about to return
+                // to the app after tapping on an ad.
+            }
+        });
+
+    }
+    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    // loadFullscreenAd method starts here.....
+    InterstitialAd mInterstitialAd;
+    int FULLSCREEN_AD_LOAD_COUNT=0;
+    private void loadFullscreenAd(String url){
+
+        //Requesting for a fullscreen Ad
+        AdRequest adRequest = new AdRequest.Builder().build();
+        InterstitialAd.load(this,url, adRequest, new InterstitialAdLoadCallback() {
+            @Override
+            public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
+                // The mInterstitialAd reference will be null until
+                // an ad is loaded.
+                mInterstitialAd = interstitialAd;
+
+                //Fullscreen callback || Requesting again when an ad is shown already
+                mInterstitialAd.setFullScreenContentCallback(new FullScreenContentCallback(){
+                    @Override
+                    public void onAdDismissedFullScreenContent() {
+                        // Called when fullscreen content is dismissed.
+                        //User dismissed the previous ad. So we are requesting a new ad here
+                        FULLSCREEN_AD_LOAD_COUNT++;
+                        loadFullscreenAd(url);
+                        Log.d("FULLSCREEN_AD_LOAD_COUNT", ""+FULLSCREEN_AD_LOAD_COUNT);
+
+                        if (targetActivity!=null) startActivity(targetActivity);
+
+                    }
+
+                }); // FullScreen Callback Ends here
+
+
+            }
+            @Override
+            public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
+                // Handle the error
+                mInterstitialAd = null;
+            }
+
+        });
+
+    }
+    // loadFullscreenAd method ENDS  here..... >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+    private void initAdmobAd(String id){
+
+        if (id.length()>12){
+            //Adding your device id -- to avoid invalid activity from your device
+            List<String> testDeviceIds = Collections.singletonList(id);
+            RequestConfiguration configuration =
+                    new RequestConfiguration.Builder().setTestDeviceIds(testDeviceIds).build();
+            MobileAds.setRequestConfiguration(configuration);
+        }
+
+
+
+
+        //Init Admob Ads
+        MobileAds.initialize(this, initializationStatus -> {
+        });
+
+    }
+    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
     @SuppressLint("NonConstantResourceId")
     @Override
     public void onClick(View view) {
@@ -214,7 +397,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             case R.id.ll_about_us:
                 btn.start();
-                startActivity(new Intent(this, AboutUs.class));
+                targetActivity = new Intent(this, AboutUs.class);
+                if (mInterstitialAd==null || !getAdsFirebase()) startActivity(targetActivity);
+                else if (FULLSCREEN_AD_LOAD_COUNT>=fullScreenAdMaxShowCount) startActivity(targetActivity);
+                else if (getAdsFirebase())mInterstitialAd.show(this);
                 break;
 
             case R.id.ll_privacy:
@@ -315,7 +501,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             } catch (Exception ex) {
                 ex.printStackTrace();
-                Toast.makeText(this, "data is not coming", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "ছবি আপলোডে অসফল!", Toast.LENGTH_SHORT).show();
             }
             super.onActivityResult(requestCode, resultCode, data);
         }
@@ -977,14 +1163,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         this.doubleBackToExitPressedOnce = true;
         Toast.makeText(this, "পুনরায় ব্যাক বাটন প্রেস করুন!", Toast.LENGTH_SHORT).show();
-
-        new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
-
-            @Override
-            public void run() {
-                doubleBackToExitPressedOnce = false;
-            }
-        }, 2000);
+        new Handler(Looper.getMainLooper()).postDelayed(() -> doubleBackToExitPressedOnce = false, 2000);
     }
 
 }

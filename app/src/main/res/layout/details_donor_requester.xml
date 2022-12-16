@@ -10,7 +10,7 @@
     android:layout_marginBottom="10dp"
     android:gravity="center"
     android:elevation="@dimen/shadow"
-    android:layout_height="@dimen/_200dp">
+    android:layout_height="@dimen/_180dp">
 
     <ImageView
         android:id="@+id/bloodImg"

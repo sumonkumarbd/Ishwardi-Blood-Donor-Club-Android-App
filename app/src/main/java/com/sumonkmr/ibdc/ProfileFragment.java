@@ -67,7 +67,7 @@ public class ProfileFragment extends Fragment {
     Button edit_btn,save_btn;
     ImageButton update_back;
     TextView f_name, l_name, mobile_number_pro, blood_grp_pro, village_pro, tehsil_pro, district_pro, state_pro, lastDonateDate_pro,email_pro,birthDate;
-    com.google.android.material.textfield.TextInputEditText f_name_edit,l_name_edit,village_edit;
+    com.google.android.material.textfield.TextInputEditText f_name_edit,l_name_edit,village_edit,number_edit;
     de.hdodenhof.circleimageview.CircleImageView profile_image,profile_image_edit,p_image_shade_edit;
     AutoCompleteTextView Division,District,Upazila,bloodGrpDropDown,lastDonateDate_edit,birthDate_edit;
     ImageView cover_image;
@@ -76,10 +76,10 @@ public class ProfileFragment extends Fragment {
     String userId,profile_url;
     Uri profile_uri;
     int d,m,y;
-   private StorageReference storageReference;
-   private DatabaseReference dbReference;
-   private FirebaseDatabase db;
-   private ProgressBar progressbar;
+    private StorageReference storageReference;
+    private DatabaseReference dbReference;
+    private FirebaseDatabase db;
+    private ProgressBar progressbar;
 
 
     @SuppressLint("MissingInflatedId")
@@ -116,6 +116,7 @@ public class ProfileFragment extends Fragment {
         p_image_shade_edit = view.findViewById(R.id.p_image_shade_edit);
         f_name_edit = view.findViewById(R.id.f_name_edit);
         l_name_edit = view.findViewById(R.id.l_name_edit);
+        number_edit = view.findViewById(R.id.number_edit);
         village_edit = view.findViewById(R.id.village_edit);
         Upazila = view.findViewById(R.id.upazilaDropDrown_edit);
         District = view.findViewById(R.id.districtDropDrown_edit);
@@ -191,8 +192,8 @@ public class ProfileFragment extends Fragment {
             assert data != null;
             filepath = data.getData();
             try {
-               InputStream inputStream = context.getContentResolver().openInputStream(filepath);
-               bitmap = BitmapFactory.decodeStream(inputStream);
+                InputStream inputStream = context.getContentResolver().openInputStream(filepath);
+                bitmap = BitmapFactory.decodeStream(inputStream);
                 profile_image_edit.setImageBitmap(bitmap);
                 processImageUpload();
             } catch (Exception ex) {
@@ -588,38 +589,38 @@ public class ProfileFragment extends Fragment {
     }
 
     private void processImageUpload(){
-            final StorageReference uploader = storageReference.child(String.format("profile_image/User Id : %s/profile_picture.%s",userId,getExtention()));
-            uploader.putFile(filepath)
-                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            Toast.makeText(context, R.string.Updated_img, Toast.LENGTH_SHORT).show();
-                            uploader.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                                @SuppressLint("UseCompatLoadingForDrawables")
-                                @Override
-                                public void onSuccess(Uri uri) {
-                                    if (!filepath.toString().isEmpty()){
-                                        profileImg(uri);
-                                        progressbar.setProgressDrawable(getResources().getDrawable(R.drawable.progress_bar_success));
-                                    }
+        final StorageReference uploader = storageReference.child(String.format("profile_image/User Id : %s/profile_picture.%s",userId,getExtention()));
+        uploader.putFile(filepath)
+                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        Toast.makeText(context, R.string.Updated_img, Toast.LENGTH_SHORT).show();
+                        uploader.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            @SuppressLint("UseCompatLoadingForDrawables")
+                            @Override
+                            public void onSuccess(Uri uri) {
+                                if (!filepath.toString().isEmpty()){
+                                    profileImg(uri);
+                                    progressbar.setProgressDrawable(getResources().getDrawable(R.drawable.progress_bar_success));
                                 }
-                            });
-                        }
-                    })
-                    .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
-                            long per = (100*snapshot.getBytesTransferred())/snapshot.getTotalByteCount();
-                            progressbar.setProgress((int) per);
-                            progressbar.setMax(100);
-                            Toast.makeText(context, R.string.updating, Toast.LENGTH_SHORT).show();
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(context, R.string.failed, Toast.LENGTH_SHORT).show();
-                        }
-                    });
+                            }
+                        });
+                    }
+                })
+                .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
+                        long per = (100*snapshot.getBytesTransferred())/snapshot.getTotalByteCount();
+                        progressbar.setProgress((int) per);
+                        progressbar.setMax(100);
+                        Toast.makeText(context, R.string.updating, Toast.LENGTH_SHORT).show();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(context, R.string.failed, Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 
     private void profileImg(Uri uri){
@@ -643,6 +644,7 @@ public class ProfileFragment extends Fragment {
         HashMap<String,Object> values = new HashMap<>();
         values.put("FName", Objects.requireNonNull(f_name_edit.getText()).toString());
         values.put("LName", Objects.requireNonNull(l_name_edit.getText()).toString());
+        values.put("Mobile", Objects.requireNonNull(number_edit.getText()).toString());
         values.put("State",Division.getText().toString());
         values.put("District",District.getText().toString());
         values.put("Upazila",Upazila.getText().toString());
@@ -691,6 +693,7 @@ public class ProfileFragment extends Fragment {
 //                    Edit tabs
                     f_name_edit.setText(Objects.requireNonNull(snapshot.child("FName").getValue()).toString());
                     l_name_edit.setText(Objects.requireNonNull(snapshot.child("LName").getValue()).toString());
+                    number_edit.setText(Objects.requireNonNull(snapshot.child("Mobile").getValue()).toString());
                     village_edit.setText(Objects.requireNonNull(snapshot.child("Village").getValue()).toString());
                     Upazila.setText(Objects.requireNonNull(snapshot.child("Upazila").getValue()).toString());
                     District.setText(Objects.requireNonNull(snapshot.child("District").getValue()).toString());
