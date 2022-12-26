@@ -120,13 +120,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        getAdsFirebase();
-
         auth = FirebaseAuth.getInstance();
         gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
         gsc = GoogleSignIn.getClient(this, gso);
         mAdView = findViewById(R.id.adView);
-
+        Ads ads = new Ads(this,mAdView);
 
         //        Database references
         FirebaseUser currentUser = auth.getCurrentUser();
@@ -203,164 +201,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-
-    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-    boolean isVal = false;
-    public boolean getAdsFirebase() {
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference reference = database.getReference("admob");
-        reference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                String settings = snapshot.child("settings").getValue(String.class);
-                String device_id = snapshot.child("device_id").getValue(String.class);
-                String banner = snapshot.child("banner").getValue(String.class);
-                String interstitials = snapshot.child("interstitials").getValue(String.class);
-                assert settings != null;
-                if (settings.contains("ON")){
-                    isVal = true;
-                    mAdView.setVisibility(View.VISIBLE);
-                    assert device_id != null;
-                    initAdmobAd(device_id);
-                    loadBannerAd();
-                    loadFullscreenAd(interstitials);
-
-                }else if (settings.contains("OFF")){
-                    isVal = false;
-                    AdView mAdView = findViewById(R.id.adView);
-                    mAdView.setVisibility(View.GONE);
-                    Toast.makeText(getApplicationContext(), "ads No Coming!", Toast.LENGTH_SHORT).show();
-                }
-                else {
-                    isVal = false;
-                    mAdView.setVisibility(View.GONE);
-                    Toast.makeText(getApplicationContext(), "Nothing!", Toast.LENGTH_SHORT).show();
-                }
-            }//onDataChange
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
-        return isVal;
-    }
-    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-    int BANNER_AD_CLICK_COUNT =0;
-    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-    private void loadBannerAd(){
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
-        mAdView.setAdListener(new AdListener() {
-            @Override
-            public void onAdLoaded() {
-                // Code to be executed when an ad finishes loading.
-                if (BANNER_AD_CLICK_COUNT >=3){
-                    if(mAdView!=null) mAdView.setVisibility(View.GONE);
-                }else{
-                    if(mAdView!=null) mAdView.setVisibility(View.VISIBLE);
-                }
-            }
-
-            @Override
-            public void onAdFailedToLoad(LoadAdError adError) {
-                // Code to be executed when an ad request fails.
-            }
-
-            @Override
-            public void onAdOpened() {
-                // Code to be executed when an ad opens an overlay that
-                // covers the screen.
-            }
-
-            @Override
-            public void onAdClicked() {
-                // Code to be executed when the user clicks on an ad.
-                BANNER_AD_CLICK_COUNT++;
-
-                if (BANNER_AD_CLICK_COUNT >=3){
-                    if(mAdView!=null) mAdView.setVisibility(View.GONE);
-                }
-
-            }
-
-            @Override
-            public void onAdClosed() {
-                // Code to be executed when the user is about to return
-                // to the app after tapping on an ad.
-            }
-        });
-
-    }
-    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-    // loadFullscreenAd method starts here.....
-    InterstitialAd mInterstitialAd;
-    int FULLSCREEN_AD_LOAD_COUNT=0;
-    private void loadFullscreenAd(String url){
-
-        //Requesting for a fullscreen Ad
-        AdRequest adRequest = new AdRequest.Builder().build();
-        InterstitialAd.load(this,url, adRequest, new InterstitialAdLoadCallback() {
-            @Override
-            public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
-                // The mInterstitialAd reference will be null until
-                // an ad is loaded.
-                mInterstitialAd = interstitialAd;
-
-                //Fullscreen callback || Requesting again when an ad is shown already
-                mInterstitialAd.setFullScreenContentCallback(new FullScreenContentCallback(){
-                    @Override
-                    public void onAdDismissedFullScreenContent() {
-                        // Called when fullscreen content is dismissed.
-                        //User dismissed the previous ad. So we are requesting a new ad here
-                        FULLSCREEN_AD_LOAD_COUNT++;
-                        loadFullscreenAd(url);
-                        Log.d("FULLSCREEN_AD_LOAD_COUNT", ""+FULLSCREEN_AD_LOAD_COUNT);
-
-                        if (targetActivity!=null) startActivity(targetActivity);
-
-                    }
-
-                }); // FullScreen Callback Ends here
-
-
-            }
-            @Override
-            public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
-                // Handle the error
-                mInterstitialAd = null;
-            }
-
-        });
-
-    }
-    // loadFullscreenAd method ENDS  here..... >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
-    private void initAdmobAd(String id){
-
-        if (id.length()>12){
-            //Adding your device id -- to avoid invalid activity from your device
-            List<String> testDeviceIds = Collections.singletonList(id);
-            RequestConfiguration configuration =
-                    new RequestConfiguration.Builder().setTestDeviceIds(testDeviceIds).build();
-            MobileAds.setRequestConfiguration(configuration);
-        }
-
-
-
-
-        //Init Admob Ads
-        MobileAds.initialize(this, initializationStatus -> {
-        });
-
-    }
-    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
     @SuppressLint("NonConstantResourceId")
     @Override
     public void onClick(View view) {
@@ -398,9 +238,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.ll_about_us:
                 btn.start();
                 targetActivity = new Intent(this, AboutUs.class);
-                if (mInterstitialAd==null || !getAdsFirebase()) startActivity(targetActivity);
-                else if (FULLSCREEN_AD_LOAD_COUNT>=fullScreenAdMaxShowCount) startActivity(targetActivity);
-                else if (getAdsFirebase())mInterstitialAd.show(this);
                 break;
 
             case R.id.ll_privacy:
