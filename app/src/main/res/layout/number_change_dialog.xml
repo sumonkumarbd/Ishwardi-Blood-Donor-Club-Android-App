@@ -127,7 +127,7 @@
                 android:orientation="horizontal"
                 android:weightSum="2">
 
-                <androidx.appcompat.widget.AppCompatButton
+                <Button
                     android:id="@+id/cBtn_Num"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -135,7 +135,6 @@
                     android:layout_weight="1"
                     android:elevation="@dimen/shadow"
                     android:text="@string/cancel"
-                    android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/card_txt" />
 
                 <Button

@@ -5,12 +5,9 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -36,7 +33,7 @@ public class AboutUs extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.about_us);
         mAdView = findViewById(R.id.adMob_about);
-        Ads ads = new Ads(this, mAdView);
+        AdsControl ads = new AdsControl(this, mAdView);
 
         Innit();
         sadequl_phn.setOnClickListener(v -> {
@@ -137,8 +134,8 @@ public class AboutUs extends AppCompatActivity {
         Random random;
         random = new Random();
         int myCount = random.nextInt(100 - 5) + 5;
-        if (Ads.passCondition() && myCount % 2 == 0) {
-            Ads.mInterstitialAd.show(this);
+        if (AdsControl.passCondition() && myCount % 2 == 0) {
+            AdsControl.mInterstitialAd.show(this);
 //            Toast.makeText(this, "Ready For Show Ads!" + myCount, Toast.LENGTH_SHORT).show();
             super.onBackPressed();
         } else {

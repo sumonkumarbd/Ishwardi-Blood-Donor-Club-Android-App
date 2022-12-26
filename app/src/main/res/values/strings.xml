@@ -17,6 +17,7 @@
     <string name="ibdc">ঈশ্বরদী ব্লাড ডোনার ক্লাব</string>
     <string name="forgot_password">পাসওয়ার্ড ভুলে গেছেন?</string>
     <string name="change_password">পাসওয়ার্ড পরিবর্তন করুন!</string>
+    <string name="isExitTitle">অ্যাপ থকে বের হতে চান?</string>
     <string name="login">লগইন</string>
     <string name="enter_phone_no">মোবাইল নম্বর দিন!</string>
     <string name="enter_password">পাসওয়ার্ড দিন…</string>
@@ -1114,6 +1115,8 @@
     <string name="change_phone">মোবাইল নাম্বার পরিবর্তন করন।</string>
     <string name="reset"><b>রিসেট করুন!</b></string>
     <string name="cancel"><b>বাতিল করুন!</b></string>
+    <string name="yes"><b>জ্বী!</b></string>
+    <string name="no"><b>না!</b></string>
     <string name="next_remainder"><b>পরবর্তী রিমাইন্ডার!</b></string>
     <string name="current_email">বর্তমান ইমেইল দিন</string>
     <string name="new_email">নতুন ইমেইল দিন</string>

@@ -14,7 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Toast;
 
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.ads.AdView;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -27,6 +27,7 @@ import com.sumonkmr.ibdc.model.User;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 
 public class DisplayDonorsActivity extends AppCompatActivity {
 
@@ -39,6 +40,7 @@ public class DisplayDonorsActivity extends AppCompatActivity {
     String uid;
     GoogleSignInAccount account;
     FirebaseAuth auth;
+    AdView adView;
 
 
     @Override
@@ -53,6 +55,8 @@ public class DisplayDonorsActivity extends AppCompatActivity {
         FirebaseUser currentUser = auth.getCurrentUser();
         assert currentUser != null;
         uid = currentUser.getUid();
+        adView = findViewById(R.id.adMob_donor_list);
+        AdsControl ads = new AdsControl(this,adView);
 
         initializeComponents();
         initializeAddressFilters();
@@ -521,6 +525,20 @@ public class DisplayDonorsActivity extends AppCompatActivity {
     private void filterList() {
         adapter.notifyDataSetChanged();
     }
+
+    public void onBackPressed() {
+        Random random;
+        random = new Random();
+        int myCount = random.nextInt(100 - 5) + 5;
+        if (AdsControl.passCondition() && myCount % 2 == 0) {
+            AdsControl.mInterstitialAd.show(this);
+//            Toast.makeText(this, "Ready For Show Ads!" + myCount, Toast.LENGTH_SHORT).show();
+            super.onBackPressed();
+        } else {
+//            Toast.makeText(this, "Something Wrong And Value is : " + Ads.mod + myCount, Toast.LENGTH_SHORT).show();
+            super.onBackPressed();
+        }
+    }//onBackPressed
 
 
 }

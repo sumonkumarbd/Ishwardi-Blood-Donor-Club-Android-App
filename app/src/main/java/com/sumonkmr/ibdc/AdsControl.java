@@ -2,10 +2,8 @@ package com.sumonkmr.ibdc;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.Intent;
 import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -25,9 +23,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import java.util.Collections;
 import java.util.List;
-import java.util.Random;
 
-public class Ads {
+public class AdsControl {
    static AdView mAdView;
    static AdRequest adRequest;
    @SuppressLint("StaticFieldLeak")
@@ -35,13 +32,13 @@ public class Ads {
 
 
 
-    Ads(){
+    AdsControl(){
     }
 
-    Ads(Activity activity, AdView mAdView){
+    AdsControl(Activity activity, AdView mAdView){
         adRequest = new AdRequest.Builder().build();
-        Ads.activity = activity;
-        Ads.mAdView = mAdView;
+        AdsControl.activity = activity;
+        AdsControl.mAdView = mAdView;
         getAdsFirebase();
 
 

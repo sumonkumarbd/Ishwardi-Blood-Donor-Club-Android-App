@@ -15,7 +15,6 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.Looper;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -36,17 +35,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.bumptech.glide.Glide;
-import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.FullScreenContentCallback;
-import com.google.android.gms.ads.LoadAdError;
-import com.google.android.gms.ads.MobileAds;
-import com.google.android.gms.ads.RequestConfiguration;
-import com.google.android.gms.ads.initialization.InitializationStatus;
-import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
-import com.google.android.gms.ads.interstitial.InterstitialAd;
-import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -54,11 +43,8 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.karumi.dexter.Dexter;
@@ -70,11 +56,8 @@ import com.karumi.dexter.listener.single.PermissionListener;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.util.Arrays;
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Objects;
 
 import nl.psdcompany.duonavigationdrawer.views.DuoDrawerLayout;
@@ -95,7 +78,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Uri filepath, profileImg_uri;
     FirebaseAuth auth;
     DatabaseReference dbReference;
-    String userId,adsData;
+    String userId, adsData;
     CheckBox lastDonate_check;
     boolean doubleBackToExitPressedOnce = false;
     GoogleSignInOptions gso;
@@ -124,7 +107,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
         gsc = GoogleSignIn.getClient(this, gso);
         mAdView = findViewById(R.id.adView);
-        Ads ads = new Ads(this,mAdView);
+        AdsControl ads = new AdsControl(this, mAdView); // for initialize Banner Ads
 
         //        Database references
         FirebaseUser currentUser = auth.getCurrentUser();
@@ -237,7 +220,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             case R.id.ll_about_us:
                 btn.start();
-                targetActivity = new Intent(this, AboutUs.class);
+                startActivity(new Intent(this, AboutUs.class));
                 break;
 
             case R.id.ll_privacy:
@@ -991,16 +974,32 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
-    @Override
-    public void onBackPressed() {
-        if (doubleBackToExitPressedOnce) {
-            super.onBackPressed();
-            return;
+    private void ExitAppDialog() {
+        dialog = new Dialog(this);
+        dialog.setContentView(R.layout.exit_popup);
+        Button ok_Btn, cBtn;
+
+        account = GoogleSignIn.getLastSignedInAccount(this);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            dialog.getWindow().setBackgroundDrawable(getDrawable(R.drawable.custom_dialog_background));
         }
 
-        this.doubleBackToExitPressedOnce = true;
-        Toast.makeText(this, "পুনরায় ব্যাক বাটন প্রেস করুন!", Toast.LENGTH_SHORT).show();
-        new Handler(Looper.getMainLooper()).postDelayed(() -> doubleBackToExitPressedOnce = false, 2000);
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.setCancelable(false); //Optional
+        dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation; //Setting the animations to dialog
+        dialog.show();
+
+
+        ok_Btn = dialog.findViewById(R.id.exitOkBtn);
+        cBtn = dialog.findViewById(R.id.exitCBtn);
+
+        ok_Btn.setOnClickListener(v -> MainActivity.super.onBackPressed());
+        cBtn.setOnClickListener(v -> dialog.dismiss());
     }
 
+    @Override
+    public void onBackPressed() {
+        ExitAppDialog();
+    }
 }
