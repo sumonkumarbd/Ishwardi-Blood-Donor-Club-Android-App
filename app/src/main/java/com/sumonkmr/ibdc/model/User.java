@@ -1,12 +1,12 @@
 package com.sumonkmr.ibdc.model;
 
 public class User {
-    String FName,LName, uid,Email,BloodGroup,Mobile,State,District, Upazila,Village,bloodImg_url,birthdate,lastDonateDate;
+    String FName,LName, uid,Email,BloodGroup,Mobile,State,District, Upazila,Village,bloodImg_url,birthdate,age,lastDonateDate;
 
     public User() {
-    } //default constructor
+    }
 
-    public User(String FName, String LName, String uid, String email, String bloodGroup, String mobile, String state, String district, String upazila, String village, String bloodImg_url, String birthdate, String lastDonateDate) {
+    public User(String FName, String LName, String uid, String email, String bloodGroup, String mobile, String state, String district, String upazila, String village, String bloodImg_url, String birthdate, String age, String lastDonateDate) {
         this.FName = FName;
         this.LName = LName;
         this.uid = uid;
@@ -19,6 +19,7 @@ public class User {
         Village = village;
         this.bloodImg_url = bloodImg_url;
         this.birthdate = birthdate;
+        this.age = age;
         this.lastDonateDate = lastDonateDate;
     }
 
@@ -116,6 +117,14 @@ public class User {
 
     public void setBirthdate(String birthdate) {
         this.birthdate = birthdate;
+    }
+
+    public String getAge() {
+        return age;
+    }
+
+    public void setAge(String age) {
+        this.age = age;
     }
 
     public String getLastDonateDate() {

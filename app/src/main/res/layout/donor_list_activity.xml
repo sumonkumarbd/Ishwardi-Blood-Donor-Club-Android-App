@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".DisplayDonorsActivity">
-
     <!--    content-->
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -15,6 +14,7 @@
         android:background="@color/colorPrimary"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -30,8 +30,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="visible"
-        >
+        android:visibility="visible">
         <!--    Header-->
         <ImageView
             android:id="@+id/headerVictor"
@@ -44,18 +43,17 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-
         <!--    main card-->
-        <LinearLayout
+        <RelativeLayout
             android:id="@+id/mainCard"
-            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginHorizontal="@dimen/_6dp"
-            android:layout_marginTop="@dimen/_38dp"
+            android:layout_marginTop="@dimen/_33dp"
             android:layout_marginBottom="@dimen/_50dp"
-            android:elevation="@dimen/shadow"
             android:background="@drawable/card"
+            android:elevation="@dimen/shadow"
+            android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -63,153 +61,245 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0">
 
-
             <LinearLayout
-                android:id="@+id/edit_tabs"
+                android:id="@+id/marquee_tabs"
                 android:layout_width="match_parent"
-                android:layout_height="165dp"
+                android:layout_height="@dimen/_30dp"
                 android:layout_gravity="center"
-                android:layout_marginHorizontal="10dp"
-                android:layout_marginTop="10dp"
+                android:gravity="start|center"
+                android:layout_alignParentTop="true"
+                android:layout_margin="@dimen/_1dp"
                 android:background="@drawable/round_textbox"
                 android:baselineAligned="false"
                 android:elevation="@dimen/shadow"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:padding="10dp"
-                android:weightSum="2">
+                android:orientation="horizontal"
+                android:padding="@dimen/_2dp">
 
                 <TextView
+                    android:id="@+id/marquee_text"
+                    style="bold"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:text="@string/search_donor" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:baselineAligned="false"
-                    android:orientation="horizontal"
-                    android:weightSum="2">
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="2"
-                        android:hint="@string/divisions"
-                        android:textColorHint="#000000"
-                        app:hintTextColor="#000000"
-                        tools:ignore="NestedWeights">
-
-                        <AutoCompleteTextView
-                            android:id="@+id/stateFilter"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:inputType="none" />
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <!--                    <com.google.android.material.textfield.TextInputLayout-->
-                    <!--                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"-->
-                    <!--                        android:layout_width="0dp"-->
-                    <!--                        android:layout_height="match_parent"-->
-                    <!--                        android:layout_weight="1"-->
-                    <!--                        android:textColorHint="#000000"-->
-                    <!--                        app:hintTextColor="#000000">-->
-                    <!--                        <com.google.android.material.textfield.MaterialAutoCompleteTextView-->
-                    <!--                            android:id="@+id/bloodGrpFilter"-->
-                    <!--                            android:layout_width="match_parent"-->
-                    <!--                            android:drawableStart="@drawable/ic_baseline_invert_colors_24"-->
-                    <!--                            android:layout_height="match_parent"-->
-                    <!--                            android:hint="@string/blood_group"-->
-                    <!--                            android:inputType="" />-->
-                    <!--                    </com.google.android.material.textfield.TextInputLayout>-->
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:baselineAligned="false"
-                    android:orientation="horizontal"
-                    android:weightSum="2">
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:hint="@string/district"
-                        android:textColorHint="#000000"
-                        app:hintTextColor="#000000"
-                        tools:ignore="NestedWeights">
-
-                        <AutoCompleteTextView
-                            android:id="@+id/districtFilter"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:hint=""
-                            android:inputType="none" />
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:hint="@string/upazila"
-                        android:textColorHint="#000000"
-                        app:hintTextColor="#000000">
-
-                        <AutoCompleteTextView
-                            android:id="@+id/upazilaFilter"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:hint=""
-                            android:inputType="none"
-                            tools:ignore="LabelFor" />
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
-
-                </LinearLayout>
-
+                    android:elevation="@dimen/minor_shadow"
+                    android:layout_marginEnd="@dimen/_2dp"
+                    android:layout_marginStart="@dimen/_2dp"
+                    android:ellipsize="marquee"
+                    android:fadingEdge="horizontal"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:scrollHorizontally="true"
+                    android:fontFamily="@font/varela_round"
+                    android:gravity="start"
+                    android:maxWidth="120dp"
+                    android:singleLine="true"
+                    android:text="@string/ins_des1"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/profile_txt" />
 
             </LinearLayout>
 
 
+            <LinearLayout
+                android:id="@+id/edit_tabs"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_30dp"
+                android:layout_gravity="center"
+                android:gravity="start|center"
+                android:backgroundTint="@color/tns"
+                android:layout_below="@+id/marquee_tabs"
+                android:layout_margin="@dimen/_1dp"
+                android:baselineAligned="false"
+                android:elevation="@dimen/shadow"
+                android:orientation="horizontal"
+                android:padding="@dimen/_2dp">
+
+                <TextView
+                    android:id="@+id/edit_hint"
+                    style="bold"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:elevation="@dimen/minor_shadow"
+                    android:layout_marginEnd="@dimen/_2dp"
+                    android:layout_marginStart="@dimen/_10dp"
+                    android:fontFamily="@font/varela_round"
+                    android:maxWidth="120dp"
+                    android:singleLine="true"
+                    android:text="@string/motive_line"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/profile_txt" />
+
+                <LinearLayout
+                    android:id="@+id/edit_res"
+                    android:visibility="gone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/upazila"
+                        style="bold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:elevation="@dimen/minor_shadow"
+                        android:layout_marginEnd="@dimen/_2dp"
+                        android:layout_marginStart="@dimen/_10dp"
+                        android:fontFamily="@font/varela_round"
+                        android:maxWidth="120dp"
+                        android:singleLine="true"
+                        android:text="@string/upazila"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="@dimen/profile_txt" />
+
+                    <TextView
+                        style="bold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:elevation="@dimen/minor_shadow"
+                        android:layout_marginEnd="@dimen/_2dp"
+                        android:fontFamily="@font/varela_round"
+                        android:maxWidth="120dp"
+                        android:singleLine="true"
+                        android:text="@string/comma"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="@dimen/profile_txt" />
+
+                    <TextView
+                        android:id="@+id/district"
+                        style="bold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:elevation="@dimen/minor_shadow"
+                        android:layout_marginEnd="@dimen/_2dp"
+                        android:fontFamily="@font/varela_round"
+                        android:maxWidth="110dp"
+                        android:singleLine="true"
+                        android:text="@string/district"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="@dimen/profile_txt" />
+
+                    <TextView
+                        style="bold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:elevation="@dimen/minor_shadow"
+                        android:layout_marginEnd="@dimen/_2dp"
+                        android:fontFamily="@font/varela_round"
+                        android:maxWidth="120dp"
+                        android:singleLine="true"
+                        android:text="@string/comma"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="@dimen/profile_txt" />
+
+                    <TextView
+                        android:id="@+id/divisions"
+                        style="bold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:contextClickable="true"
+                        android:elevation="@dimen/minor_shadow"
+                        android:layout_marginEnd="@dimen/_2dp"
+                        android:ellipsize="marquee"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:fontFamily="@font/varela_round"
+                        android:freezesText="true"
+                        android:marqueeRepeatLimit="marquee_forever"
+                        android:maxWidth="120dp"
+                        android:scrollHorizontally="true"
+                        android:singleLine="true"
+                        android:text="@string/divisions"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="@dimen/profile_txt" />
+
+                    <TextView
+                        style="bold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:elevation="@dimen/minor_shadow"
+                        android:layout_marginEnd="@dimen/_1dp"
+                        android:fontFamily="@font/varela_round"
+                        android:maxWidth="120dp"
+                        android:singleLine="true"
+                        android:text="@string/dari"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="@dimen/profile_txt" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    >
+                    <AutoCompleteTextView
+                        android:id="@+id/upa"
+                        android:hint="@string/upazila"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                    <AutoCompleteTextView
+                        android:id="@+id/zila"
+                        android:hint="@string/district"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                    <AutoCompleteTextView
+                        android:id="@+id/div"
+                        android:hint="@string/divisions"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+
+
             <View
+                android:id="@+id/view"
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
+                android:layout_below="@+id/edit_tabs"
                 android:layout_marginTop="@dimen/_5dp"
                 android:background="@color/colorAccentDark" />
-
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/donorsList"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="@dimen/_5dp"
+                android:layout_below="@+id/view"
+                android:layout_marginStart="@dimen/_5dp"
+                android:layout_marginTop="@dimen/_8dp"
+                android:layout_marginEnd="@dimen/_5dp"
+                android:layout_marginBottom="@dimen/_5dp"
                 android:elevation="@dimen/minor_shadow" />
-
-
             <View
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
+                android:layout_alignBottom="@+id/donorsList"
                 android:background="@color/colorAccentDark" />
-
-
-        </LinearLayout>
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/search_donor"
+                android:layout_width="@dimen/_40dp"
+                android:layout_height="@dimen/_40dp"
+                android:clickable="true"
+                android:pointerIcon="hand"
+                app:tint="@color/white"
+                app:backgroundTint="@color/colorPrimary"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginEnd="@dimen/_15dp"
+                android:layout_marginBottom="@dimen/_15dp"
+                android:contentDescription="@string/search"
+                android:src="@drawable/ic_baseline_person_search_24"
+                android:focusable="true"
+                app:shapeAppearanceOverlay="@style/fab_style"
+                />
+        </RelativeLayout>
         <com.google.android.gms.ads.AdView
             android:id="@+id/adMob_donor_list"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:layout_gravity="center_horizontal"
+            android:layout_alignParentBottom="true"
             app:adSize="BANNER"
             app:adUnitId="ca-app-pub-3940256099942544/6300978111"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -218,5 +308,4 @@
             app:layout_constraintTop_toBottomOf="@+id/mainCard" />
     </androidx.constraintlayout.widget.ConstraintLayout>
     <!--    finished content-->
-
 </LinearLayout>

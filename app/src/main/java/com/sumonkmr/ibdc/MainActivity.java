@@ -458,6 +458,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         month = String.valueOf(birthDate_signUp.getMonth());
         year = String.valueOf(birthDate_signUp.getYear());
         date = day + "/" + month + "/" + year;
+        int currentYear = Calendar.getInstance().get(Calendar.YEAR);
+        int age =currentYear - Integer.parseInt(year);
         HashMap<String, Object> values = new HashMap<>();
         values.put("uid", userId);
         values.put("bloodImg_url", uri.toString());
@@ -471,6 +473,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         values.put("Village", Objects.requireNonNull(village_signUp.getText()).toString());
         values.put("BloodGroup", bloodGrpDropDown.getText().toString());
         values.put("birthdate", date);
+        values.put("age",String.valueOf(age));
         if (lastDonate_check.isChecked()) {
             values.put("lastDonateDate", "পূর্বে করিনি।");
         } else {

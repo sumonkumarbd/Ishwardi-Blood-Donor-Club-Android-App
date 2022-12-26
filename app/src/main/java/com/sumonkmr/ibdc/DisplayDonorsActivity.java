@@ -1,21 +1,30 @@
 package com.sumonkmr.ibdc;
 
+import android.app.Dialog;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Build;
+import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
-import android.net.Uri;
-import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
-import android.widget.Toast;
-
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -29,6 +38,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class DisplayDonorsActivity extends AppCompatActivity {
 
 
@@ -36,11 +47,16 @@ public class DisplayDonorsActivity extends AppCompatActivity {
     UserAdapter adapter;
     ArrayList<User> users, temp;
     AutoCompleteTextView DivisionFilter, districtFilter, UpazilaFilter, bloodGrpFilter;
+    AutoCompleteTextView div, zila,upa;
     User self;
     String uid;
     GoogleSignInAccount account;
     FirebaseAuth auth;
     AdView adView;
+    FloatingActionButton search_donor;
+    LinearLayout edit_res;
+    TextView upazila, district, divisions,edit_hint,marquee_text;
+    Dialog dialog;
 
 
     @Override
@@ -51,17 +67,60 @@ public class DisplayDonorsActivity extends AppCompatActivity {
 //        account = GoogleSignIn.getLastSignedInAccount(this);
 //        assert account != null;
 //        uid = account.getId();
+        search_donor = findViewById(R.id.search_donor);
         auth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = auth.getCurrentUser();
         assert currentUser != null;
         uid = currentUser.getUid();
         adView = findViewById(R.id.adMob_donor_list);
-        AdsControl ads = new AdsControl(this,adView);
-
+        AdsControl ads = new AdsControl(this, adView);
         initializeComponents();
-        initializeAddressFilters();
         getDonors();
+        marquee_text.setSelected(true);
+        search_donor.setOnClickListener(v -> {
+            SearchDialog();
+        });
+    }//onCreate
+
+    private void SearchDialog() {
+        dialog = new Dialog(this);
+        dialog.setContentView(R.layout.donor_search);
+        Button ok_Btn, cBtn;
+
+        account = GoogleSignIn.getLastSignedInAccount(this);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            dialog.getWindow().setBackgroundDrawable(getDrawable(R.drawable.custom_dialog_background));
+        }
+
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.setCancelable(false); //Optional
+        dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation; //Setting the animations to dialog
+        dialog.show();
+
+        ok_Btn = dialog.findViewById(R.id.donorOkBtn);
+        cBtn = dialog.findViewById(R.id.donorCBtn);
+        DialogInitializeComponents();
+        initializeAddressFilters();
+        getDonorsDialog();
+
+        if (UpazilaFilter != null){
+            edit_res.setVisibility(View.VISIBLE);
+            edit_hint.setVisibility(View.GONE);
+        }else {
+            edit_res.setVisibility(View.GONE);
+            edit_hint.setVisibility(View.VISIBLE);
+        }
+
+        ok_Btn.setOnClickListener(v -> {
+            upazila.setText(UpazilaFilter.getText().toString());
+            district.setText(districtFilter.getText().toString());
+            divisions.setText(DivisionFilter.getText().toString());
+            dialog.dismiss();
+        });
+        cBtn.setOnClickListener(v -> dialog.dismiss());
     }
+
 
     private void initializeAddressFilters() {
 
@@ -108,7 +167,6 @@ public class DisplayDonorsActivity extends AppCompatActivity {
 
             }
         });
-
 
         districtFilter.setOnItemClickListener((parent, view, position, id) -> {
             switch (districtFilter.getText().toString()) {
@@ -393,13 +451,64 @@ public class DisplayDonorsActivity extends AppCompatActivity {
 
     }
 
+    void DialogInitializeComponents(){
+        DivisionFilter = dialog.findViewById(R.id.stateFilter);
+        districtFilter = dialog.findViewById(R.id.districtFilter);
+        UpazilaFilter = dialog.findViewById(R.id.upazilaFilter);
+        upazila = findViewById(R.id.upazila);
+        district = findViewById(R.id.district);
+        divisions = findViewById(R.id.divisions);
+        self = new User();
+        list = findViewById(R.id.donorsList);
+        users = new ArrayList<>();
+        temp = new ArrayList<>();
+        adapter = new UserAdapter(this, users, position -> {
+            //Handle call button event
+            Intent intent = new Intent(Intent.ACTION_DIAL);
+            intent.setData(Uri.parse("tel:" + temp.get(position).getMobile()));
+            startActivity(intent);
+        }, position -> {
+            //Handle share button event
+            User sent = temp.get(position);
+            Intent sendIntent = new Intent();
+            sendIntent.setAction(Intent.ACTION_SEND);
+            sendIntent.putExtra(Intent.EXTRA_TITLE, R.string.motive);
+            sendIntent.putExtra(Intent.EXTRA_TEXT, "Hello.\n" + "Here is the Information about blood Donor:\n" + sent.getFName() + " " + sent.getLName() + "\nBlood Group : " + sent.getBloodGroup() + "\nAddress : " + sent.getVillage() + " ," + sent.getUpazila() + " ," + sent.getDistrict() + " ," + sent.getState() + "\nMobile Number : " + sent.getMobile());
+            sendIntent.setType("text/plain");
+            Intent shareIntent = Intent.createChooser(sendIntent, "Be Hero, Donate Blood.");
+            startActivity(shareIntent);
+
+        });
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        list.setLayoutManager(linearLayoutManager);
+        list.setAdapter(adapter);
+        UpazilaFilter.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                updateList(s.toString());
+//                upazila.setText(s.toString());
+            }
+        });
+    }
+
     void initializeComponents() {
-
-        DivisionFilter = findViewById(R.id.stateFilter);
-        districtFilter = findViewById(R.id.districtFilter);
-        UpazilaFilter = findViewById(R.id.upazilaFilter);
+        div = findViewById(R.id.div);
+        zila = findViewById(R.id.zila);
+        upa = findViewById(R.id.upa);
+        edit_res = findViewById(R.id.edit_res);
+        edit_hint = findViewById(R.id.edit_hint);
+        marquee_text = findViewById(R.id.marquee_text);
 //        bloodGrpFilter = findViewById(R.id.bloodGrpFilter); // if get blood filter in search then comment out this line and also xml
-
         self = new User();
         list = findViewById(R.id.donorsList);
         users = new ArrayList<>();
@@ -423,7 +532,7 @@ public class DisplayDonorsActivity extends AppCompatActivity {
         });
         list.setLayoutManager(new LinearLayoutManager(this));
         list.setAdapter(adapter);
-        UpazilaFilter.addTextChangedListener(new TextWatcher() {
+        upa.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -496,6 +605,32 @@ public class DisplayDonorsActivity extends AppCompatActivity {
 
 
     private void getDonors() {
+        FirebaseDatabase.getInstance().getReference("Donors").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                users.clear();
+                temp.clear();
+                for (DataSnapshot ds : snapshot.getChildren()) {
+                    User user = ds.getValue(User.class);
+                    assert user != null;
+                    if (user.getUid().equals(uid)) {
+                        self = user;
+                        users.add(user);
+                        temp.add(user);
+                    }
+                }
+                updateList(upa.getText().toString());
+//                updateList(bloodGrpFilter.getText().toString());
+                filterList();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+    private void getDonorsDialog() {
         FirebaseDatabase.getInstance().getReference("Donors").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

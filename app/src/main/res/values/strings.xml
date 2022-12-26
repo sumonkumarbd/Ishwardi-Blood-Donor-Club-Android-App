@@ -4,6 +4,8 @@
     <string name="real_time_db_firebase">https://ibdc-blood-donors-default-rtdb. firebaseio. com/</string>
     <string name="if_you_can_help_them_make_call_or_share">If you can help them make CALL or SHARE. </string>
     <string name="more">আরও</string>
+    <string name="comma">,</string>
+    <string name="dari">।</string>
     <string name="heading">Displayed Requests from ALL Unions of Ishwardi Upazila. </string>
     <string name="heading_tab">To change Union edit below. </string>
     <string name="union">ইউনিয়ন</string>
@@ -35,7 +37,7 @@
     <string name="title_home">হোম</string>
     <string name="title_dashboard">ড্যাশবোর্ড</string>
     <string name="title_notifications">নোটিফিকেশন</string>
-    <string name="search">সার্চ</string>
+    <string name="search">খুঁজুন</string>
     <string name="Email"><i> ই-ইমেল</i></string>
     <string name="old_Password">বর্তমান পাসওয়ার্ড দিন…</string>
     <string name="new_Password">নতুন পাসওয়ার্ড দিন…</string>
@@ -46,9 +48,10 @@
     <string name="last_name">পদবী</string>
     <string name="first_name">নাম</string>
     <string name="motive"><i>আমি বাঁচাতে চাই একটি প্রাণ,\nতাইতো করবো রক্তদান!</i></string>
+    <string name="motive_line"><i>আমি বাঁচাতে চাই একটি প্রাণ, তাইতো করবো রক্তদান!</i></string>
     <string name="address">ঠিকানা</string>
     <string name="next">পরবর্তী</string>
-    <string name="village">গ্রাম</string>
+    <string name="village"><b>গ্রাম</b></string>
     <string name="verification">ভেরিফিকেশনস</string>
     <string name="argent_info">জরুরী তথ্য</string>
     <string name="mobile_number">মোবাইল নম্বর</string>
@@ -227,7 +230,8 @@
     <string name="not_verified">ভেরিফাই অসম্পূর্ণ!</string>
     <string name="update_profile">আপডেট প্রোফাইল!</string>
     <string name="backbutton">backButton</string>
-    <string name="age">বয়স</string>
+    <string name="age">বয়সঃ</string>
+    <string name="age_value"><b>১৮</b></string>
     <string name="birthdate">জন্ম তারিখ</string>
     <string name="submit">সম্পূর্ণ!!</string>
     <string name="updating">অপেক্ষা করুন ছবি আপডেট হচ্ছে…</string>
@@ -1123,6 +1127,7 @@
     <string name="new_phone">নতুন মোবাইল নাম্বার দিন…</string>
     <string name="current_phone">বর্তমান মোবাইল নাম্বার দিন…</string>
     <string name="if_not_donate_before">পূর্বে রক্তদান না করে থাকলে টিক দিন</string>
+    <string name="year">বছর</string>
     <!--   End Sylet Division District-->
 
     <!--Finished Districts Array-->

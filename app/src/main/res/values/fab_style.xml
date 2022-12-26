@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="fab_style">
+        <item name="cornerRadius">@dimen/_50dp</item>
+        <item name="cornerSize">@dimen/_50dp</item>
+        <item name="cornerFamilyTopRight">rounded</item>
+        <item name="cornerFamilyTopLeft">rounded</item>
+        <item name="cornerFamilyBottomLeft">rounded</item>
+        <item name="cornerFamilyBottomRight">rounded</item>
+        <item name="backgroundColor">@color/colorPrimary</item>
+        <item name="android:scaleType">centerCrop</item>
+        <item name="color">@color/white</item>
+    </style>
+</resources>

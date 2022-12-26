@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -53,7 +54,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder>{
 
     @Override
     public void onBindViewHolder(@NonNull UserHolder holder, int position) {
-        String state,district,tehsil,fname,village,bloodgroup,bloodImg_url,lastDonateDate;
+        String state,district,tehsil,fname,village,bloodgroup,bloodImg_url,lastDonateDate,age;
         state = users.get(position).getState();
         district = users.get(position).getDistrict();
         tehsil = users.get(position).getUpazila();
@@ -61,6 +62,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder>{
         bloodgroup = users.get(position).getBloodGroup();
         bloodImg_url = users.get(position).getBloodImg_url();
         lastDonateDate = users.get(position).getLastDonateDate();
+        age = users.get(position).getAge();
         fname = String.format("%s %s", users.get(position).getFName(), users.get(position).getLName());
         String s = StringCaseConverter.convertToTitleCaseIteratingChars(fname);
         holder.state.setText(state);
@@ -70,6 +72,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder>{
         holder.fullName.setText(s);
         holder.bloodGroup.setText(bloodgroup);
         holder.lastDonateDate.setText(lastDonateDate);
+        holder.age.setText(age);
         Glide
                 .with(context)
                 .load(bloodImg_url)
@@ -85,6 +88,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder>{
             holder.fullName.setTooltipText(fname);
             holder.lastDonateDate.setTooltipText(lastDonateDate);
             holder.bloodGroup.setText(bloodgroup);
+            holder.age.setText(age);
             Glide
                     .with(context)
                     .load(bloodImg_url)
@@ -93,6 +97,10 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder>{
                     .into(holder.bloodImg);
         }
 
+        holder.itemView.setOnClickListener(v -> {
+            //for play more with view
+//            Toast.makeText(context, String.valueOf(position), Toast.LENGTH_SHORT).show();
+        });
 
     }
 
@@ -110,7 +118,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder>{
 
     static class UserHolder extends RecyclerView.ViewHolder{
 
-        TextView fullName,bloodGroup,state,district,tehsil,village,lastDonateDate;
+        TextView fullName,bloodGroup,state,district,tehsil,village,lastDonateDate,age;
 
         ImageView share,call,bloodImg;
 
@@ -126,6 +134,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder>{
             share = itemView.findViewById(R.id.share);
             lastDonateDate = itemView.findViewById(R.id.lastDonateDate);
             bloodImg = itemView.findViewById(R.id.bloodImg);
+            age = itemView.findViewById(R.id.age);
 
 
 
