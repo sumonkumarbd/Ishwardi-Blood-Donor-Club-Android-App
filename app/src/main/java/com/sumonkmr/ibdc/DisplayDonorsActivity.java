@@ -85,22 +85,20 @@ public class DisplayDonorsActivity extends AppCompatActivity {
             SearchDialog();
         });
 
-        donorReload.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                soundManager.okkBtn.start();
-                initializeComponents();
-                getDonors();
-                adapter.notifyDataSetChanged();
+        donorReload.setOnRefreshListener(() -> {
+            soundManager.okkBtn.start();
+            initializeComponents();
+            getDonors();
+            adapter.notifyDataSetChanged();
 
-                donorReload.setRefreshing(false);
-            }
+            donorReload.setRefreshing(false);
         });
 
 
     }//onCreate
 
     private void SearchDialog() {
+        SoundManager soundManager = new SoundManager(this);
         dialog = new Dialog(this);
         dialog.setContentView(R.layout.donor_search);
         Button ok_Btn, cBtn;
@@ -131,10 +129,18 @@ public class DisplayDonorsActivity extends AppCompatActivity {
         }
 
         ok_Btn.setOnClickListener(v -> {
-            upazila.setText(UpazilaFilter.getText().toString());
-            district.setText(districtFilter.getText().toString());
-            divisions.setText(DivisionFilter.getText().toString());
-            dialog.dismiss();
+            if (UpazilaFilter.getText().toString().length() != 0){
+                upazila.setText(UpazilaFilter.getText().toString());
+                district.setText(districtFilter.getText().toString());
+                divisions.setText(DivisionFilter.getText().toString());
+                soundManager.great_sound.start();
+                dialog.dismiss();
+            }else{
+                edit_res.setVisibility(View.GONE);
+                edit_hint.setVisibility(View.VISIBLE);
+                Toast.makeText(this, "অনুগ্রহপূর্বক সঠিক তথ্য দিন।", Toast.LENGTH_SHORT).show();
+                soundManager.cbtN.start();
+            }
         });
         cBtn.setOnClickListener(v -> dialog.dismiss());
     }
