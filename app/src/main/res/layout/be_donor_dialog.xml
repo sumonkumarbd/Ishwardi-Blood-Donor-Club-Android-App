@@ -134,12 +134,15 @@
                 android:elevation="@dimen/_5dp"
                 android:gravity="center"
                 android:orientation="vertical"
-                android:padding="@dimen/_8dp">
+                android:padding="@dimen/_8dp"
+                android:scrollbarTrackVertical="@dimen/_5dp"
+                android:scrollbars="none">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
+
 
                     <!--                    name lay-->
                     <LinearLayout
@@ -328,7 +331,7 @@
                             <AutoCompleteTextView
                                 android:id="@+id/bloodGrpDropDown_signUp"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
+                                android:layout_height="match_parent"
                                 android:inputType="none" />
 
                         </com.google.android.material.textfield.TextInputLayout>
@@ -353,6 +356,7 @@
                         </com.google.android.material.textfield.TextInputLayout>
 
                     </LinearLayout>
+
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -379,26 +383,148 @@
                     </LinearLayout>
 
 
-                    <TextView
-                        style="bold"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginVertical="@dimen/_5dp"
-                        android:layout_marginEnd="@dimen/_5dp"
-                        android:fontFamily="@font/des_font"
-                        android:gravity="center"
-                        android:text="@string/birthdate"
-                        android:textColor="@color/black" />
+                        android:layout_margin="@dimen/_10dp"
+                        android:background="@drawable/card"
+                        android:elevation="@dimen/shadow"
+                        android:orientation="vertical">
 
-                    <DatePicker
-                        android:id="@+id/birthDate_signUp"
+                        <TextView
+                            style="bold"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginVertical="@dimen/_5dp"
+                            android:layout_marginEnd="@dimen/_5dp"
+                            android:fontFamily="@font/des_font"
+                            android:gravity="center"
+                            android:text="@string/birthdate"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/form_txt" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_2dp"
+                            android:background="@color/grey" />
+
+                        <DatePicker
+                            android:id="@+id/birthDate_signUp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/tns"
+                            android:calendarViewShown="false"
+                            android:datePickerMode="spinner"
+                            android:elevation="@dimen/shadow"
+                            android:headerBackground="@drawable/card"
+                            android:inputType="date" />
+                    </LinearLayout>
+
+
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@color/tns"
-                        android:calendarViewShown="false"
-                        android:datePickerMode="spinner"
-                        android:inputType="date" />
+                        android:layout_height="@dimen/_40dp"
+                        android:layout_marginBottom="@dimen/_10dp"
+                        android:orientation="vertical"
+                        android:padding="@dimen/_5dp"
+                        android:weightSum="2">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_gravity="center"
+                            android:layout_marginBottom="@dimen/_5dp"
+                            android:layout_weight="1"
+                            android:gravity="start|center_vertical"
+                            android:orientation="horizontal">
+
+                            <CheckBox
+                                android:id="@+id/privacy_check"
+                                android:layout_width="@dimen/_20dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="start" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/des_font"
+                                android:singleLine="true"
+                                android:text="@string/privacy_txt"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/tab_label" />
+
+                            <TextView
+                                android:id="@+id/privacyTxt"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginHorizontal="@dimen/_2dp"
+                                android:fontFamily="@font/des_font"
+                                android:hint="@string/privacy"
+                                android:text="@string/privacy"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="@dimen/tab_label" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/des_font"
+                                android:singleLine="true"
+                                android:text="@string/privacy_txt1"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/tab_label" />
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:gravity="start|center_vertical"
+                            android:orientation="horizontal">
+
+                            <CheckBox
+                                android:id="@+id/disclaimer_check"
+                                android:layout_width="@dimen/_20dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="start" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/des_font"
+                                android:singleLine="true"
+                                android:text="@string/privacy_txt"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/tab_label" />
+
+                            <TextView
+                                android:id="@+id/rulesTxt"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginHorizontal="@dimen/_2dp"
+                                android:fontFamily="@font/des_font"
+                                android:hint="@string/rules"
+                                android:text="@string/rules"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="@dimen/tab_label" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/des_font"
+                                android:singleLine="true"
+                                android:text="@string/privacy_txt1"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/tab_label" />
+
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+
                 </LinearLayout>
             </ScrollView>
 

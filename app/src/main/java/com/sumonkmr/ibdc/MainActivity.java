@@ -19,6 +19,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -70,14 +71,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     AutoCompleteTextView Division, District, Upazila, bloodGrpDropDown, lastDonateDate_signUp;
     DatePicker birthDate_signUp;
     de.hdodenhof.circleimageview.CircleImageView profile_image_menu, sds_image;
-    TextView profile_name_menu, sds_dash, mail;
+    TextView profile_name_menu, sds_dash, mail, privacyTxt,rulesTxt;
     int d, m, y;
     Dialog dialog;
     Uri filepath, profileImg_uri;
     FirebaseAuth auth;
     DatabaseReference dbReference;
     String userId, adsData;
-    CheckBox lastDonate_check;
+    CheckBox lastDonate_check, privacy_check, disclaimer_check;
     boolean doubleBackToExitPressedOnce = false;
     GoogleSignInOptions gso;
     GoogleSignInClient gsc;
@@ -392,6 +393,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         lastDonateDate_signUp = dialog.findViewById(R.id.lastDonateDate_signUp);
         birthDate_signUp = dialog.findViewById(R.id.birthDate_signUp);
         lastDonate_check = dialog.findViewById(R.id.lastDonate_check_signUp);
+        privacy_check = dialog.findViewById(R.id.privacy_check);
+        privacyTxt = dialog.findViewById(R.id.privacyTxt);
+        disclaimer_check = dialog.findViewById(R.id.disclaimer_check);
+        rulesTxt = dialog.findViewById(R.id.rulesTxt);
+
+        //        Functions
+        initializeAddressFilters();
+        FromDatePickers();
+        ChooseProfilePicture();
 
         lastDonate_check.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (!isChecked) {
@@ -404,11 +414,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
+        privacyTxt.setOnClickListener(v -> gotoUrl("https://sites.google.com/view/ibdcprivacypolicy/home?authuser=3"));
+        rulesTxt.setOnClickListener(v -> gotoUrl("https://sites.google.com/view/ibdcprivacypolicy/disclaimer?authuser=3"));
 
-//        Functions
-        initializeAddressFilters();
-        FromDatePickers();
-        ChooseProfilePicture();
 
         //        processImageUpload(profileImg_uri);
 
@@ -933,6 +941,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         if (profileImg_uri == null) {
             Toast.makeText(this, "অনুগ্রহপূর্বক একটি ছবি সিলেক্ট করুন!", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if (!privacy_check.isChecked()){
+            Toast.makeText(this, "প্রাইভেসি চেক অবশ্যক!", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if (!disclaimer_check.isChecked()){
+            Toast.makeText(this, "নীতি ও শর্তাবলী চেক অবশ্যক!", Toast.LENGTH_SHORT).show();
             return false;
         }
 

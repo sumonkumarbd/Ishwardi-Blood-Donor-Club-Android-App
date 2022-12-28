@@ -243,6 +243,10 @@
     <string name="share">শেয়ার</string>
     <string name="setting">সেটিংস</string>
     <string name="privacy">প্রাইভেসি পলেসি</string>
+    <string name="rules">নীতি ও শর্তাবলী</string>
+    <string name="privacy_txt">আমি সম্পূর্ণ বিস্তারিত </string>
+    <string name="privacy_txt1">পড়ে সহমত প্রসন করছি।</string>
+    <string name="agree">সাথে আমি একমত।</string>
     <string name="fb_grp">আমদের ফেইসবুক গ্রুপ</string>
 
     <!--    end Profile-->
