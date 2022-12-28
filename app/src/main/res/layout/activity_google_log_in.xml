@@ -22,7 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/_300dp"
             android:layout_marginHorizontal="@dimen/_10dp"
-            android:background="@drawable/card"
+            android:background="@drawable/loginscreen"
             android:elevation="@dimen/shadow"
             android:gravity="center"
             android:orientation="vertical"
@@ -34,7 +34,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_200dp"
                 android:scaleType="centerCrop"
-                android:paddingTop="@dimen/_10dp"
                 android:src="@drawable/login_screen"
                 />
 

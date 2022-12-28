@@ -2,6 +2,7 @@ package com.sumonkmr.ibdc;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,6 +12,7 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -24,19 +26,41 @@ public class SplashScreen extends AppCompatActivity {
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     TextView t1;
     LottieAnimationView animation_view,animation_2;
+    SwipeRefreshLayout swipeRefreshLayout;
+    NetworkInfo networkInfo;
+    ConnectivityManager connectivityManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
-        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+        connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        networkInfo = connectivityManager.getActiveNetworkInfo();
         setContentView(R.layout.splash_screen);
 
+        swipeRefreshLayout = findViewById(R.id.swipeLay);
         t1 = findViewById(R.id.t1);
         animation_view = findViewById(R.id.animation_view);
         animation_2 = findViewById(R.id.animation_2);
 
+        IsNetwork();
+
+        swipeRefreshLayout.setOnRefreshListener(this::refreshData);
+
+    }
+
+
+    private void refreshData() {
+        // Perform the necessary actions to refresh the data
+        connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        networkInfo = connectivityManager.getActiveNetworkInfo();
+        IsNetwork();
+
+
+
+        // Hide the refresh indicator
+        swipeRefreshLayout.setRefreshing(true);
+    }
+
+    private void IsNetwork(){
         if (networkInfo != null && networkInfo.isConnected()){
             new CountDownTimer(1000, 500) {
                 @Override
@@ -53,15 +77,13 @@ public class SplashScreen extends AppCompatActivity {
                         startActivity(new Intent(SplashScreen.this,GoogleLogIn.class));
                         SplashScreen.this.finish();
                     }
-
                 }
             }.start();
         }else {
             t1.setText("দুঃখিত ইন্টারনেট সংযোগ নেই !");
             animation_view.setVisibility(View.GONE);
             animation_2.setVisibility(View.VISIBLE);
-        }
-
+        } // for check internet Connections
     }
 
 //    private void getSelf() {
