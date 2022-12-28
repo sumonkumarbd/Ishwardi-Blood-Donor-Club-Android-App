@@ -20,6 +20,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -57,6 +58,7 @@ public class DisplayDonorsActivity extends AppCompatActivity {
     LinearLayout edit_res;
     TextView upazila, district, divisions,edit_hint,marquee_text;
     Dialog dialog;
+    SwipeRefreshLayout donorReload;
 
 
     @Override
@@ -67,6 +69,8 @@ public class DisplayDonorsActivity extends AppCompatActivity {
 //        account = GoogleSignIn.getLastSignedInAccount(this);
 //        assert account != null;
 //        uid = account.getId();
+        SoundManager soundManager = new SoundManager(this);
+        donorReload = findViewById(R.id.donorReload);
         search_donor = findViewById(R.id.search_donor);
         auth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = auth.getCurrentUser();
@@ -80,6 +84,20 @@ public class DisplayDonorsActivity extends AppCompatActivity {
         search_donor.setOnClickListener(v -> {
             SearchDialog();
         });
+
+        donorReload.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                soundManager.okkBtn.start();
+                initializeComponents();
+                getDonors();
+                adapter.notifyDataSetChanged();
+
+                donorReload.setRefreshing(false);
+            }
+        });
+
+
     }//onCreate
 
     private void SearchDialog() {

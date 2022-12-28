@@ -40,7 +40,7 @@ import com.google.firebase.database.annotations.Nullable;
 public class GoogleLogIn extends AppCompatActivity {
 
     private static final int REQUEST_CODE = 2;
-    ImageButton google_signIn;
+    TextView google_signIn;
     LottieAnimationView loadingAim;
     TextView g_signUp;
     GoogleSignInOptions gso;
