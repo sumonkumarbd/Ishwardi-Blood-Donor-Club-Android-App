@@ -23,7 +23,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="file:/D:/Program_Files/sdk/icons/material/materialicons/person_search/baseline_person_search_24.xml" />
+                                      <entry key="url" value="file:/D:/Program_Files/sdk/icons/material/materialicons/login/baseline_login_24.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -33,9 +33,9 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="color" value="ffffff" />
+                            <entry key="color" value="ee3739" />
                             <entry key="opacityPercent" value="92" />
-                            <entry key="outputName" value="ic_baseline_person_search_24" />
+                            <entry key="outputName" value="ic_baseline_login_24" />
                             <entry key="sourceFile" value="G:\android_projects\projects\Productions\IBDC App" />
                           </map>
                         </option>

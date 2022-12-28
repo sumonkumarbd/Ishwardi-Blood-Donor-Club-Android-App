@@ -12,8 +12,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.os.Handler;
-import android.os.Looper;
 import android.provider.MediaStore;
 import android.view.View;
 import android.view.ViewGroup;
@@ -88,10 +86,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private FirebaseDatabase db;
     private ProgressBar progressbar;
     final Calendar calendar = Calendar.getInstance();
-    MediaPlayer btn;
-    MediaPlayer okkBtn;
-    MediaPlayer cbtN;
-    MediaPlayer great_sound;
     AdView mAdView;
     Intent targetActivity;
     // per app run-- do not show more than 3 fullscreen ad. [[Change it if your want]]
@@ -118,7 +112,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         dbReference = db.getReference();
         account = GoogleSignIn.getLastSignedInAccount(this);
         init();
-        Sounds();
     }//onCreate finished
 
     private void init() {
@@ -189,54 +182,44 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ll_Home:
-                btn.start();
                 replace(new HomeFragment(), "Home");
                 break;
 
             case R.id.ll_Profile:
-                btn.start();
                 replace(new ProfileFragment(), "Profile");
                 break;
 
             case R.id.ll_beDonor:
-                btn.start();
                 OpenDialog();
                 break;
 
             case R.id.ll_Setting:
-                btn.start();
                 replace(new SettingFragments(), "Setting");
                 break;
 
             case R.id.ll_fb:
-                btn.start();
                 gotoUrl("https://www.facebook.com/groups/ibdcbd");
                 break;
 
             case R.id.ll_Share:
-                btn.start();
                 shareApp();
                 break;
 
             case R.id.ll_about_us:
-                btn.start();
                 startActivity(new Intent(this, AboutUs.class));
                 break;
 
             case R.id.ll_privacy:
-                btn.start();
                 gotoUrl("https://sites.google.com/view/ibdcprivacypolicy/home/");
                 break;
 
             case R.id.ll_Logout:
-                cbtN.start();
                 auth.signOut();
                 startActivity(new Intent(this, SplashScreen.class));
                 MainActivity.this.finish();
                 break;
 
             case R.id.mail:
-                btn.start();
                 Intent intent = new Intent(Intent.ACTION_SEND);
                 intent.putExtra(Intent.EXTRA_EMAIL, new String[]{"sumonkmrofficial@gmail.com"});
                 intent.putExtra(Intent.EXTRA_SUBJECT, "Im Sending Email From IBDC App");
@@ -246,12 +229,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.sds_dash:
-                btn.start();
                 gotoUrl("https://www.facebook.com/sumonkmr.studio/");
                 break;
 
             case R.id.sds_image:
-                btn.start();
                 gotoUrl("https://play.google.com/store/apps/dev?id=6877143126125387449");
                 break;
 
@@ -339,7 +320,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             if (!profileImg_uri.toString().isEmpty()) {
                                 addToDatabase(uri);
                                 progressbar.setProgressDrawable(getDrawable(R.drawable.progress_bar_success));
-                                great_sound.start();
                                 dialog.dismiss();
                             }
                         });
@@ -433,7 +413,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //        processImageUpload(profileImg_uri);
 
         ok_Btn.setOnClickListener(v -> {
-            btn.start();//sound effect
             if (!validateInput()) {
                 Toast.makeText(this, "সবগুলি তথ্য দিন!", Toast.LENGTH_SHORT).show();
             } else {
@@ -442,7 +421,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
 
         cBtn.setOnClickListener(v -> {
-            cbtN.start(); //sound effect
 //            auth.signOut();
 //            startActivity(new Intent(this, SplashScreen.class));
             dialog.dismiss();
@@ -878,12 +856,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         startActivity(new Intent(Intent.ACTION_VIEW, uri));
     }
 
-    private void Sounds() {
-        btn = MediaPlayer.create(getApplicationContext(), R.raw.mousemp3);
-        okkBtn = MediaPlayer.create(getApplicationContext(), R.raw.positive_beeps);
-        cbtN = MediaPlayer.create(getApplicationContext(), R.raw.stop);
-        great_sound = MediaPlayer.create(getApplicationContext(), R.raw.decide);
-    }
+
 
     //        Make Form Validation Here
     private boolean validateInput() {

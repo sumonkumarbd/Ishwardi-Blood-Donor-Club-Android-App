@@ -35,11 +35,11 @@ public class SplashScreen extends AppCompatActivity {
         connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         networkInfo = connectivityManager.getActiveNetworkInfo();
         setContentView(R.layout.splash_screen);
-
         swipeRefreshLayout = findViewById(R.id.swipeLay);
         t1 = findViewById(R.id.t1);
         animation_view = findViewById(R.id.animation_view);
         animation_2 = findViewById(R.id.animation_2);
+
 
         IsNetwork();
 
@@ -57,10 +57,11 @@ public class SplashScreen extends AppCompatActivity {
 
 
         // Hide the refresh indicator
-        swipeRefreshLayout.setRefreshing(true);
+        swipeRefreshLayout.setRefreshing(false);
     }
 
     private void IsNetwork(){
+        SoundManager soundManager = new SoundManager(this);
         if (networkInfo != null && networkInfo.isConnected()){
             new CountDownTimer(1000, 500) {
                 @Override
@@ -72,6 +73,7 @@ public class SplashScreen extends AppCompatActivity {
                 public void onFinish() {
                     if(user != null){
                         startActivity(new Intent(SplashScreen.this, MainActivity.class));
+                        soundManager.okkBtn.start();
                         SplashScreen.this.finish();
                     }else {
                         startActivity(new Intent(SplashScreen.this,GoogleLogIn.class));
@@ -83,6 +85,7 @@ public class SplashScreen extends AppCompatActivity {
             t1.setText("দুঃখিত ইন্টারনেট সংযোগ নেই !");
             animation_view.setVisibility(View.GONE);
             animation_2.setVisibility(View.VISIBLE);
+            soundManager.cbtN.start();
         } // for check internet Connections
     }
 

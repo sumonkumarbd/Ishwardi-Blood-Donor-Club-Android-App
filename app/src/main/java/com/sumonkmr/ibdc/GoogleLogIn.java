@@ -2,6 +2,7 @@ package com.sumonkmr.ibdc;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.app.Dialog;
 import android.content.Intent;
@@ -50,6 +51,7 @@ public class GoogleLogIn extends AppCompatActivity {
     DatabaseReference dbReference;
     Dialog dialog;
     TextView textView7;
+    SwipeRefreshLayout loginReload;
 
 
 
@@ -58,20 +60,30 @@ public class GoogleLogIn extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_google_log_in);
 
+        SoundManager soundManager = new SoundManager(this);
+        soundManager.national_aunt.start();
         mAuth = FirebaseAuth.getInstance();
         mAuth.setLanguageCode("bn");
         ProcessRequest();
         OneTapClientProcess();
 
+        loginReload = findViewById(R.id.loginReload);
         google_signIn = findViewById(R.id.google_signIn);
         loadingAim = findViewById(R.id.loadingAim);
 
+        loginReload.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                soundManager.national_aunt.start();
+
+                loginReload.setRefreshing(false);
+            }
+        });
 
         google_signIn.setOnClickListener(v -> {
             LoginProcess();
         });
 
-        textView7 = findViewById(R.id.textView7);
 
     }//onCreate
 
