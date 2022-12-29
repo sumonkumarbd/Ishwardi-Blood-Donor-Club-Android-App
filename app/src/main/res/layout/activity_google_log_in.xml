@@ -41,21 +41,33 @@
                 android:paddingTop="@dimen/_10dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/login_screen"
-                />
+                android:contentDescription="@string/todo" />
 
             <ImageView
                 android:id="@+id/logo"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_100dp"
                 android:elevation="@dimen/shadow"
-                android:layout_below="@+id/imageView"
                 android:gravity="center"
                 android:padding="@dimen/_5dp"
+                android:layout_below="@id/imageView"
                 android:src="@drawable/ibdc_logo_tns"
                 android:text="@string/motive"
-                android:textColor="@color/colorPrimary" />
+                android:textColor="@color/colorPrimary"
+                android:contentDescription="@string/todo" />
+
         </RelativeLayout>
 
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/heartAnim"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_100dp"
+            android:layout_below="@+id/edit_tabs"
+            android:layout_centerInParent="true"
+            android:layout_marginVertical="@dimen/_5dp"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="false"
+            app:lottie_rawRes="@raw/heart" />
         <TextView
             android:id="@+id/google_signIn"
             android:layout_width="@dimen/_100dp"
@@ -77,10 +89,10 @@
         android:layout_width="@dimen/_80dp"
         android:layout_height="@dimen/_80dp"
         android:layout_marginStart="8dp"
-        android:contentDescription="@string/todo"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
-        app:srcCompat="@drawable/splash" />
+        app:srcCompat="@drawable/splash"
+        android:contentDescription="@string/todo" />
 
     <ImageView
         android:id="@+id/imageView5"

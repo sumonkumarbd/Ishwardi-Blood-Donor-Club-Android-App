@@ -81,9 +81,12 @@ dependencies {
 
 
 //    Admob
-        implementation 'com.google.android.gms:play-services-ads:21.3.0'
+        implementation 'com.google.android.gms:play-services-ads:21.4.0'
 
 //    FaceBook Login
 //    implementation 'com.facebook.android:facebook-android-sdk:8.x'
+
+    //for Animations
+        implementation 'com.daimajia.androidanimations:library:2.4@aar'
 
 }

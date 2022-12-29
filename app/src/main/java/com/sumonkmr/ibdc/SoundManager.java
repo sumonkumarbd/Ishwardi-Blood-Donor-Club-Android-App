@@ -13,7 +13,6 @@ public class SoundManager {
     }
 
     protected SoundManager(Activity activity) {
-
         this.activity = activity;
         SoundsList();
     }

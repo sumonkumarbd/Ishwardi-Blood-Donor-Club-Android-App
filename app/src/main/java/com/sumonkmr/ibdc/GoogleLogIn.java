@@ -9,15 +9,23 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.LinearInterpolator;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.airbnb.lottie.LottieAnimationView;
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 import com.google.android.gms.auth.api.identity.BeginSignInRequest;
 import com.google.android.gms.auth.api.identity.Identity;
 import com.google.android.gms.auth.api.identity.SignInClient;
@@ -40,8 +48,10 @@ import com.google.firebase.database.annotations.Nullable;
 public class GoogleLogIn extends AppCompatActivity {
 
     private static final int REQUEST_CODE = 2;
+    RelativeLayout edit_tabs;
+    ImageView imageView,logo;
     TextView google_signIn;
-    LottieAnimationView loadingAim;
+    LottieAnimationView loadingAim,heartAnim;
     TextView g_signUp;
     GoogleSignInOptions gso;
     GoogleSignInClient gsc;
@@ -60,24 +70,24 @@ public class GoogleLogIn extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_google_log_in);
 
+        //For Sounds
         SoundManager soundManager = new SoundManager(this);
         soundManager.national_aunt.start();
+
         mAuth = FirebaseAuth.getInstance();
         mAuth.setLanguageCode("bn");
         ProcessRequest();
         OneTapClientProcess();
+        //for initialize
+        Init();
+        //for start Animations
+        PlayAnim();
 
-        loginReload = findViewById(R.id.loginReload);
-        google_signIn = findViewById(R.id.google_signIn);
-        loadingAim = findViewById(R.id.loadingAim);
-
-        loginReload.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                soundManager.national_aunt.start();
-
-                loginReload.setRefreshing(false);
-            }
+        loginReload.setOnRefreshListener(() -> {
+            soundManager.national_aunt.start();
+            PlayAnim();
+            loginReload.setRefreshing(false);
+            heartAnim.playAnimation();
         });
 
         google_signIn.setOnClickListener(v -> {
@@ -86,6 +96,26 @@ public class GoogleLogIn extends AppCompatActivity {
 
 
     }//onCreate
+
+    private void Init() {
+        loginReload = findViewById(R.id.loginReload);
+        google_signIn = findViewById(R.id.google_signIn);
+        loadingAim = findViewById(R.id.loadingAim);
+        edit_tabs = findViewById(R.id.edit_tabs);
+        imageView = findViewById(R.id.imageView);
+        logo = findViewById(R.id.logo);
+        heartAnim = findViewById(R.id.heartAnim);
+    }
+
+    private void PlayAnim() {
+        //For Animations
+        YoYo.with(Techniques.FadeInDown).delay(0).repeat(0).duration(1300).playOn(edit_tabs);
+        YoYo.with(Techniques.FadeIn).delay(0).repeat(0).duration(1500).playOn(imageView);
+        YoYo.with(Techniques.SlideInLeft).delay(0).repeat(0).duration(500).playOn(heartAnim);
+        YoYo.with(Techniques.FadeIn).delay(0).repeat(0).duration(1500).playOn(logo);
+        YoYo.with(Techniques.SlideInUp).delay(0).repeat(0).duration(2000).playOn(google_signIn);
+        YoYo.with(Techniques.Shake).delay(8000).repeat(0).duration(1000).playOn(google_signIn);
+    }
 
 
     private void ProcessRequest() {
