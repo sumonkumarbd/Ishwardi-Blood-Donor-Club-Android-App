@@ -6,19 +6,9 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.app.Dialog;
 import android.content.Intent;
-import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.animation.LinearInterpolator;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -49,7 +39,7 @@ public class GoogleLogIn extends AppCompatActivity {
 
     private static final int REQUEST_CODE = 2;
     RelativeLayout edit_tabs;
-    ImageView imageView,logo;
+    ImageView imageView,logo,headerImg,bloodDrop,bloodRise;
     TextView google_signIn;
     LottieAnimationView loadingAim,heartAnim;
     TextView g_signUp;
@@ -105,11 +95,17 @@ public class GoogleLogIn extends AppCompatActivity {
         imageView = findViewById(R.id.imageView);
         logo = findViewById(R.id.logo);
         heartAnim = findViewById(R.id.heartAnim);
+        headerImg = findViewById(R.id.headerImg);
+        bloodDrop = findViewById(R.id.bloodDrop);
+        bloodRise = findViewById(R.id.bloodRise);
     }
 
     private void PlayAnim() {
         //For Animations
-        YoYo.with(Techniques.FadeInDown).delay(0).repeat(0).duration(1300).playOn(edit_tabs);
+        YoYo.with(Techniques.FadeIn).delay(0).repeat(0).duration(1300).playOn(edit_tabs);
+        YoYo.with(Techniques.FadeInDown).delay(0).repeat(0).duration(1300).playOn(headerImg);
+        YoYo.with(Techniques.FadeInRight).delay(0).repeat(0).duration(1300).playOn(bloodRise);
+        YoYo.with(Techniques.FadeInLeft).delay(0).repeat(0).duration(1300).playOn(bloodDrop);
         YoYo.with(Techniques.FadeIn).delay(0).repeat(0).duration(1500).playOn(imageView);
         YoYo.with(Techniques.SlideInLeft).delay(0).repeat(0).duration(500).playOn(heartAnim);
         YoYo.with(Techniques.FadeIn).delay(0).repeat(0).duration(1500).playOn(logo);

@@ -14,13 +14,13 @@
         android:layout_height="match_parent">
 
     <ImageView
-        android:id="@+id/header"
+        android:id="@+id/headerImg"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_100dp"
         android:scaleType="centerCrop"
         android:layout_alignParentTop="true"
         android:src="@drawable/header_victor"
-         />
+        android:contentDescription="TODO" />
 
         <RelativeLayout
             android:id="@+id/edit_tabs"
@@ -31,7 +31,7 @@
             android:elevation="@dimen/shadow"
             android:gravity="center"
             android:orientation="vertical"
-            android:layout_below="@id/header"
+            android:layout_below="@id/headerImg"
             android:layout_marginTop="@dimen/_minus_20dp"
             >
             <ImageView
@@ -85,7 +85,7 @@
             app:drawableEndCompat="@drawable/ic_baseline_login_24" />
 
     <ImageView
-        android:id="@+id/imageView4"
+        android:id="@+id/bloodDrop"
         android:layout_width="@dimen/_80dp"
         android:layout_height="@dimen/_80dp"
         android:layout_marginStart="8dp"
@@ -95,7 +95,7 @@
         android:contentDescription="@string/todo" />
 
     <ImageView
-        android:id="@+id/imageView5"
+        android:id="@+id/bloodRise"
         android:layout_width="@dimen/_80dp"
         android:layout_height="@dimen/_80dp"
         android:layout_alignParentBottom="true"
