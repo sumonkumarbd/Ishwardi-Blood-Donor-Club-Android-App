@@ -3,17 +3,22 @@ package com.sumonkmr.ibdc.adapters;
 import android.app.Application;
 import android.content.Context;
 import android.os.Build;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 import com.karumi.dexter.Dexter;
 import com.squareup.picasso.Picasso;
 import com.sumonkmr.ibdc.DisplayDonorsActivity;
@@ -22,8 +27,10 @@ import com.sumonkmr.ibdc.StringCaseConverter;
 import com.sumonkmr.ibdc.listeners.MyOnClickListener;
 import com.sumonkmr.ibdc.model.User;
 
+import java.io.Console;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder>{
 
@@ -109,6 +116,12 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder>{
         super.onBindViewHolder(holder, position, payloads);
         holder.share.setOnClickListener(v -> myOnClickListenerShare.getPosition(position));
         holder.call.setOnClickListener(v -> myOnClickListenerCall.getPosition(position));
+        try {
+            YoYo.with(Techniques.SlideInDown).delay(0).duration(1000).playOn(holder.recViewHeader);
+        }catch (Exception e){
+            Log.d("Error",String.valueOf(e.getCause()));
+        }
+
     }
 
     @Override
@@ -119,8 +132,8 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder>{
     static class UserHolder extends RecyclerView.ViewHolder{
 
         TextView fullName,bloodGroup,state,district,tehsil,village,lastDonateDate,age;
-
         ImageView share,call,bloodImg;
+        ConstraintLayout recViewHeader;
 
         public UserHolder(@NonNull View itemView) {
             super(itemView);
@@ -135,9 +148,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder>{
             lastDonateDate = itemView.findViewById(R.id.lastDonateDate);
             bloodImg = itemView.findViewById(R.id.bloodImg);
             age = itemView.findViewById(R.id.age);
-
-
-
+            recViewHeader = itemView.findViewById(R.id.recViewHeader);
         }
     }
 

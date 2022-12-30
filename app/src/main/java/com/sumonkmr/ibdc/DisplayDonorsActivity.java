@@ -18,10 +18,13 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -66,9 +69,6 @@ public class DisplayDonorsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.donor_list_activity);
 
-//        account = GoogleSignIn.getLastSignedInAccount(this);
-//        assert account != null;
-//        uid = account.getId();
         SoundManager soundManager = new SoundManager(this);
         donorReload = findViewById(R.id.donorReload);
         search_donor = findViewById(R.id.search_donor);
@@ -84,7 +84,6 @@ public class DisplayDonorsActivity extends AppCompatActivity {
         search_donor.setOnClickListener(v -> {
             SearchDialog();
         });
-
         donorReload.setOnRefreshListener(() -> {
             soundManager.okkBtn.start();
             initializeComponents();
@@ -532,7 +531,6 @@ public class DisplayDonorsActivity extends AppCompatActivity {
         edit_res = findViewById(R.id.edit_res);
         edit_hint = findViewById(R.id.edit_hint);
         marquee_text = findViewById(R.id.marquee_text);
-//        bloodGrpFilter = findViewById(R.id.bloodGrpFilter); // if get blood filter in search then comment out this line and also xml
         self = new User();
         list = findViewById(R.id.donorsList);
         users = new ArrayList<>();
