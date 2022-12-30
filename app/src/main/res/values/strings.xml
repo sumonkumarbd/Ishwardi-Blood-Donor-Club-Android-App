@@ -49,6 +49,7 @@
     <string name="first_name">নাম</string>
     <string name="motive"><i>আমি বাঁচাতে চাই একটি প্রাণ,\nতাইতো করবো রক্তদান!</i></string>
     <string name="motive_line"><i>আমি বাঁচাতে চাই একটি প্রাণ, তাইতো করবো রক্তদান!</i></string>
+    <string name="total"><i>মোটঃ </i></string>
     <string name="address">ঠিকানা</string>
     <string name="next">পরবর্তী</string>
     <string name="village"><b>গ্রাম</b></string>

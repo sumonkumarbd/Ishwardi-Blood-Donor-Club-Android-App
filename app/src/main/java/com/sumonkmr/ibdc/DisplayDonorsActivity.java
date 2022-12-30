@@ -1,5 +1,6 @@
 package com.sumonkmr.ibdc;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
 import android.net.Uri;
@@ -33,6 +34,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.sumonkmr.ibdc.adapters.UserAdapter;
@@ -51,7 +53,7 @@ public class DisplayDonorsActivity extends AppCompatActivity {
     UserAdapter adapter;
     ArrayList<User> users, temp;
     AutoCompleteTextView DivisionFilter, districtFilter, UpazilaFilter, bloodGrpFilter;
-    AutoCompleteTextView div, zila,upa;
+    AutoCompleteTextView div, zila, upa;
     User self;
     String uid;
     GoogleSignInAccount account;
@@ -59,7 +61,7 @@ public class DisplayDonorsActivity extends AppCompatActivity {
     AdView adView;
     FloatingActionButton search_donor;
     LinearLayout edit_res;
-    TextView upazila, district, divisions,edit_hint,marquee_text;
+    TextView upazila, district, divisions, marquee_text, edit_total;
     Dialog dialog;
     SwipeRefreshLayout donorReload;
 
@@ -119,24 +121,16 @@ public class DisplayDonorsActivity extends AppCompatActivity {
         initializeAddressFilters();
         getDonorsDialog();
 
-        if (UpazilaFilter != null){
-            edit_res.setVisibility(View.VISIBLE);
-            edit_hint.setVisibility(View.GONE);
-        }else {
-            edit_res.setVisibility(View.GONE);
-            edit_hint.setVisibility(View.VISIBLE);
-        }
-
         ok_Btn.setOnClickListener(v -> {
-            if (UpazilaFilter.getText().toString().length() != 0){
+            edit_res.setVisibility(View.VISIBLE);
+            if (UpazilaFilter.getText().toString().length() != 0) {
                 upazila.setText(UpazilaFilter.getText().toString());
                 district.setText(districtFilter.getText().toString());
                 divisions.setText(DivisionFilter.getText().toString());
                 soundManager.great_sound.start();
                 dialog.dismiss();
-            }else{
+            } else {
                 edit_res.setVisibility(View.GONE);
-                edit_hint.setVisibility(View.VISIBLE);
                 Toast.makeText(this, "অনুগ্রহপূর্বক সঠিক তথ্য দিন।", Toast.LENGTH_SHORT).show();
                 soundManager.cbtN.start();
             }
@@ -474,7 +468,7 @@ public class DisplayDonorsActivity extends AppCompatActivity {
 
     }
 
-    void DialogInitializeComponents(){
+    void DialogInitializeComponents() {
         DivisionFilter = dialog.findViewById(R.id.stateFilter);
         districtFilter = dialog.findViewById(R.id.districtFilter);
         UpazilaFilter = dialog.findViewById(R.id.upazilaFilter);
@@ -522,6 +516,9 @@ public class DisplayDonorsActivity extends AppCompatActivity {
 //                upazila.setText(s.toString());
             }
         });
+        long totalDonor = adapter.getItemCount()+1;
+        String totalUserFinal = String.format("মোটঃ %d জন রক্তদাতা", totalDonor);
+        edit_total.setText(totalUserFinal);
     }
 
     void initializeComponents() {
@@ -529,8 +526,8 @@ public class DisplayDonorsActivity extends AppCompatActivity {
         zila = findViewById(R.id.zila);
         upa = findViewById(R.id.upa);
         edit_res = findViewById(R.id.edit_res);
-        edit_hint = findViewById(R.id.edit_hint);
         marquee_text = findViewById(R.id.marquee_text);
+        edit_total = findViewById(R.id.edit_total);
         self = new User();
         list = findViewById(R.id.donorsList);
         users = new ArrayList<>();
@@ -570,7 +567,9 @@ public class DisplayDonorsActivity extends AppCompatActivity {
                 updateList(s.toString());
             }
         });
-
+        long totalDonor = adapter.getItemCount()+1;
+        String totalUserFinal = String.format("মোটঃ %d জন রক্তদাতা", totalDonor);
+        edit_total.setText(totalUserFinal);
 
 //        bloodGrpFilter.addTextChangedListener(new TextWatcher() {
 //            @Override
@@ -589,6 +588,25 @@ public class DisplayDonorsActivity extends AppCompatActivity {
 //            }
 //        });  // if get blood filter in search then comment out this line and also xml
     }
+
+
+    private void GetTotalDonor(){
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Donor");
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    long TotalUser = snapshot.getChildrenCount()+1;
+                    String totalUserFinal = String.format("মোটঃ %d জন রক্তদাতা", TotalUser);
+                    edit_total.setText(totalUserFinal);
+                    Toast.makeText(DisplayDonorsActivity.this, totalUserFinal, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    } // Need TO Implement Tomorrow
 
     private void updateVisible(boolean b) {
         HashMap<String, Object> updateValues = new HashMap<>();

@@ -105,7 +105,7 @@
             </LinearLayout>
 
 
-            <LinearLayout
+            <RelativeLayout
                 android:id="@+id/edit_tabs"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_30dp"
@@ -119,26 +119,13 @@
                 android:orientation="horizontal"
                 android:padding="@dimen/_2dp">
 
-                <TextView
-                    android:id="@+id/edit_hint"
-                    style="bold"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:elevation="@dimen/minor_shadow"
-                    android:layout_marginEnd="@dimen/_2dp"
-                    android:layout_marginStart="@dimen/_10dp"
-                    android:fontFamily="@font/varela_round"
-                    android:maxWidth="120dp"
-                    android:singleLine="true"
-                    android:text="@string/motive_line"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="@dimen/profile_txt" />
-
                 <LinearLayout
                     android:id="@+id/edit_res"
-                    android:visibility="gone"
+                    android:visibility="invisible"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    >
                     <TextView
                         android:id="@+id/upazila"
                         style="bold"
@@ -149,6 +136,8 @@
                         android:layout_marginStart="@dimen/_10dp"
                         android:fontFamily="@font/varela_round"
                         android:maxWidth="120dp"
+                        android:layout_gravity="center_vertical"
+                        android:gravity="start"
                         android:singleLine="true"
                         android:text="@string/upazila"
                         android:textColor="@color/colorPrimary"
@@ -231,6 +220,23 @@
 
                 </LinearLayout>
 
+                <TextView
+                    android:id="@+id/edit_total"
+                    style="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:elevation="@dimen/minor_shadow"
+                    android:layout_marginEnd="@dimen/_10dp"
+                    android:layout_marginStart="@dimen/_10dp"
+                    android:fontFamily="@font/varela_round"
+                    android:singleLine="true"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="end"
+                    android:text="@string/total"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/profile_txt" />
+
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -253,9 +259,9 @@
                         android:hint="@string/divisions"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
-                </LinearLayout>
+                </LinearLayout><!-- blink but must need-->
 
-            </LinearLayout>
+            </RelativeLayout>
 
 
 

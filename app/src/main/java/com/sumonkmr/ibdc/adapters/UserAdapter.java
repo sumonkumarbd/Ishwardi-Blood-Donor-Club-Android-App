@@ -30,7 +30,7 @@ import com.sumonkmr.ibdc.model.User;
 import java.io.Console;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
+
 
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder>{
 
