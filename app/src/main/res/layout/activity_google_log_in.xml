@@ -76,6 +76,7 @@
             android:text="@string/login"
             android:elevation="@dimen/shadow"
             android:gravity="center"
+            android:layout_marginBottom="@dimen/_10dp"
             android:padding="@dimen/_10dp"
             android:fontFamily="@font/des"
             android:textColor="@color/colorPrimary"
@@ -106,10 +107,11 @@
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/loadingAim"
-        android:layout_width="@dimen/_80dp"
-        android:layout_height="@dimen/_80dp"
+        android:layout_width="@dimen/_60dp"
+        android:layout_height="@dimen/_60dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/_10dp"
         android:visibility="invisible"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
