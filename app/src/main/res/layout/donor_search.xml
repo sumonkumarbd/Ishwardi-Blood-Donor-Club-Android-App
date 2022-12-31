@@ -48,7 +48,7 @@
         <LinearLayout
             android:id="@+id/edit_tabs"
             android:layout_width="match_parent"
-            android:layout_height="165dp"
+            android:layout_height="200dp"
             android:layout_gravity="center"
             android:layout_marginHorizontal="10dp"
             android:layout_marginTop="10dp"
@@ -58,7 +58,7 @@
             android:gravity="center"
             android:orientation="vertical"
             android:padding="10dp"
-            android:weightSum="2">
+            android:weightSum="3">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -153,6 +153,36 @@
 
 
             </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:baselineAligned="false"
+                android:orientation="horizontal">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    app:hintTextColor="#000000"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="@string/last_donate"
+                    android:textColorHint="#000000">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/lastDonateSearch"
+                        tools:ignore="LabelFor"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint=""
+                        android:inputType="none" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+
+            </LinearLayout>
+
 
 
         </LinearLayout>

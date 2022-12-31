@@ -1,6 +1,7 @@
 package com.sumonkmr.ibdc;
 
 import android.annotation.SuppressLint;
+import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Intent;
 import android.net.Uri;
@@ -13,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -42,6 +44,7 @@ import com.sumonkmr.ibdc.adapters.UserAdapter;
 import com.sumonkmr.ibdc.model.User;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Random;
 
@@ -53,7 +56,7 @@ public class DisplayDonorsActivity extends AppCompatActivity {
     RecyclerView list;
     UserAdapter adapter;
     ArrayList<User> users, temp;
-    AutoCompleteTextView DivisionFilter, districtFilter, UpazilaFilter, bloodGrpFilter;
+    AutoCompleteTextView DivisionFilter, districtFilter, UpazilaFilter, bloodGrpFilter,lastDonateSearch;
     User self;
     String uid;
     GoogleSignInAccount account;
@@ -122,11 +125,11 @@ public class DisplayDonorsActivity extends AppCompatActivity {
         getDonorsDialog();
 
         ok_Btn.setOnClickListener(v -> {
-            if (UpazilaFilter.getText().toString().length() != 0 || bloodGrpFilter.getText().toString().length() !=0) {
+            if (UpazilaFilter.getText().toString().length() != 0 || bloodGrpFilter.getText().toString().length() !=0 || lastDonateSearch.getText().toString().length() !=0) {
                 soundManager.great_sound.start();
                 dialog.dismiss();
             } else {
-                Toast.makeText(this, "ঠিকানা অথবা রক্তের গ্রুপ সিলেক্ট করুন!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "ঠিকানা অথবা রক্তের গ্রুপ অথবা শেষ রক্তদানের তারিখ সিলেক্ট করুন!", Toast.LENGTH_SHORT).show();
                 soundManager.cbtN.start();
             }
         });
@@ -179,7 +182,6 @@ public class DisplayDonorsActivity extends AppCompatActivity {
 
             }
         });
-
         districtFilter.setOnItemClickListener((parent, view, position, id) -> {
             switch (districtFilter.getText().toString()) {
 
@@ -468,6 +470,7 @@ public class DisplayDonorsActivity extends AppCompatActivity {
         districtFilter = dialog.findViewById(R.id.districtFilter);
         UpazilaFilter = dialog.findViewById(R.id.upazilaFilter);
         bloodGrpFilter = dialog.findViewById(R.id.bloodGrpFilter);
+        lastDonateSearch = dialog.findViewById(R.id.lastDonateSearch);
         self = new User();
         list = findViewById(R.id.donorsList);
         users = new ArrayList<>();
@@ -492,6 +495,7 @@ public class DisplayDonorsActivity extends AppCompatActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         list.setLayoutManager(linearLayoutManager);
         list.setAdapter(adapter);
+        lastDonateSearch.setOnClickListener(v -> GetLastDonateDate());
         UpazilaFilter.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -524,9 +528,42 @@ public class DisplayDonorsActivity extends AppCompatActivity {
                 updateBloodGroupList(s.toString());
             }
         });
+        lastDonateSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                updateLastDonateList(s.toString());
+            }
+        });
         long totalDonor = adapter.getItemCount()+1;
         String totalUserFinal = String.format("মোটঃ %d জন রক্তদাতা", totalDonor);
         edit_total.setText(totalUserFinal);
+    }
+
+    private void GetLastDonateDate() {
+        Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this,
+                (view, year1, month1, dayOfMonth1) -> {
+                    // Do something with the selected date
+                    int actualMonth = month1+1;
+                    String date = dayOfMonth1 + "/" + actualMonth + "/" + year1;
+                    lastDonateSearch.setText(date);
+                }, year, month, dayOfMonth);
+
+        datePickerDialog.show();
     }
 
     void initializeComponents() {
@@ -647,6 +684,18 @@ public class DisplayDonorsActivity extends AppCompatActivity {
         adapter.updateList(temp);
     }
 
+    private void updateLastDonateList(String s) {
+        System.out.println(s);
+        temp.clear();
+        for (User v : users) {
+            if (v.getLastDonateDate().toUpperCase().contains(s) || s.equalsIgnoreCase("ALL")) {
+                System.out.println(v.getLastDonateDate());
+                temp.add(v);
+            }
+        }
+        adapter.updateList(temp);
+    }
+
 
     private void getDonors() {
         FirebaseDatabase.getInstance().getReference("Donors").addValueEventListener(new ValueEventListener() {
@@ -672,6 +721,7 @@ public class DisplayDonorsActivity extends AppCompatActivity {
             }
         });
     }
+
     private void getDonorsDialog() {
         FirebaseDatabase.getInstance().getReference("Donors").addValueEventListener(new ValueEventListener() {
             @Override
@@ -689,7 +739,7 @@ public class DisplayDonorsActivity extends AppCompatActivity {
                 }
                 updateList(UpazilaFilter.getText().toString());
                 updateBloodGroupList(bloodGrpFilter.getText().toString());
-                filterList();
+                updateLastDonateList(lastDonateSearch.getText().toString());
             }
 
             @Override
