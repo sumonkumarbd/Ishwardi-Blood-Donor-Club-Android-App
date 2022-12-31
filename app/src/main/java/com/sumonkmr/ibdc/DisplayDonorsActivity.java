@@ -4,6 +4,8 @@ import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -23,6 +25,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -85,7 +88,10 @@ public class DisplayDonorsActivity extends AppCompatActivity {
         AdsControl ads = new AdsControl(this, adView);
         initializeComponents();
         getDonors();
-        marquee_text.setSelected(true);
+        MorQueTxr();
+        YoYo.with(Techniques.Tada).delay(300).duration(1000).playOn(search_donor);
+        YoYo.with(Techniques.FadeInRight).duration(1000).playOn(edit_total);
+        YoYo.with(Techniques.FadeInLeft).duration(1000).playOn(search);
         search_donor.setOnClickListener(v -> {
             SearchDialog();
         });
@@ -95,11 +101,34 @@ public class DisplayDonorsActivity extends AppCompatActivity {
             getDonors();
             adapter.notifyDataSetChanged();
             search.onActionViewCollapsed();
+            MorQueTxr();
+            YoYo.with(Techniques.Tada).delay(500).duration(1000).playOn(search_donor);
+            YoYo.with(Techniques.FadeInRight).duration(1000).playOn(edit_total);
+            YoYo.with(Techniques.FadeInLeft).duration(1000).playOn(search);
             donorReload.setRefreshing(false);
         });
 
 
     }//onCreate
+
+    private void MorQueTxr() {
+        marquee_text.setSelected(true);
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference reference = database.getReference().child("texts").child("marqueTxt");
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String value = snapshot.getValue(String.class);
+//                String value = snapshot.getValue("marqueTxt");
+                marquee_text.setText(value);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
 
     private void SearchDialog() {
         SoundManager soundManager = new SoundManager(this);
@@ -558,9 +587,6 @@ public class DisplayDonorsActivity extends AppCompatActivity {
                 updateLastDonateList(s.toString());
             }
         });
-        long totalDonor = adapter.getItemCount()+1;
-        String totalUserFinal = String.format("মোটঃ %d জন রক্তদাতা", totalDonor);
-        edit_total.setText(totalUserFinal);
     }
 
     private void GetLastDonateDate() {
@@ -606,28 +632,10 @@ public class DisplayDonorsActivity extends AppCompatActivity {
         });
         list.setLayoutManager(new LinearLayoutManager(this));
         list.setAdapter(adapter);
-        long totalDonor = adapter.getItemCount()+1;
-        String totalUserFinal = String.format("মোটঃ %d জন রক্তদাতা", totalDonor);
-        edit_total.setText(totalUserFinal);
+        GetUpdateUserCount();
         //Searching
         SearchInt();
 
-        //        bloodGrpFilter.addTextChangedListener(new TextWatcher() {
-//            @Override
-//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//
-//            }
-//
-//            @Override
-//            public void onTextChanged(CharSequence s, int start, int before, int count) {
-//
-//            }
-//
-//            @Override
-//            public void afterTextChanged(Editable s) {
-//                updateBloodGroupList(s.toString());
-//            }
-//        });  // if get blood filter in search then comment out this line and also xml
     }
 
     @SuppressLint("UseCompatLoadingForDrawables")
@@ -640,6 +648,7 @@ public class DisplayDonorsActivity extends AppCompatActivity {
             YoYo.with(Techniques.SlideInLeft).duration(500).playOn(search);
             return false;
         });
+
         search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -655,23 +664,6 @@ public class DisplayDonorsActivity extends AppCompatActivity {
     }
 
 
-    private void GetTotalDonor(){
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Donor");
-        reference.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    long TotalUser = snapshot.getChildrenCount()+1;
-                    String totalUserFinal = String.format("মোটঃ %d জন রক্তদাতা", TotalUser);
-                    edit_total.setText(totalUserFinal);
-                    Toast.makeText(DisplayDonorsActivity.this, totalUserFinal, Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-    } // Need TO Implement Tomorrow
 
 
     private void updateList(String s) {
@@ -684,6 +676,7 @@ public class DisplayDonorsActivity extends AppCompatActivity {
             }
         }
         adapter.updateList(temp);
+        GetUpdateUserCount();
     }
 
     private void updateBloodGroupList(String s) {
@@ -696,6 +689,7 @@ public class DisplayDonorsActivity extends AppCompatActivity {
             }
         }
         adapter.updateList(temp);
+        GetUpdateUserCount();
     }
 
     private void updateLastDonateList(String s) {
@@ -708,7 +702,20 @@ public class DisplayDonorsActivity extends AppCompatActivity {
             }
         }
         adapter.updateList(temp);
+        GetUpdateUserCount();
     }
+
+
+   private void GetUpdateUserCount(){
+       adapter.updateList(temp);
+       long totalUser = Integer.parseInt(String.valueOf(temp.size()));
+       if (temp.size() == 0){
+           edit_total.setText(String.format("মোটঃ %d জন রক্তদাতা", totalUser));
+       }else {
+           temp.size();
+           edit_total.setText(String.format("মোটঃ %d জন রক্তদাতা", totalUser));
+       }
+   }
 
 
     private void getDonors() {
@@ -724,6 +731,7 @@ public class DisplayDonorsActivity extends AppCompatActivity {
                         self = user;
                         users.add(user);
                         temp.add(user);
+                        edit_total.setText(String.format("মোটঃ %d জন রক্তদাতা", snapshot.getChildrenCount()));
                     }
                 }
                 filterList();

@@ -131,11 +131,12 @@
                     android:layout_marginStart="@dimen/_10dp"
                     android:layout_marginEnd="@dimen/_10dp"
                     android:elevation="@dimen/minor_shadow"
-                    android:fontFamily="@font/varela_round"
+                    android:fontFamily="@font/banglanumber"
                     android:singleLine="true"
                     android:text="@string/total"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="@dimen/profile_txt" />
+                    android:textSize="@dimen/profile_txt"
+                    android:textStyle="bold" />
 
                 <androidx.appcompat.widget.SearchView
                     android:id="@+id/search"
@@ -146,9 +147,10 @@
                     android:layout_marginStart="@dimen/_5dp"
                     android:background="@color/tns"
                     android:focusable="true"
-                    android:maxWidth="@dimen/_140dp"
-                    android:padding="@dimen/_2dp"
-                    app:iconifiedByDefault="true" />
+                    android:maxWidth="@dimen/_150dp"
+                    app:iconifiedByDefault="true"
+                    app:queryHint="@string/quick_search"
+                    app:searchIcon="@drawable/ic_baseline_search_24" />
 
 
             </RelativeLayout>
