@@ -105,6 +105,7 @@ public class DisplayDonorsActivity extends AppCompatActivity {
         SoundManager soundManager = new SoundManager(this);
         dialog = new Dialog(this);
         dialog.setContentView(R.layout.donor_search);
+        LinearLayout lay1,lay2,lay3;
         Button ok_Btn, cBtn;
 
         account = GoogleSignIn.getLastSignedInAccount(this);
@@ -118,8 +119,16 @@ public class DisplayDonorsActivity extends AppCompatActivity {
         dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation; //Setting the animations to dialog
         dialog.show();
 
+        lay1 = dialog.findViewById(R.id.lay1);
+        lay2 = dialog.findViewById(R.id.lay2);
+        lay3 = dialog.findViewById(R.id.lay3);
         ok_Btn = dialog.findViewById(R.id.donorOkBtn);
         cBtn = dialog.findViewById(R.id.donorCBtn);
+        YoYo.with(Techniques.FadeInDown).duration(1000).playOn(lay1);
+        YoYo.with(Techniques.FadeInLeft).duration(1000).playOn(lay2);
+        YoYo.with(Techniques.FadeInRight).duration(1000).playOn(lay3);
+        YoYo.with(Techniques.SlideInLeft).duration(1000).playOn(ok_Btn);
+        YoYo.with(Techniques.SlideInRight).duration(1000).playOn(cBtn);
         DialogInitializeComponents();
         initializeAddressFilters();
         getDonorsDialog();
@@ -471,6 +480,11 @@ public class DisplayDonorsActivity extends AppCompatActivity {
         UpazilaFilter = dialog.findViewById(R.id.upazilaFilter);
         bloodGrpFilter = dialog.findViewById(R.id.bloodGrpFilter);
         lastDonateSearch = dialog.findViewById(R.id.lastDonateSearch);
+        YoYo.with(Techniques.SlideInLeft).duration(700).playOn(DivisionFilter);
+        YoYo.with(Techniques.SlideInRight).duration(700).playOn(districtFilter);
+        YoYo.with(Techniques.SlideInLeft).duration(700).playOn(UpazilaFilter);
+        YoYo.with(Techniques.SlideInRight).duration(700).playOn(bloodGrpFilter);
+        YoYo.with(Techniques.SlideInDown).duration(700).playOn(lastDonateSearch);
         self = new User();
         list = findViewById(R.id.donorsList);
         users = new ArrayList<>();
