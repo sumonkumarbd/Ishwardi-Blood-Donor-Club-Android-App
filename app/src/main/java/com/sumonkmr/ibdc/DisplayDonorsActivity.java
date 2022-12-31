@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -64,6 +65,7 @@ public class DisplayDonorsActivity extends AppCompatActivity {
     TextView upazila, district, divisions, marquee_text, edit_total;
     Dialog dialog;
     SwipeRefreshLayout donorReload;
+    SearchView search;
 
 
     @Override
@@ -522,9 +524,6 @@ public class DisplayDonorsActivity extends AppCompatActivity {
     }
 
     void initializeComponents() {
-        div = findViewById(R.id.div);
-        zila = findViewById(R.id.zila);
-        upa = findViewById(R.id.upa);
         edit_res = findViewById(R.id.edit_res);
         marquee_text = findViewById(R.id.marquee_text);
         edit_total = findViewById(R.id.edit_total);
@@ -551,27 +550,13 @@ public class DisplayDonorsActivity extends AppCompatActivity {
         });
         list.setLayoutManager(new LinearLayoutManager(this));
         list.setAdapter(adapter);
-        upa.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                updateList(s.toString());
-            }
-        });
         long totalDonor = adapter.getItemCount()+1;
         String totalUserFinal = String.format("মোটঃ %d জন রক্তদাতা", totalDonor);
         edit_total.setText(totalUserFinal);
+        //Searching
+        SearchInt();
 
-//        bloodGrpFilter.addTextChangedListener(new TextWatcher() {
+        //        bloodGrpFilter.addTextChangedListener(new TextWatcher() {
 //            @Override
 //            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 //
@@ -587,6 +572,30 @@ public class DisplayDonorsActivity extends AppCompatActivity {
 //                updateBloodGroupList(s.toString());
 //            }
 //        });  // if get blood filter in search then comment out this line and also xml
+    }
+
+    @SuppressLint("UseCompatLoadingForDrawables")
+    private void SearchInt(){
+        search = findViewById(R.id.search);
+        search.setOnSearchClickListener(v -> {
+            YoYo.with(Techniques.SlideInRight).duration(300).playOn(search);
+        });
+        search.setOnCloseListener(() -> {
+            YoYo.with(Techniques.SlideInLeft).duration(500).playOn(search);
+            return false;
+        });
+        search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                updateList(newText);
+                return true;
+            }
+        });
     }
 
 
@@ -608,22 +617,12 @@ public class DisplayDonorsActivity extends AppCompatActivity {
         });
     } // Need TO Implement Tomorrow
 
-    private void updateVisible(boolean b) {
-        HashMap<String, Object> updateValues = new HashMap<>();
-
-        if (b) {
-            updateValues.put("Visible", "True");
-        } else {
-            updateValues.put("Visible", "False");
-        }
-        FirebaseDatabase.getInstance().getReference("Donors").child(uid).updateChildren(updateValues);
-    }
 
     private void updateList(String s) {
         System.out.println(s);
         temp.clear();
         for (User v : users) {
-            if (v.getUpazila().toUpperCase().contains(s) || s.equalsIgnoreCase("ALL")) {
+            if (v.getUpazila().toUpperCase().contains(s) || v.getDistrict().toUpperCase().contains(s) || v.getState().toUpperCase().contains(s) || v.getBloodGroup().toUpperCase().contains(s) || v.getLastDonateDate().toUpperCase().contains(s)||s.equalsIgnoreCase("ALL")) {
                 System.out.println(v.getUpazila());
                 temp.add(v);
             }
@@ -659,7 +658,7 @@ public class DisplayDonorsActivity extends AppCompatActivity {
                         temp.add(user);
                     }
                 }
-                updateList(upa.getText().toString());
+//                updateList(upa.getText().toString());
 //                updateList(bloodGrpFilter.getText().toString());
                 filterList();
             }
