@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     FirebaseAuth auth;
     DatabaseReference dbReference;
     String userId, adsData;
-    CheckBox lastDonate_check, privacy_check, disclaimer_check;
+    CheckBox lastDonate_check, privacy_check, disclaimer_check,beDonorAgree;
     boolean doubleBackToExitPressedOnce = false;
     GoogleSignInOptions gso;
     GoogleSignInClient gsc;
@@ -418,6 +418,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         lastDonateDate_signUp = dialog.findViewById(R.id.lastDonateDate_signUp);
         birthDate_signUp = dialog.findViewById(R.id.birthDate_signUp);
         lastDonate_check = dialog.findViewById(R.id.lastDonate_check_signUp);
+        beDonorAgree = dialog.findViewById(R.id.beDonorAgree);
         privacy_check = dialog.findViewById(R.id.privacy_check);
         privacyTxt = dialog.findViewById(R.id.privacyTxt);
         disclaimer_check = dialog.findViewById(R.id.disclaimer_check);
@@ -966,6 +967,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         if (profileImg_uri == null) {
             Toast.makeText(this, "অনুগ্রহপূর্বক একটি ছবি সিলেক্ট করুন!", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if (!beDonorAgree.isChecked()){
+            Toast.makeText(this, "আপনি রক্তদিতে প্রস্তুত কিনা তা চেক বক্সে টিক দিয়ে নিশ্চিত করুন।", Toast.LENGTH_SHORT).show();
             return false;
         }
 

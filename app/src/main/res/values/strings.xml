@@ -248,6 +248,7 @@
     <string name="privacy_txt">আমি সম্পূর্ণ বিস্তারিত </string>
     <string name="privacy_txt1">পড়ে সহমত প্রসন করছি।</string>
     <string name="agree">সাথে আমি একমত।</string>
+    <string name="agreeBe_donor">আমি মানবস্বার্থে বিনামূল্যে রক্তদান করতে প্রস্তুত।</string>
     <string name="fb_grp">আমদের ফেইসবুক গ্রুপ</string>
 
     <!--    end Profile-->
