@@ -109,157 +109,47 @@
                 android:id="@+id/edit_tabs"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_30dp"
-                android:layout_gravity="center"
-                android:gravity="start|center"
-                android:backgroundTint="@color/tns"
                 android:layout_below="@+id/marquee_tabs"
-                android:layout_margin="@dimen/_1dp"
+                android:layout_marginStart="@dimen/_1dp"
+                android:layout_marginTop="@dimen/_1dp"
+                android:layout_marginEnd="@dimen/_1dp"
+                android:layout_marginBottom="@dimen/_1dp"
+                android:backgroundTint="@color/tns"
                 android:baselineAligned="false"
                 android:elevation="@dimen/shadow"
+                android:gravity="center|center_vertical"
                 android:orientation="horizontal"
                 android:padding="@dimen/_2dp">
-
-                <LinearLayout
-                    android:id="@+id/edit_res"
-                    android:visibility="invisible"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    >
-                    <TextView
-                        android:id="@+id/upazila"
-                        style="bold"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:elevation="@dimen/minor_shadow"
-                        android:layout_marginEnd="@dimen/_2dp"
-                        android:layout_marginStart="@dimen/_10dp"
-                        android:fontFamily="@font/varela_round"
-                        android:maxWidth="120dp"
-                        android:layout_gravity="center_vertical"
-                        android:gravity="start"
-                        android:singleLine="true"
-                        android:text="@string/upazila"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="@dimen/profile_txt" />
-
-                    <TextView
-                        style="bold"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:elevation="@dimen/minor_shadow"
-                        android:layout_marginEnd="@dimen/_2dp"
-                        android:fontFamily="@font/varela_round"
-                        android:maxWidth="120dp"
-                        android:singleLine="true"
-                        android:text="@string/comma"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="@dimen/profile_txt" />
-
-                    <TextView
-                        android:id="@+id/district"
-                        style="bold"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:elevation="@dimen/minor_shadow"
-                        android:layout_marginEnd="@dimen/_2dp"
-                        android:fontFamily="@font/varela_round"
-                        android:maxWidth="110dp"
-                        android:singleLine="true"
-                        android:text="@string/district"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="@dimen/profile_txt" />
-
-                    <TextView
-                        style="bold"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:elevation="@dimen/minor_shadow"
-                        android:layout_marginEnd="@dimen/_2dp"
-                        android:fontFamily="@font/varela_round"
-                        android:maxWidth="120dp"
-                        android:singleLine="true"
-                        android:text="@string/comma"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="@dimen/profile_txt" />
-
-                    <TextView
-                        android:id="@+id/divisions"
-                        style="bold"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:clickable="true"
-                        android:contextClickable="true"
-                        android:elevation="@dimen/minor_shadow"
-                        android:layout_marginEnd="@dimen/_2dp"
-                        android:ellipsize="marquee"
-                        android:focusable="true"
-                        android:focusableInTouchMode="true"
-                        android:fontFamily="@font/varela_round"
-                        android:freezesText="true"
-                        android:marqueeRepeatLimit="marquee_forever"
-                        android:maxWidth="120dp"
-                        android:scrollHorizontally="true"
-                        android:singleLine="true"
-                        android:text="@string/divisions"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="@dimen/profile_txt" />
-
-                    <TextView
-                        style="bold"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:elevation="@dimen/minor_shadow"
-                        android:layout_marginEnd="@dimen/_1dp"
-                        android:fontFamily="@font/varela_round"
-                        android:maxWidth="120dp"
-                        android:singleLine="true"
-                        android:text="@string/dari"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="@dimen/profile_txt" />
-
-                </LinearLayout>
 
                 <TextView
                     android:id="@+id/edit_total"
                     style="bold"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:elevation="@dimen/minor_shadow"
-                    android:layout_marginEnd="@dimen/_10dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerInParent="true"
                     android:layout_marginStart="@dimen/_10dp"
+                    android:layout_marginEnd="@dimen/_10dp"
+                    android:elevation="@dimen/minor_shadow"
                     android:fontFamily="@font/varela_round"
                     android:singleLine="true"
-                    android:layout_gravity="center_vertical"
-                    android:gravity="end"
                     android:text="@string/total"
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/profile_txt" />
 
-                <LinearLayout
+                <androidx.appcompat.widget.SearchView
+                    android:id="@+id/search"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    >
-                    <AutoCompleteTextView
-                        android:id="@+id/upa"
-                        android:hint="@string/upazila"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
+                    android:layout_height="match_parent"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginStart="@dimen/_5dp"
+                    android:background="@color/tns"
+                    android:focusable="true"
+                    android:maxWidth="@dimen/_140dp"
+                    android:padding="@dimen/_2dp"
+                    app:iconifiedByDefault="true" />
 
-                    <AutoCompleteTextView
-                        android:id="@+id/zila"
-                        android:hint="@string/district"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-
-                    <AutoCompleteTextView
-                        android:id="@+id/div"
-                        android:hint="@string/divisions"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-                </LinearLayout><!-- blink but must need-->
 
             </RelativeLayout>
 
