@@ -54,15 +54,13 @@ public class DisplayDonorsActivity extends AppCompatActivity {
     UserAdapter adapter;
     ArrayList<User> users, temp;
     AutoCompleteTextView DivisionFilter, districtFilter, UpazilaFilter, bloodGrpFilter;
-    AutoCompleteTextView div, zila, upa;
     User self;
     String uid;
     GoogleSignInAccount account;
     FirebaseAuth auth;
     AdView adView;
     FloatingActionButton search_donor;
-    LinearLayout edit_res;
-    TextView upazila, district, divisions, marquee_text, edit_total;
+    TextView marquee_text, edit_total;
     Dialog dialog;
     SwipeRefreshLayout donorReload;
     SearchView search;
@@ -93,7 +91,7 @@ public class DisplayDonorsActivity extends AppCompatActivity {
             initializeComponents();
             getDonors();
             adapter.notifyDataSetChanged();
-
+            search.onActionViewCollapsed();
             donorReload.setRefreshing(false);
         });
 
@@ -124,27 +122,22 @@ public class DisplayDonorsActivity extends AppCompatActivity {
         getDonorsDialog();
 
         ok_Btn.setOnClickListener(v -> {
-            edit_res.setVisibility(View.VISIBLE);
-            if (UpazilaFilter.getText().toString().length() != 0) {
-                upazila.setText(UpazilaFilter.getText().toString());
-                district.setText(districtFilter.getText().toString());
-                divisions.setText(DivisionFilter.getText().toString());
+            if (UpazilaFilter.getText().toString().length() != 0 || bloodGrpFilter.getText().toString().length() !=0) {
                 soundManager.great_sound.start();
                 dialog.dismiss();
             } else {
-                edit_res.setVisibility(View.GONE);
-                Toast.makeText(this, "অনুগ্রহপূর্বক সঠিক তথ্য দিন।", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "ঠিকানা অথবা রক্তের গ্রুপ সিলেক্ট করুন!", Toast.LENGTH_SHORT).show();
                 soundManager.cbtN.start();
             }
         });
         cBtn.setOnClickListener(v -> dialog.dismiss());
-    }
+    }//search Dialog
 
 
     private void initializeAddressFilters() {
 
         DivisionFilter.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.states)));
-//        bloodGrpFilter.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.blood_groups)));
+        bloodGrpFilter.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.blood_groups)));
         DivisionFilter.setOnItemClickListener((parent, view, position, id) -> {
 
             switch (DivisionFilter.getText().toString()) {
@@ -474,9 +467,7 @@ public class DisplayDonorsActivity extends AppCompatActivity {
         DivisionFilter = dialog.findViewById(R.id.stateFilter);
         districtFilter = dialog.findViewById(R.id.districtFilter);
         UpazilaFilter = dialog.findViewById(R.id.upazilaFilter);
-        upazila = findViewById(R.id.upazila);
-        district = findViewById(R.id.district);
-        divisions = findViewById(R.id.divisions);
+        bloodGrpFilter = dialog.findViewById(R.id.bloodGrpFilter);
         self = new User();
         list = findViewById(R.id.donorsList);
         users = new ArrayList<>();
@@ -515,7 +506,22 @@ public class DisplayDonorsActivity extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
                 updateList(s.toString());
-//                upazila.setText(s.toString());
+            }
+        });
+        bloodGrpFilter.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                updateBloodGroupList(s.toString());
             }
         });
         long totalDonor = adapter.getItemCount()+1;
@@ -524,7 +530,6 @@ public class DisplayDonorsActivity extends AppCompatActivity {
     }
 
     void initializeComponents() {
-        edit_res = findViewById(R.id.edit_res);
         marquee_text = findViewById(R.id.marquee_text);
         edit_total = findViewById(R.id.edit_total);
         self = new User();
@@ -622,7 +627,7 @@ public class DisplayDonorsActivity extends AppCompatActivity {
         System.out.println(s);
         temp.clear();
         for (User v : users) {
-            if (v.getUpazila().toUpperCase().contains(s) || v.getDistrict().toUpperCase().contains(s) || v.getState().toUpperCase().contains(s) || v.getBloodGroup().toUpperCase().contains(s) || v.getLastDonateDate().toUpperCase().contains(s)||s.equalsIgnoreCase("ALL")) {
+            if (v.getUpazila().toUpperCase().contains(s) || v.getDistrict().toUpperCase().contains(s) || v.getState().toUpperCase().contains(s) || v.getLastDonateDate().toUpperCase().contains(s)||s.equalsIgnoreCase("ALL")) {
                 System.out.println(v.getUpazila());
                 temp.add(v);
             }
@@ -658,8 +663,6 @@ public class DisplayDonorsActivity extends AppCompatActivity {
                         temp.add(user);
                     }
                 }
-//                updateList(upa.getText().toString());
-//                updateList(bloodGrpFilter.getText().toString());
                 filterList();
             }
 
@@ -685,7 +688,7 @@ public class DisplayDonorsActivity extends AppCompatActivity {
                     }
                 }
                 updateList(UpazilaFilter.getText().toString());
-//                updateList(bloodGrpFilter.getText().toString());
+                updateBloodGroupList(bloodGrpFilter.getText().toString());
                 filterList();
             }
 
