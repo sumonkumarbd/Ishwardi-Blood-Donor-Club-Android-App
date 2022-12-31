@@ -670,7 +670,7 @@ public class DisplayDonorsActivity extends AppCompatActivity {
         System.out.println(s);
         temp.clear();
         for (User v : users) {
-            if (v.getUpazila().toUpperCase().contains(s) || v.getDistrict().toUpperCase().contains(s) || v.getState().toUpperCase().contains(s) || v.getLastDonateDate().toUpperCase().contains(s)||s.equalsIgnoreCase("ALL")) {
+            if (v.getVillage().toUpperCase().contains(s)||v.getUpazila().toUpperCase().contains(s) || v.getDistrict().toUpperCase().contains(s) || v.getState().toUpperCase().contains(s) || v.getLastDonateDate().toUpperCase().contains(s)||v.getMobile().toUpperCase().contains(s)||s.equalsIgnoreCase("ALL")) {
                 System.out.println(v.getUpazila());
                 temp.add(v);
             }
