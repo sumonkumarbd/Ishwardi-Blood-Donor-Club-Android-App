@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId "com.sumonkmr.ibdc"
-        minSdk 25
+        minSdk 28
         //noinspection ExpiringTargetSdkVersion
         targetSdkVersion 33
         versionCode 3

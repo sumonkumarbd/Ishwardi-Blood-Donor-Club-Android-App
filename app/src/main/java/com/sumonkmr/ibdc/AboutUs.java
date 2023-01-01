@@ -26,14 +26,15 @@ public class AboutUs extends AppCompatActivity {
     String rakibul_num = "tel:+8801726641227";
     String harun_num = "tel:+8801849696823";
     String mamun_num = "tel:+8801821897961";
-    private AdView mAdView;
+    private LinearLayout bannerLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.about_us);
-        mAdView = findViewById(R.id.adMob_about);
-        AdsControl ads = new AdsControl(this, mAdView);
+        bannerLayout = findViewById(R.id.bannerLayout);
+        AdsControl ads = new AdsControl(this);
+        ads.loadBannerAd(bannerLayout);
 
         Innit();
         sadequl_phn.setOnClickListener(v -> {
@@ -131,10 +132,11 @@ public class AboutUs extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        AdsControl adsControl = new AdsControl(this);
         Random random;
         random = new Random();
         int myCount = random.nextInt(100 - 5) + 5;
-        if (AdsControl.passCondition() && myCount % 2 == 0) {
+        if (adsControl.passCondition() && myCount % 2 == 0) {
             AdsControl.mInterstitialAd.show(this);
 //            Toast.makeText(this, "Ready For Show Ads!" + myCount, Toast.LENGTH_SHORT).show();
             super.onBackPressed();

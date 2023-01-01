@@ -92,7 +92,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private FirebaseDatabase db;
     private ProgressBar progressbar;
     final Calendar calendar = Calendar.getInstance();
-    AdView mAdView;
+    LinearLayout bannerLay;
     Intent targetActivity;
     // per app run-- do not show more than 3 fullscreen ad. [[Change it if your want]]
     int fullScreenAdMaxShowCount = 3;
@@ -106,8 +106,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         auth = FirebaseAuth.getInstance();
         gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
         gsc = GoogleSignIn.getClient(this, gso);
-        mAdView = findViewById(R.id.adView);
-        AdsControl ads = new AdsControl(this, mAdView); // for initialize Banner Ads
+        bannerLay = findViewById(R.id.bannerLayout);
+        AdsControl ads = new AdsControl(this); // for initialize Banner Ads
+        ads.loadBannerAd(bannerLay);
 
         //        Database references
         FirebaseUser currentUser = auth.getCurrentUser();
