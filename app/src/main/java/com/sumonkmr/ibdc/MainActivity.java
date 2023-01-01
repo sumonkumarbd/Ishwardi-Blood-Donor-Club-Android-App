@@ -81,6 +81,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Dialog dialog;
     Uri filepath, profileImg_uri;
     FirebaseAuth auth;
+    FirebaseUser currentUser;
     DatabaseReference dbReference;
     String userId, adsData;
     CheckBox lastDonate_check, privacy_check, disclaimer_check,beDonorAgree;
@@ -111,7 +112,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         ads.loadBannerAd(bannerLay);
 
         //        Database references
-        FirebaseUser currentUser = auth.getCurrentUser();
+        currentUser = auth.getCurrentUser();
         assert currentUser != null;
         userId = currentUser.getUid();
         storageReference = FirebaseStorage.getInstance().getReference();
@@ -153,18 +154,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         sds_image = menuView.findViewById(R.id.sds_image);
         mail = menuView.findViewById(R.id.mail);
 
-        if (account != null) {
-            Uri profile_img_url = (account.getPhotoUrl());
-            String f_name = (account.getDisplayName());
-            profile_name_menu.setText(f_name);
-            Glide.with(this)
-                    .load(profile_img_url)
-                    .centerCrop()
-                    .placeholder(R.drawable.ibdc_logo)
-                    .into(profile_image_menu);
-        }
-
-
         ll_Home.setOnClickListener(this);
         ll_Profile.setOnClickListener(this);
         ll_beDonor.setOnClickListener(this);
@@ -182,18 +171,38 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         replace(new HomeFragment());
 
         //for checking signup
-        dbReference.child("Donors").addValueEventListener(new ValueEventListener() {
+        dbReference.child("Donors").child(userId).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                boolean isSignUp = snapshot.hasChildren();
-                if (isSignUp){
+                String uid = snapshot.child("uid").getValue(String.class);
+                String f_name = snapshot.child("FName").getValue(String.class);
+                String l_name = snapshot.child("LName").getValue(String.class);
+                String bloodImg_url = snapshot.child("bloodImg_url").getValue(String.class);
+
+                if (uid != null && f_name != null && l_name != null && bloodImg_url != null){
                     ll_beDonor.setVisibility(View.GONE);
                     ll_Profile.setVisibility(View.VISIBLE);
-                }else{
+                    String name = (f_name+" "+l_name);
+                    profile_name_menu.setText(name);
+                    Glide.with(contentView.getContext())
+                            .load(bloodImg_url)
+                            .centerCrop()
+                            .placeholder(R.drawable.ibdc_logo)
+                            .into(profile_image_menu);
+                }else {
                     ll_Profile.setVisibility(View.GONE);
                     ll_beDonor.setVisibility(View.VISIBLE);
                     OpenDialog();
+                    Uri profile_img_url = (account.getPhotoUrl());
+                    String name = (account.getDisplayName());
+                    profile_name_menu.setText(name);
+                    Glide.with(contentView.getContext())
+                            .load(profile_img_url)
+                            .centerCrop()
+                            .placeholder(R.drawable.ibdc_logo)
+                            .into(profile_image_menu);
                 }
+
             }
 
             @Override
@@ -203,6 +212,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
 
     }
+
 
     @SuppressLint("NonConstantResourceId")
     @Override

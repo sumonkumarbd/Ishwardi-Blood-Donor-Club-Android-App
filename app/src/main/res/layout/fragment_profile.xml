@@ -139,7 +139,7 @@
                         android:id="@+id/mobile_number_pro"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/text_font"
+                        android:fontFamily="@font/banglanumber"
                         android:text="@string/mobile_number"
                         android:textColor="@color/white"
                         android:textSize="@dimen/form_txt"
@@ -371,7 +371,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:elevation="@dimen/minor_shadow"
-                            android:fontFamily="@font/varela_round"
+                            android:fontFamily="@font/banglanumber"
                             android:maxWidth="210dp"
                             android:singleLine="true"
                             android:text="@string/last_donate_date"
@@ -494,7 +494,7 @@
                             android:ellipsize="marquee"
                             android:focusable="true"
                             android:focusableInTouchMode="true"
-                            android:fontFamily="@font/varela_round"
+                            android:fontFamily="@font/banglanumber"
                             android:freezesText="true"
                             android:marqueeRepeatLimit="marquee_forever"
                             android:singleLine="true"
@@ -859,8 +859,8 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:inputType="none"
-                                android:textColor="@color/colorPrimary"
-                                android:textSize="@dimen/_8sp"/>
+                                android:fontFamily="@font/des_font"
+                                android:textSize="@dimen/_12sp"/>
 
                         </com.google.android.material.textfield.TextInputLayout>
 
@@ -880,6 +880,7 @@
                             android:id="@+id/birthDate_edit"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:fontFamily="@font/des_font"
                             android:inputType="none" />
 
                     </com.google.android.material.textfield.TextInputLayout>

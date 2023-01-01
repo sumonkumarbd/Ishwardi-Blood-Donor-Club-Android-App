@@ -121,7 +121,7 @@
                         style="bold"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="@dimen/_8dp"
+                        android:layout_marginEnd="@dimen/_5dp"
                         android:elevation="@dimen/minor_shadow"
                         android:fontFamily="@font/varela_round"
                         android:maxWidth="120dp"
@@ -142,7 +142,7 @@
                         android:ellipsize="marquee"
                         android:focusable="true"
                         android:focusableInTouchMode="true"
-                        android:fontFamily="@font/varela_round"
+                        android:fontFamily="@font/banglanumber"
                         android:freezesText="true"
                         android:marqueeRepeatLimit="marquee_forever"
                         android:maxWidth="120dp"
@@ -322,13 +322,13 @@
                     android:elevation="@dimen/minor_shadow"
                     android:focusable="true"
                     android:focusableInTouchMode="true"
-                    android:fontFamily="@font/varela_round"
+                    android:fontFamily="@font/banglanumber"
                     android:marqueeRepeatLimit="marquee_forever"
                     android:maxWidth="120dp"
                     android:singleLine="true"
                     android:text="@string/last_donate_date"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="@dimen/_10sp"
+                    android:textSize="@dimen/_14sp"
                     android:textStyle="bold" />
 
 
