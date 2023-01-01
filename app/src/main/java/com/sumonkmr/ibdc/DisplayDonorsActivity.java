@@ -728,12 +728,10 @@ public class DisplayDonorsActivity extends AppCompatActivity {
                 for (DataSnapshot ds : snapshot.getChildren()) {
                     User user = ds.getValue(User.class);
                     assert user != null;
-                    if (user.getUid().equals(uid)) {
                         self = user;
                         users.add(user);
                         temp.add(user);
                         edit_total.setText(String.format("মোটঃ %d জন রক্তদাতা", snapshot.getChildrenCount()));
-                    }
                 }
                 filterList();
             }

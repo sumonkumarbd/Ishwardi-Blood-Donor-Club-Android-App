@@ -254,6 +254,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 auth.signOut();
                 startActivity(new Intent(this, SplashScreen.class));
                 MainActivity.this.finish();
+                gsc.revokeAccess();
                 break;
 
             case R.id.mail:
