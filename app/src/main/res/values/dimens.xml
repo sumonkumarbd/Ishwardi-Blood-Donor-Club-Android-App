@@ -6,6 +6,7 @@
     <dimen name="tab_max_width">@dimen/_264dp</dimen>
     <dimen name="tab_padding_bottom">@dimen/_16dp</dimen>
     <dimen name="tab_label">@dimen/_10sp</dimen>
+    <dimen name="label">@dimen/_8sp</dimen>
     <dimen name="custom_tab_layout_height">@dimen/_72dp</dimen>
     <dimen name="form_txt">@dimen/_14sp</dimen>
     <dimen name="profile_txt">@dimen/_12dp</dimen>
