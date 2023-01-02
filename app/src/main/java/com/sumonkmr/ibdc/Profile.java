@@ -1,23 +1,23 @@
 package com.sumonkmr.ibdc;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
+import android.os.Environment;
 import android.os.Handler;
-import android.view.LayoutInflater;
+import android.provider.MediaStore;
 import android.view.View;
-import android.view.ViewGroup;
 import android.webkit.MimeTypeMap;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -25,11 +25,14 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -51,21 +54,20 @@ import com.karumi.dexter.listener.PermissionDeniedResponse;
 import com.karumi.dexter.listener.PermissionGrantedResponse;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.single.PermissionListener;
-import com.squareup.picasso.Picasso;
 import com.sumonkmr.ibdc.model.User;
 
-import java.io.InputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Objects;
 
-
-public class ProfileFragment extends Fragment {
+public class Profile extends AppCompatActivity {
 
     Context context;
+    Dialog dialog;
     androidx.constraintlayout.widget.ConstraintLayout profile_tab, profile_edit_tab;
-    Button edit_btn,save_btn;
-    ImageButton update_back;
+    Button edit_btn,save_btn,update_back;
     TextView f_name, l_name, mobile_number_pro, blood_grp_pro, village_pro, tehsil_pro, district_pro, state_pro, lastDonateDate_pro,email_pro,birthDate;
     com.google.android.material.textfield.TextInputEditText f_name_edit,l_name_edit,village_edit,number_edit;
     de.hdodenhof.circleimageview.CircleImageView profile_image,profile_image_edit,p_image_shade_edit;
@@ -76,56 +78,26 @@ public class ProfileFragment extends Fragment {
     String userId,profile_url;
     Uri profile_uri;
     int d,m,y;
-    private StorageReference storageReference;
-    private DatabaseReference dbReference;
-    private FirebaseDatabase db;
-    private ProgressBar progressbar;
+    protected StorageReference storageReference;
+    protected DatabaseReference dbReference;
+    protected FirebaseDatabase db;
+    protected ProgressBar progressbar;
+    GoogleSignInAccount account;
+    int REQUEST_CODE = 11;
+    LinearLayout bannerLay;
 
-
-    @SuppressLint("MissingInflatedId")
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_profile, container, false);
-        context = getContext();
-
-        //        Hooks of TextViews
-        f_name = view.findViewById(R.id.f_name);
-        l_name = view.findViewById(R.id.l_name);
-        mobile_number_pro = view.findViewById(R.id.mobile_number_pro);
-        blood_grp_pro = view.findViewById(R.id.blood_grp_pro);
-        village_pro = view.findViewById(R.id.village_pro);
-        tehsil_pro = view.findViewById(R.id.tehsil_pro);
-        district_pro = view.findViewById(R.id.district_pro);
-        state_pro = view.findViewById(R.id.state_pro);
-        email_pro = view.findViewById(R.id.email_pro);
-        birthDate = view.findViewById(R.id.birthDate);
-        lastDonateDate_pro = view.findViewById(R.id.lastDonateDate_pro);
-        progressbar = view.findViewById(R.id.progressbar);
-
-//        Hooks of edit buttons
-        edit_btn = view.findViewById(R.id.edit_btn);
-        save_btn = view.findViewById(R.id.save_btn);
-        update_back = view.findViewById(R.id.update_back);
-        profile_tab = view.findViewById(R.id.profile_tab);
-        profile_edit_tab = view.findViewById(R.id.profile_edit_tab);
-        profile_image = view.findViewById(R.id.profile_image);
-        cover_image = view.findViewById(R.id.cover_image);
-        profile_image_edit = view.findViewById(R.id.profile_image_edit);
-        p_image_shade_edit = view.findViewById(R.id.p_image_shade_edit);
-        f_name_edit = view.findViewById(R.id.f_name_edit);
-        l_name_edit = view.findViewById(R.id.l_name_edit);
-        number_edit = view.findViewById(R.id.number_edit);
-        village_edit = view.findViewById(R.id.village_edit);
-        Upazila = view.findViewById(R.id.upazilaDropDrown_edit);
-        District = view.findViewById(R.id.districtDropDrown_edit);
-        Division = view.findViewById(R.id.stateDropDrown_edit);
-        bloodGrpDropDown = view.findViewById(R.id.bloodGrpDropDown_edit);
-        lastDonateDate_edit = view.findViewById(R.id.lastDonateDate_edit);
-        birthDate_edit = view.findViewById(R.id.birthDate_edit);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_profile);
+        context = getApplicationContext();
+        bannerLay = findViewById(R.id.bannerLayout);
+        AdsControl ads = new AdsControl(this); // for initialize Banner Ads
+        ads.loadBannerAd(bannerLay);
+        account = GoogleSignIn.getLastSignedInAccount(this);
 
         //        Methods
+        Init();
         initializeAddressFilters();
         LastDonateDatePicker();
 
@@ -143,14 +115,13 @@ public class ProfileFragment extends Fragment {
         });
 
         save_btn.setOnClickListener(v -> {
-            addToDatabase();
-            Handler handler = new Handler();
-            Runnable runnable = () -> {
-                profile_edit_tab.setVisibility(View.GONE);
-                profile_tab.setVisibility(View.VISIBLE);
-            };
+            if (NotEmpty()){
+                addToDatabase();
+                processImageUpload();
+            }else {
+                Toast.makeText(context, "ত্রুটি, অনুগ্রহপূর্বক সকল তথ্য পুনরায় চেক করুন।", Toast.LENGTH_SHORT).show();
+            }
 
-            handler.postDelayed(runnable,3000);
         });
 
         update_back.setOnClickListener(v -> {
@@ -168,7 +139,7 @@ public class ProfileFragment extends Fragment {
                             Intent intent = new Intent(Intent.ACTION_PICK);
                             intent.setType("image/*");
                             intent.setAction(Intent.ACTION_GET_CONTENT);
-                            startActivityForResult(Intent.createChooser(intent, "Browse For Image"), 101);
+                            startActivityForResult(Intent.createChooser(intent, "Browse For Image"), REQUEST_CODE);
                         }
 
                         @Override
@@ -182,26 +153,73 @@ public class ProfileFragment extends Fragment {
                         }
                     }).check();
         });
-
-        return view;
-    }
-
+    }//onCrate
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        if (requestCode == 101 && resultCode == -1) {
-            assert data != null;
-            filepath = data.getData();
+        if (requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
             try {
-                InputStream inputStream = context.getContentResolver().openInputStream(filepath);
-                bitmap = BitmapFactory.decodeStream(inputStream);
-                profile_image_edit.setImageBitmap(bitmap);
-                processImageUpload();
+                assert data != null;
+                filepath = data.getData();
+                User user = new User();
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), filepath);
+                ContextWrapper contextWrapper = new ContextWrapper(getApplicationContext());
+                File path = contextWrapper.getExternalFilesDir(Environment.DIRECTORY_DCIM);
+                String fileName = String.format("%s.jpg", user.getEmail());
+                File finalFile = new File(path, fileName);
+                FileOutputStream fileOutputStream = new FileOutputStream(finalFile);
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 20, fileOutputStream);
+                fileOutputStream.flush();
+                fileOutputStream.close();
+                profile_image_edit.setImageURI(Uri.fromFile(finalFile));
+                Intent intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+                intent.setData(Uri.fromFile(finalFile));
+                sendBroadcast(intent);
+                profile_uri = intent.getData();
+
             } catch (Exception ex) {
+                ex.printStackTrace();
+                Toast.makeText(this, "দুঃখিত,ছবি আপলোডে অসফল!", Toast.LENGTH_SHORT).show();
             }
             super.onActivityResult(requestCode, resultCode, data);
         }
     }
 
+    private void Init(){
+        //        Hooks of TextViews
+        f_name = findViewById(R.id.f_name);
+        l_name = findViewById(R.id.l_name);
+        mobile_number_pro = findViewById(R.id.mobile_number_pro);
+        blood_grp_pro = findViewById(R.id.blood_grp_pro);
+        village_pro = findViewById(R.id.village_pro);
+        tehsil_pro = findViewById(R.id.tehsil_pro);
+        district_pro = findViewById(R.id.district_pro);
+        state_pro = findViewById(R.id.state_pro);
+        email_pro = findViewById(R.id.email_pro);
+        birthDate = findViewById(R.id.birthDate);
+        lastDonateDate_pro = findViewById(R.id.lastDonateDate_pro);
+        progressbar = findViewById(R.id.progressbar);
+
+//        Hooks of edit buttons
+        edit_btn = findViewById(R.id.edit_btn);
+        save_btn = findViewById(R.id.save_btn);
+        update_back = findViewById(R.id.update_back);
+        profile_tab = findViewById(R.id.profile_tab);
+        profile_edit_tab = findViewById(R.id.profile_edit_tab);
+        profile_image = findViewById(R.id.profile_image);
+        cover_image = findViewById(R.id.cover_image);
+        profile_image_edit = findViewById(R.id.profile_image_edit);
+        p_image_shade_edit = findViewById(R.id.p_image_shade_edit);
+        f_name_edit = findViewById(R.id.f_name_edit);
+        l_name_edit = findViewById(R.id.l_name_edit);
+        number_edit = findViewById(R.id.number_edit);
+        village_edit = findViewById(R.id.village_edit);
+        Upazila = findViewById(R.id.upazilaDropDrown_edit);
+        District = findViewById(R.id.districtDropDrown_edit);
+        Division = findViewById(R.id.stateDropDrown_edit);
+        bloodGrpDropDown = findViewById(R.id.bloodGrpDropDown_edit);
+        lastDonateDate_edit = findViewById(R.id.lastDonateDate_edit);
+        birthDate_edit = findViewById(R.id.birthDate_edit);
+    }
 
     private void initializeAddressFilters() {
         Division.setOnClickListener(new View.OnClickListener() {
@@ -589,53 +607,46 @@ public class ProfileFragment extends Fragment {
     }
 
     private void processImageUpload(){
-        final StorageReference uploader = storageReference.child(String.format("profile_image/User Id : %s/profile_picture.%s",userId,getExtention()));
-        uploader.putFile(filepath)
-                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+        User user = new User();
+        if (profile_uri != null) {
+            final StorageReference uploader = storageReference.child(String.format("profile_image/User Email : %s/profile_picture.%s",account.getEmail(), ".jpg"));
+            uploader.putFile(profile_uri)
+                    .addOnSuccessListener(taskSnapshot -> {
                         Toast.makeText(context, R.string.Updated_img, Toast.LENGTH_SHORT).show();
                         uploader.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                             @SuppressLint("UseCompatLoadingForDrawables")
                             @Override
                             public void onSuccess(Uri uri) {
-                                if (!filepath.toString().isEmpty()){
+                                if (!filepath.toString().isEmpty()) {
                                     profileImg(uri);
                                     progressbar.setProgressDrawable(getResources().getDrawable(R.drawable.progress_bar_success));
                                 }
                             }
                         });
-                    }
-                })
-                .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
-                        long per = (100*snapshot.getBytesTransferred())/snapshot.getTotalByteCount();
+                    })
+                    .addOnProgressListener(snapshot -> {
+                        long per = (100 * snapshot.getBytesTransferred()) / snapshot.getTotalByteCount();
                         progressbar.setProgress((int) per);
                         progressbar.setMax(100);
                         Toast.makeText(context, R.string.updating, Toast.LENGTH_SHORT).show();
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(context, R.string.failed, Toast.LENGTH_SHORT).show();
-                    }
-                });
+                    }).addOnFailureListener(e -> Toast.makeText(context, R.string.failed, Toast.LENGTH_SHORT).show());
+        }else {
+            System.out.println("profile Uri is null but program can run.");
+        }
     }
 
     private void profileImg(Uri uri){
         HashMap<String,Object> values = new HashMap<>();
         values.put("bloodImg_url",uri.toString());
-        FirebaseDatabase.getInstance().getReference("Donors/"+FirebaseAuth.getInstance().getUid())
+        FirebaseDatabase.getInstance().getReference("Donors/"+ FirebaseAuth.getInstance().getUid())
                 .updateChildren(values)
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if(task.isSuccessful()){
-                            Toast.makeText(context, R.string.Updated, Toast.LENGTH_SHORT).show();
-                        }else {
-                            Toast.makeText(context, R.string.failed, Toast.LENGTH_SHORT).show();
-                        }
+                .addOnCompleteListener(task -> {
+                    if(task.isSuccessful()){
+                        profile_edit_tab.setVisibility(View.GONE);
+                        profile_tab.setVisibility(View.VISIBLE);
+                        Toast.makeText(context, R.string.Updated, Toast.LENGTH_SHORT).show();
+                    }else {
+                        Toast.makeText(context, R.string.failed, Toast.LENGTH_SHORT).show();
                     }
                 });
     }
@@ -654,14 +665,13 @@ public class ProfileFragment extends Fragment {
         values.put("birthdate",birthDate_edit.getText().toString());
         FirebaseDatabase.getInstance().getReference("Donors/"+FirebaseAuth.getInstance().getUid())
                 .updateChildren(values)
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if(task.isSuccessful()){
-                            Toast.makeText(context, R.string.Updated, Toast.LENGTH_SHORT).show();
-                        }else {
-                            Toast.makeText(context, R.string.failed, Toast.LENGTH_SHORT).show();
-                        }
+                .addOnCompleteListener(task -> {
+                    if(task.isSuccessful()){
+                        profile_edit_tab.setVisibility(View.GONE);
+                        profile_tab.setVisibility(View.VISIBLE);
+                        Toast.makeText(context, R.string.Updated, Toast.LENGTH_SHORT).show();
+                    }else {
+                        Toast.makeText(context, R.string.failed, Toast.LENGTH_SHORT).show();
                     }
                 });
 
@@ -730,7 +740,90 @@ public class ProfileFragment extends Fragment {
         });
     }
 
+    private boolean NotEmpty(){
+        if (f_name_edit.getText() == null || f_name_edit.getText().toString().length() == 0) {
+            f_name_edit.setError("অনুগ্রহপূর্বক সঠিক নাম দিন!");
+            return false;
+        } else {
+            f_name_edit.setError(null);
+        }
 
 
+        if (l_name_edit.getText() == null || l_name_edit.getText().toString().length() == 0) {
+            l_name_edit.setError("অনুগ্রহপূর্বক সঠিক শেষের নাম দিন!");
+            return false;
+        } else {
+            l_name_edit.setError(null);
+        }
 
-}//base
+        if (Objects.requireNonNull(number_edit.getText()).length() != 11) {
+            number_edit.setError("অনুগ্রহপূর্বক সঠিক মোবাইল নম্বর দিন!");
+            return false;
+        } else {
+            number_edit.setError(null);
+        }
+
+        if (Division.getText() == null || Division.getText().toString().length() == 0) {
+            Division.setError("অনুগ্রহপূর্বক সঠিক তথ্য দিন!");
+            return false;
+        } else {
+            Division.setError(null);
+        }
+
+
+        if (District.getText() == null || District.getText().toString().length() == 0) {
+            District.setError("অনুগ্রহপূর্বক সঠিক তথ্য দিন!");
+            return false;
+        } else {
+            District.setError(null);
+        }
+
+
+        if (Upazila.getText() == null || Upazila.getText().toString().length() == 0) {
+            Upazila.setError("অনুগ্রহপূর্বক সঠিক তথ্য দিন!");
+            return false;
+        } else {
+            Upazila.setError(null);
+        }
+
+
+        if (village_edit.getText() == null || village_edit.getText().toString().length() == 0) {
+            village_edit.setError("অনুগ্রহপূর্বক সঠিক তথ্য দিন!");
+            return false;
+        } else {
+            village_edit.setError(null);
+        }
+
+
+        if (bloodGrpDropDown.getText() == null || bloodGrpDropDown.getText().toString().length() == 0) {
+            bloodGrpDropDown.setError("অনুগ্রহপূর্বক সঠিক তথ্য দিন!");
+            return false;
+        } else {
+            bloodGrpDropDown.setError(null);
+        }
+
+        if (lastDonateDate_edit.getText() == null || lastDonateDate_edit.getText().toString().length() == 0) {
+            lastDonateDate_edit.setError("অনুগ্রহপূর্বক সঠিক তথ্য দিন!");
+            return false;
+        } else {
+            lastDonateDate_edit.setError(null);
+        }
+
+        if (birthDate_edit.getText() == null || birthDate_edit.getText().toString().length() == 0) {
+            birthDate_edit.setError("অনুগ্রহপূর্বক সঠিক তথ্য দিন!");
+            return false;
+        } else {
+            birthDate_edit.setError(null);
+        }
+
+        return true;
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        profile_edit_tab.setVisibility(View.GONE);
+        profile_tab.setVisibility(View.VISIBLE);
+        super.onBackPressed();
+    }
+}//Root

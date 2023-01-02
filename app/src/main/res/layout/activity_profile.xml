@@ -1,0 +1,988 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Profile">
+
+  <!--    content-->
+  <androidx.appcompat.widget.Toolbar
+      android:id="@+id/toolbar"
+      android:layout_width="match_parent"
+      android:layout_height="?attr/actionBarSize"
+      android:background="@color/colorPrimary"
+      android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+      app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/title_font"
+        android:text="@string/app_name"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="@dimen/manu_txt"
+        android:textStyle="bold" />
+  </androidx.appcompat.widget.Toolbar>
+
+  <androidx.constraintlayout.widget.ConstraintLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:visibility="visible"
+      >
+    <!--    Header-->
+    <ImageView
+        android:id="@+id/headerVictor"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:contentDescription="@string/header"
+        android:scaleType="centerCrop"
+        android:src="@drawable/header_victor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <!--    main card-->
+    <LinearLayout
+        android:id="@+id/mainCard"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginHorizontal="@dimen/_6dp"
+        android:layout_marginTop="@dimen/_38dp"
+        android:layout_marginBottom="@dimen/_50dp"
+        android:elevation="@dimen/shadow"
+        android:background="@drawable/card"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        tools:ignore="UselessParent">
+
+      <!--    Profile tab-->
+      <androidx.constraintlayout.widget.ConstraintLayout
+          android:id="@+id/profile_tab"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:gravity="center"
+          android:visibility="visible"
+          android:orientation="vertical">
+        <!--    for background images-->
+        <ImageView
+            android:id="@+id/cover_image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/_8dp"
+            android:contentDescription="@string/cover"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ibdc_logo" />
+
+        <!--    for background images-->
+
+        <!--details box-->
+
+        <!--details box-->
+
+        <!--title box-->
+
+        <View
+            android:id="@+id/cover_shed"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/_8dp"
+            android:background="@color/semi_tns_background"
+            app:layout_constraintBottom_toBottomOf="@+id/cover_image"
+            app:layout_constraintEnd_toEndOf="@+id/cover_image"
+            app:layout_constraintHorizontal_bias="0.2"
+            app:layout_constraintStart_toStartOf="@+id/cover_image"
+            app:layout_constraintTop_toTopOf="@+id/cover_image" />
+
+        <LinearLayout
+            android:id="@+id/info_box"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_245dp"
+            android:layout_marginHorizontal="@dimen/_8dp"
+            android:background="@color/semi_tns_background"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="@+id/cover_shed"
+            app:layout_constraintEnd_toEndOf="@+id/cover_shed"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/cover_shed"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0">
+
+
+          <LinearLayout
+              android:id="@+id/title_header_box"
+              android:layout_width="match_parent"
+              android:layout_height="@dimen/_100dp"
+              android:background="@color/semi_tns_background"
+              android:orientation="horizontal"
+              android:weightSum="4"
+              app:layout_constraintBottom_toBottomOf="parent"
+              app:layout_constraintEnd_toEndOf="@+id/cover_shed"
+              app:layout_constraintHorizontal_bias="0.0"
+              app:layout_constraintStart_toStartOf="@id/cover_shed"
+              app:layout_constraintTop_toTopOf="parent"
+              app:layout_constraintVertical_bias="0.648">
+
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                >
+
+              <de.hdodenhof.circleimageview.CircleImageView
+                  android:id="@+id/profile_image"
+                  android:layout_width="@dimen/_100dp"
+                  android:layout_height="@dimen/_100dp"
+                  android:layout_gravity="center"
+                  android:layout_marginStart="@dimen/_10dp"
+                  android:layout_marginEnd="@dimen/_10dp"
+                  android:elevation="@dimen/shadow"
+                  android:scaleType="centerCrop"
+                  android:src="@drawable/ibdc_logo"
+                  app:civ_border_color="@color/colorPrimary"
+                  app:civ_border_width="@dimen/_3dp" />
+
+            </RelativeLayout>
+
+
+            <LinearLayout
+                android:id="@+id/title_box"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="vertical">
+
+              <LinearLayout
+                  android:id="@+id/name_box"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/f_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:fontFamily="@font/text_font"
+                    android:text="@string/first_name"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/manu_txt"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/l_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/text_font"
+                    android:text="@string/last_name"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/form_txt"
+                    android:textStyle="bold" />
+
+              </LinearLayout><!--            nameBox-->
+
+
+              <TextView
+                  android:id="@+id/mobile_number_pro"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:fontFamily="@font/banglanumber"
+                  android:text="@string/mobile_number"
+                  android:textColor="@color/white"
+                  android:textSize="@dimen/form_txt"
+                  android:textStyle="bold" />
+
+
+              <TextView
+                  android:id="@+id/blood_grp_pro"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:fontFamily="@font/text_font"
+                  android:text="@string/blood_group"
+                  android:textColor="@color/colorPrimary"
+                  android:textSize="@dimen/manu_txt"
+                  android:textStyle="bold" />
+
+            </LinearLayout><!--        title_box-->
+
+
+          </LinearLayout><!--title box-->
+
+          <LinearLayout
+              android:layout_width="match_parent"
+              android:layout_height="30dp"
+              android:layout_marginStart="5dp"
+              android:gravity="center"
+              android:layout_gravity="bottom"
+              android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/email_key"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:layout_weight=".58"
+                android:elevation="@dimen/minor_shadow"
+                android:fontFamily="@font/varela_round"
+                android:maxWidth="210dp"
+                android:singleLine="true"
+                android:text="@string/Email_bn"
+                android:textColor="@color/white"
+                android:textSize="@dimen/profile_txt" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".06"
+                android:text="@string/colon"
+                android:textColor="@color/white"
+                android:textSize="@dimen/profile_txt"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/email_pro"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.54"
+                android:clickable="true"
+                android:contextClickable="true"
+                android:elevation="@dimen/minor_shadow"
+                android:ellipsize="marquee"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:fontFamily="@font/varela_round"
+                android:freezesText="true"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:maxWidth="120dp"
+                android:scrollHorizontally="true"
+                android:singleLine="true"
+                android:text="@string/Email_bn"
+                android:textColor="@color/white"
+                android:textSize="@dimen/profile_txt" />
+
+          </LinearLayout>
+
+          <!--        info box-->
+          <LinearLayout
+              android:layout_width="match_parent"
+              android:layout_height="150dp"
+              android:layout_gravity="center"
+              android:gravity="center"
+              android:orientation="horizontal">
+
+            <!--            address box-->
+            <LinearLayout
+                android:id="@+id/linear1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="5dp"
+                android:layout_weight="1.7"
+                android:gravity="bottom"
+                android:orientation="horizontal"
+                android:paddingTop="20dp"
+                android:weightSum="2">
+
+              <!--                Address key's-->
+              <LinearLayout
+                  android:layout_width="0dp"
+                  android:layout_height="match_parent"
+                  android:layout_weight=".85"
+                  android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:elevation="@dimen/minor_shadow"
+                    android:fontFamily="@font/varela_round"
+                    android:maxWidth="210dp"
+                    android:singleLine="true"
+                    android:text="@string/birthdate"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/profile_txt" />
+
+                <TextView
+                    android:id="@+id/Village_key"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:elevation="@dimen/minor_shadow"
+                    android:fontFamily="@font/varela_round"
+                    android:maxWidth="210dp"
+                    android:singleLine="true"
+                    android:text="@string/village"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/profile_txt" />
+
+                <TextView
+                    android:id="@+id/upazila_key"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:elevation="@dimen/minor_shadow"
+                    android:fontFamily="@font/varela_round"
+                    android:maxWidth="210dp"
+                    android:singleLine="true"
+                    android:text="@string/upazila"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/profile_txt" />
+
+                <TextView
+                    android:id="@+id/district_key"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:elevation="@dimen/minor_shadow"
+                    android:fontFamily="@font/varela_round"
+                    android:maxWidth="210dp"
+                    android:singleLine="true"
+                    android:text="@string/district"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/profile_txt" />
+
+                <TextView
+                    android:id="@+id/division_key"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:elevation="@dimen/minor_shadow"
+                    android:fontFamily="@font/varela_round"
+                    android:maxWidth="210dp"
+                    android:singleLine="true"
+                    android:text="@string/divisions"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/profile_txt" />
+
+              </LinearLayout><!--                Address key's-->
+
+              <!--                Colon's-->
+              <LinearLayout
+                  android:layout_width="0dp"
+                  android:layout_height="match_parent"
+                  android:layout_weight=".05"
+                  android:orientation="vertical">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/colon"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/profile_txt"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/colon"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/profile_txt"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/colon"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/profile_txt"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/colon"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/profile_txt"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/colon"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/profile_txt"
+                    android:textStyle="bold" />
+              </LinearLayout><!--                Colon's-->
+
+              <!--                address value's-->
+              <LinearLayout
+                  android:layout_width="0dp"
+                  android:layout_height="match_parent"
+                  android:layout_marginStart="10dp"
+                  android:layout_weight="1.10"
+                  android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/birthDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:elevation="@dimen/minor_shadow"
+                    android:fontFamily="@font/banglanumber"
+                    android:maxWidth="210dp"
+                    android:singleLine="true"
+                    android:text="@string/last_donate_date"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/profile_txt" />
+
+                <TextView
+                    android:id="@+id/village_pro"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:elevation="@dimen/minor_shadow"
+                    android:fontFamily="@font/varela_round"
+                    android:maxWidth="210dp"
+                    android:singleLine="true"
+                    android:text="@string/vil_txt"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/profile_txt" />
+
+                <TextView
+                    android:id="@+id/tehsil_pro"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:elevation="@dimen/minor_shadow"
+                    android:fontFamily="@font/varela_round"
+                    android:maxWidth="120dp"
+                    android:singleLine="true"
+                    android:text="@string/upa_txt"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/profile_txt" />
+
+                <TextView
+                    android:id="@+id/district_pro"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:elevation="@dimen/minor_shadow"
+                    android:fontFamily="@font/varela_round"
+                    android:maxWidth="110dp"
+                    android:singleLine="true"
+                    android:text="@string/dis_txt"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/profile_txt" />
+
+                <TextView
+                    android:id="@+id/state_pro"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:contextClickable="true"
+                    android:elevation="@dimen/minor_shadow"
+                    android:ellipsize="marquee"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:fontFamily="@font/varela_round"
+                    android:freezesText="true"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:maxWidth="120dp"
+                    android:scrollHorizontally="true"
+                    android:singleLine="true"
+                    android:text="@string/div_txt"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/profile_txt" />
+
+
+              </LinearLayout><!--                address value's-->
+
+
+            </LinearLayout><!--            address box-->
+
+            <!--            lastDonateBox-->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight=".75"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:weightSum="1.8">
+
+
+              <LinearLayout
+                  android:layout_width="match_parent"
+                  android:layout_height="0dp"
+                  android:layout_gravity="center"
+                  android:layout_marginEnd="1dp"
+                  android:layout_weight="1.3"
+                  android:gravity="center"
+                  android:orientation="vertical">
+
+
+                <TextView
+                    android:id="@+id/lastDonate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:contextClickable="true"
+                    android:elevation="@dimen/minor_shadow"
+                    android:ellipsize="marquee"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:fontFamily="@font/varela_round"
+                    android:freezesText="true"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:singleLine="true"
+                    android:text="@string/last_donate"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/profile_txt" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@color/colorPrimary"
+                    android:elevation="@dimen/minor_shadow" />
+
+                <TextView
+                    android:id="@+id/lastDonateDate_pro"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:contextClickable="true"
+                    android:elevation="@dimen/minor_shadow"
+                    android:ellipsize="marquee"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:fontFamily="@font/banglanumber"
+                    android:freezesText="true"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:singleLine="true"
+                    android:text="@string/last_donate_date"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/profile_txt" />
+
+              </LinearLayout>
+
+
+              <LinearLayout
+                  android:layout_width="match_parent"
+                  android:layout_height="0dp"
+                  android:layout_gravity="center"
+                  android:layout_weight=".4"
+                  android:gravity="center"
+                  android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/edit_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_gravity="end"
+                    android:layout_marginEnd="5dp"
+                    android:gravity="center"
+                    android:text="@string/edit_profile"
+                    android:visibility="visible" />
+
+
+              </LinearLayout>
+
+            </LinearLayout><!--            lastDonateBox-->
+
+          </LinearLayout><!--        info box-->
+
+
+        </LinearLayout>
+
+      </androidx.constraintlayout.widget.ConstraintLayout><!--    Profile tab-->
+
+
+      <!--    profile edit tab-->
+      <androidx.constraintlayout.widget.ConstraintLayout
+          android:id="@+id/profile_edit_tab"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:gravity="center"
+          android:visibility="gone"
+          android:orientation="vertical">
+
+        <!--        Root Edit-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:weightSum="7"
+            >
+
+
+
+          <LinearLayout
+              android:layout_width="match_parent"
+              android:layout_height="0dp"
+              android:layout_weight="2"
+              android:orientation="vertical">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center">
+
+              <ProgressBar
+                  android:id="@+id/progressbar"
+                  style="@style/Widget.MaterialComponents.CircularProgressIndicator"
+                  android:layout_width="@dimen/_140dp"
+                  android:layout_height="@dimen/_140dp"
+                  android:layout_gravity="center"
+                  android:foregroundGravity="center"
+                  android:indeterminate="false"
+                  android:progressDrawable="@drawable/coustom_progressbar"
+                  app:layout_constraintBottom_toBottomOf="parent"
+                  app:layout_constraintEnd_toEndOf="parent"
+                  app:layout_constraintStart_toStartOf="parent"
+                  app:layout_constraintTop_toTopOf="parent" />
+
+              <de.hdodenhof.circleimageview.CircleImageView
+                  android:id="@+id/profile_image_edit"
+                  android:layout_width="@dimen/_100dp"
+                  android:layout_height="@dimen/_100dp"
+                  android:layout_gravity="center"
+                  android:foregroundGravity="center"
+                  android:scaleType="centerCrop"
+                  android:src="@drawable/ibdc_logo"
+                  app:layout_constraintBottom_toBottomOf="parent"
+                  app:layout_constraintEnd_toEndOf="parent"
+                  app:layout_constraintStart_toStartOf="parent"
+                  app:layout_constraintTop_toTopOf="parent" />
+
+
+              <de.hdodenhof.circleimageview.CircleImageView
+                  android:id="@+id/p_image_shade_edit"
+                  android:layout_width="@dimen/_100dp"
+                  android:layout_height="@dimen/_100dp"
+                  android:layout_gravity="center"
+                  android:foregroundGravity="center"
+                  android:scaleType="centerCrop"
+                  android:src="@drawable/edit_photo"
+                  app:layout_constraintBottom_toBottomOf="parent"
+                  app:layout_constraintEnd_toEndOf="parent"
+                  app:layout_constraintStart_toStartOf="parent"
+                  app:layout_constraintTop_toTopOf="parent" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout><!--                    Photo Section-->
+
+          </LinearLayout>
+
+
+
+          <ScrollView
+              android:id="@+id/edit_tabs"
+              android:layout_width="match_parent"
+              android:layout_height="0dp"
+              android:layout_weight="4.4"
+              android:layout_gravity="center"
+              android:layout_marginHorizontal="@dimen/_12dp"
+              android:paddingBottom="@dimen/_5dp"
+              android:background="@drawable/round_textbox"
+              android:elevation="@dimen/_5dp"
+              android:gravity="center"
+              android:orientation="vertical"
+              android:padding="@dimen/_8dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+
+              <!--name lay-->
+              <LinearLayout
+                  android:layout_width="match_parent"
+                  android:layout_height="@dimen/_50dp"
+                  android:baselineAligned="false"
+                  android:orientation="horizontal"
+                  android:weightSum="2">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginHorizontal="2dp"
+                    android:layout_weight="1"
+                    android:hint="@string/first_name"
+                    android:textColorHint="#000000"
+                    app:hintTextColor="#000000">
+
+                  <com.google.android.material.textfield.TextInputEditText
+                      android:id="@+id/f_name_edit"
+                      android:layout_width="match_parent"
+                      android:layout_height="match_parent"
+                      android:inputType="textCapWords"
+                      android:singleLine="true" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginHorizontal="2dp"
+                    android:layout_weight="1"
+                    android:hint="@string/last_name"
+                    android:textColorHint="#000000"
+                    app:hintTextColor="#000000">
+
+                  <com.google.android.material.textfield.TextInputEditText
+                      android:id="@+id/l_name_edit"
+                      android:layout_width="match_parent"
+                      android:layout_height="match_parent"
+                      android:inputType="textCapWords"
+                      android:singleLine="true" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+              </LinearLayout><!--name lay-->
+
+              <!--                    phoneNum-->
+              <LinearLayout
+                  android:layout_width="match_parent"
+                  android:layout_height="@dimen/_50dp"
+                  android:baselineAligned="false"
+                  android:orientation="horizontal">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginHorizontal="2dp"
+                    android:hint="@string/mobile_number"
+                    android:textColorHint="#000000"
+                    app:hintTextColor="#000000">
+
+                  <com.google.android.material.textfield.TextInputEditText
+                      android:id="@+id/number_edit"
+                      android:layout_width="match_parent"
+                      android:layout_height="match_parent"
+                      android:inputType="number"
+                      android:singleLine="true" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+              </LinearLayout>
+              <!--                    phoneNum-->
+
+              <LinearLayout
+                  android:layout_width="match_parent"
+                  android:layout_height="@dimen/_50dp"
+                  android:baselineAligned="false"
+                  android:orientation="horizontal"
+                  android:weightSum="2"
+                  tools:ignore="NestedWeights">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginHorizontal="2dp"
+                    android:layout_weight="1"
+                    android:hint="@string/divisions"
+                    android:textColorHint="#000000"
+                    app:hintTextColor="#000000">
+
+                  <AutoCompleteTextView
+                      android:id="@+id/stateDropDrown_edit"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:hint=""
+                      android:inputType="none" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginHorizontal="2dp"
+                    android:layout_weight="1"
+                    android:hint="@string/district"
+                    android:textColorHint="#000000"
+                    app:hintTextColor="#000000">
+
+                  <AutoCompleteTextView
+                      android:id="@+id/districtDropDrown_edit"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:hint=""
+                      android:inputType="none" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+              </LinearLayout>
+
+              <LinearLayout
+                  android:layout_width="match_parent"
+                  android:layout_height="@dimen/_50dp"
+                  android:baselineAligned="false"
+                  android:orientation="horizontal"
+                  android:weightSum="2"
+                  tools:ignore="NestedWeights">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginHorizontal="2dp"
+                    android:layout_weight="1"
+                    android:hint="@string/upazila"
+                    android:textColorHint="#000000"
+                    app:hintTextColor="#000000">
+
+                  <AutoCompleteTextView
+                      android:id="@+id/upazilaDropDrown_edit"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:inputType="none" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginHorizontal="2dp"
+                    android:layout_weight="1"
+                    android:hint="@string/village"
+                    android:textColorHint="#000000"
+                    app:hintTextColor="#000000">
+
+                  <com.google.android.material.textfield.TextInputEditText
+                      android:id="@+id/village_edit"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:inputType="textCapWords"
+                      android:singleLine="true" />
+                </com.google.android.material.textfield.TextInputLayout>
+              </LinearLayout>
+
+              <LinearLayout
+                  android:layout_width="match_parent"
+                  android:layout_height="@dimen/_50dp"
+                  android:baselineAligned="false"
+                  android:orientation="horizontal"
+                  android:weightSum="2"
+                  tools:ignore="NestedWeights">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginHorizontal="2dp"
+                    android:layout_weight="1"
+                    android:hint="@string/blood_group"
+                    android:textColorHint="#000000"
+                    app:hintTextColor="#000000">
+
+                  <AutoCompleteTextView
+                      android:id="@+id/bloodGrpDropDown_edit"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:inputType="none" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginHorizontal="2dp"
+                    android:layout_weight="1"
+                    android:hint="@string/last_donate"
+                    android:textColorHint="@color/black"
+                    app:hintTextColor="@color/black">
+
+                  <AutoCompleteTextView
+                      android:id="@+id/lastDonateDate_edit"
+                      android:layout_width="match_parent"
+                      android:layout_height="match_parent"
+                      android:inputType="none"
+                      android:fontFamily="@font/des_font"
+                      android:textSize="@dimen/_12sp"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+              </LinearLayout>
+
+              <com.google.android.material.textfield.TextInputLayout
+                  style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                  android:layout_width="match_parent"
+                  android:layout_height="@dimen/_50dp"
+                  android:layout_marginHorizontal="2dp"
+                  android:hint="@string/birthdate"
+                  android:textColorHint="#000000"
+                  app:hintTextColor="#000000"
+                  tools:ignore="TooManyViews">
+
+                <AutoCompleteTextView
+                    android:id="@+id/birthDate_edit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/des_font"
+                    android:inputType="none" />
+
+              </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+          </ScrollView>
+
+          <LinearLayout
+              android:layout_width="match_parent"
+              android:layout_height="0dp"
+              android:layout_weight=".6"
+              android:layout_marginHorizontal="@dimen/_20dp"
+              android:layout_marginTop="@dimen/_5dp"
+              android:orientation="horizontal"
+              android:weightSum="2">
+
+            <Button
+                android:id="@+id/update_back"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_5dp"
+                android:layout_weight="1"
+                android:elevation="@dimen/shadow"
+                android:text="@string/cancel"
+                android:textColor="@color/white"
+                android:textSize="@dimen/card_txt" />
+
+            <Button
+                android:id="@+id/save_btn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_5dp"
+                android:layout_weight="1"
+                android:elevation="@dimen/shadow"
+                android:text="@string/save_profile"
+                android:textColor="@color/white"
+                android:textSize="@dimen/card_txt" />
+          </LinearLayout>
+
+
+
+        </LinearLayout>
+        <!--        root Edit-->
+
+
+      </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/bannerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginBottom="@dimen/_5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+  </androidx.constraintlayout.widget.ConstraintLayout>
+
+  </LinearLayout>

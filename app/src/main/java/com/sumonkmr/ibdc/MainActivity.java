@@ -223,7 +223,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.ll_Profile:
-                replace(new ProfileFragment(), "Profile");
+//                replace(new ProfileFragment(), "Profile");
+                startActivity(new Intent(this,Profile.class));
                 break;
 
             case R.id.ll_beDonor:
@@ -377,24 +378,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
     }
-
-
-//    private void profileImg(Uri uri) {
-//        HashMap<String, Object> values = new HashMap<>();
-//        values.put("bloodImg_url", uri.toString());
-//        FirebaseDatabase.getInstance().getReference("Donors/" + account.getId())
-//                .updateChildren(values)
-//                .addOnCompleteListener(new OnCompleteListener<Void>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<Void> task) {
-//                        if (task.isSuccessful()) {
-//                            Toast.makeText(getApplicationContext(), R.string.Updated, Toast.LENGTH_SHORT).show();
-//                        } else {
-//                            Toast.makeText(getApplicationContext(), R.string.failed, Toast.LENGTH_SHORT).show();
-//                        }
-//                    }
-//                });
-//    }
 
     //////////////////////////////////////////////////////
 

@@ -224,7 +224,7 @@
     <string name="div_txt">রাজশাহী</string>
     <string name="edit_button">ইডিট!!</string>
     <string name="edit_profile">ইডিট!!</string>
-    <string name="save_profile">সেভ!!</string>
+    <string name="save_profile"><b>সেভ!!</b></string>
     <string name="Email_bn">ইমেল</string>
     <string name="verified">ভেরিফাই সম্পূর্ণ!✔</string>
     <string name="verifying">ভেরিফাই হচ্ছে…</string>
