@@ -13,17 +13,17 @@ import android.content.ContextWrapper;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.os.Handler;
 import android.provider.MediaStore;
 import android.view.View;
+import android.view.ViewGroup;
 import android.webkit.MimeTypeMap;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -33,10 +33,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -45,9 +42,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.PermissionToken;
 import com.karumi.dexter.listener.PermissionDeniedResponse;
@@ -61,6 +56,8 @@ import java.io.FileOutputStream;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Objects;
+import java.util.Random;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Profile extends AppCompatActivity {
 
@@ -71,7 +68,7 @@ public class Profile extends AppCompatActivity {
     TextView f_name, l_name, mobile_number_pro, blood_grp_pro, village_pro, tehsil_pro, district_pro, state_pro, lastDonateDate_pro,email_pro,birthDate;
     com.google.android.material.textfield.TextInputEditText f_name_edit,l_name_edit,village_edit,number_edit;
     de.hdodenhof.circleimageview.CircleImageView profile_image,profile_image_edit,p_image_shade_edit;
-    AutoCompleteTextView Division,District,Upazila,bloodGrpDropDown,lastDonateDate_edit,birthDate_edit;
+    AutoCompleteTextView Division,District,Upazila,bloodGrpDropDown,lastDonateDate_edit;
     ImageView cover_image;
     Uri filepath;
     Bitmap bitmap;
@@ -85,6 +82,8 @@ public class Profile extends AppCompatActivity {
     GoogleSignInAccount account;
     int REQUEST_CODE = 11;
     LinearLayout bannerLay;
+    String day, month, year, date;
+    int currentYear,age;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,7 +99,6 @@ public class Profile extends AppCompatActivity {
         Init();
         initializeAddressFilters();
         LastDonateDatePicker();
-
 //        Database references
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         userId = currentUser.getUid();
@@ -115,19 +113,18 @@ public class Profile extends AppCompatActivity {
         });
 
         save_btn.setOnClickListener(v -> {
-            if (NotEmpty()){
-                addToDatabase();
-                processImageUpload();
-            }else {
-                Toast.makeText(context, "ত্রুটি, অনুগ্রহপূর্বক সকল তথ্য পুনরায় চেক করুন।", Toast.LENGTH_SHORT).show();
-            }
+                if (NotEmpty()){
+                    addToDatabase();
+                    processImageUpload();
+                }else {
+                    Toast.makeText(context, "ত্রুটি, অনুগ্রহপূর্বক সকল তথ্য পুনরায় চেক করুন।", Toast.LENGTH_SHORT).show();
+                }
 
         });
 
         update_back.setOnClickListener(v -> {
             profile_edit_tab.setVisibility(View.GONE);
             profile_tab.setVisibility(View.VISIBLE);
-
         });
 
         p_image_shade_edit.setOnClickListener(v -> {
@@ -153,6 +150,8 @@ public class Profile extends AppCompatActivity {
                         }
                     }).check();
         });
+
+
     }//onCrate
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -218,7 +217,6 @@ public class Profile extends AppCompatActivity {
         Division = findViewById(R.id.stateDropDrown_edit);
         bloodGrpDropDown = findViewById(R.id.bloodGrpDropDown_edit);
         lastDonateDate_edit = findViewById(R.id.lastDonateDate_edit);
-        birthDate_edit = findViewById(R.id.birthDate_edit);
     }
 
     private void initializeAddressFilters() {
@@ -564,46 +562,14 @@ public class Profile extends AppCompatActivity {
 
     private void LastDonateDatePicker(){
         final Calendar calendar = Calendar.getInstance();
-
-        lastDonateDate_edit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                y = calendar.get(Calendar.YEAR);
-                m = calendar.get(Calendar.MONTH);
-                d = calendar.get(Calendar.DAY_OF_MONTH);
-                DatePickerDialog datePickerDialog = new DatePickerDialog(context, new DatePickerDialog.OnDateSetListener() {
-                    @SuppressLint("SetTextI18n")
-                    @Override
-                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        lastDonateDate_edit.setText(dayOfMonth+ "/"+(month+1)+"/"+year);
-                    }
-                },y,m,d);
-                datePickerDialog.show();
-            }
+        lastDonateDate_edit.setOnClickListener(v -> {
+            y = calendar.get(Calendar.YEAR);
+            m = calendar.get(Calendar.MONTH);
+            d = calendar.get(Calendar.DAY_OF_MONTH);
+            DatePickerDialog datePickerDialog = new DatePickerDialog(Profile.this, (view, year, month, dayOfMonth) -> lastDonateDate_edit.setText(dayOfMonth+ "/"+(month+1)+"/"+year),y,m,d);
+            datePickerDialog.show();
         });
 
-        birthDate_edit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                y = calendar.get(Calendar.YEAR);
-                m = calendar.get(Calendar.MONTH);
-                d = calendar.get(Calendar.DAY_OF_MONTH);
-                DatePickerDialog datePickerDialog = new DatePickerDialog(context, new DatePickerDialog.OnDateSetListener() {
-                    @SuppressLint("SetTextI18n")
-                    @Override
-                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        birthDate_edit.setText(dayOfMonth+ "/"+(month+1)+"/"+year);
-                    }
-                },y,m,d);
-                datePickerDialog.show();
-            }
-        });
-    }
-
-
-    private String getExtention(){
-        MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
-        return mimeTypeMap.getExtensionFromMimeType(context.getContentResolver().getType(filepath));
     }
 
     private void processImageUpload(){
@@ -662,7 +628,6 @@ public class Profile extends AppCompatActivity {
         values.put("Village", Objects.requireNonNull(village_edit.getText()).toString());
         values.put("BloodGroup",bloodGrpDropDown.getText().toString());
         values.put("lastDonateDate",lastDonateDate_edit.getText().toString());
-        values.put("birthdate",birthDate_edit.getText().toString());
         FirebaseDatabase.getInstance().getReference("Donors/"+FirebaseAuth.getInstance().getUid())
                 .updateChildren(values)
                 .addOnCompleteListener(task -> {
@@ -710,7 +675,6 @@ public class Profile extends AppCompatActivity {
                     Division.setText(Objects.requireNonNull(snapshot.child("State").getValue()).toString());
                     bloodGrpDropDown.setText(Objects.requireNonNull(snapshot.child("BloodGroup").getValue()).toString());
                     lastDonateDate_edit.setText(Objects.requireNonNull(snapshot.child("lastDonateDate").getValue()).toString());
-                    birthDate_edit.setText(Objects.requireNonNull(snapshot.child("birthdate").getValue()).toString());
 
                     Glide.with(context)
                             .load(profile_url)
@@ -809,21 +773,22 @@ public class Profile extends AppCompatActivity {
             lastDonateDate_edit.setError(null);
         }
 
-        if (birthDate_edit.getText() == null || birthDate_edit.getText().toString().length() == 0) {
-            birthDate_edit.setError("অনুগ্রহপূর্বক সঠিক তথ্য দিন!");
-            return false;
-        } else {
-            birthDate_edit.setError(null);
-        }
-
         return true;
     }
 
-
     @Override
     public void onBackPressed() {
-        profile_edit_tab.setVisibility(View.GONE);
-        profile_tab.setVisibility(View.VISIBLE);
-        super.onBackPressed();
-    }
+        AdsControl adsControl = new AdsControl(this);
+        Random random;
+        random = new Random();
+        int myCount = random.nextInt(100 - 5) + 5;
+        if (adsControl.passCondition() && myCount % 2 == 0) {
+            AdsControl.mInterstitialAd.show(this);
+//            Toast.makeText(this, "Ready For Show Ads!" + myCount, Toast.LENGTH_SHORT).show();
+            super.onBackPressed();
+        } else {
+//            Toast.makeText(this, "Something Wrong And Value is : " + Ads.mod + myCount, Toast.LENGTH_SHORT).show();
+            super.onBackPressed();
+        }
+    }//onBackPressed
 }//Root
