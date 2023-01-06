@@ -227,12 +227,12 @@
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:layout_marginHorizontal="10dp"
-                                        android:layout_marginTop="5dp"
+                                        android:layout_marginVertical="@dimen/_5dp"
                                         android:fontFamily="@font/des_font"
                                         android:text="@string/sadiqul_position"
                                         android:textAlignment="center"
                                         android:textColor="@color/goodgrey"
-                                        android:textSize="@dimen/card_txt"
+                                        android:textSize="@dimen/label"
                                         android:textStyle="bold" />
 
                                     <LinearLayout

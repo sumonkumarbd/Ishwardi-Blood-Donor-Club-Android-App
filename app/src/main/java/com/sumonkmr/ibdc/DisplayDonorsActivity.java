@@ -49,6 +49,7 @@ import com.sumonkmr.ibdc.model.User;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Random;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -671,7 +672,7 @@ public class DisplayDonorsActivity extends AppCompatActivity {
         System.out.println(s);
         temp.clear();
         for (User v : users) {
-            if (v.getVillage().toUpperCase().contains(s)||v.getUpazila().toUpperCase().contains(s) || v.getDistrict().toUpperCase().contains(s) || v.getState().toUpperCase().contains(s) || v.getLastDonateDate().toUpperCase().contains(s)||v.getMobile().toUpperCase().contains(s)||s.equalsIgnoreCase("ALL")) {
+            if (v.getVillage().toUpperCase().contains(s.toLowerCase(Locale.ROOT).toUpperCase(Locale.ROOT))||v.getUpazila().toUpperCase().contains(s) || v.getDistrict().toUpperCase().contains(s) || v.getState().toUpperCase().contains(s) || v.getLastDonateDate().toUpperCase().contains(s)||v.getBloodGroup().toUpperCase().contains(s.toLowerCase(Locale.ROOT).toUpperCase(Locale.ROOT))||s.equalsIgnoreCase("ALL")) {
                 System.out.println(v.getUpazila());
                 temp.add(v);
             }

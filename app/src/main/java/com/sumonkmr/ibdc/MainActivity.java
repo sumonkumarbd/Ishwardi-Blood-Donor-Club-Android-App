@@ -63,6 +63,7 @@ import java.io.FileOutputStream;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Objects;
+import java.util.Random;
 
 import nl.psdcompany.duonavigationdrawer.views.DuoDrawerLayout;
 import nl.psdcompany.duonavigationdrawer.widgets.DuoDrawerToggle;
@@ -217,6 +218,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @SuppressLint("NonConstantResourceId")
     @Override
     public void onClick(View view) {
+        AdsControl adsControl = new AdsControl(this);
+        Random random = new Random();
+        int myCount = random.nextInt(100 - 5) + 5;
         switch (view.getId()) {
             case R.id.ll_Home:
                 replace(new HomeFragment(), "Home");
@@ -236,7 +240,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.ll_fb:
-                gotoUrl("https://www.facebook.com/groups/ibdcbd");
+                if (adsControl.passCondition() && myCount % 2 == 0) {
+                    AdsControl.mInterstitialAd.show(this);
+//            Toast.makeText(this, "Ready For Show Ads!" + myCount, Toast.LENGTH_SHORT).show();
+                    gotoUrl("https://www.facebook.com/groups/ibdcbd");
+                } else {
+//            Toast.makeText(this, "Something Wrong And Value is : " + Ads.mod + myCount, Toast.LENGTH_SHORT).show();
+                    gotoUrl("https://www.facebook.com/groups/ibdcbd");
+                }
                 break;
 
             case R.id.ll_Share:
@@ -248,14 +259,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.ll_privacy:
-                gotoUrl("https://sites.google.com/view/ibdcprivacypolicy/privacy-policy?authuser=0");
+                if (adsControl.passCondition() && myCount % 2 == 0) {
+                    AdsControl.mInterstitialAd.show(this);
+//            Toast.makeText(this, "Ready For Show Ads!" + myCount, Toast.LENGTH_SHORT).show();
+                    gotoUrl("https://sites.google.com/view/ibdcprivacypolicy/privacy-policy?authuser=0");
+                } else {
+//            Toast.makeText(this, "Something Wrong And Value is : " + Ads.mod + myCount, Toast.LENGTH_SHORT).show();
+                    gotoUrl("https://sites.google.com/view/ibdcprivacypolicy/privacy-policy?authuser=0");
+                }
                 break;
 
             case R.id.ll_Logout:
-                auth.signOut();
-                startActivity(new Intent(this, SplashScreen.class));
-                MainActivity.this.finish();
-                gsc.revokeAccess();
+                if (adsControl.passCondition() && myCount % 2 == 0) {
+                    AdsControl.mInterstitialAd.show(this);
+//            Toast.makeText(this, "Ready For Show Ads!" + myCount, Toast.LENGTH_SHORT).show();
+                    auth.signOut();
+                    startActivity(new Intent(this, SplashScreen.class));
+                    MainActivity.this.finish();
+                    gsc.revokeAccess();
+                } else {
+//            Toast.makeText(this, "Something Wrong And Value is : " + Ads.mod + myCount, Toast.LENGTH_SHORT).show();
+                    auth.signOut();
+                    startActivity(new Intent(this, SplashScreen.class));
+                    MainActivity.this.finish();
+                    gsc.revokeAccess();
+                }
                 break;
 
             case R.id.mail:

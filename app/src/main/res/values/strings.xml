@@ -1123,11 +1123,11 @@
     <string name="password_update">পাসওয়ার্ড পরিবর্তন করুন।</string>
     <string name="changeEmail"> ইমেল পরিবর্তন করুন।</string>
     <string name="change_phone">মোবাইল নাম্বার পরিবর্তন করন।</string>
-    <string name="reset"><b>রিসেট করুন!</b></string>
-    <string name="cancel"><b>বাতিল করুন!</b></string>
+    <string name="reset"><b>রিসেট!</b></string>
+    <string name="cancel"><b>বাতিল!</b></string>
     <string name="yes"><b>জ্বী!</b></string>
     <string name="no"><b>না!</b></string>
-    <string name="next_remainder"><b>পরবর্তী রিমাইন্ডার!</b></string>
+    <string name="next_remainder"><b>এখন নয়!</b></string>
     <string name="current_email">বর্তমান ইমেইল দিন</string>
     <string name="new_email">নতুন ইমেইল দিন</string>
     <string name="new_phone">নতুন মোবাইল নাম্বার দিন…</string>

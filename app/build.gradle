@@ -5,16 +5,24 @@ plugins {
 }
 
 android {
+    signingConfigs {
+        relese {
+            storeFile file('G:\\android_projects\\projects\\Productions\\Ishwardi-Blood-Donor-Club-Android-App\\key_store\\ibdc_keystore.jks')
+            storePassword 'IBDC@007'
+            keyAlias 'ibdc'
+            keyPassword 'IBDC@007'
+        }
+    }
     compileSdkVersion 33
     buildToolsVersion "30.0.3"
 
     defaultConfig {
         applicationId "com.sumonkmr.ibdc"
-        minSdk 28
+        minSdk 25
         //noinspection ExpiringTargetSdkVersion
         targetSdkVersion 33
-        versionCode 5
-        versionName "2.0"
+        versionCode 7
+        versionName "2.1"
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -23,6 +31,7 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.relese
         }
     }
     compileOptions {
