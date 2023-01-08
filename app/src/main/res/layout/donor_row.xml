@@ -2,7 +2,7 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/_150dp"
+    android:layout_height="@dimen/_165dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardUseCompatPadding="true"
     android:elevation="@dimen/shadow"
@@ -31,6 +31,49 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/view2"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_2dp"
+            android:layout_marginTop="@dimen/_5dp"
+            android:background="@color/colorAccent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/dRowImg" />
+
+        <ImageView
+            android:id="@+id/like_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/like"
+            android:layout_marginStart="@dimen/_10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view2"
+            android:contentDescription="@string/todo" />
+
+        <TextView
+            android:id="@+id/like_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/dRowImg"
+            android:clickable="true"
+            android:contextClickable="true"
+            android:elevation="@dimen/minor_shadow"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:fontFamily="@font/banglanumber"
+            android:gravity="center_vertical"
+            android:maxWidth="@dimen/_150dp"
+            android:singleLine="true"
+            android:text="@string/comma"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/tab_label"
+            android:layout_marginStart="@dimen/_5dp"
+            app:layout_constraintBottom_toBottomOf="@+id/like_btn"
+            app:layout_constraintStart_toEndOf="@+id/like_btn"
+            app:layout_constraintTop_toTopOf="@+id/like_btn" />
 
         <TextView
             android:id="@+id/dRowFullName"

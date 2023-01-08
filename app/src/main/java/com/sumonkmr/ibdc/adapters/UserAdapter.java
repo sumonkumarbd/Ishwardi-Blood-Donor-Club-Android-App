@@ -1,6 +1,5 @@
 package com.sumonkmr.ibdc.adapters;
 
-import android.app.Application;
 import android.content.Context;
 import android.os.Build;
 import android.util.Log;
@@ -8,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,34 +18,39 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
-import com.karumi.dexter.Dexter;
-import com.squareup.picasso.Picasso;
-import com.sumonkmr.ibdc.DisplayDonorsActivity;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.sumonkmr.ibdc.R;
 import com.sumonkmr.ibdc.StringCaseConverter;
 import com.sumonkmr.ibdc.listeners.MyOnClickListener;
 import com.sumonkmr.ibdc.model.User;
 
-import java.io.Console;
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder>{
+public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder> {
 
 
     ArrayList<User> users;
     Context context;
-    MyOnClickListener myOnClickListenerCall,myOnClickListenerShare;
+    MyOnClickListener myOnClickListenerCall, myOnClickListenerShare;
+    DatabaseReference likeInterface,like_ref;
+    Boolean testClick = false;
 
 
-    public void updateList(ArrayList<User>users){
+    public void updateList(ArrayList<User> users) {
         this.users = users;
         notifyDataSetChanged();
     }
 
 
-    public UserAdapter(Context context,ArrayList<User> users, MyOnClickListener onClickListenerCall,MyOnClickListener onClickListenerShare){
+    public UserAdapter(Context context, ArrayList<User> users, MyOnClickListener onClickListenerCall, MyOnClickListener onClickListenerShare) {
         this.context = context;
         this.users = users;
         this.myOnClickListenerCall = onClickListenerCall;
@@ -57,12 +60,66 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder>{
     @NonNull
     @Override
     public UserHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new UserHolder(LayoutInflater.from(context).inflate(R.layout.donor_row,parent,false));
+        return new UserHolder(LayoutInflater.from(context).inflate(R.layout.donor_row, parent, false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull UserHolder holder, int position) {
-        String state,district,tehsil,fname,village,bloodgroup,bloodImg_url,lastDonateDate,age;
+
+//        like System
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        assert currentUser != null;
+        String userId = currentUser.getUid();
+        String postKey = users.get(position).getUid();
+        likeInterface = FirebaseDatabase.getInstance().getReference("likes");
+        likeInterface.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.child(postKey).hasChild(userId)) {
+                    int likeCount = (int) snapshot.child(postKey).getChildrenCount();
+                    holder.like_count.setText(String.valueOf(likeCount));
+                    holder.like_btn.setImageResource(R.drawable.like_active);
+                } else {
+                    int likeCount = (int) snapshot.child(postKey).getChildrenCount();
+                    holder.like_count.setText(String.valueOf(likeCount));
+                    holder.like_btn.setImageResource(R.drawable.like);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        like_ref = FirebaseDatabase.getInstance().getReference("likes");
+        holder.like_btn.setOnClickListener(v -> {
+            testClick = true;
+            like_ref.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if (testClick) {
+                        if (snapshot.child(postKey).hasChild(userId)) {
+                            like_ref.child(postKey).child(userId).removeValue();
+                            testClick = false;
+                        }else {
+                            like_ref.child(postKey).child(userId).setValue(true);
+                            testClick = false;
+                        }
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+        });
+//        Like system
+
+
+        String state, district, tehsil, fname, village, bloodgroup, bloodImg_url, lastDonateDate, age;
         state = users.get(position).getState();
         district = users.get(position).getDistrict();
         tehsil = users.get(position).getUpazila();
@@ -119,8 +176,8 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder>{
         holder.call.setOnClickListener(v -> myOnClickListenerCall.getPosition(position));
         try {
             YoYo.with(Techniques.SlideInDown).delay(0).duration(1000).playOn(holder.recViewHeader);
-        }catch (Exception e){
-            Log.d("Error",String.valueOf(e.getCause()));
+        } catch (Exception e) {
+            Log.d("Error", String.valueOf(e.getCause()));
         }
 
     }
@@ -130,10 +187,10 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder>{
         return users.size();
     }
 
-    static class UserHolder extends RecyclerView.ViewHolder{
+    static class UserHolder extends RecyclerView.ViewHolder {
 
-        TextView fullName,bloodGroup,state,district,tehsil,village,lastDonateDate,age;
-        ImageView share,call,bloodImg;
+        TextView fullName, bloodGroup, state, district, tehsil, village, lastDonateDate, age, like_count;
+        ImageView share, call, bloodImg, like_btn;
         ConstraintLayout recViewHeader;
         CardView dRow_parent;
 
@@ -151,6 +208,8 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder>{
             bloodImg = itemView.findViewById(R.id.dRowImg);
 //            age = itemView.findViewById(R.id.age);
             dRow_parent = itemView.findViewById(R.id.dRow_parent);
+            like_btn = itemView.findViewById(R.id.like_btn);
+            like_count = itemView.findViewById(R.id.like_count);
         }
     }
 
