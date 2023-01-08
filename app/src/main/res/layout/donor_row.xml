@@ -2,7 +2,7 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/_165dp"
+    android:layout_height="@dimen/_170dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardUseCompatPadding="true"
     android:elevation="@dimen/shadow"
@@ -15,6 +15,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         >
+
+        <ImageView
+            android:id="@+id/header"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_20dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/blood_background"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="@string/todo" />
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/dRowImg"
@@ -123,6 +134,7 @@
             android:id="@+id/l_dateTxt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_5dp"
             android:clickable="true"
             android:contextClickable="true"
             android:elevation="@dimen/minor_shadow"
@@ -132,12 +144,11 @@
             android:marqueeRepeatLimit="marquee_forever"
             android:maxWidth="120dp"
             android:singleLine="true"
-            android:layout_marginStart="@dimen/_5dp"
             android:text="@string/last_donate"
-            android:textColor="@color/colorPrimary"
+            android:textColor="@color/white"
             android:textSize="@dimen/card_txt"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/dRowImg"
+            app:layout_constraintBottom_toBottomOf="@+id/header"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -155,7 +166,7 @@
             android:maxWidth="120dp"
             android:singleLine="true"
             android:text="@string/last_donate_date"
-            android:textColor="@color/colorPrimary"
+            android:textColor="@color/white"
             android:textSize="@dimen/_14sp"
             android:textStyle="bold"
             android:layout_marginStart="@dimen/_5dp"
@@ -255,12 +266,13 @@
             android:id="@+id/dRow_share"
             android:layout_width="@dimen/_25dp"
             android:layout_height="@dimen/_25dp"
-            android:layout_marginTop="@dimen/_5dp"
             android:layout_marginEnd="12dp"
+            android:layout_marginTop="@dimen/_5dp"
             android:contentDescription="@string/todo"
-            android:src="@drawable/ic_baseline_share_24"
+            android:src="@drawable/share"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/header"
+            />
 
         <ImageView
             android:id="@+id/dRaw_call"
@@ -268,7 +280,7 @@
             android:layout_height="@dimen/_25dp"
             android:contentDescription="@string/todo"
             android:layout_marginEnd="@dimen/_5dp"
-            android:src="@drawable/ic_baseline_call_24"
+            android:src="@drawable/call"
             app:layout_constraintBottom_toBottomOf="@+id/dRow_share"
             app:layout_constraintEnd_toStartOf="@+id/dRow_share"
             app:layout_constraintTop_toTopOf="@+id/dRow_share" />

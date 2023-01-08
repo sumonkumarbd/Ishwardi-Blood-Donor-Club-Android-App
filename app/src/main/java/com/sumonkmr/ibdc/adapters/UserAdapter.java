@@ -1,11 +1,14 @@
 package com.sumonkmr.ibdc.adapters;
 
 import android.content.Context;
+import android.media.MediaPlayer;
 import android.os.Build;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,7 +28,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.sumonkmr.ibdc.DisplayDonorsActivity;
 import com.sumonkmr.ibdc.R;
+import com.sumonkmr.ibdc.SoundManager;
 import com.sumonkmr.ibdc.StringCaseConverter;
 import com.sumonkmr.ibdc.listeners.MyOnClickListener;
 import com.sumonkmr.ibdc.model.User;
@@ -65,7 +70,6 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull UserHolder holder, int position) {
-
 //        like System
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         assert currentUser != null;
@@ -103,9 +107,11 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder> {
                         if (snapshot.child(postKey).hasChild(userId)) {
                             like_ref.child(postKey).child(userId).removeValue();
                             testClick = false;
+                            MediaPlayer.create(context.getApplicationContext(), R.raw.light_switch).start();
                         }else {
                             like_ref.child(postKey).child(userId).setValue(true);
                             testClick = false;
+                            MediaPlayer.create(context.getApplicationContext(), R.raw.ping).start();
                         }
                     }
                 }
@@ -166,6 +172,9 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder> {
             //for play more with view
 //            Toast.makeText(context, String.valueOf(position), Toast.LENGTH_SHORT).show();
         });
+
+        Animation itemViewAnim = AnimationUtils.loadAnimation(holder.itemView.getContext(),R.anim.slide_in_left);
+        holder.itemView.startAnimation(itemViewAnim);
 
     }
 
