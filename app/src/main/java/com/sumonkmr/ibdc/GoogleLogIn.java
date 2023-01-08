@@ -35,6 +35,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.annotations.Nullable;
 
+import java.util.Objects;
+
 public class GoogleLogIn extends AppCompatActivity {
 
     private static final int REQUEST_CODE = 2;
@@ -142,7 +144,7 @@ public class GoogleLogIn extends AppCompatActivity {
 
             } catch (ApiException e) {
                 // ...
-                Toast.makeText(this, "সফল হয় নি। দয়া করে আবার চেষ্টা করুন!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this,"টেকনিক্যাল সমস্যা!! অনুগ্রহপূর্বক কিচ্ছুক্ষন পরে আবার চেষ্টা করুন।", Toast.LENGTH_SHORT).show();
 
 
             }
@@ -152,20 +154,17 @@ public class GoogleLogIn extends AppCompatActivity {
     private void GoogleFirebaseAuth(String idToken) {
         AuthCredential firebaseCredential = GoogleAuthProvider.getCredential(idToken, null);
         mAuth.signInWithCredential(firebaseCredential)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Toast.makeText(GoogleLogIn.this, "লগ ইন সফল!", Toast.LENGTH_SHORT).show();
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            startActivity(new Intent(getApplicationContext(),SplashScreen.class));
-                            loadingAim.setVisibility(View.INVISIBLE);
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Toast.makeText(GoogleLogIn.this, "লগ ইন ফেল!", Toast.LENGTH_SHORT).show();
-                            loadingAim.setVisibility(View.INVISIBLE);
-                        }
+                .addOnCompleteListener(this, task -> {
+                    if (task.isSuccessful()) {
+                        // Sign in success, update UI with the signed-in user's information
+                        Toast.makeText(GoogleLogIn.this, "লগ ইন সফল!", Toast.LENGTH_SHORT).show();
+                        FirebaseUser user = mAuth.getCurrentUser();
+                        startActivity(new Intent(getApplicationContext(),SplashScreen.class));
+                        loadingAim.setVisibility(View.INVISIBLE);
+                    } else {
+                        // If sign in fails, display a message to the user.
+                        Toast.makeText(GoogleLogIn.this, "লগ ইন ফেল!", Toast.LENGTH_SHORT).show();
+                        loadingAim.setVisibility(View.INVISIBLE);
                     }
                 });
     }
