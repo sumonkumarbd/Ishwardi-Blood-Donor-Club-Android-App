@@ -195,7 +195,7 @@
 
     <string name="hintforlocation">আপনার স্থান নির্বাচন করুন</string>
     <string name="developer_name"><b>Sumon Kumar</b></string>
-    <string name="last_donate">শেষ রক্তদান</string>
+    <string name="last_donate">শেষ রক্তদানঃ</string>
     <string name="last_donate_never">পূর্বে করিনি।</string>
     <string name="last_donate_date">০৩/১২/২০২১ ইং</string>
 

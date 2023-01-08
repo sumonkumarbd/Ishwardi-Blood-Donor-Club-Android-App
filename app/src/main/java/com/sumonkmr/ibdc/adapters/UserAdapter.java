@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -56,7 +57,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder>{
     @NonNull
     @Override
     public UserHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new UserHolder(LayoutInflater.from(context).inflate(R.layout.details_donor_requester,parent,false));
+        return new UserHolder(LayoutInflater.from(context).inflate(R.layout.donor_row,parent,false));
     }
 
     @Override
@@ -72,14 +73,14 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder>{
         age = users.get(position).getAge();
         fname = String.format("%s %s", users.get(position).getFName(), users.get(position).getLName());
         String s = StringCaseConverter.convertToTitleCaseIteratingChars(fname);
-        holder.state.setText(state);
-        holder.district.setText(district);
+//        holder.state.setText(state);
+//        holder.district.setText(district);
         holder.tehsil.setText(tehsil);
         holder.village.setText(village);
         holder.fullName.setText(s);
         holder.bloodGroup.setText(bloodgroup);
         holder.lastDonateDate.setText(lastDonateDate);
-        holder.age.setText(age);
+//        holder.age.setText(age);
         Glide
                 .with(context)
                 .load(bloodImg_url)
@@ -88,14 +89,14 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder>{
                 .into(holder.bloodImg);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            holder.state.setText(state);
-            holder.district.setTooltipText(district);
+//            holder.state.setText(state);
+//            holder.district.setTooltipText(district);
             holder.tehsil.setTooltipText(tehsil);
             holder.village.setTooltipText(village);
             holder.fullName.setTooltipText(fname);
             holder.lastDonateDate.setTooltipText(lastDonateDate);
             holder.bloodGroup.setText(bloodgroup);
-            holder.age.setText(age);
+//            holder.age.setText(age);
             Glide
                     .with(context)
                     .load(bloodImg_url)
@@ -134,21 +135,22 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder>{
         TextView fullName,bloodGroup,state,district,tehsil,village,lastDonateDate,age;
         ImageView share,call,bloodImg;
         ConstraintLayout recViewHeader;
+        CardView dRow_parent;
 
         public UserHolder(@NonNull View itemView) {
             super(itemView);
-            fullName = itemView.findViewById(R.id.detailFullName);
-            bloodGroup = itemView.findViewById(R.id.detailBloodGroup);
-            state = itemView.findViewById(R.id.detailState);
-            district = itemView.findViewById(R.id.detailDistrict);
-            tehsil = itemView.findViewById(R.id.detailTehsil);
-            village = itemView.findViewById(R.id.detailVillage);
-            call = itemView.findViewById(R.id.call);
-            share = itemView.findViewById(R.id.share);
-            lastDonateDate = itemView.findViewById(R.id.lastDonateDate);
-            bloodImg = itemView.findViewById(R.id.bloodImg);
-            age = itemView.findViewById(R.id.age);
-            recViewHeader = itemView.findViewById(R.id.recViewHeader);
+            fullName = itemView.findViewById(R.id.dRowFullName);
+            bloodGroup = itemView.findViewById(R.id.dRow_bloodG);
+//            state = itemView.findViewById(R.id.detailState);
+//            district = itemView.findViewById(R.id.detailDistrict);
+            tehsil = itemView.findViewById(R.id.dRow_Upa);
+            village = itemView.findViewById(R.id.dRowVil);
+            call = itemView.findViewById(R.id.dRaw_call);
+            share = itemView.findViewById(R.id.dRow_share);
+            lastDonateDate = itemView.findViewById(R.id.dRaw_lastDonateDate);
+            bloodImg = itemView.findViewById(R.id.dRowImg);
+//            age = itemView.findViewById(R.id.age);
+            dRow_parent = itemView.findViewById(R.id.dRow_parent);
         }
     }
 
