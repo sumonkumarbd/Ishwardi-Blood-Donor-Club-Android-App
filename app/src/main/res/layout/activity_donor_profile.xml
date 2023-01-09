@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".DonorProfile">
+
+    <!--    content-->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/title_font"
+            android:text="@string/app_name"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="@dimen/manu_txt"
+            android:textStyle="bold" />
+    </androidx.appcompat.widget.Toolbar>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible">
+        <!--    Header-->
+        <ImageView
+            android:id="@+id/headerVictor"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:contentDescription="@string/header"
+            android:scaleType="centerCrop"
+            android:src="@drawable/header_victor"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!--    main card-->
+        <LinearLayout
+            android:id="@+id/mainCard"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="@dimen/_6dp"
+            android:layout_marginTop="@dimen/_38dp"
+            android:layout_marginBottom="@dimen/_50dp"
+            android:elevation="@dimen/shadow"
+            android:background="@drawable/card"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0">
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="5dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/text_font"
+                android:text="@string/profile"
+                android:textAlignment="textStart"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/manu_txt"
+                android:textStyle="bold" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/colorAccentDark" />
+
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="5dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:layout_marginHorizontal="5dp"
+                        android:layout_marginTop="2dp"
+                        android:layout_marginBottom="5dp"
+                        android:background="@color/colorAccentDark" />
+
+
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:background="@color/colorAccentDark" />
+
+                    <!-- Comments-->
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_40dp"
+                        android:orientation="vertical"
+                        android:background="@drawable/card"
+                        android:elevation="@dimen/shadow"
+                        android:layout_gravity="center"
+                        android:layout_marginHorizontal="@dimen/_10dp"
+                        android:layout_marginVertical="@dimen/_5dp"
+                        android:visibility="visible">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/commentField"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/tns"
+                            android:drawableStart="@drawable/comments"
+                            android:inputType="text"
+                            android:singleLine="true"
+                            android:scrollbars="horizontal"
+                            android:scrollbarThumbHorizontal="@null"
+                            android:paddingStart="@dimen/_5dp"
+                            android:paddingEnd="@dimen/_35dp"
+                            />
+
+                        <ImageView
+                            android:id="@+id/comment_done"
+                            android:layout_width="@dimen/_30dp"
+                            android:layout_height="@dimen/_30dp"
+                            android:layout_alignEnd="@+id/commentField"
+                            android:contentDescription="@string/todo"
+                            android:src="@drawable/comment_done"
+                            app:layout_constraintBottom_toBottomOf="@+id/commentField"
+                            app:layout_constraintEnd_toEndOf="@+id/commentField"
+                            app:layout_constraintTop_toTopOf="@+id/commentField" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout><!--Comments-->
+                </LinearLayout>
+
+            </ScrollView>
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/colorAccentDark" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/bannerLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="@dimen/_5dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <!--    finished content-->
+
+</LinearLayout>

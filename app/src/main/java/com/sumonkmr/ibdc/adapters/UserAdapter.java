@@ -1,6 +1,8 @@
 package com.sumonkmr.ibdc.adapters;
 
+import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Build;
 import android.util.Log;
@@ -9,7 +11,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,6 +25,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -29,6 +34,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.sumonkmr.ibdc.DisplayDonorsActivity;
+import com.sumonkmr.ibdc.DonorProfile;
 import com.sumonkmr.ibdc.R;
 import com.sumonkmr.ibdc.SoundManager;
 import com.sumonkmr.ibdc.StringCaseConverter;
@@ -96,7 +102,6 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder> {
 
             }
         });
-
         like_ref = FirebaseDatabase.getInstance().getReference("likes");
         holder.like_btn.setOnClickListener(v -> {
             testClick = true;
@@ -123,6 +128,14 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder> {
             });
         });
 //        Like system
+
+//        CommentSYStem
+        holder.commentsBtn.setOnClickListener(v -> {
+            Intent intent = new Intent(holder.itemView.getContext(), DonorProfile.class);
+            intent.putExtra("postKey",postKey);
+            holder.itemView.getContext().startActivity(intent);
+        });
+//        CommentSYStem
 
 
         String state, district, tehsil, fname, village, bloodgroup, bloodImg_url, lastDonateDate, age;
@@ -198,8 +211,8 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder> {
 
     static class UserHolder extends RecyclerView.ViewHolder {
 
-        TextView fullName, bloodGroup, state, district, tehsil, village, lastDonateDate, age, like_count;
-        ImageView share, call, bloodImg, like_btn;
+        TextView fullName, bloodGroup, state, district, tehsil, village, lastDonateDate, age, like_count,commentsTxt;
+        ImageView share, call, bloodImg, like_btn,commentsBtn;
         ConstraintLayout recViewHeader;
         CardView dRow_parent;
 
@@ -219,7 +232,10 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder> {
             dRow_parent = itemView.findViewById(R.id.dRow_parent);
             like_btn = itemView.findViewById(R.id.like_btn);
             like_count = itemView.findViewById(R.id.like_count);
+            commentsBtn = itemView.findViewById(R.id.commentsBtn);
+            commentsTxt = itemView.findViewById(R.id.commentsTxt);
         }
+
     }
 
 }

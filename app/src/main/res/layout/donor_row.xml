@@ -86,6 +86,28 @@
             app:layout_constraintStart_toEndOf="@+id/like_btn"
             app:layout_constraintTop_toTopOf="@+id/like_btn" />
 
+        <ImageView
+            android:id="@+id/commentsBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/comments"
+            android:layout_marginStart="@dimen/_10dp"
+            app:layout_constraintBottom_toBottomOf="@+id/like_count"
+            app:layout_constraintStart_toEndOf="@+id/like_count"
+            app:layout_constraintTop_toTopOf="@+id/like_count"
+            android:contentDescription="@string/todo" />
+        <TextView
+            android:id="@+id/commentsTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10dp"
+            android:text="@string/comma"
+            android:textColor="@color/colorPrimary"
+            app:layout_constraintBottom_toBottomOf="@+id/commentsBtn"
+            app:layout_constraintStart_toEndOf="@+id/commentsBtn"
+            app:layout_constraintTop_toTopOf="@+id/commentsBtn"
+            android:contentDescription="@string/todo" />
+
         <TextView
             android:id="@+id/dRowFullName"
             android:layout_width="wrap_content"

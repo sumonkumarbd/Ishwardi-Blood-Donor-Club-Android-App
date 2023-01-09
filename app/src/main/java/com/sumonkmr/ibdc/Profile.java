@@ -217,15 +217,17 @@ public class Profile extends AppCompatActivity {
         Division = findViewById(R.id.stateDropDrown_edit);
         bloodGrpDropDown = findViewById(R.id.bloodGrpDropDown_edit);
         lastDonateDate_edit = findViewById(R.id.lastDonateDate_edit);
+        bloodGrpDropDown.setOnClickListener(v -> bloodGrpDropDown.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.blood_groups))));
     }
 
     private void initializeAddressFilters() {
-        Division.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Division.setAdapter(new ArrayAdapter<>(context, android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.states)));
-            }
-        });
+
+//        bloodGrpDropDown.setOnClickListener(v -> {
+//            ArrayAdapter<String> adapter=new ArrayAdapter<String>(context, android.R.layout.simple_dropdown_item_1line,getResources().getStringArray(R.array.blood_groups));
+//            bloodGrpDropDown.setAdapter(adapter);
+//        });
+
+        Division.setOnClickListener(v -> Division.setAdapter(new ArrayAdapter<>(context, android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.states))));
 
         Division.setAdapter(new ArrayAdapter<>(context, android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.states)));
 
@@ -550,12 +552,6 @@ public class Profile extends AppCompatActivity {
 
 
             }
-        });
-
-        bloodGrpDropDown.setOnClickListener(v -> {
-            String[] bloodGroups = getResources().getStringArray(R.array.blood_groups);
-            ArrayAdapter<String> adapter=new ArrayAdapter<String>(context, android.R.layout.simple_dropdown_item_1line,bloodGroups);
-            bloodGrpDropDown.setAdapter(adapter);
         });
 
     }

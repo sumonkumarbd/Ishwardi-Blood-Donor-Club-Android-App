@@ -661,6 +661,7 @@
                   android:layout_height="@dimen/_100dp"
                   android:layout_gravity="center"
                   android:foregroundGravity="center"
+                  android:clickable="true"
                   android:scaleType="centerCrop"
                   android:src="@drawable/edit_photo"
                   app:layout_constraintBottom_toBottomOf="parent"
@@ -881,7 +882,8 @@
                       android:id="@+id/bloodGrpDropDown_edit"
                       android:layout_width="match_parent"
                       android:layout_height="wrap_content"
-                      android:inputType="none" />
+                      android:inputType="none"
+                      tools:ignore="TooManyViews" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
