@@ -1,6 +1,5 @@
 package com.sumonkmr.ibdc.adapters;
 
-import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.media.MediaPlayer;
@@ -11,11 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -25,7 +21,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -33,10 +28,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.sumonkmr.ibdc.DisplayDonorsActivity;
 import com.sumonkmr.ibdc.DonorProfile;
 import com.sumonkmr.ibdc.R;
-import com.sumonkmr.ibdc.SoundManager;
 import com.sumonkmr.ibdc.StringCaseConverter;
 import com.sumonkmr.ibdc.listeners.MyOnClickListener;
 import com.sumonkmr.ibdc.model.User;
@@ -51,7 +44,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder> {
     ArrayList<User> users;
     Context context;
     MyOnClickListener myOnClickListenerCall, myOnClickListenerShare;
-    DatabaseReference likeInterface,like_ref;
+    DatabaseReference likeInterface,like_ref,commentInterface;
     Boolean testClick = false;
 
 
@@ -134,6 +127,19 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder> {
             Intent intent = new Intent(holder.itemView.getContext(), DonorProfile.class);
             intent.putExtra("postKey",postKey);
             holder.itemView.getContext().startActivity(intent);
+        });
+        commentInterface = FirebaseDatabase.getInstance().getReference("Donors").child(postKey).child("comments");
+        commentInterface.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                int commentCount = (int) snapshot.getChildrenCount();
+                holder.commentsTxt.setText(String.valueOf(commentCount));
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
         });
 //        CommentSYStem
 

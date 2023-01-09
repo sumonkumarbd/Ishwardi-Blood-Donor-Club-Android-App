@@ -134,18 +134,33 @@
                             android:paddingEnd="@dimen/_35dp"
                             />
 
-                        <ImageView
+                        <ImageButton
                             android:id="@+id/comment_done"
                             android:layout_width="@dimen/_30dp"
                             android:layout_height="@dimen/_30dp"
                             android:layout_alignEnd="@+id/commentField"
+                            android:clickable="true"
                             android:contentDescription="@string/todo"
+                            android:background="@color/tns"
                             android:src="@drawable/comment_done"
                             app:layout_constraintBottom_toBottomOf="@+id/commentField"
                             app:layout_constraintEnd_toEndOf="@+id/commentField"
                             app:layout_constraintTop_toTopOf="@+id/commentField" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout><!--Comments-->
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        >
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:id="@+id/cmtRecView"
+                            />
+
+                    </LinearLayout>
                 </LinearLayout>
 
             </ScrollView>

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/_5dp"
+    android:orientation="horizontal"
+    >
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/cmtImg"
+        android:layout_width="@dimen/_30dp"
+        android:layout_height="@dimen/_30dp"
+        android:layout_gravity="top"
+        android:src="@drawable/ibdc_logo"
+        app:civ_border_color="@color/colorAccent"
+        app:civ_border_width="@dimen/_2dp"
+        android:elevation="@dimen/minor_shadow"
+        android:layout_marginStart="@dimen/_2dp"
+        android:layout_marginTop="@dimen/_8dp"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/card"
+        android:elevation="@dimen/minor_shadow"
+        android:padding="@dimen/_5dp"
+        android:layout_margin="@dimen/_5dp"
+        android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/cmtName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:singleLine="true"
+        android:textSize="@dimen/profile_txt"
+        android:textColor="@color/colorPrimary"
+        android:text="@string/developer_name"
+        />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_2dp"
+        android:layout_marginTop="@dimen/_2dp"
+        android:background="@color/colorAccent"
+         />
+
+
+        <TextView
+            android:id="@+id/cmtMsg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/motive_line"
+            android:textSize="@dimen/tab_label"
+            android:fontFamily="@font/des"
+            android:textColor="@color/goodgrey"
+            android:layout_marginVertical="@dimen/_5dp"
+            android:layout_marginHorizontal="@dimen/_2dp"
+            />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="@dimen/_5dp"
+            android:layout_gravity="end"
+            android:gravity="end">
+            <TextView
+                android:id="@+id/cmtTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/varela_round"
+                android:text="@string/time"
+                android:layout_marginEnd="@dimen/_2dp"
+                android:singleLine="true"
+                android:textColor="@color/text_shadow"
+                android:textSize="@dimen/label"
+                />
+            <TextView
+                android:id="@+id/cmtDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/varela_round"
+                android:text="@string/date"
+                android:singleLine="true"
+                android:layout_marginStart="@dimen/_5dp"
+                android:textColor="@color/text_shadow"
+                android:textSize="@dimen/label"
+                />
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</LinearLayout>
