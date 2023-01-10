@@ -1,6 +1,7 @@
 package com.sumonkmr.ibdc;
 
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -10,6 +11,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class CommentViewHolder extends RecyclerView.ViewHolder {
     CircleImageView cmtImg;
+    ImageButton cmt_delete;
     TextView cmtName,cmtMsg,cmtTime,cmtDate;
 
     public CommentViewHolder(@NonNull View itemView) {
@@ -20,5 +22,6 @@ public class CommentViewHolder extends RecyclerView.ViewHolder {
         cmtMsg = itemView.findViewById(R.id.cmtMsg);
         cmtTime = itemView.findViewById(R.id.cmtTime);
         cmtDate = itemView.findViewById(R.id.cmtDate);
+        cmt_delete = itemView.findViewById(R.id.cmt_delete);
     }
 }
