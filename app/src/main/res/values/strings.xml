@@ -9,7 +9,7 @@
     <string name="heading">Displayed Requests from ALL Unions of Ishwardi Upazila. </string>
     <string name="heading_tab">To change Union edit below. </string>
     <string name="union">ইউনিয়ন</string>
-    <string name="view_donors">View Donors</string>
+    <string name="donors">রক্তদাতার বিস্তারিত</string>
     <string name="request_blood">Request Blood</string>
     <string name="all">ALL</string>
     <string name="make_call_or_share_if_needed">Make CALL or SHARE if Needed. </string>
@@ -1137,6 +1137,9 @@
     <string name="quick_search">দ্রুত খুঁজুন</string>
     <string name="time">11:30 pm</string>
     <string name="date">03/1/23</string>
+    <string name="zero">0</string>
+    <string name="bloodGrp">O+</string>
+    <string name="comment_hint">রক্তদাতা সম্পর্কে কিছু লিখুন…</string>
     <!--   End Sylet Division District-->
 
     <!--Finished Districts Array-->

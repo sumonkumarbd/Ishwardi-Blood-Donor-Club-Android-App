@@ -10,7 +10,7 @@
     <dimen name="custom_tab_layout_height">@dimen/_72dp</dimen>
     <dimen name="form_txt">@dimen/_14sp</dimen>
     <dimen name="profile_txt">@dimen/_12dp</dimen>
-    <dimen name="manu_txt">@dimen/_20dp</dimen>
+    <dimen name="manu_txt">@dimen/_18dp</dimen>
     <dimen name="shadow">@dimen/_10dp</dimen>
     <dimen name="minor_shadow">@dimen/_1sp</dimen>
     <dimen name="card_txt">@dimen/_10sp</dimen>

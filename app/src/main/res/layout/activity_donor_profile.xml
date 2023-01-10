@@ -47,14 +47,14 @@
         <!--    main card-->
         <LinearLayout
             android:id="@+id/mainCard"
-            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginHorizontal="@dimen/_6dp"
             android:layout_marginTop="@dimen/_38dp"
             android:layout_marginBottom="@dimen/_50dp"
-            android:elevation="@dimen/shadow"
             android:background="@drawable/card"
+            android:elevation="@dimen/shadow"
+            android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -63,108 +63,541 @@
             app:layout_constraintVertical_bias="0.0">
 
 
-            <TextView
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="5dp"
-                android:layout_marginTop="10dp"
-                android:fontFamily="@font/text_font"
-                android:text="@string/profile"
-                android:textAlignment="textStart"
-                android:textColor="@color/colorPrimary"
-                android:textSize="@dimen/manu_txt"
-                android:textStyle="bold" />
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_5dp"
+                    android:fontFamily="@font/des_font"
+                    android:text="@string/donors"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/manu_txt"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <ImageView
+                    android:id="@+id/d_like_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/_5dp"
+                    android:contentDescription="@string/todo"
+                    android:src="@drawable/like"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/d_like_count"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/d_like_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/_15dp"
+                    android:clickable="true"
+                    android:contextClickable="true"
+                    android:elevation="@dimen/minor_shadow"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:fontFamily="@font/banglanumber"
+                    android:gravity="center_vertical"
+                    android:maxWidth="@dimen/_150dp"
+                    android:singleLine="true"
+                    android:text="@string/zero"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/form_txt"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/d_commentsBtn"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/d_commentsBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/_5dp"
+                    android:contentDescription="@string/todo"
+                    android:src="@drawable/comments"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/d_commentsTxt"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/d_commentsTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/_15dp"
+                    android:clickable="true"
+                    android:contextClickable="true"
+                    android:elevation="@dimen/minor_shadow"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:fontFamily="@font/banglanumber"
+                    android:gravity="center_vertical"
+                    android:maxWidth="@dimen/_150dp"
+                    android:singleLine="true"
+                    android:text="@string/zero"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/form_txt"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginVertical="@dimen/_2dp"
                 android:background="@color/colorAccentDark" />
-
 
             <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginBottom="5dp">
+                android:layout_marginBottom="5dp"
+                android:scrollbarThumbVertical="@null">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="2dp"
-                        android:layout_marginHorizontal="5dp"
-                        android:layout_marginTop="2dp"
-                        android:layout_marginBottom="5dp"
-                        android:background="@color/colorAccentDark" />
-
-
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="2dp"
-                        android:background="@color/colorAccentDark" />
-
-                    <!-- Comments-->
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/_40dp"
-                        android:orientation="vertical"
-                        android:background="@drawable/card"
-                        android:elevation="@dimen/shadow"
-                        android:layout_gravity="center"
-                        android:layout_marginHorizontal="@dimen/_10dp"
-                        android:layout_marginVertical="@dimen/_5dp"
-                        android:visibility="visible">
+                        android:layout_height="match_parent">
 
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/commentField"
+                        <LinearLayout
+                            android:id="@+id/proCard"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:background="@color/tns"
-                            android:drawableStart="@drawable/comments"
-                            android:inputType="text"
-                            android:singleLine="true"
-                            android:scrollbars="horizontal"
-                            android:scrollbarThumbHorizontal="@null"
-                            android:paddingStart="@dimen/_5dp"
-                            android:paddingEnd="@dimen/_35dp"
-                            />
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/card"
+                            android:elevation="@dimen/shadow"
+                            android:orientation="vertical"
+                            android:padding="@dimen/_5dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
 
-                        <ImageButton
-                            android:id="@+id/comment_done"
-                            android:layout_width="@dimen/_30dp"
+                            <ImageView
+                                android:id="@+id/donorImg"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_230dp"
+                                android:contentDescription="@string/todo"
+                                android:scaleType="centerCrop"
+                                android:src="@drawable/devimg" />
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_100dp"
+                                android:layout_gravity="center"
+                                android:background="@drawable/blood_background"
+                                android:foregroundGravity="center"
+                                android:orientation="vertical">
+                                <!--Name-->
+                                <RelativeLayout
+                                    android:id="@+id/relativeLayout"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginHorizontal="5dp"
+                                    android:layout_marginTop="@dimen/_2dp"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent">
+
+                                    <TextView
+                                        android:id="@+id/detailFullName"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_alignParentStart="true"
+                                        android:layout_marginBottom="2dp"
+                                        android:clickable="true"
+                                        android:contextClickable="true"
+                                        android:elevation="@dimen/minor_shadow"
+                                        android:focusable="true"
+                                        android:focusableInTouchMode="true"
+                                        android:fontFamily="@font/des_font"
+                                        android:maxWidth="@dimen/_180dp"
+                                        android:singleLine="true"
+                                        android:text="@string/developer_name"
+                                        android:textColor="@color/white"
+                                        android:textSize="@dimen/manu_txt" />
+
+                                    <TextView
+                                        android:id="@+id/detailBloodGroup"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_alignParentEnd="true"
+                                        android:layout_gravity="end"
+                                        android:layout_marginEnd="@dimen/_5dp"
+                                        android:elevation="@dimen/minor_shadow"
+                                        android:fontFamily="@font/varela_round"
+                                        android:gravity="center"
+                                        android:maxWidth="@dimen/_60dp"
+                                        android:singleLine="true"
+                                        android:text="@string/blood_group"
+                                        android:textColor="@color/white"
+                                        android:textSize="@dimen/manu_txt"
+                                        android:textStyle="bold"
+                                        tools:ignore="RelativeOverlap" />
+
+                                </RelativeLayout>
+                                <!-- Name-->
+                                <View
+                                    android:id="@+id/v"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="2dp"
+                                    android:layout_marginVertical="@dimen/_2dp"
+                                    android:background="@color/grey"
+                                    app:layout_constraintStart_toStartOf="@+id/relativeLayout"
+                                    app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
+                                <!--                            Details-->
+                                <!--                            age-->
+                                <LinearLayout
+                                    android:id="@+id/linearLayout"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/_2dp"
+                                    android:orientation="horizontal"
+                                    app:layout_constraintStart_toStartOf="@+id/v"
+                                    app:layout_constraintTop_toBottomOf="@+id/v">
+
+                                    <TextView
+                                        android:id="@+id/age_title"
+                                        style="bold"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginEnd="@dimen/_5dp"
+                                        android:elevation="@dimen/minor_shadow"
+                                        android:fontFamily="@font/des_font"
+                                        android:maxWidth="120dp"
+                                        android:singleLine="true"
+                                        android:text="@string/age"
+                                        android:textColor="@color/white"
+                                        android:textSize="@dimen/card_txt" />
+
+                                    <TextView
+                                        android:id="@+id/age_d"
+                                        style="bold"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginEnd="@dimen/_5dp"
+                                        android:clickable="true"
+                                        android:contextClickable="true"
+                                        android:elevation="@dimen/minor_shadow"
+                                        android:ellipsize="marquee"
+                                        android:focusable="true"
+                                        android:focusableInTouchMode="true"
+                                        android:fontFamily="@font/banglanumber"
+                                        android:freezesText="true"
+                                        android:marqueeRepeatLimit="marquee_forever"
+                                        android:maxWidth="120dp"
+                                        android:scrollHorizontally="true"
+                                        android:singleLine="true"
+                                        android:text="@string/age"
+                                        android:textColor="@color/white"
+                                        android:textSize="@dimen/profile_txt" />
+
+                                    <TextView
+                                        style="bold"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:clickable="true"
+                                        android:contextClickable="true"
+                                        android:elevation="@dimen/minor_shadow"
+                                        android:ellipsize="marquee"
+                                        android:focusable="true"
+                                        android:focusableInTouchMode="true"
+                                        android:fontFamily="@font/des_font"
+                                        android:freezesText="true"
+                                        android:marqueeRepeatLimit="marquee_forever"
+                                        android:maxWidth="120dp"
+                                        android:scrollHorizontally="true"
+                                        android:singleLine="true"
+                                        android:text="@string/year"
+                                        android:textColor="@color/white"
+                                        android:textSize="@dimen/card_txt" />
+                                </LinearLayout>
+                                <!--                            age-->
+
+                                <!--                            address-->
+                                <TextView
+                                    android:id="@+id/detailVillage"
+                                    style="bold"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/_2dp"
+                                    android:elevation="@dimen/minor_shadow"
+                                    android:fontFamily="@font/des_font"
+                                    android:maxWidth="210dp"
+                                    android:singleLine="true"
+                                    android:text="@string/village"
+                                    android:textColor="@color/white"
+                                    android:textSize="@dimen/profile_txt"
+                                    android:tooltipText="Tooltip"
+                                    app:layout_constraintStart_toStartOf="@+id/linearLayout"
+                                    app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+                                <LinearLayout
+                                    android:id="@+id/linearLayout3"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/_2dp"
+                                    android:orientation="horizontal"
+                                    app:layout_constraintStart_toStartOf="@+id/detailVillage"
+                                    app:layout_constraintTop_toBottomOf="@+id/detailVillage">
+
+                                    <TextView
+                                        android:id="@+id/detailTehsil"
+                                        style="bold"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginEnd="@dimen/_2dp"
+                                        android:elevation="@dimen/minor_shadow"
+                                        android:fontFamily="@font/des_font"
+                                        android:maxWidth="120dp"
+                                        android:singleLine="true"
+                                        android:text="@string/upazila"
+                                        android:textColor="@color/white"
+                                        android:textSize="@dimen/card_txt" />
+
+                                    <TextView
+                                        style="bold"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginEnd="@dimen/_2dp"
+                                        android:elevation="@dimen/minor_shadow"
+                                        android:fontFamily="@font/varela_round"
+                                        android:maxWidth="120dp"
+                                        android:singleLine="true"
+                                        android:text="@string/comma"
+                                        android:textColor="@color/colorPrimary"
+                                        android:textSize="@dimen/card_txt" />
+
+                                    <TextView
+                                        android:id="@+id/detailDistrict"
+                                        style="bold"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginEnd="@dimen/_2dp"
+                                        android:elevation="@dimen/minor_shadow"
+                                        android:fontFamily="@font/des_font"
+                                        android:maxWidth="110dp"
+                                        android:singleLine="true"
+                                        android:text="@string/district"
+                                        android:textColor="@color/white"
+                                        android:textSize="@dimen/card_txt" />
+
+                                    <TextView
+                                        style="bold"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginEnd="@dimen/_2dp"
+                                        android:elevation="@dimen/minor_shadow"
+                                        android:fontFamily="@font/varela_round"
+                                        android:maxWidth="120dp"
+                                        android:singleLine="true"
+                                        android:text="@string/comma"
+                                        android:textColor="@color/colorPrimary"
+                                        android:textSize="@dimen/card_txt" />
+
+                                    <TextView
+                                        android:id="@+id/detailState"
+                                        style="bold"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginEnd="@dimen/_2dp"
+                                        android:clickable="true"
+                                        android:contextClickable="true"
+                                        android:elevation="@dimen/minor_shadow"
+                                        android:ellipsize="marquee"
+                                        android:focusable="true"
+                                        android:focusableInTouchMode="true"
+                                        android:fontFamily="@font/des_font"
+                                        android:freezesText="true"
+                                        android:marqueeRepeatLimit="marquee_forever"
+                                        android:maxWidth="120dp"
+                                        android:scrollHorizontally="true"
+                                        android:singleLine="true"
+                                        android:text="@string/divisions"
+                                        android:textColor="@color/white"
+                                        android:textSize="@dimen/card_txt" />
+
+                                    <TextView
+                                        style="bold"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginEnd="@dimen/_1dp"
+                                        android:elevation="@dimen/minor_shadow"
+                                        android:fontFamily="@font/varela_round"
+                                        android:maxWidth="120dp"
+                                        android:singleLine="true"
+                                        android:text="@string/dari"
+                                        android:textColor="@color/colorPrimary"
+                                        android:textSize="@dimen/card_txt" />
+
+                                </LinearLayout>
+                                <!--                            address-->
+                                <!--                            mobile-->
+                                <TextView
+                                    android:id="@+id/mobile_no"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/_5dp"
+                                    android:layout_marginEnd="@dimen/_5dp"
+                                    android:clickable="true"
+                                    android:contextClickable="true"
+                                    android:elevation="@dimen/minor_shadow"
+                                    android:ellipsize="marquee"
+                                    android:focusable="true"
+                                    android:focusableInTouchMode="true"
+                                    android:fontFamily="@font/banglanumber"
+                                    android:freezesText="true"
+                                    android:marqueeRepeatLimit="marquee_forever"
+                                    android:singleLine="true"
+                                    android:text="@string/mobile_number"
+                                    android:textColor="@color/white"
+                                    android:textSize="@dimen/form_txt"
+                                    app:drawableStartCompat="@drawable/call_mail"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintTop_toBottomOf="@+id/v" />
+
+                                <!--                            lastDonate-->
+                                <TextView
+                                    android:id="@+id/lastDonate"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginEnd="@dimen/_5dp"
+                                    android:clickable="true"
+                                    android:contextClickable="true"
+                                    android:elevation="@dimen/minor_shadow"
+                                    android:ellipsize="marquee"
+                                    android:focusable="true"
+                                    android:focusableInTouchMode="true"
+                                    android:fontFamily="@font/des_font"
+                                    android:freezesText="true"
+                                    android:marqueeRepeatLimit="marquee_forever"
+                                    android:singleLine="true"
+                                    android:text="@string/last_donate"
+                                    android:textColor="@color/white"
+                                    android:textSize="@dimen/card_txt"
+                                    app:layout_constraintBottom_toBottomOf="@+id/lastDonateDate_d"
+                                    app:layout_constraintEnd_toStartOf="@+id/lastDonateDate_d"
+                                    app:layout_constraintTop_toTopOf="@+id/lastDonateDate_d" />
+
+                                <TextView
+                                    android:id="@+id/lastDonateDate_d"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/_12dp"
+                                    android:layout_marginEnd="@dimen/_5dp"
+                                    android:clickable="true"
+                                    android:contextClickable="true"
+                                    android:elevation="@dimen/minor_shadow"
+                                    android:focusable="true"
+                                    android:focusableInTouchMode="true"
+                                    android:fontFamily="@font/banglanumber"
+                                    android:marqueeRepeatLimit="marquee_forever"
+                                    android:singleLine="true"
+                                    android:text="@string/last_donate_date"
+                                    android:textColor="@color/white"
+                                    android:textSize="@dimen/tab_label"
+                                    android:textStyle="bold"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintTop_toBottomOf="@+id/mobile_no" />
+                                <!--                            Details-->
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        </LinearLayout>
+                        <View
+                            android:id="@+id/v1"
+                            android:layout_width="match_parent"
+                            android:layout_height="2dp"
+                            android:layout_marginHorizontal="5dp"
+                            android:layout_marginTop="@dimen/_5dp"
+                            android:background="@color/colorAccentDark"
+                            app:layout_constraintEnd_toEndOf="@+id/proCard"
+                            app:layout_constraintStart_toStartOf="@+id/proCard"
+                            app:layout_constraintTop_toBottomOf="@+id/proCard" />
+                        <!-- Comments-->
+                        <LinearLayout
+                            android:id="@+id/linearLayout4"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="@dimen/_5dp"
+                            android:orientation="vertical"
+                            android:layout_marginTop="@dimen/_5dp"
+                            app:layout_constraintEnd_toEndOf="@+id/v1"
+                            app:layout_constraintStart_toStartOf="@+id/v1"
+                            app:layout_constraintTop_toBottomOf="@+id/v1">
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/cmtRecView"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent" />
+
+                        </LinearLayout>
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/cmt_box"
+                            android:layout_width="match_parent"
                             android:layout_height="@dimen/_30dp"
-                            android:layout_alignEnd="@+id/commentField"
-                            android:clickable="true"
-                            android:contentDescription="@string/todo"
-                            android:background="@color/tns"
-                            android:src="@drawable/comment_done"
-                            app:layout_constraintBottom_toBottomOf="@+id/commentField"
-                            app:layout_constraintEnd_toEndOf="@+id/commentField"
-                            app:layout_constraintTop_toTopOf="@+id/commentField" />
+                            android:layout_gravity="center"
+                            android:layout_marginHorizontal="@dimen/_10dp"
+                            android:layout_marginVertical="@dimen/_10dp"
+                            android:background="@drawable/card"
+                            android:elevation="@dimen/minor_shadow"
+                            android:orientation="vertical"
+                            android:visibility="visible"
+                            app:layout_constraintEnd_toEndOf="@+id/linearLayout4"
+                            app:layout_constraintStart_toStartOf="@+id/linearLayout4"
+                            app:layout_constraintTop_toBottomOf="@+id/linearLayout4">
 
-                    </androidx.constraintlayout.widget.ConstraintLayout><!--Comments-->
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/commentField"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@color/tns"
+                                android:inputType="text"
+                                android:hint="@string/comment_hint"
+                                android:textColorHint="@color/text_shadow"
+                                android:paddingStart="@dimen/_10dp"
+                                android:paddingEnd="@dimen/_35dp"
+                                android:scrollbarThumbHorizontal="@null"
+                                android:scrollbars="horizontal"
+                                android:singleLine="true" />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        >
-                        <androidx.recyclerview.widget.RecyclerView
+                            <ImageButton
+                                android:id="@+id/comment_done"
+                                android:layout_width="@dimen/_30dp"
+                                android:layout_height="@dimen/_30dp"
+                                android:layout_alignEnd="@+id/commentField"
+                                android:background="@color/tns"
+                                android:clickable="true"
+                                android:contentDescription="@string/todo"
+                                android:src="@drawable/comment_done"
+                                app:layout_constraintBottom_toBottomOf="@+id/commentField"
+                                app:layout_constraintEnd_toEndOf="@+id/commentField"
+                                app:layout_constraintTop_toTopOf="@+id/commentField" />
+
+
+                        </androidx.constraintlayout.widget.ConstraintLayout><!--Comments-->
+                        <View
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:id="@+id/cmtRecView"
+                            android:layout_height="2dp"
+                            android:background="@color/colorAccentDark"
+                            android:layout_marginTop="@dimen/_10dp"
+                            android:layout_marginBottom="@dimen/_2dp"
+                            android:layout_marginHorizontal="@dimen/_5dp"
+                            app:layout_constraintTop_toBottomOf="@+id/cmt_box"
                             />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
-                    </LinearLayout>
                 </LinearLayout>
 
             </ScrollView>
-
 
             <View
                 android:layout_width="match_parent"
@@ -176,13 +609,12 @@
             android:id="@+id/bannerLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:layout_marginBottom="@dimen/_5dp"
+            android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
     <!--    finished content-->
-
 </LinearLayout>

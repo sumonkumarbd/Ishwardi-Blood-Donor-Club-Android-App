@@ -123,11 +123,6 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder> {
 //        Like system
 
 //        CommentSYStem
-        holder.commentsBtn.setOnClickListener(v -> {
-            Intent intent = new Intent(holder.itemView.getContext(), DonorProfile.class);
-            intent.putExtra("postKey",postKey);
-            holder.itemView.getContext().startActivity(intent);
-        });
         commentInterface = FirebaseDatabase.getInstance().getReference("Donors").child(postKey).child("comments");
         commentInterface.addValueEventListener(new ValueEventListener() {
             @Override
@@ -144,14 +139,20 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder> {
 //        CommentSYStem
 
 
-        String state, district, tehsil, fname, village, bloodgroup, bloodImg_url, lastDonateDate, age;
+        String state, district, tehsil, fname, village, bloodgroup, bloodImg_url, lastDonateDate, age,mobile;
         state = users.get(position).getState();
         district = users.get(position).getDistrict();
         tehsil = users.get(position).getUpazila();
         village = users.get(position).getVillage();
         bloodgroup = users.get(position).getBloodGroup();
         bloodImg_url = users.get(position).getBloodImg_url();
-        lastDonateDate = users.get(position).getLastDonateDate();
+        if (users.get(position).getLastDonateDate().contains("পূর্বে করিনি।")){
+            lastDonateDate = users.get(position).getLastDonateDate();
+        }else {
+            lastDonateDate = users.get(position).getLastDonateDate()+" ইং";
+        }
+
+        mobile = users.get(position).getMobile();
         age = users.get(position).getAge();
         fname = String.format("%s %s", users.get(position).getFName(), users.get(position).getLName());
         String s = StringCaseConverter.convertToTitleCaseIteratingChars(fname);
@@ -189,7 +190,19 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder> {
 
         holder.itemView.setOnClickListener(v -> {
             //for play more with view
-//            Toast.makeText(context, String.valueOf(position), Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(holder.itemView.getContext(), DonorProfile.class);
+            intent.putExtra("fName",fname);
+            intent.putExtra("pIMG",bloodImg_url);
+            intent.putExtra("division",state);
+            intent.putExtra("district",district);
+            intent.putExtra("upazila",tehsil);
+            intent.putExtra("village",village);
+            intent.putExtra("bloodGrope",bloodgroup);
+            intent.putExtra("mobile",mobile);
+            intent.putExtra("lastDonateDate",lastDonateDate);
+            intent.putExtra("age",age);
+            intent.putExtra("postKey",postKey);
+            holder.itemView.getContext().startActivity(intent);
         });
 
         Animation itemViewAnim = AnimationUtils.loadAnimation(holder.itemView.getContext(),R.anim.slide_in_left);

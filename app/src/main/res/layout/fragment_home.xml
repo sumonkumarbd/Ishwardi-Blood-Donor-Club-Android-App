@@ -137,7 +137,7 @@
                             android:gravity="center"
                             android:text="@string/instructions"
                             android:textColor="@color/white"
-                            android:textSize="@dimen/form_txt" />
+                            android:textSize="@dimen/profile_txt" />
                     </RelativeLayout>
 
                     <View
@@ -175,7 +175,7 @@
                             android:gravity="center"
                             android:text="@string/why_donate"
                             android:textColor="@color/white"
-                            android:textSize="@dimen/form_txt" />
+                            android:textSize="@dimen/profile_txt" />
                     </RelativeLayout>
 
                 </LinearLayout>
@@ -221,7 +221,7 @@
                             android:gravity="center"
                             android:text="@string/about_us"
                             android:textColor="@color/white"
-                            android:textSize="@dimen/form_txt" />
+                            android:textSize="@dimen/profile_txt" />
                     </RelativeLayout>
 
                     <View
@@ -259,7 +259,7 @@
                             android:gravity="center"
                             android:text="@string/rate_us"
                             android:textColor="@color/white"
-                            android:textSize="@dimen/form_txt" />
+                            android:textSize="@dimen/profile_txt" />
                     </RelativeLayout>
 
                 </LinearLayout>

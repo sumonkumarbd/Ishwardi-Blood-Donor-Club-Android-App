@@ -74,7 +74,7 @@
                     android:text="@string/ins_title"
                     android:textAlignment="textStart"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="@dimen/manu_txt"
+                    android:textSize="@dimen/form_txt"
                     android:textStyle="bold" />
 
                 <View
@@ -88,6 +88,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginBottom="5dp"
+                    android:scrollbarTrackVertical="@null"
                     >
 
                     <LinearLayout
@@ -105,7 +106,7 @@
                             android:text="@string/ins_title_inner1"
                             android:textAlignment="textStart"
                             android:textColor="@color/colorPrimary"
-                            android:textSize="@dimen/manu_txt"
+                            android:textSize="@dimen/form_txt"
                             android:textStyle="bold" />
                         <View
                             android:layout_width="match_parent"
@@ -136,7 +137,7 @@
                             android:text="@string/ins_title_inner2"
                             android:textAlignment="textStart"
                             android:textColor="@color/colorPrimary"
-                            android:textSize="@dimen/manu_txt"
+                            android:textSize="@dimen/form_txt"
                             android:textStyle="bold" />
                         <View
                             android:layout_width="match_parent"
@@ -166,7 +167,7 @@
                             android:text="@string/ins_title_inner3"
                             android:textAlignment="textStart"
                             android:textColor="@color/colorPrimary"
-                            android:textSize="@dimen/manu_txt"
+                            android:textSize="@dimen/form_txt"
                             android:textStyle="bold" />
                         <View
                             android:layout_width="match_parent"
@@ -197,7 +198,7 @@
                             android:text="@string/ins_title_inner4"
                             android:textAlignment="textStart"
                             android:textColor="@color/colorPrimary"
-                            android:textSize="@dimen/manu_txt"
+                            android:textSize="@dimen/form_txt"
                             android:textStyle="bold" />
                         <View
                             android:layout_width="match_parent"

@@ -36,6 +36,7 @@
         android:layout_height="wrap_content"
         android:singleLine="true"
         android:textSize="@dimen/profile_txt"
+        android:fontFamily="@font/des_font"
         android:textColor="@color/colorPrimary"
         android:text="@string/developer_name"
         />
