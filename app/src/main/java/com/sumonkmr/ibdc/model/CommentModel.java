@@ -2,18 +2,21 @@ package com.sumonkmr.ibdc.model;
 
 public class CommentModel {
 
-    String userName,usermsg,userImg,uid,time,date;
+    String userName,usermsg,userImg,uid,time,date, editTime,editDate,cmtEdit;
 
     public CommentModel() {
     }
 
-    public CommentModel(String userName, String usermsg, String userImg, String uid, String time, String date) {
+    public CommentModel(String userName, String usermsg, String userImg, String uid, String time, String date, String editTime, String editDate, String cmtEdit) {
         this.userName = userName;
         this.usermsg = usermsg;
         this.userImg = userImg;
         this.uid = uid;
         this.time = time;
         this.date = date;
+        this.editTime = editTime;
+        this.editDate = editDate;
+        this.cmtEdit = cmtEdit;
     }
 
     public String getUserName() {
@@ -63,4 +66,30 @@ public class CommentModel {
     public void setDate(String date) {
         this.date = date;
     }
+
+    public String getEditTime() {
+        return editTime;
+    }
+
+    public void setEditTime(String editTime) {
+        this.editTime = editTime;
+    }
+
+    public String getEditDate() {
+        return editDate;
+    }
+
+    public void setEditDate(String editDate) {
+        this.editDate = editDate;
+    }
+
+    public String getCmtEdit() {
+        return cmtEdit;
+    }
+
+    public void setCmtEdit(String cmtEdit) {
+        this.cmtEdit = cmtEdit;
+    }
 }
+
+

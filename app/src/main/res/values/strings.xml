@@ -20,6 +20,9 @@
     <string name="forgot_password">পাসওয়ার্ড ভুলে গেছেন?</string>
     <string name="change_password">পাসওয়ার্ড পরিবর্তন করুন!</string>
     <string name="isExitTitle">অ্যাপ থকে বের হতে চান?</string>
+    <string name="cmtDelete">কমেন্ট ডিলিট করতে চান?</string>
+    <string name="cmtEdit">কমেন্ট ইডিট করতে চান?</string>
+    <string name="edited">Edited : </string>
     <string name="login">লগইন</string>
     <string name="enter_phone_no">মোবাইল নম্বর দিন!</string>
     <string name="enter_password">পাসওয়ার্ড দিন…</string>

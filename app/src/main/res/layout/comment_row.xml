@@ -109,6 +109,36 @@
         android:layout_marginEnd="@dimen/_10dp"
         android:layout_marginTop="@dimen/_2dp"
         >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginEnd="@dimen/_5dp"
+            >
+
+            <TextView
+                android:id="@+id/cmtEditTimeDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/varela_round"
+                android:text=""
+                android:singleLine="true"
+                android:layout_marginStart="@dimen/_5dp"
+                android:textColor="@color/text_shadow"
+                android:textSize="@dimen/label"
+                />
+
+        </LinearLayout>
+        <ImageButton
+            android:id="@+id/cmt_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/tns"
+            android:layout_marginEnd="@dimen/_5dp"
+            android:src="@drawable/ic_baseline_edit_note_24"
+            android:contentDescription="@string/todo" />
+
         <ImageButton
             android:id="@+id/cmt_delete"
             android:layout_width="wrap_content"

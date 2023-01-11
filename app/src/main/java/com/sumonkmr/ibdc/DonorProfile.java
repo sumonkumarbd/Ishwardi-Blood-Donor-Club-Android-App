@@ -1,12 +1,13 @@
 package com.sumonkmr.ibdc;
 
 import android.Manifest;
-import android.content.DialogInterface;
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.icu.util.Calendar;
 import android.media.MediaPlayer;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,6 +15,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -21,8 +24,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -33,10 +34,11 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -54,7 +56,7 @@ public class DonorProfile extends AppCompatActivity {
     private static final int Request_call = 1;
     TextInputEditText commentField;
     ImageButton comment_done;
-    ImageView donorImg, d_like_btn, d_commentsBtn,d_shareBtn;
+    ImageView donorImg, d_like_btn, d_commentsBtn, d_shareBtn;
     DatabaseReference userRef, commentRef, like_ref;
     String postKey;
     String userId;
@@ -64,6 +66,7 @@ public class DonorProfile extends AppCompatActivity {
     FirebaseUser currentUser;
     GoogleSignInAccount account;
     private Boolean testClick = false;
+    Dialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -127,7 +130,7 @@ public class DonorProfile extends AppCompatActivity {
             Intent sendIntent = new Intent();
             sendIntent.setAction(Intent.ACTION_SEND);
             sendIntent.putExtra(Intent.EXTRA_TITLE, R.string.app_name);
-            sendIntent.putExtra(Intent.EXTRA_TEXT,  "আমি বাঁচাতে চাই একটি প্রাণ, তাইতো করবো রক্তদান!\n" + "এখানে রক্তদাতা সম্পর্কে তথ্য রয়েছে :\nনাম : " + fname+ " " + "\nরক্তের গ্রুপ : " + bloodgroup + "\nঠিকানা: " + village + " ," + upazila + " ," + district + " ," + state + "\nমোবাইল নম্বর : " + mobile);
+            sendIntent.putExtra(Intent.EXTRA_TEXT, "আমি বাঁচাতে চাই একটি প্রাণ, তাইতো করবো রক্তদান!\n" + "এখানে রক্তদাতা সম্পর্কে তথ্য রয়েছে :\nনাম : " + fname + " " + "\nরক্তের গ্রুপ : " + bloodgroup + "\nঠিকানা: " + village + " ," + upazila + " ," + district + " ," + state + "\nমোবাইল নম্বর : " + mobile);
             sendIntent.setType("text/plain");
             Intent shareIntent = Intent.createChooser(sendIntent, "রক্ত দিন জীবন বাঁচান।");
             startActivity(shareIntent);
@@ -254,11 +257,13 @@ public class DonorProfile extends AppCompatActivity {
                 commentRef.child(getRef(position).getKey()).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        Log.d("snap", "onDataChange: "+snapshot.child("uid").getValue().equals(userId));
-                        if (snapshot.child("uid").getValue().equals(userId)){
+                        Log.d("snap", "onDataChange: " + snapshot.child("uid").getValue().equals(userId));
+                        if (snapshot.child("uid").getValue().equals(userId)) {
                             holder.cmt_delete.setImageResource(R.drawable.delete_icon);
-                        }else{
-                            holder.cmt_delete.setVisibility(View.INVISIBLE);
+                            holder.cmt_edit.setImageResource(R.drawable.ic_baseline_edit_note_24);
+                        } else {
+                            holder.cmt_delete.setVisibility(View.GONE);
+                            holder.cmt_edit.setVisibility(View.GONE);
                         }
                     }
 
@@ -269,23 +274,103 @@ public class DonorProfile extends AppCompatActivity {
                 });
 
 
-                holder.cmt_delete.setOnClickListener(v -> {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(DonorProfile.this);
-                    builder.setIcon(R.drawable.ibdc_logo);
-                    builder.setTitle(R.string.app_name);
-                    builder.setMessage("কমেন্ট ডিলিট করতে চান?");
-                    builder.setPositiveButton(R.string.yes, (dialog, which) -> {
-                        // Do something when the user clicks the OK button
-                        commentRef.child(getRef(position).getKey()).removeValue((error, ref) -> Toast.makeText(DonorProfile.this, "কমেন্ট ডিলিট সফল!", Toast.LENGTH_SHORT).show());
-                    });
-                    builder.setNegativeButton(R.string.no, (dialog, which) -> {
-                        // Do something when the user clicks the Cancel button
-                    });
-                    AlertDialog dialog = builder.create();
+                holder.cmt_edit.setOnClickListener(v -> {
+                    dialog = new Dialog(DonorProfile.this);
+                    dialog.setContentView(R.layout.comment_edit);
+                    Button ok_Btn, cBtn;
+                    TextInputEditText cEditInput;
+                    Calendar dateValue = Calendar.getInstance();
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yy");
+                    String cDate = dateFormat.format(dateValue.getTime());
+                    SimpleDateFormat timeFormat = new SimpleDateFormat("hh:mm aa");
+                    String cTime = timeFormat.format(dateValue.getTime());
+
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                        dialog.getWindow().setBackgroundDrawable(getDrawable(R.drawable.custom_dialog_background));
+                    }
+
+                    dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                    dialog.setCancelable(false); //Optional
+                    dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation; //Setting the animations to dialog
                     dialog.show();
 
-                });
+                    HashMap cmnt = new HashMap();
+                    cmnt.put("cmtEdit", "Edited : ");
+                    cmnt.put("editDate", cDate);
+                    cmnt.put("editTime", cTime);
 
+                    ok_Btn = dialog.findViewById(R.id.CEditBtn_done);
+                    cBtn = dialog.findViewById(R.id.CEditBtn_cansel);
+                    cEditInput = dialog.findViewById(R.id.cEditInput);
+                    commentRef.child(getRef(position).getKey()).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            if (snapshot.hasChild("usermsg")){
+                                cEditInput.setText(snapshot.child("usermsg").getValue().toString());
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+                    ok_Btn.setOnClickListener(v13 -> {
+                        // Do something when the user clicks the OK button
+                        String msg = String.valueOf(cEditInput.getText());
+                        if (cEditInput.getText().length() > 0) {
+                            commentRef.child(getRef(position).getKey()).child("usermsg").setValue(msg).addOnCompleteListener(task -> {
+                                commentRef.child(getRef(position).getKey()).updateChildren(cmnt).addOnCompleteListener(new OnCompleteListener() {
+                                    @Override
+                                    public void onComplete(@NonNull Task task) {
+                                        if (task.isSuccessful()){
+//                                            holder.cmtEditTimeDate.setText(cmnt.toString());
+                                            Log.d("yyy", "onBindViewHolder: "+cTime+cDate+"////"+model.getCmtEdit()+model.getEditTime()+model.getEditDate());
+                                        }
+                                    }
+                                });
+                                dialog.dismiss();
+                                Toast.makeText(DonorProfile.this, "কমেন্ট আপডেট সম্পূর্ণ!", Toast.LENGTH_SHORT).show();
+                            });
+                        } else {
+                            cEditInput.getText().toString();
+                            cEditInput.setError("রক্তদাতা সম্পর্কে কিছু লিখুন!");
+                        }
+                        Log.d("msg", "onBindViewHolder: " + msg);
+                    });
+                    cBtn.setOnClickListener(v12 -> dialog.dismiss());
+
+                });
+                if (model.getCmtEdit() != null){
+                    holder.cmtEditTimeDate.setText(model.getCmtEdit()+" "+model.getEditTime()+" "+model.getEditDate());
+                }
+                holder.cmt_delete.setOnClickListener(v -> {
+                    dialog = new Dialog(DonorProfile.this);
+                    dialog.setContentView(R.layout.comment_delete);
+                    Button ok_Btn, cBtn;
+
+                    account = GoogleSignIn.getLastSignedInAccount(DonorProfile.this);
+
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                        dialog.getWindow().setBackgroundDrawable(getDrawable(R.drawable.custom_dialog_background));
+                    }
+
+                    dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                    dialog.setCancelable(false); //Optional
+                    dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation; //Setting the animations to dialog
+                    dialog.show();
+
+
+                    ok_Btn = dialog.findViewById(R.id.cDelete_yes);
+                    cBtn = dialog.findViewById(R.id.cDelete_no);
+
+                    ok_Btn.setOnClickListener(v1 -> commentRef.child(getRef(position).getKey()).removeValue((error, ref) -> {
+                        dialog.dismiss();
+                        Toast.makeText(DonorProfile.this, "কমেন্ট ডিলিট সফল!", Toast.LENGTH_SHORT).show();
+                    }));
+                    cBtn.setOnClickListener(v12 -> dialog.dismiss());
+
+                });
             }
 
             @NonNull
@@ -339,7 +424,7 @@ public class DonorProfile extends AppCompatActivity {
 
     public void callActions(String number) {
         Intent intent = new Intent(Intent.ACTION_CALL);
-        intent.setData(Uri.parse("tel:" +number));
+        intent.setData(Uri.parse("tel:" + number));
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CALL_PHONE}, Request_call);
         } else {
