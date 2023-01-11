@@ -120,14 +120,16 @@ public class AboutUs extends AppCompatActivity {
     }
 
 
-    public void callActions(String number) {
-        Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse(number));
+    private void callActions(String number) {
+        Intent intent = new Intent(Intent.ACTION_CALL);
+        intent.setData(Uri.parse(number));
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CALL_PHONE}, Request_call);
         } else {
             startActivity(intent);
         }
     }
+
 
 
     @Override

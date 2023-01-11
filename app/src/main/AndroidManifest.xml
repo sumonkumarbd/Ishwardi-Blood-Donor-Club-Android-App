@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.sumonkmr.ibdc">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -7,6 +8,7 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
         android:name=".OneSignalApplications"
@@ -21,21 +23,25 @@
         android:theme="@style/Theme.IbdcBySumonKmr">
         <activity
             android:name=".DonorProfile"
-            android:exported="false">
+            android:exported="false"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
             android:name=".Profile"
-            android:exported="false">
+            android:exported="false"
+            android:screenOrientation="portrait"
+            >
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
             android:name=".GoogleLogIn"
-            android:exported="false">
+            android:exported="false"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -46,7 +52,9 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".ProfitOfBloodDonation"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"
+            />
         <activity
             android:name=".AboutUs"
             android:exported="false"
@@ -59,18 +67,7 @@
         <activity
             android:name=".DisplayDonorsActivity"
             android:screenOrientation="portrait" />
-        <activity
-            android:name=".RegisterIIIActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".RegisterIIActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".RegisterIActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".LoginScreenActivity"
-            android:screenOrientation="portrait" />
+
         <activity
             android:name=".SplashScreen"
             android:exported="true"
@@ -81,7 +78,9 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity> <!-- Sample AdMob app ID: ca-app-pub-3940256099942544~3347511713 -->
+        </activity>
+
+        <!-- Sample AdMob app ID: ca-app-pub-3940256099942544~3347511713 -->
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-3940256099942544~3347511713" />

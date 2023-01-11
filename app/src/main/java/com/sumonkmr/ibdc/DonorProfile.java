@@ -1,8 +1,12 @@
 package com.sumonkmr.ibdc;
 
+import android.Manifest;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.icu.util.Calendar;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,6 +24,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -46,9 +51,10 @@ import java.util.Random;
 
 public class DonorProfile extends AppCompatActivity {
 
+    private static final int Request_call = 1;
     TextInputEditText commentField;
     ImageButton comment_done;
-    ImageView donorImg, d_like_btn, d_commentsBtn;
+    ImageView donorImg, d_like_btn, d_commentsBtn,d_shareBtn;
     DatabaseReference userRef, commentRef, like_ref;
     String postKey;
     String userId;
@@ -99,6 +105,7 @@ public class DonorProfile extends AppCompatActivity {
         d_like_count = findViewById(R.id.d_like_count);
         d_commentsBtn = findViewById(R.id.d_commentsBtn);
         d_commentsTxt = findViewById(R.id.d_commentsTxt);
+        d_shareBtn = findViewById(R.id.d_shareBtn);
         cmtRecView = findViewById(R.id.cmtRecView);
         cmtRecView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -113,6 +120,18 @@ public class DonorProfile extends AppCompatActivity {
         mobile_no.setText(mobile);
         lastDonateDate_d.setText(lastDonateDate);
         Glide.with(this).load(bloodImg_url).into(donorImg);
+        mobile_no.setOnClickListener(v -> {
+            callActions(mobile);
+        });
+        d_shareBtn.setOnClickListener(v -> {
+            Intent sendIntent = new Intent();
+            sendIntent.setAction(Intent.ACTION_SEND);
+            sendIntent.putExtra(Intent.EXTRA_TITLE, R.string.app_name);
+            sendIntent.putExtra(Intent.EXTRA_TEXT,  "আমি বাঁচাতে চাই একটি প্রাণ, তাইতো করবো রক্তদান!\n" + "এখানে রক্তদাতা সম্পর্কে তথ্য রয়েছে :\nনাম : " + fname+ " " + "\nরক্তের গ্রুপ : " + bloodgroup + "\nঠিকানা: " + village + " ," + upazila + " ," + district + " ," + state + "\nমোবাইল নম্বর : " + mobile);
+            sendIntent.setType("text/plain");
+            Intent shareIntent = Intent.createChooser(sendIntent, "রক্ত দিন জীবন বাঁচান।");
+            startActivity(shareIntent);
+        });
 //        =============================================
         userRef = FirebaseDatabase.getInstance().getReference().child("Donors");
         like_ref = FirebaseDatabase.getInstance().getReference("likes");
@@ -315,6 +334,17 @@ public class DonorProfile extends AppCompatActivity {
         });
 
 
+    }
+
+
+    public void callActions(String number) {
+        Intent intent = new Intent(Intent.ACTION_CALL);
+        intent.setData(Uri.parse("tel:" +number));
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CALL_PHONE}, Request_call);
+        } else {
+            startActivity(intent);
+        }
     }
 
 

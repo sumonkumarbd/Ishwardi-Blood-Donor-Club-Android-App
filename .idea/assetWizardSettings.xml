@@ -23,7 +23,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="file:/D:/Program_Files/sdk/icons/material/materialicons/delete_forever/baseline_delete_forever_24.xml" />
+                                      <entry key="url" value="file:/D:/Program_Files/sdk/icons/material/materialicons/share/baseline_share_24.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -35,7 +35,7 @@
                           <map>
                             <entry key="color" value="ee3739" />
                             <entry key="opacityPercent" value="92" />
-                            <entry key="outputName" value="delete_icon" />
+                            <entry key="outputName" value="ic_baseline_share_24" />
                             <entry key="sourceFile" value="G:\android_projects\projects\Productions\IBDC App" />
                           </map>
                         </option>

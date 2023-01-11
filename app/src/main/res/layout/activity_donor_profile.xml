@@ -131,11 +131,11 @@
                     android:id="@+id/d_commentsTxt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/_15dp"
                     android:clickable="true"
                     android:contextClickable="true"
                     android:elevation="@dimen/minor_shadow"
                     android:focusable="true"
+                    android:layout_marginEnd="@dimen/_30dp"
                     android:focusableInTouchMode="true"
                     android:fontFamily="@font/banglanumber"
                     android:gravity="center_vertical"
@@ -145,8 +145,21 @@
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/form_txt"
                     app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/d_shareBtn"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/d_shareBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/_10dp"
+                    android:contentDescription="@string/todo"
+                    android:src="@drawable/ic_baseline_share_24"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
+
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <View
@@ -453,7 +466,7 @@
                                     android:ellipsize="marquee"
                                     android:focusable="true"
                                     android:focusableInTouchMode="true"
-                                    android:fontFamily="@font/banglanumber"
+                                    android:fontFamily="@font/des_font"
                                     android:freezesText="true"
                                     android:marqueeRepeatLimit="marquee_forever"
                                     android:singleLine="true"

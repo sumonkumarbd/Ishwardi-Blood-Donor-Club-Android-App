@@ -625,10 +625,10 @@ public class DisplayDonorsActivity extends AppCompatActivity {
             User sent = temp.get(position);
             Intent sendIntent = new Intent();
             sendIntent.setAction(Intent.ACTION_SEND);
-            sendIntent.putExtra(Intent.EXTRA_TITLE, R.string.motive);
-            sendIntent.putExtra(Intent.EXTRA_TEXT, "Hello.\n" + "Here is the Information about blood Donor:\n" + sent.getFName() + " " + sent.getLName() + "\nBlood Group : " + sent.getBloodGroup() + "\nAddress : " + sent.getVillage() + " ," + sent.getUpazila() + " ," + sent.getDistrict() + " ," + sent.getState() + "\nMobile Number : " + sent.getMobile());
+            sendIntent.putExtra(Intent.EXTRA_TITLE, R.string.app_name);
+            sendIntent.putExtra(Intent.EXTRA_TEXT,  "আমি বাঁচাতে চাই একটি প্রাণ, তাইতো করবো রক্তদান!\n" + "এখানে রক্তদাতা সম্পর্কে তথ্য রয়েছে :\nনাম : " + sent.getFName()+ " " + "\nরক্তের গ্রুপ : " + sent.getBloodGroup() + "\nঠিকানা: " + sent.getVillage() + " ," + sent.getUpazila() + " ," + sent.getDistrict() + " ," + sent.getState() + "\nমোবাইল নম্বর : " + sent.getMobile());
             sendIntent.setType("text/plain");
-            Intent shareIntent = Intent.createChooser(sendIntent, "Be Hero, Donate Blood.");
+            Intent shareIntent = Intent.createChooser(sendIntent, "রক্ত দিন জীবন বাঁচান।");
             startActivity(shareIntent);
 
         });
