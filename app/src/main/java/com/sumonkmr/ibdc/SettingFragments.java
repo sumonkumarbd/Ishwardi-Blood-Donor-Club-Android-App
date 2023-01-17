@@ -3,6 +3,10 @@ package com.sumonkmr.ibdc;
 import static com.bumptech.glide.load.resource.drawable.DrawableDecoderCompat.getDrawable;
 
 import android.app.Dialog;
+import android.content.Context;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
+import android.media.AudioManager;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -14,10 +18,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.FirebaseTooManyRequestsException;
 import com.google.firebase.auth.AuthCredential;
@@ -38,13 +45,14 @@ import java.util.concurrent.TimeUnit;
 public class SettingFragments extends Fragment {
 
     TextView change_Email, change_password, changeNumber;
-    EditText reNew_pass, oldPass_resetPass, newPass_resetPass,oldMail,newMail,passForCngMail,oldNum,newNum, pass_Num;
-    Button resetBtn, cBtn,resetBtn_Num_done,resetBtn_Num,cBtn_Num;
+    EditText reNew_pass, oldPass_resetPass, newPass_resetPass, oldMail, newMail, passForCngMail, oldNum, newNum, pass_Num;
+    Button resetBtn, cBtn, resetBtn_Num_done, resetBtn_Num, cBtn_Num;
     String emailExceptions;
     FirebaseAuth mAuth;
     FirebaseUser user;
     String id;
-   boolean isSubmit = false;
+    boolean isSubmit = false;
+
 
 
     @Override
@@ -65,7 +73,6 @@ public class SettingFragments extends Fragment {
         assert userEmail != null;
 
 
-
 //        functions
         EmailChange();
         PassWordChange();
@@ -75,10 +82,9 @@ public class SettingFragments extends Fragment {
         return view;
     }//onCreate VIew
 
-
     private void EmailChange() {
 
-       Dialog dialog = new Dialog(getContext());
+        Dialog dialog = new Dialog(getContext());
         dialog.setContentView(R.layout.change_email_dialog);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             dialog.getWindow().setBackgroundDrawableResource(R.drawable.custom_dialog_background);
@@ -144,13 +150,12 @@ public class SettingFragments extends Fragment {
         });
 
 
-
     }//email Change
 
 
     private void PassWordChange() {
 
-       Dialog dialog = new Dialog(getContext());
+        Dialog dialog = new Dialog(getContext());
         dialog.setContentView(R.layout.change_password_dialog);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             dialog.getWindow().setBackgroundDrawableResource(R.drawable.custom_dialog_background);
@@ -243,7 +248,7 @@ public class SettingFragments extends Fragment {
             dialog.show();
         });
 
-        resetBtn_Num.setOnClickListener(v-> {
+        resetBtn_Num.setOnClickListener(v -> {
             initOpt();
         });
 
@@ -264,59 +269,53 @@ public class SettingFragments extends Fragment {
         });
 
 
-
-
     }//Number Change
 
 
-
-
-
     private void UpdateEmailInDB() {
-        HashMap<String,Object> values = new HashMap<>();
-        values.put("Email",user.getEmail());
-        FirebaseDatabase.getInstance().getReference("Donors/"+user.getUid())
+        HashMap<String, Object> values = new HashMap<>();
+        values.put("Email", user.getEmail());
+        FirebaseDatabase.getInstance().getReference("Donors/" + user.getUid())
                 .updateChildren(values)
                 .addOnCompleteListener(task -> {
-                    if(task.isSuccessful()){
-                        Toast.makeText(getContext(), "আপনার নতুন ইমেইলঃ "+user.getEmail(), Toast.LENGTH_LONG).show();
-                    }else {
+                    if (task.isSuccessful()) {
+                        Toast.makeText(getContext(), "আপনার নতুন ইমেইলঃ " + user.getEmail(), Toast.LENGTH_LONG).show();
+                    } else {
                         Toast.makeText(getContext(), R.string.failed, Toast.LENGTH_SHORT).show();
                     }
                 });
 
     }//addToDatabase
-
 
 
     //need to implement blow 3 function for Change number functions...
     private void UpdatePhnInDB() {
-        HashMap<String,Object> values = new HashMap<>();
-        values.put("Mobile",newNum.getText().toString());
-        FirebaseDatabase.getInstance().getReference("Donors/"+user.getUid())
+        HashMap<String, Object> values = new HashMap<>();
+        values.put("Mobile", newNum.getText().toString());
+        FirebaseDatabase.getInstance().getReference("Donors/" + user.getUid())
                 .updateChildren(values)
                 .addOnCompleteListener(task -> {
-                    if(task.isSuccessful()){
-                        Toast.makeText(getContext(), "আপনার নতুন নাম্বারঃ "+user.getPhoneNumber(), Toast.LENGTH_SHORT).show();
-                    }else {
+                    if (task.isSuccessful()) {
+                        Toast.makeText(getContext(), "আপনার নতুন নাম্বারঃ " + user.getPhoneNumber(), Toast.LENGTH_SHORT).show();
+                    } else {
                         Toast.makeText(getContext(), R.string.failed, Toast.LENGTH_SHORT).show();
                     }
                 });
 
     }//addToDatabase
 
-    private void initOpt(){
+    private void initOpt() {
 
-        if (oldNum.getText().toString().isEmpty() || oldNum.getText().toString().length() != 11){
+        if (oldNum.getText().toString().isEmpty() || oldNum.getText().toString().length() != 11) {
             oldNum.setError("আপনার বর্তমান নাম্বারটি সঠিক ভাবে লিখুন!");
             resetBtn_Num.setVisibility(View.VISIBLE);
             resetBtn_Num_done.setVisibility(View.GONE);
-        }else if(newNum.getText().toString().isEmpty() || newNum.getText().toString().length() != 11) {
+        } else if (newNum.getText().toString().isEmpty() || newNum.getText().toString().length() != 11) {
             newNum.setError("আপনার নতুন নাম্বারটি সঠিক ভাবে লিখুন!");
             resetBtn_Num.setVisibility(View.VISIBLE);
             resetBtn_Num_done.setVisibility(View.GONE);
 
-        }else {
+        } else {
             resetBtn_Num.setVisibility(View.GONE);
             resetBtn_Num_done.setVisibility(View.VISIBLE);
             pass_Num.setHint(R.string.verifying);
@@ -359,14 +358,14 @@ public class SettingFragments extends Fragment {
         }
     }//init otp
 
-    private void updatePhoneNum(Dialog d){
+    private void updatePhoneNum(Dialog d) {
         User u = new User();
-        if(pass_Num.getText().toString().length()!=6) {
+        if (pass_Num.getText().toString().length() != 6) {
             Toast.makeText(getContext(), "পাসওয়ার্ড সঠিক নয়!!", Toast.LENGTH_LONG).show();
-        }else if(pass_Num.getText().toString().isEmpty()) {
+        } else if (pass_Num.getText().toString().isEmpty()) {
             Toast.makeText(getContext(), "পাসওয়ার্ড দিন!!", Toast.LENGTH_LONG).show();
-        }else {
-            if (Objects.equals(u.getMobile(), oldNum.toString())){
+        } else {
+            if (Objects.equals(u.getMobile(), oldNum.toString())) {
                 if (!TextUtils.isEmpty(newNum.getText()) && newNum.getText().toString().length() == 11) {
                     AuthCredential credential = EmailAuthProvider.getCredential(Objects.requireNonNull(user.getEmail()), pass_Num.getText().toString());
                     user.reauthenticate(credential)
@@ -386,10 +385,10 @@ public class SettingFragments extends Fragment {
                             .addOnFailureListener(e -> {
                                 Toast.makeText(getContext(), "আপনার পাসওয়ার্ড টি ভুল! অনুগ্রহপূর্বক সঠিক পাসওয়ার্ড দিন!!", Toast.LENGTH_SHORT).show();
                             });
-                }else {
+                } else {
                     newNum.setError("নাম্বার টি সঠিক নয়!");
                 }
-            }else {
+            } else {
                 oldNum.setError("নাম্বার টি সঠিক নয়!");
             }
         }

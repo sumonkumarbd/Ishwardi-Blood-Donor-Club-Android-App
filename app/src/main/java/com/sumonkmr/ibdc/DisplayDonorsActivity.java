@@ -98,7 +98,7 @@ public class DisplayDonorsActivity extends AppCompatActivity {
             SearchDialog();
         });
         donorReload.setOnRefreshListener(() -> {
-            soundManager.okkBtn.start();
+            soundManager.reFresh.start();
             initializeComponents();
             getDonors();
             adapter.notifyDataSetChanged();

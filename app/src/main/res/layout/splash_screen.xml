@@ -36,7 +36,7 @@
         android:text="@string/thank_txt"
         android:textAlignment="center"
         android:textColor="@color/colorPrimary"
-        android:textSize="@dimen/manu_txt"
+        android:textSize="@dimen/form_txt"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

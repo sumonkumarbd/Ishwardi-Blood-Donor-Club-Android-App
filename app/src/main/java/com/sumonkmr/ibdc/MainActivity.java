@@ -4,9 +4,13 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Build;
@@ -21,6 +25,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -42,6 +47,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -99,12 +105,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     // per app run-- do not show more than 3 fullscreen ad. [[Change it if your want]]
     int fullScreenAdMaxShowCount = 3;
 
+    SwitchMaterial switch_button;
+    ImageView soundImg;
+    private AudioManager audioManager;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         auth = FirebaseAuth.getInstance();
         gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
         gsc = GoogleSignIn.getClient(this, gso);
@@ -122,9 +131,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         account = GoogleSignIn.getLastSignedInAccount(this);
         init();
     }//onCreate finished
-
     private void init() {
-
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -154,6 +161,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         sds_dash = menuView.findViewById(R.id.sds_dash);
         sds_image = menuView.findViewById(R.id.sds_image);
         mail = menuView.findViewById(R.id.mail);
+        switch_button = menuView.findViewById(R.id.switch_button);
+        soundImg = menuView.findViewById(R.id.soundImg);
 
         ll_Home.setOnClickListener(this);
         ll_Profile.setOnClickListener(this);
@@ -212,34 +221,40 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
+        SoundToggle();
     }
 
 
     @SuppressLint("NonConstantResourceId")
     @Override
     public void onClick(View view) {
+        SoundManager sm = new SoundManager(MainActivity.this);
         AdsControl adsControl = new AdsControl(this);
         Random random = new Random();
         int myCount = random.nextInt(100 - 5) + 5;
         switch (view.getId()) {
             case R.id.ll_Home:
                 replace(new HomeFragment(), "Home");
+                sm.okkBtn.start();
                 break;
 
             case R.id.ll_Profile:
-//                replace(new ProfileFragment(), "Profile");
+                sm.okkBtn.start();
                 startActivity(new Intent(this,Profile.class));
                 break;
 
             case R.id.ll_beDonor:
                 OpenDialog();
+                sm.okkBtn.start();
                 break;
 
             case R.id.ll_Setting:
                 replace(new SettingFragments(), "Setting");
+                sm.okkBtn.start();
                 break;
 
             case R.id.ll_fb:
+                sm.okkBtn.start();;
                 if (adsControl.passCondition() && myCount % 2 == 0) {
                     AdsControl.mInterstitialAd.show(this);
 //            Toast.makeText(this, "Ready For Show Ads!" + myCount, Toast.LENGTH_SHORT).show();
@@ -251,14 +266,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.ll_Share:
+                sm.okkBtn.start();
                 shareApp();
                 break;
 
             case R.id.ll_about_us:
+                sm.okkBtn.start();
                 startActivity(new Intent(this, AboutUs.class));
                 break;
 
             case R.id.ll_privacy:
+                sm.okkBtn.start();
                 if (adsControl.passCondition() && myCount % 2 == 0) {
                     AdsControl.mInterstitialAd.show(this);
 //            Toast.makeText(this, "Ready For Show Ads!" + myCount, Toast.LENGTH_SHORT).show();
@@ -270,6 +288,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.ll_Logout:
+                sm.okkBtn.start();
                 if (adsControl.passCondition() && myCount % 2 == 0) {
                     AdsControl.mInterstitialAd.show(this);
 //            Toast.makeText(this, "Ready For Show Ads!" + myCount, Toast.LENGTH_SHORT).show();
@@ -287,6 +306,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.mail:
+                sm.okkBtn.start();
                 Intent intent = new Intent(Intent.ACTION_SEND);
                 intent.putExtra(Intent.EXTRA_EMAIL, new String[]{"sumonkmrofficial@gmail.com"});
                 intent.putExtra(Intent.EXTRA_SUBJECT, "Im Sending Email From IBDC App");
@@ -296,10 +316,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.sds_dash:
+                sm.okkBtn.start();
                 gotoUrl("https://www.facebook.com/sumonkmr.studio/");
                 break;
 
             case R.id.sds_image:
+                sm.okkBtn.start();
                 gotoUrl("https://play.google.com/store/apps/dev?id=6877143126125387449");
                 break;
 
@@ -377,11 +399,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     private void FinalUploadDatabase() {
+        SoundManager soundManager = new SoundManager(MainActivity.this);
         if (profileImg_uri != null) {
             progressbar = dialog.findViewById(R.id.progressbar_signUp);
             final StorageReference uploader = storageReference.child(String.format("profile_image/User Email : %s/profile_picture.%s", account.getEmail(), ".jpg"));
             uploader.putFile(profileImg_uri)
                     .addOnSuccessListener(taskSnapshot -> {
+                        soundManager.great_sound.start();
                         Toast.makeText(getApplicationContext(), R.string.Updated_img, Toast.LENGTH_SHORT).show();
                         uploader.getDownloadUrl().addOnSuccessListener(uri -> {
                             if (!profileImg_uri.toString().isEmpty()) {
@@ -917,7 +941,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     //        Make Form Validation Here
     private boolean validateInput() {
-
         if (f_name_signUp.getText() == null || f_name_signUp.getText().toString().length() == 0) {
             f_name_signUp.setError("অনুগ্রহপূর্বক সঠিক নাম দিন!");
             return false;
@@ -1023,12 +1046,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     private void ExitAppDialog() {
+        SoundManager soundManager = new SoundManager(this);
+        soundManager.uiClick.start();
         dialog = new Dialog(this);
         dialog.setContentView(R.layout.exit_popup);
         Button ok_Btn, cBtn;
-
         account = GoogleSignIn.getLastSignedInAccount(this);
-
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             dialog.getWindow().setBackgroundDrawable(getDrawable(R.drawable.custom_dialog_background));
         }
@@ -1044,6 +1067,48 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         ok_Btn.setOnClickListener(v -> MainActivity.super.onBackPressed());
         cBtn.setOnClickListener(v -> dialog.dismiss());
+    }
+
+    public void SoundToggle(){
+        ColorStateList thumbColors = new ColorStateList(
+                new int[][]{
+                        new int[]{android.R.attr.state_checked},  // checked
+                        new int[]{-android.R.attr.state_checked}  // not checked
+                },
+                new int[]{
+                        Color.argb(255, 238, 55, 57) , // checked
+                        Color.argb(255, 238, 55, 57)  // not checked
+                }
+        );
+
+        ColorStateList trackColors = new ColorStateList(
+                new int[][]{
+                        new int[]{android.R.attr.state_checked},  // checked
+                        new int[]{-android.R.attr.state_checked}  // not checked
+                },
+                new int[]{
+                        Color.WHITE,  // checked
+                         Color.WHITE   // not checked
+                }
+        );
+        switch_button.setThumbTintList(thumbColors);
+        switch_button.setTrackTintList(trackColors);
+
+        switch_button.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            audioManager = (AudioManager) this.getSystemService(Context.AUDIO_SERVICE);
+            if (switch_button.isChecked()) {
+                audioManager.setStreamMute(AudioManager.STREAM_MUSIC, false);
+                switch_button.setChecked(true);
+                soundImg.setImageResource(R.drawable.sound_on);
+            } else {
+                audioManager.setStreamMute(AudioManager.STREAM_MUSIC, true);
+                switch_button.setChecked(false);
+                SoundManager soundManager = new SoundManager(this);
+                soundManager.okkBtn.start();
+                soundImg.setImageResource(R.drawable.sound_off);
+            }
+        });
+
     }
 
     @Override

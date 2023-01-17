@@ -32,6 +32,7 @@
         />
 
         <TextView
+            android:visibility="gone"
             android:id="@+id/change_Email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -46,6 +47,7 @@
             app:drawableStartCompat="@drawable/ic_baseline_alternate_email_24" />
 
         <TextView
+            android:visibility="gone"
             android:id="@+id/change_password"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -60,6 +62,7 @@
             app:drawableStartCompat="@drawable/ic_baseline_person_pin_24" />
 
         <TextView
+            android:visibility="gone"
             android:id="@+id/changeNumber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -72,6 +75,8 @@
             android:textStyle="bold"
             android:fontFamily="@font/des_font"
             app:drawableStartCompat="@drawable/ic_baseline_phone_iphone_24" />
+
+
 
 
     </LinearLayout>

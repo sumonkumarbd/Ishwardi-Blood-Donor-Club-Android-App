@@ -1143,6 +1143,9 @@
     <string name="zero">0</string>
     <string name="bloodGrp">O+</string>
     <string name="comment_hint">রক্তদাতা সম্পর্কে কিছু লিখুন…</string>
+    <string name="sound">শব্দ</string>
+    <string name="off">বন্ধ</string>
+    <string name="on">চালু</string>
     <!--   End Sylet Division District-->
 
     <!--Finished Districts Array-->
