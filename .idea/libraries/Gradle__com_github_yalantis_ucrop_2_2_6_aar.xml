@@ -9,10 +9,10 @@
       <root url="file://D:/Program_Files/sdk/caches/transforms-3/af4ecab0286d733a7572dc38c51e78f1/transformed/jetified-ucrop-2.2.6/res" />
     </CLASSES>
     <JAVADOC>
-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.yalantis/ucrop/2.2.6/463960c5eeefff73517b978228d207911146c162/ucrop-2.2.6-javadoc.jar!/" />
+      <root url="jar://D:/Program_Files/sdk/caches/modules-2/files-2.1/com.github.yalantis/ucrop/2.2.6/463960c5eeefff73517b978228d207911146c162/ucrop-2.2.6-javadoc.jar!/" />
     </JAVADOC>
     <SOURCES>
-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.yalantis/ucrop/2.2.6/3a2db8c65da9d26feb14480a6f5e47419637611/ucrop-2.2.6-sources.jar!/" />
+      <root url="jar://D:/Program_Files/sdk/caches/modules-2/files-2.1/com.github.yalantis/ucrop/2.2.6/3a2db8c65da9d26feb14480a6f5e47419637611/ucrop-2.2.6-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

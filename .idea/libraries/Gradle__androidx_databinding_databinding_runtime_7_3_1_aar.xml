@@ -7,7 +7,7 @@
     </CLASSES>
     <JAVADOC />
     <SOURCES>
-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.databinding/databinding-runtime/7.3.1/f2bf4c5deedb037f4b93a4596774be1ebbe4d039/databinding-runtime-7.3.1-sources.jar!/" />
+      <root url="jar://D:/Program_Files/sdk/caches/modules-2/files-2.1/androidx.databinding/databinding-runtime/7.3.1/f2bf4c5deedb037f4b93a4596774be1ebbe4d039/databinding-runtime-7.3.1-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

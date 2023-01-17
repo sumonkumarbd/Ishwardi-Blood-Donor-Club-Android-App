@@ -5,7 +5,7 @@
       <root url="file://D:/Program_Files/sdk/caches/transforms-3/957689cab9c806ce8fe3e225cb3c66fe/transformed/jetified-play-services-fido-19.0.0/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC>
-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.android.gms/play-services-fido/19.0.0/45dbe3999e4633b89db1a3df791c98bbb1e48c04/play-services-fido-19.0.0-javadoc.jar!/" />
+      <root url="jar://D:/Program_Files/sdk/caches/modules-2/files-2.1/com.google.android.gms/play-services-fido/19.0.0/45dbe3999e4633b89db1a3df791c98bbb1e48c04/play-services-fido-19.0.0-javadoc.jar!/" />
     </JAVADOC>
     <SOURCES />
   </library>

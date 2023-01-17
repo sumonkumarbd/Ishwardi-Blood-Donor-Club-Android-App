@@ -5,10 +5,10 @@
       <root url="file://D:/Program_Files/sdk/caches/transforms-3/46d9f55278c68f837157eb3e0da6e0a9/transformed/espresso-core-3.5.0/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC>
-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.test.espresso/espresso-core/3.5.0/f69b42009b83f3d93e6a5a3d1968eef9865beb02/espresso-core-3.5.0-javadoc.jar!/" />
+      <root url="jar://D:/Program_Files/sdk/caches/modules-2/files-2.1/androidx.test.espresso/espresso-core/3.5.0/f69b42009b83f3d93e6a5a3d1968eef9865beb02/espresso-core-3.5.0-javadoc.jar!/" />
     </JAVADOC>
     <SOURCES>
-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.test.espresso/espresso-core/3.5.0/50bb4dd95e68eb3fdc986995afab6730be477cdb/espresso-core-3.5.0-sources.jar!/" />
+      <root url="jar://D:/Program_Files/sdk/caches/modules-2/files-2.1/androidx.test.espresso/espresso-core/3.5.0/50bb4dd95e68eb3fdc986995afab6730be477cdb/espresso-core-3.5.0-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

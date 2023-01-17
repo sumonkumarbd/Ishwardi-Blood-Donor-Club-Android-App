@@ -9,10 +9,10 @@
       <root url="file://D:/Program_Files/sdk/caches/transforms-3/002955ddb9a23d511ba8273bed08749d/transformed/jetified-duo-navigation-drawer-3.0.0/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC>
-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/nl.psdcompany/duo-navigation-drawer/3.0.0/c24f94d0243514db66f279500bc4048133540daf/duo-navigation-drawer-3.0.0-javadoc.jar!/" />
+      <root url="jar://D:/Program_Files/sdk/caches/modules-2/files-2.1/nl.psdcompany/duo-navigation-drawer/3.0.0/c24f94d0243514db66f279500bc4048133540daf/duo-navigation-drawer-3.0.0-javadoc.jar!/" />
     </JAVADOC>
     <SOURCES>
-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/nl.psdcompany/duo-navigation-drawer/3.0.0/c6710d95ddede3d2767c6f434f75dbd81cdc2814/duo-navigation-drawer-3.0.0-sources.jar!/" />
+      <root url="jar://D:/Program_Files/sdk/caches/modules-2/files-2.1/nl.psdcompany/duo-navigation-drawer/3.0.0/c6710d95ddede3d2767c6f434f75dbd81cdc2814/duo-navigation-drawer-3.0.0-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

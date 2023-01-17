@@ -5,7 +5,7 @@
       <root url="jar://D:/Program_Files/sdk/caches/transforms-3/007bd111ca6718beb7129c62ef2c7a7e/transformed/jetified-play-services-auth-api-phone-18.0.1/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC>
-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.android.gms/play-services-auth-api-phone/18.0.1/e50322b5fef28962e883380be05fcf2298222b00/play-services-auth-api-phone-18.0.1-javadoc.jar!/" />
+      <root url="jar://D:/Program_Files/sdk/caches/modules-2/files-2.1/com.google.android.gms/play-services-auth-api-phone/18.0.1/e50322b5fef28962e883380be05fcf2298222b00/play-services-auth-api-phone-18.0.1-javadoc.jar!/" />
     </JAVADOC>
     <SOURCES />
   </library>

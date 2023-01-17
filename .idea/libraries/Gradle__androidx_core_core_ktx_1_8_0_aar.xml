@@ -7,7 +7,7 @@
     </CLASSES>
     <JAVADOC />
     <SOURCES>
-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.core/core-ktx/1.8.0/3850f60ae5c85d51335279f163e90163587e2bef/core-ktx-1.8.0-sources.jar!/" />
+      <root url="jar://D:/Program_Files/sdk/caches/modules-2/files-2.1/androidx.core/core-ktx/1.8.0/3850f60ae5c85d51335279f163e90163587e2bef/core-ktx-1.8.0-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

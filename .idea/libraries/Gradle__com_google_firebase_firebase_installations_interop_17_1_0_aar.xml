@@ -5,10 +5,10 @@
       <root url="file://D:/Program_Files/sdk/caches/transforms-3/2b94d8a0c9088c3561cef551f8f2c089/transformed/jetified-firebase-installations-interop-17.1.0/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC>
-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.firebase/firebase-installations-interop/17.1.0/4fd04ebe2d8d8f9bf658db62a507d7a0161c362a/firebase-installations-interop-17.1.0-javadoc.jar!/" />
+      <root url="jar://D:/Program_Files/sdk/caches/modules-2/files-2.1/com.google.firebase/firebase-installations-interop/17.1.0/4fd04ebe2d8d8f9bf658db62a507d7a0161c362a/firebase-installations-interop-17.1.0-javadoc.jar!/" />
     </JAVADOC>
     <SOURCES>
-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.firebase/firebase-installations-interop/17.1.0/5998843857375da90db2675c2dce6814d97d16ff/firebase-installations-interop-17.1.0-sources.jar!/" />
+      <root url="jar://D:/Program_Files/sdk/caches/modules-2/files-2.1/com.google.firebase/firebase-installations-interop/17.1.0/5998843857375da90db2675c2dce6814d97d16ff/firebase-installations-interop-17.1.0-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

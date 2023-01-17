@@ -6,7 +6,7 @@
       <root url="file://D:/Program_Files/sdk/caches/transforms-3/2ba0b11328aefd424ae355115a134586/transformed/jetified-play-services-basement-18.1.0/res" />
     </CLASSES>
     <JAVADOC>
-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.android.gms/play-services-basement/18.1.0/dc468f5f14200309066c7c5f99374e625c9fa89a/play-services-basement-18.1.0-javadoc.jar!/" />
+      <root url="jar://D:/Program_Files/sdk/caches/modules-2/files-2.1/com.google.android.gms/play-services-basement/18.1.0/dc468f5f14200309066c7c5f99374e625c9fa89a/play-services-basement-18.1.0-javadoc.jar!/" />
     </JAVADOC>
     <SOURCES />
   </library>

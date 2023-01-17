@@ -5,10 +5,10 @@
       <root url="file://D:/Program_Files/sdk/caches/transforms-3/31c8bb8e2d7e9f233b742d89b39b171c/transformed/espresso-idling-resource-3.5.0/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC>
-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.test.espresso/espresso-idling-resource/3.5.0/7d9e3a2e8bfc68b7a7d5c8e517227cb59d252bf4/espresso-idling-resource-3.5.0-javadoc.jar!/" />
+      <root url="jar://D:/Program_Files/sdk/caches/modules-2/files-2.1/androidx.test.espresso/espresso-idling-resource/3.5.0/7d9e3a2e8bfc68b7a7d5c8e517227cb59d252bf4/espresso-idling-resource-3.5.0-javadoc.jar!/" />
     </JAVADOC>
     <SOURCES>
-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.test.espresso/espresso-idling-resource/3.5.0/7dd3d807f81bd316fe725ad5ab60f7afdad14607/espresso-idling-resource-3.5.0-sources.jar!/" />
+      <root url="jar://D:/Program_Files/sdk/caches/modules-2/files-2.1/androidx.test.espresso/espresso-idling-resource/3.5.0/7dd3d807f81bd316fe725ad5ab60f7afdad14607/espresso-idling-resource-3.5.0-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

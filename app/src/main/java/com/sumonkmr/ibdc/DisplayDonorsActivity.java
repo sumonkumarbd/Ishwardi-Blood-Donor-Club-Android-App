@@ -708,16 +708,16 @@ public class DisplayDonorsActivity extends AppCompatActivity {
     }
 
 
-   private void GetUpdateUserCount(){
-       adapter.updateList(temp);
-       long totalUser = Integer.parseInt(String.valueOf(temp.size()));
-       if (temp.size() == 0){
-           edit_total.setText(String.format("মোটঃ %d জন রক্তদাতা", totalUser));
-       }else {
-           temp.size();
-           edit_total.setText(String.format("মোটঃ %d জন রক্তদাতা", totalUser));
-       }
-   }
+    private void GetUpdateUserCount(){
+        adapter.updateList(temp);
+        long totalUser = Integer.parseInt(String.valueOf(temp.size()));
+        if (temp.size() == 0){
+            edit_total.setText(String.format("মোটঃ %d জন রক্তদাতা", totalUser));
+        }else {
+            temp.size();
+            edit_total.setText(String.format("মোটঃ %d জন রক্তদাতা", totalUser));
+        }
+    }
 
 
     private void getDonors() {
@@ -729,10 +729,10 @@ public class DisplayDonorsActivity extends AppCompatActivity {
                 for (DataSnapshot ds : snapshot.getChildren()) {
                     User user = ds.getValue(User.class);
                     assert user != null;
-                        self = user;
-                        users.add(user);
-                        temp.add(user);
-                        edit_total.setText(String.format("মোটঃ %d জন রক্তদাতা", snapshot.getChildrenCount()));
+                    self = user;
+                    users.add(user);
+                    temp.add(user);
+                    edit_total.setText(String.format("মোটঃ %d জন রক্তদাতা", snapshot.getChildrenCount()));
                 }
                 filterList();
             }
@@ -753,9 +753,9 @@ public class DisplayDonorsActivity extends AppCompatActivity {
                 for (DataSnapshot ds : snapshot.getChildren()) {
                     User user = ds.getValue(User.class);
                     assert user != null;
-                        self = user;
-                        users.add(user);
-                        temp.add(user);
+                    self = user;
+                    users.add(user);
+                    temp.add(user);
                 }
                 updateList(UpazilaFilter.getText().toString());
                 updateBloodGroupList(bloodGrpFilter.getText().toString());

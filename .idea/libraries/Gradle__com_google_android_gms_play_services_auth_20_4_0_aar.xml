@@ -6,7 +6,7 @@
       <root url="file://D:/Program_Files/sdk/caches/transforms-3/2149240e4a7fcd5acad4a898cdb2f93d/transformed/jetified-play-services-auth-20.4.0/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC>
-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.android.gms/play-services-auth/20.4.0/6ea7d6b9911957d92cdd066a4d8656636ae79718/play-services-auth-20.4.0-javadoc.jar!/" />
+      <root url="jar://D:/Program_Files/sdk/caches/modules-2/files-2.1/com.google.android.gms/play-services-auth/20.4.0/6ea7d6b9911957d92cdd066a4d8656636ae79718/play-services-auth-20.4.0-javadoc.jar!/" />
     </JAVADOC>
     <SOURCES />
   </library>

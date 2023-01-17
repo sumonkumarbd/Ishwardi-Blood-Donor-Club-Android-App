@@ -5,7 +5,7 @@
       <root url="jar://D:/Program_Files/sdk/caches/transforms-3/f7fc7368241a440950c95e1fb279b30d/transformed/jetified-user-messaging-platform-2.0.0/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC>
-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.android.ump/user-messaging-platform/2.0.0/1d7f5f01e2c676b2f818c43b213404391c2d6536/user-messaging-platform-2.0.0-javadoc.jar!/" />
+      <root url="jar://D:/Program_Files/sdk/caches/modules-2/files-2.1/com.google.android.ump/user-messaging-platform/2.0.0/1d7f5f01e2c676b2f818c43b213404391c2d6536/user-messaging-platform-2.0.0-javadoc.jar!/" />
     </JAVADOC>
     <SOURCES />
   </library>

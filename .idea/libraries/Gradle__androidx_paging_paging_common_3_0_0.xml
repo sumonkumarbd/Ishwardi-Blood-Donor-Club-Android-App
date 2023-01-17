@@ -5,7 +5,7 @@
     </CLASSES>
     <JAVADOC />
     <SOURCES>
-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.paging/paging-common/3.0.0/305fc4a31769467b3e3872e6970fe9cdc101b400/paging-common-3.0.0-sources.jar!/" />
+      <root url="jar://D:/Program_Files/sdk/caches/modules-2/files-2.1/androidx.paging/paging-common/3.0.0/305fc4a31769467b3e3872e6970fe9cdc101b400/paging-common-3.0.0-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

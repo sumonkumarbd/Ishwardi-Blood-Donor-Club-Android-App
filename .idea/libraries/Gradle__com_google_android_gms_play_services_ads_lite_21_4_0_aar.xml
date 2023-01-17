@@ -6,7 +6,7 @@
       <root url="file://D:/Program_Files/sdk/caches/transforms-3/267a78219d2d90b28abf6607aadea7e3/transformed/jetified-play-services-ads-lite-21.4.0/res" />
     </CLASSES>
     <JAVADOC>
-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.android.gms/play-services-ads-lite/21.4.0/4b233f142031b89e8e7048d47267d5771937ef3f/play-services-ads-lite-21.4.0-javadoc.jar!/" />
+      <root url="jar://D:/Program_Files/sdk/caches/modules-2/files-2.1/com.google.android.gms/play-services-ads-lite/21.4.0/4b233f142031b89e8e7048d47267d5771937ef3f/play-services-ads-lite-21.4.0-javadoc.jar!/" />
     </JAVADOC>
     <SOURCES />
   </library>

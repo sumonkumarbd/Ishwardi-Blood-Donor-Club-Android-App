@@ -6,7 +6,7 @@
       <root url="file://D:/Program_Files/sdk/caches/transforms-3/3e802a475ee3e47b6e96ad8c15ca2c51/transformed/jetified-car-ui-lib-2.3.0/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC>
-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.car.ui/car-ui-lib/2.3.0/a8c3b6cc8383bdd8afff4e4754f340b22a636ba3/car-ui-lib-2.3.0-javadoc.jar!/" />
+      <root url="jar://D:/Program_Files/sdk/caches/modules-2/files-2.1/com.android.car.ui/car-ui-lib/2.3.0/a8c3b6cc8383bdd8afff4e4754f340b22a636ba3/car-ui-lib-2.3.0-javadoc.jar!/" />
     </JAVADOC>
     <SOURCES />
   </library>

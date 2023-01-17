@@ -5,10 +5,10 @@
       <root url="file://D:/Program_Files/sdk/caches/transforms-3/450d1ae17eec3903e1471ff1c6eeef26/transformed/jetified-transport-runtime-3.1.8/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC>
-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.android.datatransport/transport-runtime/3.1.8/448df02831bf02af4fece264a7b96a3889f4f594/transport-runtime-3.1.8-javadoc.jar!/" />
+      <root url="jar://D:/Program_Files/sdk/caches/modules-2/files-2.1/com.google.android.datatransport/transport-runtime/3.1.8/448df02831bf02af4fece264a7b96a3889f4f594/transport-runtime-3.1.8-javadoc.jar!/" />
     </JAVADOC>
     <SOURCES>
-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.android.datatransport/transport-runtime/3.1.8/9b00f2ea90e62a04032d60248cb67f05abe81fcf/transport-runtime-3.1.8-sources.jar!/" />
+      <root url="jar://D:/Program_Files/sdk/caches/modules-2/files-2.1/com.google.android.datatransport/transport-runtime/3.1.8/9b00f2ea90e62a04032d60248cb67f05abe81fcf/transport-runtime-3.1.8-sources.jar!/" />
     </SOURCES>
   </library>
 </component>
