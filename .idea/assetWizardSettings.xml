@@ -23,7 +23,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="file:/D:/Program_Files/sdk/icons/material/materialicons/edit_note/baseline_edit_note_24.xml" />
+                                      <entry key="url" value="file:/D:/Program_Files/sdk/icons/material/materialicons/email/baseline_email_24.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -33,9 +33,9 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="color" value="ee3739" />
+                            <entry key="color" value="082342" />
                             <entry key="opacityPercent" value="92" />
-                            <entry key="outputName" value="ic_baseline_edit_note_24" />
+                            <entry key="outputName" value="baseline_email_24" />
                             <entry key="sourceFile" value="G:\android_projects\projects\Productions\IBDC App" />
                           </map>
                         </option>

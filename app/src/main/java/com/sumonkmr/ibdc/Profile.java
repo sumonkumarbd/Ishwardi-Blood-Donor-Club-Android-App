@@ -128,6 +128,7 @@ public class Profile extends AppCompatActivity {
         });
 
         p_image_shade_edit.setOnClickListener(v -> {
+            Toast.makeText(context, "working", Toast.LENGTH_SHORT).show();
             Dexter.withContext(context)
                     .withPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
                     .withListener(new PermissionListener() {
@@ -155,15 +156,14 @@ public class Profile extends AppCompatActivity {
     }//onCrate
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        if (requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
+        if (requestCode == 101 && resultCode == -1) {
             try {
                 assert data != null;
                 filepath = data.getData();
-                User user = new User();
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), filepath);
                 ContextWrapper contextWrapper = new ContextWrapper(getApplicationContext());
                 File path = contextWrapper.getExternalFilesDir(Environment.DIRECTORY_DCIM);
-                String fileName = String.format("%s.jpg", user.getEmail());
+                String fileName = String.format("%s.jpg", account.getEmail());
                 File finalFile = new File(path, fileName);
                 FileOutputStream fileOutputStream = new FileOutputStream(finalFile);
                 bitmap.compress(Bitmap.CompressFormat.JPEG, 20, fileOutputStream);
@@ -177,7 +177,7 @@ public class Profile extends AppCompatActivity {
 
             } catch (Exception ex) {
                 ex.printStackTrace();
-                Toast.makeText(this, "দুঃখিত,ছবি আপলোডে অসফল!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "ছবি আপলোডে অসফল!", Toast.LENGTH_SHORT).show();
             }
             super.onActivityResult(requestCode, resultCode, data);
         }

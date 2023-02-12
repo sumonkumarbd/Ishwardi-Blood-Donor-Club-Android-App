@@ -12,14 +12,12 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
-import com.google.android.gms.ads.AdView;
-
 import java.util.Random;
 
 public class AboutUs extends AppCompatActivity {
 
     LinearLayout sds, sadequl, rakibul, harun, mamun;
-    TextView dev_name, sdsEmail, moreApps, sadequl_phn, rakibul_phn, harun_phn, mamun_phn;
+    TextView dev_name, aftEmail, moreApps, sadequl_phn, rakibul_phn, harun_phn, mamun_phn;
     ImageView dev_img;
     private static final int Request_call = 1;
     String sadequl_num = "tel:+8801764942671";
@@ -62,12 +60,12 @@ public class AboutUs extends AppCompatActivity {
         });
 
         sds.setOnClickListener(v -> {
-            gotoUrl("https://www.facebook.com/sumonkmr.studio/");
+            gotoUrl("https://www.appsformation.com/");
         });
 
-        sdsEmail.setOnClickListener(v -> {
+        aftEmail.setOnClickListener(v -> {
             Intent intent = new Intent(Intent.ACTION_SEND);
-            intent.putExtra(Intent.EXTRA_EMAIL, new String[]{"sumonkmrofficial@gmail.com"});
+            intent.putExtra(Intent.EXTRA_EMAIL, new String[]{"info@appsformation.com"});
             intent.putExtra(Intent.EXTRA_SUBJECT, "Im Sending Email From IBDC App");
             intent.putExtra(Intent.EXTRA_TEXT, "Please Type Your Massage Here : \n");
             intent.setType("massage/rfc822");
@@ -100,7 +98,7 @@ public class AboutUs extends AppCompatActivity {
 
     private void Innit() {
         sds = findViewById(R.id.sds);
-        sdsEmail = findViewById(R.id.sdsEmail);
+        aftEmail = findViewById(R.id.sdsEmail);
         dev_name = findViewById(R.id.dev_name);
         dev_img = findViewById(R.id.dev_img);
         moreApps = findViewById(R.id.moreApps);

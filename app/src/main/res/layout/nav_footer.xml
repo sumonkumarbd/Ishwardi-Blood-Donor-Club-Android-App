@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="10dp"
+    android:background="@color/colorPrimary"
     android:orientation="vertical"
     >
     <TextView
@@ -15,21 +17,13 @@
         android:fontFamily="@font/varela_round"
         />
     <View
-        android:layout_width="80dp"
+        android:layout_width="@dimen/_190dp"
         android:layout_height="2dp"
         android:layout_marginBottom="5dp"
         android:background="@color/white"/>
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/sds_image"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:src="@drawable/sds_logo"
-        app:civ_border_width="2dp"
-        app:civ_border_color="#ffffff"/>
-
     <TextView
+        android:visibility="gone"
         android:id="@+id/sds_dash"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -40,15 +34,41 @@
         android:fontFamily="@font/varela_round"
         />
 
+    <LinearLayout
+        android:id="@+id/site_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <ImageView
+            android:id="@+id/aft_image"
+            android:layout_width="@dimen/_190dp"
+            android:background="@color/white"
+            android:layout_height="wrap_content"
+            android:src="@drawable/aft_logo_full"
+            />
+        <TextView
+            android:id="@+id/website"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="@string/website"
+            android:textSize="@dimen/profile_txt"
+            android:drawablePadding="@dimen/_2dp"
+            android:textColor="@color/white"
+            android:fontFamily="@font/varela_round"
+            app:drawableStartCompat="@drawable/website_icon" />
+    </LinearLayout>
     <TextView
         android:id="@+id/mail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:text="@string/developer_email"
-        android:textSize="@dimen/card_txt"
+        android:textSize="@dimen/profile_txt"
+        android:drawablePadding="@dimen/_2dp"
         android:textColor="@color/white"
         android:fontFamily="@font/varela_round"
+        app:drawableStartCompat="@drawable/baseline_email_24"
         />
 
 </LinearLayout>

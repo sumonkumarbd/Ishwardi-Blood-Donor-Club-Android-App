@@ -259,8 +259,8 @@
     <!--    Developer info-->
     <string name="created_by_bn">ডেভেলপার</string>
     <string name="post"><b>Founder and Lead Programmer</b></string>
-    <string name="sds"><b>SumonKmr Development Studio</b></string>
-    <string name="developer_email"><b>Email : sumonkmrofficial@gmail.com</b></string>
+    <string name="sds"><b>Apps Formation Technology</b></string>
+    <string name="developer_email"><b>info@appsformation.com</b></string>
 
 
     <!--    Directors Info-->
@@ -1146,6 +1146,7 @@
     <string name="sound">শব্দ</string>
     <string name="off">বন্ধ</string>
     <string name="on">চালু</string>
+    <string name="website"><b>appsformation.com</b></string>
     <!--   End Sylet Division District-->
 
     <!--Finished Districts Array-->

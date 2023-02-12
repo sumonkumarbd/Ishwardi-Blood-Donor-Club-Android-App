@@ -23,7 +23,6 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -39,9 +38,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.bumptech.glide.Glide;
-import com.daimajia.androidanimations.library.Techniques;
-import com.daimajia.androidanimations.library.YoYo;
-import com.google.android.gms.ads.AdView;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -82,7 +78,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     de.hdodenhof.circleimageview.CircleImageView profile_image_signUp, p_image_shade_signUp;
     AutoCompleteTextView Division, District, Upazila, bloodGrpDropDown, lastDonateDate_signUp;
     DatePicker birthDate_signUp;
-    de.hdodenhof.circleimageview.CircleImageView profile_image_menu, sds_image;
+    de.hdodenhof.circleimageview.CircleImageView profile_image_menu;
     TextView profile_name_menu, sds_dash, mail, privacyTxt,rulesTxt;
     int d, m, y;
     Dialog dialog;
@@ -100,7 +96,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private FirebaseDatabase db;
     private ProgressBar progressbar;
     final Calendar calendar = Calendar.getInstance();
-    LinearLayout bannerLay;
+    LinearLayout bannerLay,site_bar;
     Intent targetActivity;
     // per app run-- do not show more than 3 fullscreen ad. [[Change it if your want]]
     int fullScreenAdMaxShowCount = 3;
@@ -159,8 +155,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         profile_name_menu = menuView.findViewById(R.id.profile_name_menu);
         profile_image_menu = menuView.findViewById(R.id.profile_image_menu);
         sds_dash = menuView.findViewById(R.id.sds_dash);
-        sds_image = menuView.findViewById(R.id.sds_image);
         mail = menuView.findViewById(R.id.mail);
+        site_bar = menuView.findViewById(R.id.site_bar);
         switch_button = menuView.findViewById(R.id.switch_button);
         soundImg = menuView.findViewById(R.id.soundImg);
 
@@ -174,7 +170,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         ll_about_us.setOnClickListener(this);
         ll_privacy.setOnClickListener(this);
         sds_dash.setOnClickListener(this);
-        sds_image.setOnClickListener(this);
+        site_bar.setOnClickListener(this);
         mail.setOnClickListener(this);
 
 
@@ -280,10 +276,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 if (adsControl.passCondition() && myCount % 2 == 0) {
                     AdsControl.mInterstitialAd.show(this);
 //            Toast.makeText(this, "Ready For Show Ads!" + myCount, Toast.LENGTH_SHORT).show();
-                    gotoUrl("https://sites.google.com/view/ibdcprivacypolicy/privacy-policy?authuser=0");
+                    gotoUrl("https://ibdc-blood.blogspot.com/2023/02/privacy-policy.html");
                 } else {
 //            Toast.makeText(this, "Something Wrong And Value is : " + Ads.mod + myCount, Toast.LENGTH_SHORT).show();
-                    gotoUrl("https://sites.google.com/view/ibdcprivacypolicy/privacy-policy?authuser=0");
+                    gotoUrl("https://ibdc-blood.blogspot.com/2023/02/privacy-policy.html");
                 }
                 break;
 
@@ -308,21 +304,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.mail:
                 sm.okkBtn.start();
                 Intent intent = new Intent(Intent.ACTION_SEND);
-                intent.putExtra(Intent.EXTRA_EMAIL, new String[]{"sumonkmrofficial@gmail.com"});
+                intent.putExtra(Intent.EXTRA_EMAIL, new String[]{"info@appsformation.com"});
                 intent.putExtra(Intent.EXTRA_SUBJECT, "Im Sending Email From IBDC App");
                 intent.putExtra(Intent.EXTRA_TEXT, "Please Type Your Massage Here : \n");
                 intent.setType("massage/rfc822");
                 startActivity(intent);
                 break;
 
-            case R.id.sds_dash:
+            case R.id.site_bar:
                 sm.okkBtn.start();
-                gotoUrl("https://www.facebook.com/sumonkmr.studio/");
-                break;
-
-            case R.id.sds_image:
-                sm.okkBtn.start();
-                gotoUrl("https://play.google.com/store/apps/dev?id=6877143126125387449");
+                gotoUrl("https://appsformation.com/");
                 break;
 
 
@@ -487,8 +478,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
-        privacyTxt.setOnClickListener(v -> gotoUrl("https://sites.google.com/view/ibdcprivacypolicy/privacy-policy?authuser=0"));
-        rulesTxt.setOnClickListener(v -> gotoUrl("https://sites.google.com/view/ibdcprivacypolicy/disclaimer?authuser=3"));
+        privacyTxt.setOnClickListener(v -> gotoUrl("https://ibdc-blood.blogspot.com/2023/02/privacy-policy.html"));
+        rulesTxt.setOnClickListener(v -> gotoUrl("https://ibdc-blood.blogspot.com/2023/02/disclaimer.html"));
 
 
         //        processImageUpload(profileImg_uri);

@@ -258,31 +258,17 @@
                                             android:textSize="@dimen/card_txt" />
                                     </LinearLayout>
 
-                                    <LinearLayout
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:gravity="center"
-                                        android:orientation="horizontal">
-
-                                        <de.hdodenhof.circleimageview.CircleImageView
-                                            android:layout_width="30dp"
-                                            android:layout_height="30dp"
-                                            android:layout_marginStart="@dimen/_minus_10dp"
-                                            android:layout_marginEnd="@dimen/_10dp"
-                                            android:src="@drawable/ic_outline_local_phone_24"
-                                            app:civ_border_color="#ffffff"
-                                            app:civ_border_width="2dp" />
-
                                         <TextView
                                             android:id="@+id/sadequl_phn"
                                             android:layout_width="wrap_content"
-                                            android:layout_height="match_parent"
+                                            android:layout_height="wrap_content"
                                             android:fontFamily="@font/varela_round"
+                                            android:drawableStart="@drawable/call"
+                                            android:drawablePadding="@dimen/_5dp"
                                             android:gravity="center|center_vertical|center_horizontal"
                                             android:text="@string/sadiqul_num"
                                             android:textColor="@color/colorPrimary"
                                             android:textSize="@dimen/card_txt" />
-                                    </LinearLayout>
 
                                 </LinearLayout>
 
@@ -375,32 +361,17 @@
                                             android:textSize="@dimen/card_txt" />
                                     </LinearLayout>
 
-                                    <LinearLayout
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:gravity="center"
-                                        android:orientation="horizontal">
-
-                                        <de.hdodenhof.circleimageview.CircleImageView
-                                            android:layout_width="30dp"
-                                            android:layout_height="30dp"
-                                            android:layout_marginStart="@dimen/_minus_10dp"
-                                            android:layout_marginEnd="@dimen/_10dp"
-                                            android:src="@drawable/ic_outline_local_phone_24"
-                                            app:civ_border_color="#ffffff"
-                                            app:civ_border_width="2dp" />
-
                                         <TextView
                                             android:id="@+id/rakibul_phn"
                                             android:layout_width="wrap_content"
-                                            android:layout_height="match_parent"
+                                            android:layout_height="wrap_content"
                                             android:fontFamily="@font/varela_round"
                                             android:gravity="center|center_vertical|center_horizontal"
+                                            android:drawableStart="@drawable/call"
+                                            android:drawablePadding="@dimen/_5dp"
                                             android:text="@string/rakibul_num"
                                             android:textColor="@color/colorPrimary"
                                             android:textSize="@dimen/card_txt" />
-                                    </LinearLayout>
-
                                 </LinearLayout>
 
                             </LinearLayout>
@@ -495,32 +466,17 @@
                                             android:textSize="@dimen/card_txt" />
                                     </LinearLayout>
 
-
-                                    <LinearLayout
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:gravity="center"
-                                        android:orientation="horizontal">
-
-                                        <de.hdodenhof.circleimageview.CircleImageView
-                                            android:layout_width="30dp"
-                                            android:layout_height="30dp"
-                                            android:layout_marginStart="@dimen/_minus_10dp"
-                                            android:layout_marginEnd="@dimen/_10dp"
-                                            android:src="@drawable/ic_outline_local_phone_24"
-                                            app:civ_border_color="#ffffff"
-                                            app:civ_border_width="2dp" />
-
                                         <TextView
                                             android:id="@+id/harun_phn"
                                             android:layout_width="wrap_content"
-                                            android:layout_height="match_parent"
+                                            android:layout_height="wrap_content"
                                             android:fontFamily="@font/varela_round"
+                                            android:drawableStart="@drawable/call"
+                                            android:drawablePadding="@dimen/_5dp"
                                             android:gravity="center|center_vertical|center_horizontal"
                                             android:text="@string/harun_num"
                                             android:textColor="@color/colorPrimary"
                                             android:textSize="@dimen/card_txt" />
-                                    </LinearLayout>
 
                                 </LinearLayout>
 
@@ -613,32 +569,17 @@
                                             android:textSize="@dimen/card_txt" />
                                     </LinearLayout>
 
-                                    <LinearLayout
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:gravity="center"
-                                        android:orientation="horizontal">
-
-                                        <de.hdodenhof.circleimageview.CircleImageView
-                                            android:layout_width="30dp"
-                                            android:layout_height="30dp"
-                                            android:layout_marginStart="@dimen/_minus_10dp"
-                                            android:layout_marginEnd="@dimen/_10dp"
-                                            android:src="@drawable/ic_outline_local_phone_24"
-                                            app:civ_border_color="#ffffff"
-                                            app:civ_border_width="2dp" />
-
                                         <TextView
                                             android:id="@+id/mamun_phn"
                                             android:layout_width="wrap_content"
-                                            android:layout_height="match_parent"
+                                            android:layout_height="wrap_content"
                                             android:fontFamily="@font/varela_round"
                                             android:gravity="center|center_vertical|center_horizontal"
                                             android:text="@string/mamun_num"
+                                            android:drawableStart="@drawable/call"
+                                            android:drawablePadding="@dimen/_5dp"
                                             android:textColor="@color/colorPrimary"
                                             android:textSize="@dimen/card_txt" />
-                                    </LinearLayout>
-
                                 </LinearLayout>
 
                             </LinearLayout>
@@ -694,7 +635,7 @@
                                 android:fontFamily="@font/title_font"
                                 android:text="@string/developer_name"
                                 android:textAlignment="center"
-                                android:textColor="@color/blue"
+                                android:textColor="@color/linkColor"
                                 android:textSize="@dimen/card_header_txt"
                                 android:textStyle="bold" />
 
@@ -720,7 +661,7 @@
                                     android:id="@+id/profile_image"
                                     android:layout_width="30dp"
                                     android:layout_height="30dp"
-                                    android:src="@drawable/sds_logo"
+                                    android:src="@drawable/aft_logo"
                                     app:civ_border_color="#ffffff"
                                     app:civ_border_width="2dp" />
 
@@ -729,7 +670,7 @@
                                     android:layout_height="wrap_content"
                                     android:fontFamily="@font/varela_round"
                                     android:text="@string/sds"
-                                    android:textColor="@color/colorPrimary"
+                                    android:textColor="@color/linkColor"
                                     android:textSize="@dimen/form_txt" />
                             </LinearLayout>
 
@@ -741,7 +682,7 @@
                                 android:layout_gravity="center"
                                 android:fontFamily="@font/varela_round"
                                 android:text="@string/developer_email"
-                                android:textColor="@color/blue"
+                                android:textColor="@color/linkColor"
                                 android:textSize="@dimen/card_txt" />
 
                             <TextView
@@ -752,7 +693,7 @@
                                 android:layout_gravity="center"
                                 android:fontFamily="@font/varela_round"
                                 android:text="@string/moreApps"
-                                android:textColor="@color/blue"
+                                android:textColor="@color/linkColor"
                                 android:textSize="@dimen/card_txt" />
                         </LinearLayout><!--Developer-->
 
