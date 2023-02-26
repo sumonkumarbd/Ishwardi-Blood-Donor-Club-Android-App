@@ -3,6 +3,7 @@ package com.sumonkmr.ibdc;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -31,10 +32,12 @@ public class Instructions extends AppCompatActivity {
         int myCount = random.nextInt(100 - 5) + 5;
         if (adsControl.passCondition() && myCount % 2 == 0) {
             AdsControl.mInterstitialAd.show(this);
-//            Toast.makeText(this, "Ready For Show Ads!" + myCount, Toast.LENGTH_SHORT).show();
             super.onBackPressed();
+        } else if (!adsControl.passCondition() && myCount % 2 == 0) {
+            adsControl.StartIoInnit(AdsControl.isValStartIo);
+            super.onBackPressed();
+            Log.d("llaa", "onBackPressed: " + adsControl.passCondition() + " and " + myCount);
         } else {
-//            Toast.makeText(this, "Something Wrong And Value is : " + adsControl.mod + myCount, Toast.LENGTH_SHORT).show();
             super.onBackPressed();
         }
     }//onBackPressed

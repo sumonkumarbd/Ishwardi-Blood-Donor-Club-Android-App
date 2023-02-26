@@ -23,8 +23,8 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/profile_image_menu"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="@dimen/_60dp"
+                android:layout_height="@dimen/_60dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginStart="10dp"
                 android:src="@drawable/ibdc_logo_1"
@@ -47,7 +47,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
-                android:layout_marginTop="17dp"
+                android:layout_marginTop="10dp"
                 android:background="@color/white"
                 />
 
@@ -107,8 +107,8 @@
             <LinearLayout
                 android:id="@+id/ll_beDonor"
                 android:gravity="center_vertical"
-                android:layout_marginTop="24dp"
-                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="@dimen/_20dp"
+                android:layout_marginHorizontal="@dimen/_20dp"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -133,8 +133,8 @@
             <LinearLayout
                 android:id="@+id/ll_Share"
                 android:gravity="center_vertical"
-                android:layout_marginTop="24dp"
-                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="@dimen/_20dp"
+                android:layout_marginHorizontal="@dimen/_20dp"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -160,8 +160,8 @@
             <LinearLayout
                 android:id="@+id/ll_about_us"
                 android:gravity="center_vertical"
-                android:layout_marginTop="24dp"
-                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="@dimen/_20dp"
+                android:layout_marginHorizontal="@dimen/_20dp"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -186,8 +186,8 @@
             <LinearLayout
                 android:id="@+id/ll_fb"
                 android:gravity="center_vertical"
-                android:layout_marginTop="24dp"
-                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="@dimen/_20dp"
+                android:layout_marginHorizontal="@dimen/_20dp"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -213,8 +213,8 @@
             <LinearLayout
                 android:id="@+id/ll_privacy"
                 android:gravity="center_vertical"
-                android:layout_marginTop="24dp"
-                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="@dimen/_20dp"
+                android:layout_marginHorizontal="@dimen/_20dp"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -240,8 +240,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="@dimen/_20dp"
+                android:layout_marginHorizontal="@dimen/_20dp"
                 android:layout_gravity="center"
                 android:orientation="horizontal"
                 >
@@ -289,8 +289,8 @@
                 android:visibility="gone"
                 android:id="@+id/ll_Setting"
                 android:gravity="center_vertical"
-                android:layout_marginTop="24dp"
-                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="@dimen/_20dp"
+                android:layout_marginHorizontal="@dimen/_20dp"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -316,8 +316,9 @@
             <LinearLayout
                 android:id="@+id/ll_Logout"
                 android:gravity="center_vertical"
-                android:layout_marginTop="24dp"
-                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="@dimen/_20dp"
+                android:layout_marginHorizontal="@dimen/_20dp"
+                android:layout_marginBottom="@dimen/_5dp"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -363,13 +364,15 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="@dimen/_8dp"
                 android:fontFamily="@font/title_font"
                 android:text="@string/app_name"
-                android:textAlignment="center"
+                android:textAlignment="viewStart"
+                android:gravity="start"
+                android:layout_gravity="start"
                 android:singleLine="true"
                 android:textColor="@color/white"
-                android:textSize="@dimen/manu_txt"
+                android:textSize="@dimen/manu_title"
                 android:textStyle="bold" />
         </androidx.appcompat.widget.Toolbar>
 
@@ -389,7 +392,7 @@
                 <ImageView
                     android:id="@+id/headerVictor"
                     android:layout_width="match_parent"
-                    android:layout_height="100dp"
+                    android:layout_height="@dimen/_80dp"
                     android:contentDescription="@string/header"
                     android:scaleType="centerCrop"
                     android:src="@drawable/header_victor"
@@ -432,6 +435,15 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent" />
+
+<!--                <com.startapp.sdk.ads.banner.banner3d.Banner3D-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:orientation="vertical"-->
+<!--                    android:layout_marginBottom="@dimen/_5dp"-->
+<!--                    app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                    app:layout_constraintLeft_toLeftOf="parent"-->
+<!--                    app:layout_constraintRight_toRightOf="parent"/>-->
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

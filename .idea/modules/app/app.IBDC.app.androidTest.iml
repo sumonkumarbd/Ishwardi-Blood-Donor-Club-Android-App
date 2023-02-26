@@ -175,6 +175,7 @@
     <orderEntry type="library" scope="TEST" name="Gradle: com.facebook.android:audience-network-sdk:6.12.0@aar" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: com.daimajia.androidanimations:library:2.4@aar" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: com.ms-square:expandableTextView:0.1.4@aar" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: com.startapp:inapp-sdk:4.10.7@aar" level="project" />
   </component>
   <component name="TestModuleProperties" production-module="IBDC.app.main" />
 </module>

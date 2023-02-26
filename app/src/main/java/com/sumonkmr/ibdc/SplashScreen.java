@@ -17,6 +17,8 @@ import android.widget.Toast;
 import com.airbnb.lottie.LottieAnimationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.startapp.sdk.ads.splash.SplashConfig;
+import com.startapp.sdk.adsbase.StartAppAd;
 
 //Programmed by SumonKmr
 //On Tue, 02-05-22
@@ -39,7 +41,7 @@ public class SplashScreen extends AppCompatActivity {
         t1 = findViewById(R.id.t1);
         animation_view = findViewById(R.id.animation_view);
         animation_2 = findViewById(R.id.animation_2);
-
+        StartAppAd.disableSplash();
 
         IsNetwork();
 

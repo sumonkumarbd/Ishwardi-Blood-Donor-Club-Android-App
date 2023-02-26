@@ -5,12 +5,15 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+
+import com.startapp.sdk.adsbase.StartAppAd;
 
 import java.util.Random;
 
@@ -129,7 +132,6 @@ public class AboutUs extends AppCompatActivity {
     }
 
 
-
     @Override
     public void onBackPressed() {
         AdsControl adsControl = new AdsControl(this);
@@ -138,10 +140,12 @@ public class AboutUs extends AppCompatActivity {
         int myCount = random.nextInt(100 - 5) + 5;
         if (adsControl.passCondition() && myCount % 2 == 0) {
             AdsControl.mInterstitialAd.show(this);
-//            Toast.makeText(this, "Ready For Show Ads!" + myCount, Toast.LENGTH_SHORT).show();
             super.onBackPressed();
+        } else if (!adsControl.passCondition() && myCount % 2 == 0) {
+            adsControl.StartIoInnit(AdsControl.isValStartIo);
+            super.onBackPressed();
+            Log.d("llaa", "onBackPressed: " + adsControl.passCondition() + " and " + myCount);
         } else {
-//            Toast.makeText(this, "Something Wrong And Value is : " + Ads.mod + myCount, Toast.LENGTH_SHORT).show();
             super.onBackPressed();
         }
     }//onBackPressed

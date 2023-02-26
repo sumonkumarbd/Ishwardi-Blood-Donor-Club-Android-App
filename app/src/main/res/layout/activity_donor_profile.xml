@@ -357,8 +357,9 @@
                                     android:id="@+id/linearLayout3"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginTop="@dimen/_2dp"
                                     android:orientation="horizontal"
+                                    android:layout_marginVertical="@dimen/_2dp"
+                                    app:layout_constraintBottom_toBottomOf="parent"
                                     app:layout_constraintStart_toStartOf="@+id/detailVillage"
                                     app:layout_constraintTop_toBottomOf="@+id/detailVillage">
 
@@ -386,7 +387,7 @@
                                         android:maxWidth="120dp"
                                         android:singleLine="true"
                                         android:text="@string/comma"
-                                        android:textColor="@color/colorPrimary"
+                                        android:textColor="@color/white"
                                         android:textSize="@dimen/card_txt" />
 
                                     <TextView
@@ -413,7 +414,7 @@
                                         android:maxWidth="120dp"
                                         android:singleLine="true"
                                         android:text="@string/comma"
-                                        android:textColor="@color/colorPrimary"
+                                        android:textColor="@color/white"
                                         android:textSize="@dimen/card_txt" />
 
                                     <TextView
@@ -448,7 +449,7 @@
                                         android:maxWidth="120dp"
                                         android:singleLine="true"
                                         android:text="@string/dari"
-                                        android:textColor="@color/colorPrimary"
+                                        android:textColor="@color/white"
                                         android:textSize="@dimen/card_txt" />
 
                                 </LinearLayout>

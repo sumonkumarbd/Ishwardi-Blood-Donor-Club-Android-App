@@ -1,9 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: androidx.startup:startup-runtime:1.1.1@aar">
     <CLASSES>
-      <root url="jar://D:/Program_Files/sdk/caches/transforms-3/df64a67eea139b4f1546c807e40d1cec/transformed/jetified-startup-runtime-1.1.1/jars/classes.jar!/" />
-      <root url="file://D:/Program_Files/sdk/caches/transforms-3/df64a67eea139b4f1546c807e40d1cec/transformed/jetified-startup-runtime-1.1.1/AndroidManifest.xml" />
-      <root url="file://D:/Program_Files/sdk/caches/transforms-3/df64a67eea139b4f1546c807e40d1cec/transformed/jetified-startup-runtime-1.1.1/res" />
+      <root url="file://D:/Program_Files/sdk/caches/transforms-3/67635bd6f63c9ac3a9b35e2538599fa8/transformed/jetified-startup-runtime-1.1.1/AndroidManifest.xml" />
+      <root url="jar://D:/Program_Files/sdk/caches/transforms-3/67635bd6f63c9ac3a9b35e2538599fa8/transformed/jetified-startup-runtime-1.1.1/jars/classes.jar!/" />
+      <root url="file://D:/Program_Files/sdk/caches/transforms-3/67635bd6f63c9ac3a9b35e2538599fa8/transformed/jetified-startup-runtime-1.1.1/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

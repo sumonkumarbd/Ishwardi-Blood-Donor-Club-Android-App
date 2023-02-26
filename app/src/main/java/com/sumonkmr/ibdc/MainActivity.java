@@ -59,6 +59,10 @@ import com.karumi.dexter.listener.PermissionDeniedResponse;
 import com.karumi.dexter.listener.PermissionGrantedResponse;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.single.PermissionListener;
+import com.startapp.sdk.ads.nativead.StartAppNativeAd;
+import com.startapp.sdk.adsbase.Ad;
+import com.startapp.sdk.adsbase.StartAppAd;
+import com.startapp.sdk.adsbase.StartAppSDK;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -79,7 +83,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     AutoCompleteTextView Division, District, Upazila, bloodGrpDropDown, lastDonateDate_signUp;
     DatePicker birthDate_signUp;
     de.hdodenhof.circleimageview.CircleImageView profile_image_menu;
-    TextView profile_name_menu, sds_dash, mail, privacyTxt,rulesTxt;
+    TextView profile_name_menu, sds_dash, mail, privacyTxt, rulesTxt;
     int d, m, y;
     Dialog dialog;
     Uri filepath, profileImg_uri;
@@ -87,7 +91,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     FirebaseUser currentUser;
     DatabaseReference dbReference;
     String userId, adsData;
-    CheckBox lastDonate_check, privacy_check, disclaimer_check,beDonorAgree;
+    CheckBox lastDonate_check, privacy_check, disclaimer_check, beDonorAgree;
     boolean doubleBackToExitPressedOnce = false;
     GoogleSignInOptions gso;
     GoogleSignInClient gsc;
@@ -96,7 +100,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private FirebaseDatabase db;
     private ProgressBar progressbar;
     final Calendar calendar = Calendar.getInstance();
-    LinearLayout bannerLay,site_bar;
+    LinearLayout bannerLay, site_bar;
     Intent targetActivity;
     // per app run-- do not show more than 3 fullscreen ad. [[Change it if your want]]
     int fullScreenAdMaxShowCount = 3;
@@ -116,6 +120,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         bannerLay = findViewById(R.id.bannerLayout);
         AdsControl ads = new AdsControl(this); // for initialize Banner Ads
         ads.loadBannerAd(bannerLay);
+//        start.io ads
+        StartAppSDK.setTestAdsEnabled(true);
 
         //        Database references
         currentUser = auth.getCurrentUser();
@@ -127,6 +133,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         account = GoogleSignIn.getLastSignedInAccount(this);
         init();
     }//onCreate finished
+
     private void init() {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -185,17 +192,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 String l_name = snapshot.child("LName").getValue(String.class);
                 String bloodImg_url = snapshot.child("bloodImg_url").getValue(String.class);
 
-                if (uid != null && f_name != null && l_name != null && bloodImg_url != null){
+                if (uid != null && f_name != null && l_name != null && bloodImg_url != null) {
                     ll_beDonor.setVisibility(View.GONE);
                     ll_Profile.setVisibility(View.VISIBLE);
-                    String name = (f_name+" "+l_name);
+                    String name = (f_name + " " + l_name);
                     profile_name_menu.setText(name);
                     Glide.with(contentView.getContext())
                             .load(bloodImg_url)
                             .centerCrop()
                             .placeholder(R.drawable.ibdc_logo)
                             .into(profile_image_menu);
-                }else {
+                } else {
                     ll_Profile.setVisibility(View.GONE);
                     ll_beDonor.setVisibility(View.VISIBLE);
                     OpenDialog();
@@ -236,7 +243,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             case R.id.ll_Profile:
                 sm.okkBtn.start();
-                startActivity(new Intent(this,Profile.class));
+                startActivity(new Intent(this, Profile.class));
                 break;
 
             case R.id.ll_beDonor:
@@ -250,13 +257,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.ll_fb:
-                sm.okkBtn.start();;
+                sm.okkBtn.start();
+                ;
                 if (adsControl.passCondition() && myCount % 2 == 0) {
                     AdsControl.mInterstitialAd.show(this);
-//            Toast.makeText(this, "Ready For Show Ads!" + myCount, Toast.LENGTH_SHORT).show();
                     gotoUrl("https://www.facebook.com/groups/ibdcbd");
-                } else {
-//            Toast.makeText(this, "Something Wrong And Value is : " + Ads.mod + myCount, Toast.LENGTH_SHORT).show();
+                }else if (!adsControl.passCondition() && myCount % 2 == 0){
+                    adsControl.StartIoInnit(AdsControl.isValStartIo);
+                    gotoUrl("https://www.facebook.com/groups/ibdcbd");
+                }else {
                     gotoUrl("https://www.facebook.com/groups/ibdcbd");
                 }
                 break;
@@ -275,10 +284,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 sm.okkBtn.start();
                 if (adsControl.passCondition() && myCount % 2 == 0) {
                     AdsControl.mInterstitialAd.show(this);
-//            Toast.makeText(this, "Ready For Show Ads!" + myCount, Toast.LENGTH_SHORT).show();
                     gotoUrl("https://ibdc-blood.blogspot.com/2023/02/privacy-policy.html");
-                } else {
-//            Toast.makeText(this, "Something Wrong And Value is : " + Ads.mod + myCount, Toast.LENGTH_SHORT).show();
+                }else if (!adsControl.passCondition() && myCount % 2 == 0){
+                    adsControl.StartIoInnit(AdsControl.isValStartIo);
+                    gotoUrl("https://ibdc-blood.blogspot.com/2023/02/privacy-policy.html");
+                }else {
                     gotoUrl("https://ibdc-blood.blogspot.com/2023/02/privacy-policy.html");
                 }
                 break;
@@ -509,7 +519,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         year = String.valueOf(birthDate_signUp.getYear());
         date = day + "/" + month + "/" + year;
         int currentYear = Calendar.getInstance().get(Calendar.YEAR);
-        int age =currentYear - Integer.parseInt(year);
+        int age = currentYear - Integer.parseInt(year);
         HashMap<String, Object> values = new HashMap<>();
         values.put("uid", userId);
         values.put("bloodImg_url", uri.toString());
@@ -523,7 +533,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         values.put("Village", Objects.requireNonNull(village_signUp.getText()).toString());
         values.put("BloodGroup", bloodGrpDropDown.getText().toString());
         values.put("birthdate", date);
-        values.put("age",String.valueOf(age));
+        values.put("age", String.valueOf(age));
         if (lastDonate_check.isChecked()) {
             values.put("lastDonateDate", "পূর্বে করিনি।");
         } else {
@@ -929,7 +939,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
-
     //        Make Form Validation Here
     private boolean validateInput() {
         if (f_name_signUp.getText() == null || f_name_signUp.getText().toString().length() == 0) {
@@ -1007,17 +1016,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             return false;
         }
 
-        if (!beDonorAgree.isChecked()){
+        if (!beDonorAgree.isChecked()) {
             Toast.makeText(this, "আপনি রক্তদিতে প্রস্তুত কিনা তা চেক বক্সে টিক দিয়ে নিশ্চিত করুন।", Toast.LENGTH_SHORT).show();
             return false;
         }
 
-        if (!privacy_check.isChecked()){
+        if (!privacy_check.isChecked()) {
             Toast.makeText(this, "প্রাইভেসি চেক অবশ্যক!", Toast.LENGTH_SHORT).show();
             return false;
         }
 
-        if (!disclaimer_check.isChecked()){
+        if (!disclaimer_check.isChecked()) {
             Toast.makeText(this, "নীতি ও শর্তাবলী চেক অবশ্যক!", Toast.LENGTH_SHORT).show();
             return false;
         }
@@ -1060,14 +1069,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         cBtn.setOnClickListener(v -> dialog.dismiss());
     }
 
-    public void SoundToggle(){
+    public void SoundToggle() {
         ColorStateList thumbColors = new ColorStateList(
                 new int[][]{
                         new int[]{android.R.attr.state_checked},  // checked
                         new int[]{-android.R.attr.state_checked}  // not checked
                 },
                 new int[]{
-                        Color.argb(255, 238, 55, 57) , // checked
+                        Color.argb(255, 238, 55, 57), // checked
                         Color.argb(255, 238, 55, 57)  // not checked
                 }
         );
@@ -1079,7 +1088,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 },
                 new int[]{
                         Color.WHITE,  // checked
-                         Color.WHITE   // not checked
+                        Color.WHITE   // not checked
                 }
         );
         switch_button.setThumbTintList(thumbColors);

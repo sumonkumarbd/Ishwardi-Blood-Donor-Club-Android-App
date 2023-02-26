@@ -1,12 +1,12 @@
 <component name="libraryTable">
   <library name="Gradle: com.ms-square:expandableTextView:0.1.4@aar">
     <ANNOTATIONS>
-      <root url="jar://D:/Program_Files/sdk/caches/transforms-3/5e2307e2afb6c2654196ec8496605b7a/transformed/jetified-expandableTextView-0.1.4/annotations.zip!/" />
+      <root url="jar://D:/Program_Files/sdk/caches/transforms-3/50c84ec264cffbb8cfcaa2584b9d9406/transformed/jetified-expandableTextView-0.1.4/annotations.zip!/" />
     </ANNOTATIONS>
     <CLASSES>
-      <root url="file://D:/Program_Files/sdk/caches/transforms-3/5e2307e2afb6c2654196ec8496605b7a/transformed/jetified-expandableTextView-0.1.4/res" />
-      <root url="file://D:/Program_Files/sdk/caches/transforms-3/5e2307e2afb6c2654196ec8496605b7a/transformed/jetified-expandableTextView-0.1.4/AndroidManifest.xml" />
-      <root url="jar://D:/Program_Files/sdk/caches/transforms-3/5e2307e2afb6c2654196ec8496605b7a/transformed/jetified-expandableTextView-0.1.4/jars/classes.jar!/" />
+      <root url="file://D:/Program_Files/sdk/caches/transforms-3/50c84ec264cffbb8cfcaa2584b9d9406/transformed/jetified-expandableTextView-0.1.4/AndroidManifest.xml" />
+      <root url="jar://D:/Program_Files/sdk/caches/transforms-3/50c84ec264cffbb8cfcaa2584b9d9406/transformed/jetified-expandableTextView-0.1.4/jars/classes.jar!/" />
+      <root url="file://D:/Program_Files/sdk/caches/transforms-3/50c84ec264cffbb8cfcaa2584b9d9406/transformed/jetified-expandableTextView-0.1.4/res" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://D:/Program_Files/sdk/caches/modules-2/files-2.1/com.ms-square/expandableTextView/0.1.4/5c5dc009a45fbd783411e5a25519b66235c73432/expandableTextView-0.1.4-javadoc.jar!/" />

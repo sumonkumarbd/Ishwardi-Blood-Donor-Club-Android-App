@@ -27,6 +27,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.startapp.sdk.adsbase.StartAppAd;
 
 import java.io.Console;
 import java.util.Collections;
@@ -46,7 +47,9 @@ public class AdsControl {
         adRequest = new AdRequest.Builder().build();
         this.activity = activity;
         getAdsFirebase();
+        getAdsStartIo();
     }//para constructor
+
 
     //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
     static boolean isVal;
@@ -61,6 +64,7 @@ public class AdsControl {
                 String appUnitID = snapshot.child("AppUnitID").getValue(String.class);
                 String device_id = snapshot.child("device_id").getValue(String.class);
                 String interstitials = snapshot.child("interstitials").getValue(String.class);
+//                for admob ads
                 assert settings != null;
                 if (settings.contains("ON")) {
                     isVal = true;
@@ -123,10 +127,10 @@ public class AdsControl {
                     layout.setVisibility(View.VISIBLE);
                     mAdView = new AdView(activity);
                     mAdView.setAdSize(AdSize.BANNER);
-                    if (banner != null){
+                    if (banner != null) {
                         mAdView.setAdUnitId(banner);
 //                        Toast.makeText(activity, "Its From Database", Toast.LENGTH_SHORT).show();
-                    }else {
+                    } else {
                         mAdView.setAdUnitId("ca-app-pub-3940256099942544/6300978111");
                         Toast.makeText(activity, "Its From Manual", Toast.LENGTH_SHORT).show();
                     }
@@ -267,5 +271,72 @@ public class AdsControl {
         }
         return mod;
     }
+
+    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    static boolean isValStartIo;
+
+    protected boolean getAdsStartIo() {
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference reference = database.getReference("startIoAds");
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String settings = snapshot.child("Settings").getValue(String.class);
+                String appUnitID = snapshot.child("appUnitID").getValue(String.class);
+
+//                for StartIO ads
+                assert settings != null;
+                if (settings.contains("ON")) {
+                    isValStartIo = true;
+                    StartIoApUnitId(appUnitID);
+                    Log.d("DataBase Mode", "ON");
+
+                } else if (settings.contains("OFF")) {
+                    isValStartIo = false;
+                    Log.d("DataBase Mode", "OFF");
+                } else {
+                    isValStartIo = false;
+                    Log.d("DataBase Mode", "OFF");
+                }
+            }//onDataChange
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        return isValStartIo;
+    }
+
+    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    protected void StartIoInnit(Boolean bol) {
+
+        if (bol) {
+            StartAppAd.onBackPressed(activity);
+            StartAppAd.showAd(activity);
+        } else {
+            Log.d("llaa", "StartIoInnit: " + "false");
+
+        }
+    }
+    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    public void StartIoApUnitId(String appUnitId) {
+        try {
+
+            ApplicationInfo ai = activity.getPackageManager().getApplicationInfo("com.sumonkmr.ibdc", PackageManager.GET_META_DATA);
+            Bundle bundle = ai.metaData;
+            String myApiKey = bundle.getString("com.google.android.gms.ads.APPLICATION_ID");
+            ai.metaData.putString("com.google.android.gms.ads.APPLICATION_ID", appUnitId);//you can replace your key APPLICATION_ID here
+            String ApiKey = bundle.getString("com.google.android.gms.ads.APPLICATION_ID");
+            System.out.println(ApiKey);
+        } catch (PackageManager.NameNotFoundException | NullPointerException e) {
+            System.out.println(e);
+        }
+    }
+
+    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
 
 }

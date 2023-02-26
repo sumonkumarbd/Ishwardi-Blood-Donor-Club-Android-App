@@ -1,9 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: com.google.firebase:firebase-messaging:23.1.0@aar">
     <CLASSES>
-      <root url="file://D:/Program_Files/sdk/caches/transforms-3/0f89795b13e75bf346f84e0aaa2f8637/transformed/jetified-firebase-messaging-23.1.0/AndroidManifest.xml" />
-      <root url="jar://D:/Program_Files/sdk/caches/transforms-3/0f89795b13e75bf346f84e0aaa2f8637/transformed/jetified-firebase-messaging-23.1.0/jars/classes.jar!/" />
-      <root url="file://D:/Program_Files/sdk/caches/transforms-3/0f89795b13e75bf346f84e0aaa2f8637/transformed/jetified-firebase-messaging-23.1.0/res" />
+      <root url="file://D:/Program_Files/sdk/caches/transforms-3/20ab133b6837e64957a2b1130514b57e/transformed/jetified-firebase-messaging-23.1.0/AndroidManifest.xml" />
+      <root url="file://D:/Program_Files/sdk/caches/transforms-3/20ab133b6837e64957a2b1130514b57e/transformed/jetified-firebase-messaging-23.1.0/res" />
+      <root url="jar://D:/Program_Files/sdk/caches/transforms-3/20ab133b6837e64957a2b1130514b57e/transformed/jetified-firebase-messaging-23.1.0/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://D:/Program_Files/sdk/caches/modules-2/files-2.1/com.google.firebase/firebase-messaging/23.1.0/5a22cf07b48634a6bda09c85e8dbc222aeb53586/firebase-messaging-23.1.0-javadoc.jar!/" />

@@ -105,4 +105,7 @@ dependencies {
 //    for expandable TextView
     implementation 'com.ms-square:expandableTextView:0.1.4'
 
+    // start.io
+    implementation 'com.startapp:inapp-sdk:4.10.7'
+
 }
