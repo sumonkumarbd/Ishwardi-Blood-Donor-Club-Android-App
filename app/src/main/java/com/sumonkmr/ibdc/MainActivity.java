@@ -16,7 +16,9 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -59,6 +61,7 @@ import com.karumi.dexter.listener.PermissionDeniedResponse;
 import com.karumi.dexter.listener.PermissionGrantedResponse;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.single.PermissionListener;
+import com.startapp.sdk.ads.banner.banner3d.Banner3D;
 import com.startapp.sdk.ads.nativead.StartAppNativeAd;
 import com.startapp.sdk.adsbase.Ad;
 import com.startapp.sdk.adsbase.StartAppAd;
@@ -120,8 +123,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         bannerLay = findViewById(R.id.bannerLayout);
         AdsControl ads = new AdsControl(this); // for initialize Banner Ads
         ads.loadBannerAd(bannerLay);
-//        start.io ads
-        StartAppSDK.setTestAdsEnabled(true);
 
         //        Database references
         currentUser = auth.getCurrentUser();
@@ -1067,6 +1068,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         ok_Btn.setOnClickListener(v -> MainActivity.super.onBackPressed());
         cBtn.setOnClickListener(v -> dialog.dismiss());
+
     }
 
     public void SoundToggle() {

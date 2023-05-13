@@ -37,6 +37,7 @@ public class AdsControl {
     AdView mAdView;
     AdRequest adRequest;
     @SuppressLint("StaticFieldLeak")
+    static
     Activity activity;
 
 
@@ -275,7 +276,7 @@ public class AdsControl {
     //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
     static boolean isValStartIo;
 
-    protected boolean getAdsStartIo() {
+    static protected boolean getAdsStartIo() {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference reference = database.getReference("startIoAds");
         reference.addValueEventListener(new ValueEventListener() {
@@ -289,6 +290,7 @@ public class AdsControl {
                 if (settings.contains("ON")) {
                     isValStartIo = true;
                     StartIoApUnitId(appUnitID);
+
                     Log.d("DataBase Mode", "ON");
 
                 } else if (settings.contains("OFF")) {
@@ -321,7 +323,7 @@ public class AdsControl {
         }
     }
     //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-    public void StartIoApUnitId(String appUnitId) {
+    public static void StartIoApUnitId(String appUnitId) {
         try {
 
             ApplicationInfo ai = activity.getPackageManager().getApplicationInfo("com.sumonkmr.ibdc", PackageManager.GET_META_DATA);
