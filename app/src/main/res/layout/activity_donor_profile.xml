@@ -51,7 +51,6 @@
             android:layout_height="match_parent"
             android:layout_marginHorizontal="@dimen/_6dp"
             android:layout_marginTop="@dimen/_38dp"
-            android:layout_marginBottom="@dimen/_50dp"
             android:background="@drawable/card"
             android:elevation="@dimen/shadow"
             android:orientation="vertical"

@@ -19,68 +19,78 @@ import java.util.Random;
 
 public class AboutUs extends AppCompatActivity {
 
+    // Declaring views used in the layout
     LinearLayout sds, sadequl, rakibul, harun, mamun;
     TextView dev_name, aftEmail, moreApps, sadequl_phn, rakibul_phn, harun_phn, mamun_phn;
     ImageView dev_img;
-    private static final int Request_call = 1;
+    private static final int Request_call = 1; // Request code for call permission
+    // Phone numbers for the team members
     String sadequl_num = "tel:+8801764942671";
     String rakibul_num = "tel:+8801726641227";
     String harun_num = "tel:+8801849696823";
     String mamun_num = "tel:+8801821897961";
-    private LinearLayout bannerLayout;
+    private LinearLayout bannerLayout; // Layout for displaying ads
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.about_us);
+        setContentView(R.layout.about_us); // Setting the content view
+
+        // Initializing the ad banner
         bannerLayout = findViewById(R.id.bannerLayout);
         AdsControl ads = new AdsControl(this);
-        ads.loadBannerAd(bannerLayout);
+        ads.loadBannerAd(bannerLayout); // Load the banner ad
 
-        Innit();
+        Innit(); // Initialize the views
+
+        // Set up click listeners for phone number links
         sadequl_phn.setOnClickListener(v -> {
-            callActions(sadequl_num);
+            callActions(sadequl_num); // Call the sadequl number
         });
 
         rakibul_phn.setOnClickListener(v -> {
-            callActions(rakibul_num);
+            callActions(rakibul_num); // Call the rakibul number
         });
 
         harun_phn.setOnClickListener(v -> {
-            callActions(harun_num);
+            callActions(harun_num); // Call the harun number
         });
 
         mamun_phn.setOnClickListener(v -> {
-            callActions(mamun_num);
+            callActions(mamun_num); // Call the mamun number
         });
 
+        // Set up click listener for developer's profile link
         dev_img.setOnClickListener(v -> {
-            gotoUrl("https://www.facebook.com/developer.sumonkmr");
+            gotoUrl("https://www.facebook.com/developer.sumonkmr"); // Open developer's Facebook profile
         });
 
         dev_name.setOnClickListener(v -> {
-            gotoUrl("https://www.facebook.com/developer.sumonkmr");
+            gotoUrl("https://www.facebook.com/developer.sumonkmr"); // Open developer's Facebook profile
         });
 
+        // Set up click listener for "SDS" link
         sds.setOnClickListener(v -> {
-            gotoUrl("https://www.appsformation.com/");
+            gotoUrl("https://www.appsformation.com/"); // Open SDS website
         });
 
+        // Set up click listener for email contact
         aftEmail.setOnClickListener(v -> {
+            // Open email client with predefined subject and body
             Intent intent = new Intent(Intent.ACTION_SEND);
             intent.putExtra(Intent.EXTRA_EMAIL, new String[]{"info@appsformation.com"});
             intent.putExtra(Intent.EXTRA_SUBJECT, "Im Sending Email From IBDC App");
             intent.putExtra(Intent.EXTRA_TEXT, "Please Type Your Massage Here : \n");
-            intent.setType("massage/rfc822");
+            intent.setType("message/rfc822");
             startActivity(intent);
         });
 
+        // Set up click listener for "More Apps" link
         moreApps.setOnClickListener(v -> {
-            gotoUrl("https://play.google.com/store/apps/dev?id=6877143126125387449");
+            gotoUrl("https://play.google.com/store/apps/dev?id=6877143126125387449"); // Open the developer's other apps
         });
 
-
-//        Directors onClick
+        // Directors' onClick listeners for their Facebook profiles
         sadequl.setOnClickListener(v -> {
             gotoUrl("https://www.facebook.com/sadequl71");
         });
@@ -97,8 +107,9 @@ public class AboutUs extends AppCompatActivity {
             gotoUrl("https://www.facebook.com/jsjs.hshsh.522");
         });
 
-    }//Finished On create!
+    }// Finished onCreate
 
+    // Initialize the views
     private void Innit() {
         sds = findViewById(R.id.sds);
         aftEmail = findViewById(R.id.sdsEmail);
@@ -115,38 +126,41 @@ public class AboutUs extends AppCompatActivity {
         rakibul_phn = findViewById(R.id.rakibul_phn);
     }
 
+    // Helper method to open a URL in the browser
     private void gotoUrl(String url) {
-        Uri uri = Uri.parse(url);
-        startActivity(new Intent(Intent.ACTION_VIEW, uri));
+        Uri uri = Uri.parse(url); // Convert string to Uri
+        startActivity(new Intent(Intent.ACTION_VIEW, uri)); // Open the URL in a browser
     }
 
-
+    // Helper method to make a phone call
     private void callActions(String number) {
         Intent intent = new Intent(Intent.ACTION_CALL);
-        intent.setData(Uri.parse(number));
+        intent.setData(Uri.parse(number)); // Set the phone number
+        // Check if permission is granted for making calls
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+            // Request permission if not granted
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CALL_PHONE}, Request_call);
         } else {
-            startActivity(intent);
+            startActivity(intent); // Start the phone call
         }
     }
 
-
+    // Override the onBackPressed method to show an ad when the user presses the back button
     @Override
     public void onBackPressed() {
         AdsControl adsControl = new AdsControl(this);
-        Random random;
-        random = new Random();
-        int myCount = random.nextInt(100 - 5) + 5;
+        Random random = new Random(); // Generate a random number
+        int myCount = random.nextInt(100 - 5) + 5; // Generate a random number between 5 and 100
         if (adsControl.passCondition() && myCount % 2 == 0) {
-            AdsControl.mInterstitialAd.show(this);
-            super.onBackPressed();
+            AdsControl.mInterstitialAd.show(this); // Show interstitial ad
+            super.onBackPressed(); // Proceed with the back press
         } else if (!adsControl.passCondition() && myCount % 2 == 0) {
-            adsControl.StartIoInnit(AdsControl.isValStartIo);
-            super.onBackPressed();
+            adsControl.StartIoInnit(AdsControl.isValStartIo); // Initialize Start.io ads if condition is met
+            super.onBackPressed(); // Proceed with the back press
             Log.d("llaa", "onBackPressed: " + adsControl.passCondition() + " and " + myCount);
         } else {
-            super.onBackPressed();
+            super.onBackPressed(); // Proceed with the back press without showing ads
         }
-    }//onBackPressed
-}//Root
+    } // onBackPressed
+
+} // End of AboutUs class

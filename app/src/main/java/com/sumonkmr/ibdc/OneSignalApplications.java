@@ -1,8 +1,12 @@
 package com.sumonkmr.ibdc;
 
 import android.app.Application;
+import android.content.pm.PackageManager;
+import android.os.Build;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -31,21 +35,26 @@ public class OneSignalApplications extends Application {
                 // Enable verbose OneSignal logging to debug issues if needed.
                 OneSignal.setLogLevel(OneSignal.LOG_LEVEL.VERBOSE, OneSignal.LOG_LEVEL.NONE);
 
+
                 // OneSignal Initialization
                 OneSignal.initWithContext(OneSignalApplications.this);
                 OneSignal.setAppId(ONESIGNAL_APP_ID);
+                Log.d("OneSignal DatabaseError", "ONESIGNAL_APP_ID "+ ONESIGNAL_APP_ID);
+
 
                 // promptForPushNotifications will show the native Android notification permission prompt.
                 // We recommend removing the following code and instead using an In-App Message to prompt for notification permission (See step 7)
                 OneSignal.promptForPushNotifications();
-            }
+
+            }//onDataChange
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
+                Log.d("OneSignal DatabaseError", "OneSignal DatabaseError: Failed to read value.");
 
             }
         });
 
-    }
+    }//Id
 
-}
+}//OneSignalApplications

@@ -29,121 +29,111 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.startapp.sdk.adsbase.StartAppAd;
 
-import java.io.Console;
 import java.util.Collections;
 import java.util.List;
 
 public class AdsControl {
-    AdView mAdView;
-    AdRequest adRequest;
+    AdView mAdView; // AdMob banner ad view
+    AdRequest adRequest; // AdMob ad request object
     @SuppressLint("StaticFieldLeak")
-    static
-    Activity activity;
+    static Activity activity; // Reference to the current activity for ad interactions
 
-
+    // Default constructor for AdsControl
     AdsControl() {
     }
 
+    // Constructor to initialize AdsControl with the current activity
     AdsControl(Activity activity) {
-        adRequest = new AdRequest.Builder().build();
-        this.activity = activity;
-        getAdsFirebase();
-        getAdsStartIo();
-    }//para constructor
+        adRequest = new AdRequest.Builder().build(); // Create an ad request
+        this.activity = activity; // Assign the passed activity
+        getAdsFirebase(); // Retrieve ad configuration from Firebase
+        getAdsStartIo(); // Retrieve StartApp ad configuration
+    }
 
-
-    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    // Flag to check if ads are enabled
     static boolean isVal;
 
+    // Method to fetch ad settings from Firebase
     protected boolean getAdsFirebase() {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference reference = database.getReference("admob");
+        DatabaseReference reference = database.getReference("admob"); // Firebase reference for AdMob configuration
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                // Retrieve values from Firebase
                 String settings = snapshot.child("settings").getValue(String.class);
                 String appUnitID = snapshot.child("AppUnitID").getValue(String.class);
                 String device_id = snapshot.child("device_id").getValue(String.class);
                 String interstitials = snapshot.child("interstitials").getValue(String.class);
-//                for admob ads
+
                 assert settings != null;
                 if (settings.contains("ON")) {
-                    isVal = true;
+                    isVal = true; // Enable ads
                     assert device_id != null;
-                    TestingDevice(device_id);
-                    SetAppUnitId(appUnitID);
-                    loadFullscreenAd(interstitials);
+                    TestingDevice(device_id); // Set test device ID for AdMob
+                    SetAppUnitId(appUnitID); // Set AdMob App Unit ID
+                    loadFullscreenAd(interstitials); // Load interstitial ads
                     Log.d("DataBase Mode", "ON");
-
-                } else if (settings.contains("OFF")) {
-                    isVal = false;
-                    Log.d("DataBase Mode", "OFF");
                 } else {
-                    isVal = false;
+                    isVal = false; // Disable ads
                     Log.d("DataBase Mode", "OFF");
                 }
-            }//onDataChange
+            }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                // Handle database errors if any
             }
         });
 
         return isVal;
     }
 
-    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    // Method to set the App Unit ID for AdMob
     public void SetAppUnitId(String appUnitId) {
         try {
-
-            ApplicationInfo ai = activity.getPackageManager().getApplicationInfo("com.sumonkmr.ibdc", PackageManager.GET_META_DATA);
-            Bundle bundle = ai.metaData;
-            String myApiKey = bundle.getString("com.google.android.gms.ads.APPLICATION_ID");
-            ai.metaData.putString("com.google.android.gms.ads.APPLICATION_ID", appUnitId);//you can replace your key APPLICATION_ID here
-            String ApiKey = bundle.getString("com.google.android.gms.ads.APPLICATION_ID");
-            System.out.println(ApiKey);
+            if (appUnitId != null) {
+                ApplicationInfo ai = activity.getPackageManager().getApplicationInfo("com.sumonkmr.ibdc", PackageManager.GET_META_DATA);
+                Bundle bundle = ai.metaData;
+                ai.metaData.putString("com.google.android.gms.ads.APPLICATION_ID", appUnitId); // Set the AdMob App Unit ID
+                String ApiKey = bundle.getString("com.google.android.gms.ads.APPLICATION_ID"); // Fetch the App Unit ID
+                System.out.println(ApiKey); // Print the App ID for debugging
+            }
         } catch (PackageManager.NameNotFoundException | NullPointerException e) {
-            System.out.println(e);
+            Log.e("SetAppUnitId", "Error while setting App ID: " + e.getMessage()); // Handle exceptions
         }
     }
 
-    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    // Counter to track banner ad clicks
     static int BANNER_AD_CLICK_COUNT = 0;
 
-    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    // Method to load a banner ad into the passed LinearLayout
     protected void loadBannerAd(LinearLayout layout) {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference reference = database.getReference("admob");
+        DatabaseReference reference = database.getReference("admob"); // Firebase reference for AdMob banner ads
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 String settings = snapshot.child("settings").getValue(String.class);
-                String banner = snapshot.child("banner").getValue(String.class);
+                String banner = snapshot.child("banner").getValue(String.class); // Retrieve banner ad unit ID
+
                 assert settings != null;
                 if (settings.contains("ON")) {
-                    layout.setVisibility(View.VISIBLE);
-                    mAdView = new AdView(activity);
-                    mAdView.setAdSize(AdSize.BANNER);
+                    layout.setVisibility(View.VISIBLE); // Show the layout if ads are enabled
+                    mAdView = new AdView(activity); // Create a new AdView for banner ads
+                    mAdView.setAdSize(AdSize.BANNER); // Set the ad size to BANNER
                     if (banner != null) {
-                        mAdView.setAdUnitId(banner);
-//                        Toast.makeText(activity, "Its From Database", Toast.LENGTH_SHORT).show();
+                        mAdView.setAdUnitId(banner); // Set the banner ad unit ID from Firebase
                     } else {
-                        mAdView.setAdUnitId("ca-app-pub-3940256099942544/6300978111");
-                        Toast.makeText(activity, "Its From Manual", Toast.LENGTH_SHORT).show();
+                        mAdView.setAdUnitId("ca-app-pub-3940256099942544/6300978111"); // Default test banner ad unit
+                        Toast.makeText(activity, "It's From Manual", Toast.LENGTH_SHORT).show();
                     }
-                    mAdView.loadAd(adRequest);
-                    layout.addView(mAdView);
+                    mAdView.loadAd(adRequest); // Load the banner ad
+                    layout.addView(mAdView); // Add the ad view to the layout
                     mAdView.setAdListener(new AdListener() {
                         @Override
                         public void onAdLoaded() {
-                            // Code to be executed when an ad finishes loading.
-//                Log.d("Banner Ads","Banner Ads is successfully Loaded!!");
-//                Toast.makeText(mAdView.getContext(), "Banner Ads is successfully Loaded!!", Toast.LENGTH_SHORT).show();
-
+                            // Hide the banner ad after 3 clicks
                             if (BANNER_AD_CLICK_COUNT >= 3) {
                                 if (mAdView != null) mAdView.setVisibility(View.GONE);
                             } else {
@@ -153,192 +143,124 @@ public class AdsControl {
 
                         @Override
                         public void onAdFailedToLoad(LoadAdError adError) {
-                            // Code to be executed when an ad request fails.
+                            // Handle ad load failure
                         }
 
                         @Override
                         public void onAdOpened() {
-                            // Code to be executed when an ad opens an overlay that
-                            // covers the screen.
+                            // Handle ad opened event
                         }
 
                         @Override
                         public void onAdClicked() {
-                            // Code to be executed when the user clicks on an ad.
-                            BANNER_AD_CLICK_COUNT++;
-
+                            BANNER_AD_CLICK_COUNT++; // Increment click count
                             if (BANNER_AD_CLICK_COUNT >= 3) {
-                                if (mAdView != null) mAdView.setVisibility(View.GONE);
+                                if (mAdView != null) mAdView.setVisibility(View.GONE); // Hide after 3 clicks
                             }
-
                         }
 
                         @Override
                         public void onAdClosed() {
-                            // Code to be executed when the user is about to return
-                            // to the app after tapping on an ad.
+                            // Handle ad closed event
                         }
                     });
                     Log.d("DataBase Mode", "ON");
-                } else if (settings.contains("OFF")) {
-                    Log.d("DataBase Mode", "OFF");
-//                    Toast.makeText(activity, "OFF", Toast.LENGTH_SHORT).show();
-                    layout.setVisibility(View.INVISIBLE);
                 } else {
+                    layout.setVisibility(View.INVISIBLE); // Hide the layout if ads are disabled
                     Log.d("DataBase Mode", "OFF");
                 }
-            }//onDataChange
+            }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                // Handle Firebase read errors
             }
         });
     }
 
-    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-    // loadFullscreenAd method starts here.....
+    // Counter for fullscreen ads
     int FULLSCREEN_AD_LOAD_COUNT = 0;
-    static InterstitialAd mInterstitialAd;
+    static InterstitialAd mInterstitialAd; // Interstitial ad object
 
+    // Method to load an interstitial ad
     protected void loadFullscreenAd(String url) {
-        //Requesting for a fullscreen Ad
+        // Requesting a fullscreen ad
         InterstitialAd.load(activity.getApplicationContext(), url, adRequest, new InterstitialAdLoadCallback() {
             @Override
             public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
-                // The mInterstitialAd reference will be null until
-                // an ad is loaded.
-                mInterstitialAd = interstitialAd;
-//                Toast.makeText(activity.getApplicationContext(), "Full Screen Ads is Loaded Successfully!", Toast.LENGTH_SHORT).show();
-
-                //Fullscreen callback || Requesting again when an ad is shown already
+                mInterstitialAd = interstitialAd; // Set the interstitial ad
                 mInterstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
                     @Override
                     public void onAdDismissedFullScreenContent() {
-                        // Called when fullscreen content is dismissed.
-                        //User dismissed the previous ad. So we are requesting a new ad here
-                        FULLSCREEN_AD_LOAD_COUNT++;
-                        loadFullscreenAd(url);
+                        FULLSCREEN_AD_LOAD_COUNT++; // Increment the load count after ad dismissal
+                        loadFullscreenAd(url); // Load a new ad
                         Log.d("FULLSCREEN_AD_LOAD_COUNT", "" + FULLSCREEN_AD_LOAD_COUNT);
-
-
                     }
-
-                }); // FullScreen Callback Ends here
-
-
+                });
             }
 
             @Override
             public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
-                // Handle the error
-                mInterstitialAd = null;
-//                Toast.makeText(activity.getApplicationContext(), "Full Screen Ads is Loading is failed!", Toast.LENGTH_SHORT).show();
+                mInterstitialAd = null; // Nullify if ad fails to load
             }
-
         });
-
     }
-    // loadFullscreenAd method ENDS  here..... >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
+    // Method to configure the test device for AdMob
     protected void TestingDevice(String id) {
-
-        if (id.length() > 12) {
-            //Adding your device id -- to avoid invalid activity from your device
-            List<String> testDeviceIds = Collections.singletonList(id);
-            RequestConfiguration configuration =
-                    new RequestConfiguration.Builder().setTestDeviceIds(testDeviceIds).build();
-            MobileAds.setRequestConfiguration(configuration);
+        if (id != null && id.length() > 12) {
+            List<String> testDeviceIds = Collections.singletonList(id); // List of test device IDs
+            RequestConfiguration configuration = new RequestConfiguration.Builder().setTestDeviceIds(testDeviceIds).build();
+            MobileAds.setRequestConfiguration(configuration); // Apply the configuration
         }
-
-        //Init Admob Ads
-        MobileAds.initialize(activity.getApplicationContext(), initializationStatus -> {
-//            Toast.makeText(activity.getApplicationContext(), "অ্যাড লোড হতে প্রস্তুত!", Toast.LENGTH_SHORT).show();
-        });
+        MobileAds.initialize(activity.getApplicationContext(), initializationStatus -> {}); // Initialize MobileAds
     }
-    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
     boolean mod;
 
+    // Method to check if all conditions are met for ads
     protected boolean passCondition() {
         if (getAdsFirebase() && mInterstitialAd != null) {
-            mod = true;
-//            Toast.makeText(activity.getApplicationContext(), "সব ঠিকঠাক", Toast.LENGTH_SHORT).show();
+            mod = true; // Ads are enabled and interstitial ad is available
         } else {
-            mod = false;
-//            Toast.makeText(activity.getApplicationContext(), String.valueOf(getAdsFirebase())+isVal+mod, Toast.LENGTH_SHORT).show();
+            mod = false; // Ads are not enabled or interstitial ad is not available
         }
         return mod;
     }
 
-    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-    static boolean isValStartIo;
+    static boolean isValStartIo; // Flag for StartApp ads
 
+    // Method to fetch StartApp ad settings from Firebase
     static protected boolean getAdsStartIo() {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference reference = database.getReference("startIoAds");
+        DatabaseReference reference = database.getReference("startIoAds"); // Firebase reference for StartApp ads
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                String settings = snapshot.child("Settings").getValue(String.class);
-                String appUnitID = snapshot.child("appUnitID").getValue(String.class);
+                String settings = snapshot.child("settings").getValue(String.class);
+                String unitId = snapshot.child("unitId").getValue(String.class); // Retrieve StartApp ad unit ID
 
-//                for StartIO ads
-                assert settings != null;
-                if (settings.contains("ON")) {
-                    isValStartIo = true;
-                    StartIoApUnitId(appUnitID);
-
-                    Log.d("DataBase Mode", "ON");
-
-                } else if (settings.contains("OFF")) {
-                    isValStartIo = false;
-                    Log.d("DataBase Mode", "OFF");
+                if (settings != null && settings.contains("ON")) {
+                    isValStartIo = true; // Enable StartApp ads
+                    StartIoInnit(true); // Initialize StartApp ad
                 } else {
-                    isValStartIo = false;
-                    Log.d("DataBase Mode", "OFF");
+                    isValStartIo = false; // Disable StartApp ads
+                    StartIoInnit(false); // Disable StartApp ad
                 }
-            }//onDataChange
+            }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                // Handle Firebase read errors
             }
         });
-
         return isValStartIo;
     }
 
-    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-    protected void StartIoInnit(Boolean bol) {
-
+    // Method to initialize and show StartApp ad
+    static protected void StartIoInnit(Boolean bol) {
         if (bol) {
-            StartAppAd.onBackPressed(activity);
-            StartAppAd.showAd(activity);
-        } else {
-            Log.d("llaa", "StartIoInnit: " + "false");
-
+            StartAppAd.showAd(activity); // Show StartApp ad
         }
     }
-    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-    public static void StartIoApUnitId(String appUnitId) {
-        try {
-
-            ApplicationInfo ai = activity.getPackageManager().getApplicationInfo("com.sumonkmr.ibdc", PackageManager.GET_META_DATA);
-            Bundle bundle = ai.metaData;
-            String myApiKey = bundle.getString("com.google.android.gms.ads.APPLICATION_ID");
-            ai.metaData.putString("com.google.android.gms.ads.APPLICATION_ID", appUnitId);//you can replace your key APPLICATION_ID here
-            String ApiKey = bundle.getString("com.google.android.gms.ads.APPLICATION_ID");
-            System.out.println(ApiKey);
-        } catch (PackageManager.NameNotFoundException | NullPointerException e) {
-            System.out.println(e);
-        }
-    }
-
-    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
-
 }

@@ -9,6 +9,7 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -166,7 +167,7 @@ public class DisplayDonorsActivity extends AppCompatActivity {
         getDonorsDialog();
 
         ok_Btn.setOnClickListener(v -> {
-            if (UpazilaFilter.getText().toString().length() != 0 || bloodGrpFilter.getText().toString().length() !=0 || lastDonateSearch.getText().toString().length() !=0) {
+            if (!UpazilaFilter.getText().toString().isEmpty() || !bloodGrpFilter.getText().toString().isEmpty() || !lastDonateSearch.getText().toString().isEmpty()) {
                 soundManager.great_sound.start();
                 dialog.dismiss();
             } else {
@@ -641,8 +642,10 @@ public class DisplayDonorsActivity extends AppCompatActivity {
 
     }
 
-    @SuppressLint("UseCompatLoadingForDrawables")
-    private void SearchInt(){
+    private Handler handler = new Handler();
+    private Runnable filterRunnable;
+
+    private void SearchInt() {
         search = findViewById(R.id.search);
         search.setOnSearchClickListener(v -> {
             YoYo.with(Techniques.SlideInRight).duration(300).playOn(search);
@@ -659,12 +662,25 @@ public class DisplayDonorsActivity extends AppCompatActivity {
             }
 
             @Override
-            public boolean onQueryTextChange(String newText) {
-                updateList(newText);
+            public boolean onQueryTextChange(final String newText) {
+                // Cancel any previous filtering task
+                handler.removeCallbacks(filterRunnable);
+
+                // Set a new task with a delay
+                filterRunnable = new Runnable() {
+                    @Override
+                    public void run() {
+                        updateList(newText);
+                    }
+                };
+
+                // Apply delay before filtering (300ms)
+                handler.postDelayed(filterRunnable, 300);
                 return true;
             }
         });
     }
+
 
 
 
@@ -712,7 +728,7 @@ public class DisplayDonorsActivity extends AppCompatActivity {
     private void GetUpdateUserCount(){
         adapter.updateList(temp);
         long totalUser = Integer.parseInt(String.valueOf(temp.size()));
-        if (temp.size() == 0){
+        if (temp.isEmpty()){
             edit_total.setText(String.format("মোটঃ %d জন রক্তদাতা", totalUser));
         }else {
             temp.size();

@@ -53,7 +53,6 @@
                 android:layout_height="match_parent"
                 android:layout_marginHorizontal="@dimen/_6dp"
                 android:layout_marginTop="@dimen/_38dp"
-                android:layout_marginBottom="@dimen/_50dp"
                 android:elevation="@dimen/shadow"
                 android:background="@drawable/card"
                 app:layout_constraintBottom_toBottomOf="parent"

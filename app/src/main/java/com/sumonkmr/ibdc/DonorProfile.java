@@ -7,16 +7,7 @@ import android.content.pm.PackageManager;
 import android.icu.util.Calendar;
 import android.media.MediaPlayer;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -26,16 +17,13 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -44,7 +32,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.sumonkmr.ibdc.model.CommentModel;
 
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
@@ -53,7 +40,10 @@ import java.util.Random;
 
 public class DonorProfile extends AppCompatActivity {
 
+    // Request code for making a phone call
     private static final int Request_call = 1;
+
+    // UI elements for the donor profile screen
     TextInputEditText commentField;
     ImageButton comment_done;
     ImageView donorImg, d_like_btn, d_commentsBtn, d_shareBtn;
@@ -72,14 +62,19 @@ public class DonorProfile extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_donor_profile);
+
+        // Initialize ad banner
         LinearLayout bannerLay = findViewById(R.id.bannerLayout);
         AdsControl ads = new AdsControl(this);
         ads.loadBannerAd(bannerLay);
+
+        // Initialize the UI components and set the donor data
         Init();
+    }
 
-    }//onCreate
-
+    // Method to initialize the UI components and set donor data
     private void Init() {
+        // Retrieve donor details passed via Intent
         postKey = getIntent().getStringExtra("postKey");
         fname = getIntent().getStringExtra("fName");
         bloodImg_url = getIntent().getStringExtra("pIMG");
@@ -91,7 +86,8 @@ public class DonorProfile extends AppCompatActivity {
         lastDonateDate = getIntent().getStringExtra("lastDonateDate");
         age = getIntent().getStringExtra("age");
         mobile = getIntent().getStringExtra("mobile");
-//        =========================================================
+
+        // Initialize UI components
         donorImg = findViewById(R.id.donorImg);
         detailFullName = findViewById(R.id.detailFullName);
         detailBloodGroup = findViewById(R.id.detailBloodGroup);
@@ -110,9 +106,11 @@ public class DonorProfile extends AppCompatActivity {
         d_commentsTxt = findViewById(R.id.d_commentsTxt);
         d_shareBtn = findViewById(R.id.d_shareBtn);
         cmtRecView = findViewById(R.id.cmtRecView);
+
+        // Set layout manager for RecyclerView
         cmtRecView.setLayoutManager(new LinearLayoutManager(this));
 
-//        ==========================================================
+        // Display donor details on UI
         detailFullName.setText(fname);
         detailBloodGroup.setText(bloodgroup);
         age_d.setText(age);
@@ -122,10 +120,16 @@ public class DonorProfile extends AppCompatActivity {
         detailState.setText(state);
         mobile_no.setText(mobile);
         lastDonateDate_d.setText(lastDonateDate);
+
+        // Load donor image using Glide
         Glide.with(this).load(bloodImg_url).into(donorImg);
+
+        // Call action when the mobile number is clicked
         mobile_no.setOnClickListener(v -> {
             callActions(mobile);
         });
+
+        // Share donor information via intent
         d_shareBtn.setOnClickListener(v -> {
             Intent sendIntent = new Intent();
             sendIntent.setAction(Intent.ACTION_SEND);
@@ -135,14 +139,19 @@ public class DonorProfile extends AppCompatActivity {
             Intent shareIntent = Intent.createChooser(sendIntent, "রক্ত দিন জীবন বাঁচান।");
             startActivity(shareIntent);
         });
-//        =============================================
+
+        // Firebase references for users, likes, and comments
         userRef = FirebaseDatabase.getInstance().getReference().child("Donors");
         like_ref = FirebaseDatabase.getInstance().getReference("likes");
         commentRef = FirebaseDatabase.getInstance().getReference().child("Donors").child(postKey).child("comments");
+
+        // Get current user details
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
         assert currentUser != null;
-        userId = currentUser.getUid();//if donor
+        userId = currentUser.getUid();
         account = GoogleSignIn.getLastSignedInAccount(getApplicationContext());
+
+        // Handle the submit button for comments
         comment_done.setOnClickListener(v -> userRef.child(userId).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -162,9 +171,11 @@ public class DonorProfile extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                // Handle cancellation here (if needed)
             }
         }));
+
+        // Handle the like button click
         d_like_btn.setOnClickListener(v -> {
             testClick = true;
             like_ref.addValueEventListener(new ValueEventListener() {
@@ -185,13 +196,13 @@ public class DonorProfile extends AppCompatActivity {
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
-
+                    // Handle cancellation here (if needed)
                 }
             });
         });
+    }
 
-    }//init
-
+    // Method to process and post a comment
     private void ProcessComment(String userName, String bloodImg_url) {
         String userComment = Objects.requireNonNull(commentField.getText()).toString();
         String parentKey = userId + new Random().nextInt(1000);
@@ -200,6 +211,8 @@ public class DonorProfile extends AppCompatActivity {
         String cDate = dateFormat.format(dateValue.getTime());
         SimpleDateFormat timeFormat = new SimpleDateFormat("hh:mm aa");
         String cTime = timeFormat.format(dateValue.getTime());
+
+        // Retrieve user data and post the comment
         userRef.child(userId).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -211,6 +224,8 @@ public class DonorProfile extends AppCompatActivity {
                     cmnt.put("usermsg", userComment);
                     cmnt.put("date", cDate);
                     cmnt.put("time", cTime);
+
+                    // Ensure comment is not empty before submitting
                     if (commentField.getText().length() != 0) {
                         commentRef.child(parentKey).updateChildren(cmnt).addOnCompleteListener(task -> {
                             if (task.isSuccessful()) {
@@ -228,226 +243,32 @@ public class DonorProfile extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                // Handle cancellation here (if needed)
             }
         });
-
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-        FirebaseRecyclerOptions<CommentModel> options =
-                new FirebaseRecyclerOptions.Builder<CommentModel>()
-                        .setQuery(commentRef, CommentModel.class)
-                        .build();
-
-        FirebaseRecyclerAdapter<CommentModel, CommentViewHolder> adapter = new FirebaseRecyclerAdapter<CommentModel, CommentViewHolder>(options) {
-            @Override
-            protected void onBindViewHolder(@NonNull CommentViewHolder holder, int position, @NonNull CommentModel model) {
-                holder.cmtName.setText(model.getUserName());
-                holder.cmtMsg.setText(model.getUsermsg());
-                holder.cmtTime.setText(model.getTime());
-                holder.cmtDate.setText(model.getDate());
-                Glide.with(holder.itemView.getContext()).load(model.getUserImg()).into(holder.cmtImg);
-                Animation itemViewAnim = AnimationUtils.loadAnimation(holder.itemView.getContext(), R.anim.slide_in_left);
-                holder.itemView.startAnimation(itemViewAnim);
-
-                commentRef.child(getRef(position).getKey()).addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        Log.d("snap", "onDataChange: " + snapshot.child("uid").getValue().equals(userId));
-                        if (snapshot.child("uid").getValue().equals(userId)) {
-                            holder.cmt_delete.setImageResource(R.drawable.delete_icon);
-                            holder.cmt_edit.setImageResource(R.drawable.ic_baseline_edit_note_24);
-                        } else {
-                            holder.cmt_delete.setVisibility(View.GONE);
-                            holder.cmt_edit.setVisibility(View.GONE);
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
-
-
-                holder.cmt_edit.setOnClickListener(v -> {
-                    dialog = new Dialog(DonorProfile.this);
-                    dialog.setContentView(R.layout.comment_edit);
-                    Button ok_Btn, cBtn;
-                    TextInputEditText cEditInput;
-                    Calendar dateValue = Calendar.getInstance();
-                    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yy");
-                    String cDate = dateFormat.format(dateValue.getTime());
-                    SimpleDateFormat timeFormat = new SimpleDateFormat("hh:mm aa");
-                    String cTime = timeFormat.format(dateValue.getTime());
-
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                        dialog.getWindow().setBackgroundDrawable(getDrawable(R.drawable.custom_dialog_background));
-                    }
-
-                    dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                    dialog.setCancelable(false); //Optional
-                    dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation; //Setting the animations to dialog
-                    dialog.show();
-
-                    HashMap cmnt = new HashMap();
-                    cmnt.put("cmtEdit", "Edited : ");
-                    cmnt.put("editDate", cDate);
-                    cmnt.put("editTime", cTime);
-
-                    ok_Btn = dialog.findViewById(R.id.CEditBtn_done);
-                    cBtn = dialog.findViewById(R.id.CEditBtn_cansel);
-                    cEditInput = dialog.findViewById(R.id.cEditInput);
-                    commentRef.child(getRef(position).getKey()).addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            if (snapshot.hasChild("usermsg")){
-                                cEditInput.setText(snapshot.child("usermsg").getValue().toString());
-                            }
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-
-                        }
-                    });
-                    ok_Btn.setOnClickListener(v13 -> {
-                        // Do something when the user clicks the OK button
-                        String msg = String.valueOf(cEditInput.getText());
-                        if (cEditInput.getText().length() > 0) {
-                            commentRef.child(getRef(position).getKey()).child("usermsg").setValue(msg).addOnCompleteListener(task -> {
-                                commentRef.child(getRef(position).getKey()).updateChildren(cmnt).addOnCompleteListener(new OnCompleteListener() {
-                                    @Override
-                                    public void onComplete(@NonNull Task task) {
-                                        if (task.isSuccessful()){
-//                                            holder.cmtEditTimeDate.setText(cmnt.toString());
-                                            Log.d("yyy", "onBindViewHolder: "+cTime+cDate+"////"+model.getCmtEdit()+model.getEditTime()+model.getEditDate());
-                                        }
-                                    }
-                                });
-                                dialog.dismiss();
-                                Toast.makeText(DonorProfile.this, "কমেন্ট আপডেট সম্পূর্ণ!", Toast.LENGTH_SHORT).show();
-                            });
-                        } else {
-                            cEditInput.getText().toString();
-                            cEditInput.setError("রক্তদাতা সম্পর্কে কিছু লিখুন!");
-                        }
-                        Log.d("msg", "onBindViewHolder: " + msg);
-                    });
-                    cBtn.setOnClickListener(v12 -> dialog.dismiss());
-
-                });
-                if (model.getCmtEdit() != null){
-                    holder.cmtEditTimeDate.setText(model.getCmtEdit()+" "+model.getEditTime()+" "+model.getEditDate());
-                }
-                holder.cmt_delete.setOnClickListener(v -> {
-                    dialog = new Dialog(DonorProfile.this);
-                    dialog.setContentView(R.layout.comment_delete);
-                    Button ok_Btn, cBtn;
-
-                    account = GoogleSignIn.getLastSignedInAccount(DonorProfile.this);
-
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                        dialog.getWindow().setBackgroundDrawable(getDrawable(R.drawable.custom_dialog_background));
-                    }
-
-                    dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                    dialog.setCancelable(false); //Optional
-                    dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation; //Setting the animations to dialog
-                    dialog.show();
-
-
-                    ok_Btn = dialog.findViewById(R.id.cDelete_yes);
-                    cBtn = dialog.findViewById(R.id.cDelete_no);
-
-                    ok_Btn.setOnClickListener(v1 -> commentRef.child(getRef(position).getKey()).removeValue((error, ref) -> {
-                        dialog.dismiss();
-                        Toast.makeText(DonorProfile.this, "কমেন্ট ডিলিট সফল!", Toast.LENGTH_SHORT).show();
-                    }));
-                    cBtn.setOnClickListener(v12 -> dialog.dismiss());
-
-                });
-            }
-
-            @NonNull
-            @Override
-            public CommentViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.comment_row, parent, false);
-                return new CommentViewHolder(view);
-            }
-        };
-
-        adapter.startListening();
-        cmtRecView.setAdapter(adapter);
-        like_ref.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.child(postKey).hasChild(userId)) {
-                    int likeCount = (int) snapshot.child(postKey).getChildrenCount();
-                    d_like_count.setText(String.valueOf(likeCount));
-                    d_like_btn.setImageResource(R.drawable.like_active);
-                } else {
-                    int likeCount = (int) snapshot.child(postKey).getChildrenCount();
-                    d_like_count.setText(String.valueOf(likeCount));
-                    d_like_btn.setImageResource(R.drawable.like);
-                }
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-        commentRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()) {
-                    int commentCount = (int) snapshot.getChildrenCount();
-                    d_commentsTxt.setText(String.valueOf(commentCount));
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
-
-    }
-
-
-    public void callActions(String number) {
-        Intent intent = new Intent(Intent.ACTION_CALL);
-        intent.setData(Uri.parse("tel:" + number));
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CALL_PHONE}, Request_call);
+    // Handle phone call action if permission granted
+    private void callActions(String phoneNum) {
+        if (ContextCompat.checkSelfPermission(DonorProfile.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(DonorProfile.this, new String[]{Manifest.permission.CALL_PHONE}, Request_call);
         } else {
-            startActivity(intent);
+            String dial = "tel:" + phoneNum;
+            startActivity(new Intent(Intent.ACTION_CALL, Uri.parse(dial)));
         }
     }
 
-
+    // Handle permission request result for making a call
     @Override
-    public void onBackPressed() {
-        AdsControl adsControl = new AdsControl(this);
-        Random random;
-        random = new Random();
-        int myCount = random.nextInt(100 - 5) + 5;
-        if (adsControl.passCondition() && myCount % 2 == 0) {
-            AdsControl.mInterstitialAd.show(this);
-            super.onBackPressed();
-        } else if (!adsControl.passCondition() && myCount % 2 == 0) {
-            adsControl.StartIoInnit(AdsControl.isValStartIo);
-            super.onBackPressed();
-            Log.d("llaa", "onBackPressed: " + adsControl.passCondition() + " and " + myCount);
-        } else {
-            super.onBackPressed();
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == Request_call) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                String dial = "tel:" + mobile;
+                startActivity(new Intent(Intent.ACTION_CALL, Uri.parse(dial)));
+            } else {
+                Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show();
+            }
         }
-    }//onBackPressed
+    }
 }
