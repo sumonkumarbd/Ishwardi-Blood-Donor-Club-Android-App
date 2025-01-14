@@ -6,14 +6,13 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-
-import com.startapp.sdk.adsbase.StartAppAd;
 
 import java.util.Random;
 
@@ -22,7 +21,7 @@ public class AboutUs extends AppCompatActivity {
     // Declaring views used in the layout
     LinearLayout sds, sadequl, rakibul, harun, mamun;
     TextView dev_name, aftEmail, moreApps, sadequl_phn, rakibul_phn, harun_phn, mamun_phn;
-    ImageView dev_img;
+    ImageView dev_img,linkedin,upwork,fiverr,freelancer;
     private static final int Request_call = 1; // Request code for call permission
     // Phone numbers for the team members
     String sadequl_num = "tel:+8801764942671";
@@ -85,10 +84,15 @@ public class AboutUs extends AppCompatActivity {
             startActivity(intent);
         });
 
-        // Set up click listener for "More Apps" link
-        moreApps.setOnClickListener(v -> {
-            gotoUrl("https://play.google.com/store/apps/dev?id=6877143126125387449"); // Open the developer's other apps
-        });
+//        // Set up click listener for "More Apps" link
+//        moreApps.setOnClickListener(v -> {
+//            gotoUrl("https://play.google.com/store/apps/dev?id=6877143126125387449"); // Open the developer's other apps
+//        });
+
+        linkedin.setOnClickListener(view -> gotoUrl("https://www.linkedin.com/in/sumonkmr/"));
+        upwork.setOnClickListener(view -> gotoUrl("https://www.upwork.com/freelancers/~01aca51f9768f64e7f/"));
+        fiverr.setOnClickListener(view -> gotoUrl("https://www.fiverr.com/sumonkmr_bd/"));
+        freelancer.setOnClickListener(view -> gotoUrl("https://www.freelancer.com/u/sumonkmrbd/"));
 
         // Directors' onClick listeners for their Facebook profiles
         sadequl.setOnClickListener(v -> {
@@ -111,11 +115,11 @@ public class AboutUs extends AppCompatActivity {
 
     // Initialize the views
     private void Innit() {
-        sds = findViewById(R.id.sds);
+        sds = findViewById(R.id.devInfo);
         aftEmail = findViewById(R.id.sdsEmail);
         dev_name = findViewById(R.id.dev_name);
         dev_img = findViewById(R.id.dev_img);
-        moreApps = findViewById(R.id.moreApps);
+//        moreApps = findViewById(R.id.moreApps);
         sadequl = findViewById(R.id.sadequl);
         rakibul = findViewById(R.id.rakibul);
         harun = findViewById(R.id.harun);
@@ -124,6 +128,10 @@ public class AboutUs extends AppCompatActivity {
         harun_phn = findViewById(R.id.harun_phn);
         sadequl_phn = findViewById(R.id.sadequl_phn);
         rakibul_phn = findViewById(R.id.rakibul_phn);
+        linkedin = findViewById(R.id.linkedin);
+        upwork = findViewById(R.id.upwork);
+        fiverr = findViewById(R.id.fiverr);
+        freelancer = findViewById(R.id.freelancer);
     }
 
     // Helper method to open a URL in the browser

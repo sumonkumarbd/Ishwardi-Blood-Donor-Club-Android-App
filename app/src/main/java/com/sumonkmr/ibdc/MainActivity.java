@@ -7,6 +7,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -111,6 +112,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     SwitchMaterial switch_button;
     ImageView soundImg;
     private AudioManager audioManager;
+
+    SharedPreferences cBtnSharedPreferences;
 
 
     @Override

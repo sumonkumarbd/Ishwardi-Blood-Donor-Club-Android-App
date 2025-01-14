@@ -1,11 +1,11 @@
 <component name="libraryTable">
   <library name="Gradle: com.google.ads.mediation:facebook:6.18.0.0@aar" external-system-id="GRADLE">
     <ANNOTATIONS>
-      <root url="jar://$USER_HOME$/.gradle/caches/8.11.1/transforms/e4d650e9ea1e1824d96f01793fe6dd4e/transformed/jetified-facebook-6.18.0.0/annotations.zip!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/8.11.1/transforms/dca2b78df092c03a1c5b4719ae96ddaa/transformed/jetified-facebook-6.18.0.0/annotations.zip!/" />
     </ANNOTATIONS>
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/8.11.1/transforms/e4d650e9ea1e1824d96f01793fe6dd4e/transformed/jetified-facebook-6.18.0.0/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/8.11.1/transforms/e4d650e9ea1e1824d96f01793fe6dd4e/transformed/jetified-facebook-6.18.0.0/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/8.11.1/transforms/dca2b78df092c03a1c5b4719ae96ddaa/transformed/jetified-facebook-6.18.0.0/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/8.11.1/transforms/dca2b78df092c03a1c5b4719ae96ddaa/transformed/jetified-facebook-6.18.0.0/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

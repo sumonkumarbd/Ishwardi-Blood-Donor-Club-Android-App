@@ -639,41 +639,6 @@
                                 android:textStyle="bold" />
 
                             <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="5dp"
-                                android:fontFamily="@font/title_font"
-                                android:text="@string/post"
-                                android:textAlignment="center"
-                                android:textColor="@color/goodgrey"
-                                android:textSize="@dimen/card_txt"
-                                android:textStyle="bold" />
-
-                            <LinearLayout
-                                android:id="@+id/sds"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:gravity="center"
-                                android:orientation="horizontal">
-
-                                <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
-                                    android:id="@+id/profile_image"
-                                    android:layout_width="30dp"
-                                    android:layout_height="30dp"
-                                    android:src="@drawable/aft_logo"
-                                    app:civ_border_color="#ffffff"
-                                    app:civ_border_width="2dp" />
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:fontFamily="@font/varela_round"
-                                    android:text="@string/sds"
-                                    android:textColor="@color/linkColor"
-                                    android:textSize="@dimen/form_txt" />
-                            </LinearLayout>
-
-                            <TextView
                                 android:id="@+id/sdsEmail"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -684,16 +649,99 @@
                                 android:textColor="@color/linkColor"
                                 android:textSize="@dimen/card_txt" />
 
-                            <TextView
-                                android:id="@+id/moreApps"
-                                android:layout_width="wrap_content"
+<!--                            For agency details-->
+<!--                            <TextView-->
+<!--                                android:layout_width="match_parent"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:layout_marginTop="5dp"-->
+<!--                                android:fontFamily="@font/title_font"-->
+<!--                                android:text="@string/post"-->
+<!--                                android:textAlignment="center"-->
+<!--                                android:textColor="@color/goodgrey"-->
+<!--                                android:textSize="@dimen/card_txt"-->
+<!--                                android:textStyle="bold" />-->
+
+<!--                            <LinearLayout-->
+<!--                                android:id="@+id/sds"-->
+<!--                                android:layout_width="match_parent"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:gravity="center"-->
+<!--                                android:orientation="horizontal">-->
+
+<!--                                <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--                                    android:id="@+id/profile_image"-->
+<!--                                    android:layout_width="30dp"-->
+<!--                                    android:layout_height="30dp"-->
+<!--                                    android:src="@drawable/aft_logo"-->
+<!--                                    app:civ_border_color="#ffffff"-->
+<!--                                    app:civ_border_width="2dp" />-->
+
+<!--                                <TextView-->
+<!--                                    android:layout_width="wrap_content"-->
+<!--                                    android:layout_height="wrap_content"-->
+<!--                                    android:fontFamily="@font/varela_round"-->
+<!--                                    android:text="@string/sds"-->
+<!--                                    android:textColor="@color/linkColor"-->
+<!--                                    android:textSize="@dimen/form_txt" />-->
+<!--                            </LinearLayout>-->
+                            <!-- For agency details-->
+
+
+                            <LinearLayout
+                                android:id="@+id/devInfo"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginVertical="10dp"
-                                android:layout_gravity="center"
-                                android:fontFamily="@font/varela_round"
-                                android:text="@string/moreApps"
-                                android:textColor="@color/linkColor"
-                                android:textSize="@dimen/card_txt" />
+                                android:layout_marginBottom="@dimen/_10dp"
+                                android:gravity="center"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:id="@+id/linkedin"
+                                    android:layout_width="@dimen/_50dp"
+                                    android:layout_height="@dimen/_10dp"
+                                    android:contentDescription="@string/linkedin"
+                                    android:src="@drawable/linkedin"
+                                    app:civ_border_color="#ffffff"
+                                    app:civ_border_width="2dp" />
+
+                                <ImageView
+                                    android:id="@+id/upwork"
+                                    android:layout_width="@dimen/_50dp"
+                                    android:layout_height="@dimen/_10dp"
+                                    android:contentDescription="@string/upwork"
+                                    android:src="@drawable/upwork"
+                                    app:civ_border_color="#ffffff"
+                                    app:civ_border_width="2dp" />
+
+                                <ImageView
+                                    android:id="@+id/fiverr"
+                                    android:layout_width="@dimen/_50dp"
+                                    android:layout_height="@dimen/_10dp"
+                                    android:contentDescription="@string/fiverr"
+                                    android:src="@drawable/fiverr"
+                                    app:civ_border_color="#ffffff"
+                                    app:civ_border_width="2dp" />
+
+                                <ImageView
+                                    android:id="@+id/freelancer"
+                                    android:layout_width="@dimen/_50dp"
+                                    android:layout_height="@dimen/_10dp"
+                                    android:contentDescription="@string/freelancer"
+                                    android:src="@drawable/freelancer"
+                                    app:civ_border_color="#ffffff"
+                                    app:civ_border_width="2dp" />
+                            </LinearLayout>
+
+<!--                            <TextView-->
+<!--                                android:id="@+id/moreApps"-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:layout_marginVertical="10dp"-->
+<!--                                android:layout_gravity="center"-->
+<!--                                android:fontFamily="@font/varela_round"-->
+<!--                                android:text="@string/moreApps"-->
+<!--                                android:textColor="@color/linkColor"-->
+<!--                                android:textSize="@dimen/card_txt" />-->
                         </LinearLayout><!--Developer-->
 
                         <View

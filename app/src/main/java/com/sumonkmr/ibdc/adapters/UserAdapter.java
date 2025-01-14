@@ -46,6 +46,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder> {
     MyOnClickListener myOnClickListenerCall, myOnClickListenerShare;
     DatabaseReference likeInterface,like_ref,commentInterface;
     Boolean testClick = false;
+    int lastPosition = -1;
 
 
     public void updateList(ArrayList<User> users) {
@@ -205,8 +206,13 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder> {
             holder.itemView.getContext().startActivity(intent);
         });
 
-        Animation itemViewAnim = AnimationUtils.loadAnimation(holder.itemView.getContext(),R.anim.slide_in_left);
-        holder.itemView.startAnimation(itemViewAnim);
+
+        //===Condition start====
+        if(position > lastPosition){
+            Animation itemViewAnim = AnimationUtils.loadAnimation(holder.itemView.getContext(),R.anim.slide_in_left);
+            holder.itemView.startAnimation(itemViewAnim);
+            lastPosition = position;
+        }//===Condition end===
 
     }
 
