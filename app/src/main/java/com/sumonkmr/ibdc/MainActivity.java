@@ -209,7 +209,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 } else {
                     ll_Profile.setVisibility(View.GONE);
                     ll_beDonor.setVisibility(View.VISIBLE);
-                    OpenDialog();
+                    Runnable runnable = () -> OpenDialog();
+                    Handler handler = new Handler();
+                    handler.postDelayed(runnable, 10000);
+
                     Uri profile_img_url = (account.getPhotoUrl());
                     String name = (account.getDisplayName());
                     profile_name_menu.setText(name);

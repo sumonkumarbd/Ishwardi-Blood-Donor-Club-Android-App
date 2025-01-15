@@ -9,7 +9,7 @@
     <dimen name="label">@dimen/_8sp</dimen>
     <dimen name="custom_tab_layout_height">@dimen/_72dp</dimen>
     <dimen name="form_txt">@dimen/_14sp</dimen>
-    <dimen name="profile_txt">@dimen/_12sp</dimen>
+    <dimen name="profile_txt">@dimen/_11sp</dimen>
     <dimen name="manu_txt">@dimen/_18sp</dimen>
     <dimen name="manu_title">@dimen/_16sp</dimen>
     <dimen name="shadow">@dimen/_10dp</dimen>

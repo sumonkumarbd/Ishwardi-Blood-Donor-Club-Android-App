@@ -140,7 +140,8 @@ public class HomeFragment extends Fragment {
         // Click listener for "Rate Us" section
         rate_us.setOnClickListener(v -> {
             // Open the app's Google Play Store page for ratings
-            rateUsOnGooglePlay();
+//            rateUsOnGooglePlay();
+            rateUsOnAmazonAppstore();
         });
     }
 
@@ -210,5 +211,24 @@ public class HomeFragment extends Fragment {
     }
 
     //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    /**
+     * Opens the Amazon app Store page for the app, allowing users to rate it.
+     * If the Amazon app Store is not installed, it opens the Amazon app Store page in a web browser.
+     */
+    private void rateUsOnAmazonAppstore() {
+        final String appPackageName = requireContext().getPackageName(); // Get the app's package name
+
+        try {
+            // Try to open the Amazon Appstore to the app's page
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("amzn://apps/android?p=" + appPackageName)));
+        } catch (android.content.ActivityNotFoundException anfe) {
+            // If the Amazon Appstore app is not installed, open the app's page in the browser
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.amazon.com/gp/mas/dl/android?p=" + appPackageName)));
+        }
+    }
+
+
+
+
     //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 }
