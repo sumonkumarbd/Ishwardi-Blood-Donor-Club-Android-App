@@ -43,7 +43,7 @@ This app allows users to register as blood donors, search for available donors, 
 - Build and run the app in Android Studio. Ensure you have an emulator set up or a physical device connected.
 
 ## 📱APK Download
-- You can also [download](https://apkpure.com/ibdc-%E0%A6%B0%E0%A6%95%E0%A7%8D%E0%A6%A4%E0%A6%A6%E0%A6%BE%E0%A6%A4%E0%A6%BE-%E0%A6%B0%E0%A6%95%E0%A7%8D%E0%A6%A4%E0%A6%A6%E0%A6%BE%E0%A6%A8-%E0%A6%85%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A6%AA/com.sumonkmr.ibdc) the APK to test it yourself.
+- You can also [download](https://www.amazon.com/gp/product/B0DT4HDY9S) the APK to test it yourself.
 
 ## Future Improvements
 - **Donor History Tracking**: Enable users to track their donation history and see their impact.
