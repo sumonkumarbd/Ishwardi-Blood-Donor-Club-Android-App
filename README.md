@@ -43,7 +43,7 @@ This app allows users to register as blood donors, search for available donors, 
 - Build and run the app in Android Studio. Ensure you have an emulator set up or a physical device connected.
 
 ## 📱APK Download
-- You can also [download](https://www.amazon.com/gp/product/B0DT4HDY9S) the APK to test it yourself.
+- You can also [download](https://www.amazon.com/gp/product/B0DT4HDY9S) the APK from amazon app store or [Click here](https://github.com/sumonkumarbd/Ishwardi-Blood-Donor-Club-Android-App/raw/2d02a440e69778373b78c9c1cf039a0c902c94a9/app/release/app-release.apk) to download it locally to test it yourself.
 
 ## Future Improvements
 - **Donor History Tracking**: Enable users to track their donation history and see their impact.
